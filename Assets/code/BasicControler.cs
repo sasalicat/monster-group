@@ -6,14 +6,17 @@ using UnityEngine;
 public class BasicControler : MonoBehaviour,unitControler {
     public delegate void withDamage(Damage d);
     public delegate void forSkill(SkillInf skillInf, Dictionary<string, object> skillArgs);
-    public delegate void forSkillTrageting(SkillInf skillInf, Dictionary<String, object> skillArgs, List<unitControler> tragets);
+    public delegate void forSkillTrageting(SkillInf skillInf, Dictionary<String, object> skillArgs,unitControler[] tragets);
     public forSkill _beAppoint;
     public forSkillTrageting _befUseSkill;
     public withDamage _befTakeDamage;
     public withDamage _aftTakeDamage;
     public withDamage _aftCauseDamage;
+
     public unitData data;
     public unitState state;
+    public SkillBelt skillBelt;
+    public unitControler traget = null;
     public virtual void addBuff(string buffName)
     {
         gameObject.AddComponent(Type.GetType(buffName));
@@ -51,21 +54,23 @@ public class BasicControler : MonoBehaviour,unitControler {
         }
 
     }
-    public virtual void useSkill(Skill skill)
+    public virtual void useSkill(Skill skill,unitControler[] tragets)
     {
         if(((BasicControler)skill.Owner) != this)
         {
             return;
         }
         Dictionary<string, object> skillArg = new Dictionary<string, object>();
-
+        foreach(unitControler traget in tragets)
+        {
+            ((BasicControler)traget)._beAppoint(skill.information, skillArg);//被指定
+        }
+        _befUseSkill(skill.information,skillArg,tragets);
+        skill.trigger(skillArg);
     }
-    // Use this for initialization
-    void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void action(float time,Environment env)
+    {
+        skillBelt.updateSkill(time,env);
+    }
 }
