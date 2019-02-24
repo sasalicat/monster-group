@@ -12,6 +12,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     public withDamage _befTakeDamage;
     public withDamage _aftTakeDamage;
     public withDamage _aftCauseDamage;
+    public HpBar hpbar = null;
 
     public unitData data;
     public unitState state;
@@ -72,5 +73,9 @@ public class BasicControler : MonoBehaviour,unitControler {
     public void action(float time,Environment env)
     {
         skillBelt.updateSkill(time,env);
+    }
+    public void hpbarCallBack(int nowHp)
+    {
+        hpbar.Percentage = (float)nowHp / (float)data.Now_Max_Life;
     }
 }

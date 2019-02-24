@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface Environment {
-    unitControler[] Units
+    List<unitControler> Units
     {
         set;
         get;
