@@ -1,13 +1,104 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillBelt : MonoBehaviour {
+public class SkillBelt : MonoBehaviour,Callback4Unit {
     unitControler controler;
     public delegate void withFloat(float arg);
     protected withFloat _time_pass; 
     List<Skill> skills;
     List<Skill> activeSkills;
+    protected BasicDelegate.forSkill _be_appoint;
+    public BasicDelegate.forSkill _BeAppoint
+    {
+        get
+        {
+            return _be_appoint;
+        }
+
+        set
+        {
+            _be_appoint = value;
+        }
+    }
+    protected void beAppoint_cb(SkillInf skillInf, Dictionary<string, object> skillArgs)
+    {
+        _be_appoint(skillInf, skillArgs);
+    }
+
+    protected BasicDelegate.forSkillTrageting _bef_use_skill;
+    public BasicDelegate.forSkillTrageting _BefUseSkill
+    {
+        get
+        {
+            return _bef_use_skill;
+        }
+
+        set
+        {
+            _bef_use_skill = value;
+        }
+    }
+    protected void befUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets)
+    {
+        _bef_use_skill( skillInf,  skillArgs,tragets);
+    }
+
+    protected BasicDelegate.withDamage _bef_take_damage;
+    public BasicDelegate.withDamage _BefTakeDamage
+    {
+        get
+        {
+            return _bef_take_damage;
+        }
+
+        set
+        {
+            _bef_take_damage = value;
+        }
+    }
+    protected void befTakeDamage_cb(Damage d)
+    {
+        _bef_take_damage(d);
+    }
+
+    protected BasicDelegate.withDamage _aft_take_damage;
+    public BasicDelegate.withDamage _AftTakeDamage
+    {
+        get
+        {
+            return _aft_take_damage;
+        }
+
+        set
+        {
+            _aft_take_damage = value;
+        }
+    }
+    protected void aftTakeDamage_cb(Damage d)
+    {
+        _aft_take_damage(d);
+    }
+
+    BasicDelegate.withDamage _aft_cause_damage;
+    public BasicDelegate.withDamage _AftCauseDamage
+    {
+        get
+        {
+            return _aft_take_damage;
+        }
+
+        set
+        {
+            _aft_take_damage = value;
+        }
+    }
+    protected void aftCauseDamage_cb(Damage d)
+    {
+        _aft_take_damage(d);
+    }
+
     public virtual void addSkillBy(string skillName)
     {
         Skill newone=(Skill)gameObject.AddComponent(System.Type.GetType(skillName));
@@ -15,7 +106,7 @@ public class SkillBelt : MonoBehaviour {
         {
             _time_pass += ((CDSkill)newone).timePass;
         }
-        newone.onInit(controler);
+        newone.onInit(controler,this);
         if (newone.information.activeSkill)//如果是
         {
             activeSkills.Add(newone);
@@ -37,6 +128,11 @@ public class SkillBelt : MonoBehaviour {
     public virtual void init(unitControler controler)
     {
         this.controler = controler;
+        ((BasicControler)controler)._beAppoint += beAppoint_cb;
+        ((BasicControler)controler)._befUseSkill += befUseSkill_cb;
+        ((BasicControler)controler)._befTakeDamage += befTakeDamage_cb;
+        ((BasicControler)controler)._aftTakeDamage += aftTakeDamage_cb;
+        ((BasicControler)controler)._aftCauseDamage += aftCauseDamage_cb;
         //Timer.main.logInTimer(interval);
     }
 }

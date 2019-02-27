@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Skill:MonoBehaviour {
     public SkillInf information;
     protected unitControler owner;
-    public abstract void onInit(unitControler owner);
+    public abstract void onInit(unitControler owner,Callback4Unit deleg);
     public abstract void trigger(Dictionary<string,object> args);
     public abstract unitControler[] findTraget(Environment env);
     public virtual void arouse(Environment env)

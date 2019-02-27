@@ -14,6 +14,7 @@ public class BasicManager : MonoBehaviour,Manager {
     public const string STR_PLAYER_NO = "player_no";
     public const string STR_SKILL_NO = "skill_nos";
     protected ChessBoard chessBoard;
+    protected Dictionary<int, Color> playerColor = new Dictionary<int, Color>() { {0,Color.red}, { 1,Color.blue} };
     public unitControler createUnit(Dictionary<string, object> unitInf)
     {
         int posX = (int)unitInf["position_x"];
@@ -44,6 +45,7 @@ public class BasicManager : MonoBehaviour,Manager {
             GameObject hpbar= Instantiate(objectList.main.hpBar, newone.transform);
             controler.hpbar= hpbar.GetComponent<HpBar>();
             hpbar.transform.localPosition = objectList.main.hpBar.transform.position;
+            hpbar.GetComponent<HpBar>().HpColor = playerColor[playerNo];
             return controler;
         }
         else

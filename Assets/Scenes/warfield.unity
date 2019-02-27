@@ -1161,6 +1161,7 @@ GameObject:
   - component: {fileID: 1241327377}
   - component: {fileID: 1241327376}
   - component: {fileID: 1241327378}
+  - component: {fileID: 1241327379}
   m_Layer: 0
   m_Name: client
   m_TagString: Untagged
@@ -1246,6 +1247,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20156a1ced5b6484b87c8c2b1909d833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1241327379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1241327372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3815e434877f5c844ba516b74d55603f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  representation:
+  - repre_BaseAttack
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!1 &1323059369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,6 +1614,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114896544120714620, guid: d65d6ef1fe27b75458c9b0cb54a8eb6e,
+        type: 2}
+      propertyPath: bar
+      value: 
+      objectReference: {fileID: 1955192190}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d65d6ef1fe27b75458c9b0cb54a8eb6e, type: 2}
   m_IsPrefabAsset: 0
+--- !u!212 &1955192190 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 212628450753189704, guid: d65d6ef1fe27b75458c9b0cb54a8eb6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1955192189}

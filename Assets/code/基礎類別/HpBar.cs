@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HpBar : MonoBehaviour {
-    public GameObject bar = null;
+    public SpriteRenderer bar = null;
     private float percentage=1;
     protected const float FULL_X = .0f;
     protected const float ZERO_X = -3.39f;
@@ -21,6 +21,16 @@ public class HpBar : MonoBehaviour {
         get
         {
             return percentage;
+        }
+    }
+    public Color HpColor
+    {
+        set {
+            bar.color = value;
+        }
+        get
+        {
+            return bar.color;
         }
     }
     void Start()

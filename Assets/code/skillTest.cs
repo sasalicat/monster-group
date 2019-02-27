@@ -25,7 +25,7 @@ public class skillTest : CDSkill {
         return null;
     }
 
-    public override void onInit(unitControler owner)
+    public override void onInit(unitControler owner,Callback4Unit cb)
     {
         
     }

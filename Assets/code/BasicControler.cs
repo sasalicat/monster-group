@@ -4,20 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicControler : MonoBehaviour,unitControler {
-    public delegate void withDamage(Damage d);
-    public delegate void forSkill(SkillInf skillInf, Dictionary<string, object> skillArgs);
-    public delegate void forSkillTrageting(SkillInf skillInf, Dictionary<String, object> skillArgs,unitControler[] tragets);
-    public forSkill _beAppoint;
-    public forSkillTrageting _befUseSkill;
-    public withDamage _befTakeDamage;
-    public withDamage _aftTakeDamage;
-    public withDamage _aftCauseDamage;
+    
+    public BasicDelegate.forSkill _beAppoint;
+    public BasicDelegate.forSkillTrageting _befUseSkill;
+    public BasicDelegate.withDamage _befTakeDamage;
+    public BasicDelegate.withDamage _aftTakeDamage;
+    public BasicDelegate.withDamage _aftCauseDamage;
     public HpBar hpbar = null;
 
     public unitData data;
     public unitState state;
     public SkillBelt skillBelt;
     public unitControler traget = null;
+
     public virtual void addBuff(string buffName)
     {
         gameObject.AddComponent(Type.GetType(buffName));

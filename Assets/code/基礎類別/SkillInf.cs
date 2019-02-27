@@ -12,6 +12,8 @@ public class SkillInf  {
     public bool singleTraget;
     public List<string> tags;
     public bool activeSkill;
+    public bool remote = true;
+
     public SkillInf() {
         singleTraget = true;
         tags = new List<string>() { "damage" };
@@ -24,5 +26,13 @@ public class SkillInf  {
         this.activeSkill = active;
         this.attack = attack;
         this.tags = tags;
+    }
+    public SkillInf(bool singleTraget, bool active, bool attack,bool remote, List<string> tags)
+    {
+        this.singleTraget = singleTraget;
+        this.activeSkill = active;
+        this.attack = attack;
+        this.tags = tags;
+        this.remote = remote;
     }
 }

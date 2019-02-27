@@ -23,6 +23,7 @@ public class ChessBoard : Environment {
     }
     public unitControler[,] board;
     public List<unitControler> units;
+    Dictionary<unitControler, int> unit2pos;//從controler到flatten的索引
     public ChessBoard(int x,int y)
     {
         this.x = x;
@@ -43,8 +44,17 @@ public class ChessBoard : Environment {
         else
         {
             board[pos_y, pos_x] = unit;
+            units.Add(unit);
+            unit2pos[unit] = pos_y * X + pos_x;
             return true;
         }
+    }
+    public int[] getPosFor(unitControler unit)
+    {
+        int flatten = unit2pos[unit];
+        int y = flatten / X;
+        int x = flatten % X;
+        return new int[2] { x, y };
     }
     public List<unitControler> Units
     {

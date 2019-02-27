@@ -20,6 +20,7 @@ public class unitData  {
 
     public withInt _onLifeChange;
     public withFloat2 _onCoolDownMutipleChange;
+    private bool remote;
     public static float calReduce(int strength,int basic)
     {
         if (strength >= 0)
@@ -33,6 +34,13 @@ public class unitData  {
             return (basic + strength) / basic;
         else
             return basic / (basic - strength);
+    }
+    public bool Remote
+    {
+        get
+        {
+            return remote;
+        }
     }
     public int Now_Attack
     {
