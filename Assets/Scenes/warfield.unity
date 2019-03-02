@@ -1614,16 +1614,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114896544120714620, guid: d65d6ef1fe27b75458c9b0cb54a8eb6e,
-        type: 2}
-      propertyPath: bar
-      value: 
-      objectReference: {fileID: 1955192190}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d65d6ef1fe27b75458c9b0cb54a8eb6e, type: 2}
   m_IsPrefabAsset: 0
---- !u!212 &1955192190 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 212628450753189704, guid: d65d6ef1fe27b75458c9b0cb54a8eb6e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1955192189}

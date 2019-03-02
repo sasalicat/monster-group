@@ -13,15 +13,19 @@ public class BasicManager : MonoBehaviour,Manager {
     public const string STR_UNIT_NO = "unit_no";
     public const string STR_PLAYER_NO = "player_no";
     public const string STR_SKILL_NO = "skill_nos";
+    public const string STR_INF = "information";
     protected ChessBoard chessBoard;
     protected Dictionary<int, Color> playerColor = new Dictionary<int, Color>() { {0,Color.red}, { 1,Color.blue} };
     public unitControler createUnit(Dictionary<string, object> unitInf)
     {
+        Debug.Log("創建新的單位");
         int posX = (int)unitInf["position_x"];
         int posY = (int)unitInf["position_y"];
-        int unitNo = (int)unitInf["unit_no"];
+        roleInformation inf = ((roleInformation)unitInf["information"]);
+        int unitNo = inf.raceNo;
         int playerNo = (int)unitInf["player_no"];
-        List<int> skillnos = (List<int>)unitInf["skill_nos"];
+        List<int> skillnos = inf.skillNos;
+        unitData data = inf.data;
         int realX = 0;
         int realY = 0;
         GameObject newone = Instantiate(objectList.main.mainUnit);
@@ -38,14 +42,21 @@ public class BasicManager : MonoBehaviour,Manager {
         }
         newone.transform.position = new Vector2(INIT_X + realX * X_INTERVAL, INIT_Y + realY * Y_INTERVAL);
         BasicControler controler= newone.AddComponent<BasicControler>();
+        controler.playerNo = playerNo;
         newone.GetComponent<SpriteRenderer>().sprite = ImageList.main.headIcons[unitNo];
         bool result = chessBoard.enter(controler, realX, realY);
+        Debug.Log("result:"+result);
         if (result)
         {
             GameObject hpbar= Instantiate(objectList.main.hpBar, newone.transform);
             controler.hpbar= hpbar.GetComponent<HpBar>();
             hpbar.transform.localPosition = objectList.main.hpBar.transform.position;
             hpbar.GetComponent<HpBar>().HpColor = playerColor[playerNo];
+            controler.init(new BasicAI(),chessBoard,data);
+            Timer.main.logInTimer(controler.action);
+            SkillBelt belt= newone.AddComponent<SkillBelt>();
+            belt.init(controler);
+            //是否要用字串來儲存技能名?
             return controler;
         }
         else
@@ -65,22 +76,14 @@ public class BasicManager : MonoBehaviour,Manager {
     // Use this for initialization
     void Start () {
         chessBoard = new ChessBoard(5,8);
-        Dictionary<string, object> testdata = new Dictionary<string, object>() { {STR_POS_X, 0 }, {STR_POS_Y,0}, { STR_UNIT_NO,1}, {STR_SKILL_NO, new List<int>()}, { STR_PLAYER_NO,1} };
-        createUnit(testdata);
-        Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 0 }, { STR_UNIT_NO, 0 }, { STR_SKILL_NO, new List<int>() }, { STR_PLAYER_NO, 0 } };
-        createUnit(testdata2);
-        Dictionary<string, object> testdata3 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 3 }, { STR_UNIT_NO, 0 }, { STR_SKILL_NO, new List<int>() }, { STR_PLAYER_NO, 0 } };
-        createUnit(testdata3);
-        Dictionary<string, object> testdata4 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 1 }, { STR_UNIT_NO, 1 }, { STR_SKILL_NO, new List<int>() }, { STR_PLAYER_NO, 1 } };
-        createUnit(testdata4);
-        Dictionary<string, object> testdata5 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 2 }, { STR_UNIT_NO, 1 }, { STR_SKILL_NO, new List<int>() }, { STR_PLAYER_NO, 1 } };
-        createUnit(testdata5);
-        Dictionary<string, object> testdata6 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 3 }, { STR_UNIT_NO, 1 }, { STR_SKILL_NO, new List<int>() }, { STR_PLAYER_NO, 1 } };
-        createUnit(testdata6);
-        Dictionary<string, object> testdata7 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 1 }, { STR_UNIT_NO, 0 }, { STR_SKILL_NO, new List<int>() }, { STR_PLAYER_NO, 0 } };
-        createUnit(testdata7);
-        Dictionary<string, object> testdata8 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 2 }, { STR_UNIT_NO, 0 }, { STR_SKILL_NO, new List<int>() }, { STR_PLAYER_NO, 0 } };
-        createUnit(testdata8);
+        roleInformation inf = new roleInformation(new unitData(),new List<int>(){0},0);
+        Dictionary<string, object> testdata = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 0 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf} };
+        unitControler controler = createUnit(testdata);
+        ((BasicControler)controler).gameObject.name = "單位1";
+
+        Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 0 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf } };
+        unitControler controler2= createUnit(testdata2);
+        ((BasicControler)controler2).gameObject.name = "單位2";
     }
 
 }

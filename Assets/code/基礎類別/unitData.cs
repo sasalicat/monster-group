@@ -20,7 +20,7 @@ public class unitData  {
 
     public withInt _onLifeChange;
     public withFloat2 _onCoolDownMutipleChange;
-    private bool remote;
+    private bool remote=false;
     public static float calReduce(int strength,int basic)
     {
         if (strength >= 0)

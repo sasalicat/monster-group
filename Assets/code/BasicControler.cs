@@ -15,7 +15,10 @@ public class BasicControler : MonoBehaviour,unitControler {
     public unitData data;
     public unitState state;
     public SkillBelt skillBelt;
+    public AI ai;
     public unitControler traget = null;
+    public Environment env;
+    public int playerNo = -1;
 
     public virtual void addBuff(string buffName)
     {
@@ -69,12 +72,20 @@ public class BasicControler : MonoBehaviour,unitControler {
         skill.trigger(skillArg);
     }
 
-    public void action(float time,Environment env)
+    public void action(float time)
     {
         skillBelt.updateSkill(time,env);
+        ai.update(this, env);
     }
     public void hpbarCallBack(int nowHp)
     {
         hpbar.Percentage = (float)nowHp / (float)data.Now_Max_Life;
+    }
+    public void init(AI ai,Environment env,unitData data)
+    {
+        this.ai = ai;
+        this.env = env;
+        this.data = data;
+
     }
 }

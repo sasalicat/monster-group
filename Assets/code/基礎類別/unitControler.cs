@@ -5,5 +5,5 @@ using UnityEngine;
 public interface unitControler{
     void takeDamage(Damage damage);
     void addBuff(string buffName);
-    void action(float time,Environment env);
+    void action(float time);
 }

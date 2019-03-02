@@ -9,6 +9,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     protected withFloat _time_pass; 
     List<Skill> skills;
     List<Skill> activeSkills;
+    List<skill_representation> repres;
     protected BasicDelegate.forSkill _be_appoint;
     public BasicDelegate.forSkill _BeAppoint
     {
@@ -99,8 +100,10 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         _aft_take_damage(d);
     }
 
-    public virtual void addSkillBy(string skillName)
+    public virtual void addSkillBy(string represName)
     {
+        object newrepres= System.Activator.CreateInstance(System.Type.GetType(represName));
+        string skillName = ((skill_representation)newrepres).ScriptName;
         Skill newone=(Skill)gameObject.AddComponent(System.Type.GetType(skillName));
         if (newone.GetComponentInParent(System.Type.GetType("CDSkill")) != null)//如果是CD型技能
         {
@@ -115,7 +118,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     }
     public virtual void updateSkill(float time,Environment env)
     {
-        _time_pass(time);
+        if(_time_pass !=null)
+            _time_pass(time);
         foreach(Skill act in activeSkills)
         {
             if (act.canUse)
@@ -133,6 +137,9 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         ((BasicControler)controler)._befTakeDamage += befTakeDamage_cb;
         ((BasicControler)controler)._aftTakeDamage += aftTakeDamage_cb;
         ((BasicControler)controler)._aftCauseDamage += aftCauseDamage_cb;
+        skills =new List<Skill>();
+        activeSkills = new List<Skill>();
+        repres = new List<skill_representation>();
         //Timer.main.logInTimer(interval);
     }
 }

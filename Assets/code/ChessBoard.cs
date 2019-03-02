@@ -23,7 +23,7 @@ public class ChessBoard : Environment {
     }
     public unitControler[,] board;
     public List<unitControler> units;
-    Dictionary<unitControler, int> unit2pos;//從controler到flatten的索引
+    Dictionary<unitControler, int> unit2pos = new Dictionary<unitControler, int>();//從controler到flatten的索引
     public ChessBoard(int x,int y)
     {
         this.x = x;

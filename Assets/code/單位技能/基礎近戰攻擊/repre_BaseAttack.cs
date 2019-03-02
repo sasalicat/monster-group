@@ -31,6 +31,6 @@ public class repre_BaseAttack : skill_representation
 
     public void init(unitData nowdata)
     {
-        throw new NotImplementedException();
+        
     }
 }
