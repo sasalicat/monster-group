@@ -25,7 +25,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     }
     protected void beAppoint_cb(SkillInf skillInf, Dictionary<string, object> skillArgs)
     {
-        _be_appoint(skillInf, skillArgs);
+        if(_be_appoint!=null)
+            _be_appoint(skillInf, skillArgs);
     }
 
     protected BasicDelegate.forSkillTrageting _bef_use_skill;
@@ -43,7 +44,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     }
     protected void befUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets)
     {
-        _bef_use_skill( skillInf,  skillArgs,tragets);
+        if(_bef_use_skill !=null)
+            _bef_use_skill( skillInf,  skillArgs,tragets);
     }
 
     protected BasicDelegate.withDamage _bef_take_damage;
@@ -122,6 +124,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
             _time_pass(time);
         foreach(Skill act in activeSkills)
         {
+            Debug.Log("act canUse:" + act.canUse);
             if (act.canUse)
             {
                 act.arouse(env);
@@ -129,7 +132,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         }
     }
 
-    public virtual void init(unitControler controler)
+    public virtual void init(unitControler controler,List<int> skillNos)
     {
         this.controler = controler;
         ((BasicControler)controler)._beAppoint += beAppoint_cb;
@@ -140,6 +143,11 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         skills =new List<Skill>();
         activeSkills = new List<Skill>();
         repres = new List<skill_representation>();
+        foreach(int no in skillNos)
+        {
+            string respName = SkillList.main.representation[no];
+            addSkillBy(respName);
+        }
         //Timer.main.logInTimer(interval);
     }
 }

@@ -20,6 +20,21 @@ public class BasicControler : MonoBehaviour,unitControler {
     public Environment env;
     public int playerNo = -1;
 
+    public virtual Dictionary<string,object> createSkillArg(unitData data)
+    {
+        Dictionary<string, object> arg = new Dictionary<string, object>();
+
+        arg["phy_damage_multiple"] = data.Now_Mag_Multiple;
+        arg["phy_damage_addition"] = 0;
+        arg["mag_damage_multiple"] = 1f;
+        arg["mag_damage_addition"] = 0;
+        arg["healing_multiple"] = 1f;
+        arg["healing_addition"] = 0;
+        arg["control_multiple"] = 1f;
+        arg["control_addition"] = 0;
+
+        return arg;
+    }
     public virtual void addBuff(string buffName)
     {
         gameObject.AddComponent(Type.GetType(buffName));
@@ -63,8 +78,9 @@ public class BasicControler : MonoBehaviour,unitControler {
         {
             return;
         }
-        Dictionary<string, object> skillArg = new Dictionary<string, object>();
-        foreach(unitControler traget in tragets)
+        Dictionary<string, object> skillArg = createSkillArg(data);
+        skillArg["tragets"] = traget;
+        foreach (unitControler traget in tragets)
         {
             ((BasicControler)traget)._beAppoint(skill.information, skillArg);//被指定
         }
@@ -74,6 +90,7 @@ public class BasicControler : MonoBehaviour,unitControler {
 
     public void action(float time)
     {
+        Debug.Log("角色 action");
         skillBelt.updateSkill(time,env);
         ai.update(this, env);
     }

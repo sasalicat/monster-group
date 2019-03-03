@@ -15,6 +15,10 @@ public interface skill_representation  {
     {
         get;
     }
+    /*SkillInf information
+    {
+        get;
+    }*/
     void init(unitData nowdata);
 
 }

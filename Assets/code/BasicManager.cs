@@ -55,7 +55,8 @@ public class BasicManager : MonoBehaviour,Manager {
             controler.init(new BasicAI(),chessBoard,data);
             Timer.main.logInTimer(controler.action);
             SkillBelt belt= newone.AddComponent<SkillBelt>();
-            belt.init(controler);
+            controler.skillBelt = belt;
+            belt.init(controler, skillnos);
             //是否要用字串來儲存技能名?
             return controler;
         }

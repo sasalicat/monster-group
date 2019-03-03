@@ -10,7 +10,7 @@ public class Damage {
     public byte kind;
     public unitControler creater = null;
     public bool vaild =true;
-    Damage(int num,byte kind,unitControler creater)
+    public Damage(int num,byte kind,unitControler creater)
     {
         this.num = num;
         this.kind = kind;
