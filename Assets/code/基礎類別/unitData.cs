@@ -12,7 +12,7 @@ public class unitData  {
     public const int STAND_ATK_SPD_REINFORCE = 0;
     public const int STAND_MAG_REINFOCE = 0;
     public const int STAND_ARMOR = 0;
-    public const int STAND_LIFE = 0;
+    public const int STAND_LIFE = 100;
     public const int STAND_COOLDOWN_REINFORCE = 0;
     public const int STAND_MAG_RESISTANCE = 0;
     private int base_attack = STAND_ATK;
@@ -157,7 +157,7 @@ public class unitData  {
         }
     }
 
-    private int now_life_point = 0;
+    private int now_life_point = STAND_LIFE;
     public int Now_Life
     {
         get
@@ -176,8 +176,10 @@ public class unitData  {
             else
             {
                 now_life_point = 0;
+                Debug.Log("設置now_life_point為:" + now_life_point);
             }
-            _onLifeChange(Now_Life);
+            if(_onLifeChange!=null)
+                _onLifeChange(Now_Life);
         }
     }
 

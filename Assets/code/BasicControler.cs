@@ -47,8 +47,12 @@ public class BasicControler : MonoBehaviour,unitControler {
         {
             if (damage.kind == Damage.KIND_PHYSICAL && !state.ImmunePhysics)
             {
+                //Debug.Log("計算傷害時Physical_Reduce_Multiple為:" + data.Physical_Reduce_Multiple);
                 int hurt = (int)(data.Physical_Reduce_Multiple * damage.num);
+                //Debug.Log("計算傷害時hurt為:"+hurt);
+                Debug.Log("計算傷害時Now_Life為:" + data.Now_Life);
                 data.Now_Life -= hurt;
+                Debug.Log("計算結束");
                 _aftTakeDamage(damage);
                 BasicControler from = (BasicControler)damage.creater;
                 damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
@@ -79,7 +83,7 @@ public class BasicControler : MonoBehaviour,unitControler {
             return;
         }
         Dictionary<string, object> skillArg = createSkillArg(data);
-        skillArg["tragets"] = traget;
+        skillArg["tragets"] = tragets;
         foreach (unitControler traget in tragets)
         {
             ((BasicControler)traget)._beAppoint(skill.information, skillArg);//被指定
@@ -90,19 +94,23 @@ public class BasicControler : MonoBehaviour,unitControler {
 
     public void action(float time)
     {
-        Debug.Log("角色 action");
+        //Debug.Log("角色 action");
         skillBelt.updateSkill(time,env);
         ai.update(this, env);
     }
     public void hpbarCallBack(int nowHp)
     {
+        //Debug.Log("now_max_life為:" + data.Now_Max_Life);
         hpbar.Percentage = (float)nowHp / (float)data.Now_Max_Life;
+       
     }
-    public void init(AI ai,Environment env,unitData data)
+    public void init(AI ai,Environment env,unitData data,HpBar hpbar)
     {
         this.ai = ai;
         this.env = env;
         this.data = data;
-
+        this.state = new unitState();
+        this.hpbar = hpbar;
+        this.data._onLifeChange += hpbarCallBack;
     }
 }

@@ -9,7 +9,7 @@ public class skill_BaseAttack : CDSkill {
     {
         get
         {
-            return timeLeft >= 0 && owner.traget != null;
+            return timeLeft <= 0 && owner.traget != null;
         }
     }
 
@@ -37,20 +37,16 @@ public class skill_BaseAttack : CDSkill {
     public override void trigger(Dictionary<string, object> args)
     {
         Debug.Log("攻擊被觸發");
-        Debug.Log("traget type:" + (args["tragets"].GetType()));
+        //BasicControler traget = (BasicControler)args["tragets"];
+        //Debug.Log("traget:"+traget);
+        //Debug.Log("traget type:" + (args["tragets"].GetType()));
         unitControler[] tragets =(unitControler[])args["tragets"];
         int atk = owner.data.Now_Attack;
         Damage damage = new Damage(atk,Damage.KIND_PHYSICAL,owner);
+        //Debug.Log("製造傷害時傷害數值為:" + damage.num);
+        Debug.Log("traget 為:" + ((BasicControler)tragets[0]).gameObject.name);
         tragets[0].takeDamage(damage);
+        Debug.Log("冷卻時間:"+CoolDown);
+        base.trigger(args);
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

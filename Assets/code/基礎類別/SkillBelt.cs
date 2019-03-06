@@ -63,7 +63,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     }
     protected void befTakeDamage_cb(Damage d)
     {
-        _bef_take_damage(d);
+        if(_bef_take_damage!=null)
+            _bef_take_damage(d);
     }
 
     protected BasicDelegate.withDamage _aft_take_damage;
@@ -81,7 +82,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     }
     protected void aftTakeDamage_cb(Damage d)
     {
-        _aft_take_damage(d);
+        if(_aft_cause_damage!=null)
+            _aft_take_damage(d);
     }
 
     BasicDelegate.withDamage _aft_cause_damage;
@@ -99,7 +101,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     }
     protected void aftCauseDamage_cb(Damage d)
     {
-        _aft_take_damage(d);
+        if(_aft_cause_damage !=null)
+            _aft_take_damage(d);
     }
 
     public virtual void addSkillBy(string represName)
@@ -120,11 +123,12 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     }
     public virtual void updateSkill(float time,Environment env)
     {
+        //Debug.Log("updateSkill time:" + time);
         if(_time_pass !=null)
             _time_pass(time);
         foreach(Skill act in activeSkills)
         {
-            Debug.Log("act canUse:" + act.canUse);
+            //Debug.Log("act canUse:" + act.canUse);
             if (act.canUse)
             {
                 act.arouse(env);

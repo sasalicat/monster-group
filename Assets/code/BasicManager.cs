@@ -49,10 +49,10 @@ public class BasicManager : MonoBehaviour,Manager {
         if (result)
         {
             GameObject hpbar= Instantiate(objectList.main.hpBar, newone.transform);
-            controler.hpbar= hpbar.GetComponent<HpBar>();
             hpbar.transform.localPosition = objectList.main.hpBar.transform.position;
             hpbar.GetComponent<HpBar>().HpColor = playerColor[playerNo];
-            controler.init(new BasicAI(),chessBoard,data);
+
+            controler.init(new BasicAI(),chessBoard,data, hpbar.GetComponent<HpBar>());
             Timer.main.logInTimer(controler.action);
             SkillBelt belt= newone.AddComponent<SkillBelt>();
             controler.skillBelt = belt;
@@ -81,8 +81,8 @@ public class BasicManager : MonoBehaviour,Manager {
         Dictionary<string, object> testdata = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 0 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf} };
         unitControler controler = createUnit(testdata);
         ((BasicControler)controler).gameObject.name = "單位1";
-
-        Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 0 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf } };
+        roleInformation inf2 = new roleInformation(new unitData(), new List<int>() { 0 }, 0);
+        Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 0 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf2 } };
         unitControler controler2= createUnit(testdata2);
         ((BasicControler)controler2).gameObject.name = "單位2";
     }
