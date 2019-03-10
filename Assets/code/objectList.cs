@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class objectList : MonoBehaviour {
-    public static objectList main=null;
+public static objectList main=null;
     void OnEnable()
     {
         if(main != null)
@@ -17,4 +17,5 @@ public class objectList : MonoBehaviour {
     }
     public GameObject mainUnit;
     public GameObject hpBar;
+    public List<GameObject> prafebList;
 }

@@ -14,6 +14,8 @@ public class BasicManager : MonoBehaviour,Manager {
     public const string STR_PLAYER_NO = "player_no";
     public const string STR_SKILL_NO = "skill_nos";
     public const string STR_INF = "information";
+
+
     protected ChessBoard chessBoard;
     protected Dictionary<int, Color> playerColor = new Dictionary<int, Color>() { {0,Color.red}, { 1,Color.blue} };
     public unitControler createUnit(Dictionary<string, object> unitInf)
@@ -57,6 +59,7 @@ public class BasicManager : MonoBehaviour,Manager {
             SkillBelt belt= newone.AddComponent<SkillBelt>();
             controler.skillBelt = belt;
             belt.init(controler, skillnos);
+            newone.AddComponent<sp_effection>();
             //是否要用字串來儲存技能名?
             return controler;
         }
@@ -78,11 +81,11 @@ public class BasicManager : MonoBehaviour,Manager {
     void Start () {
         chessBoard = new ChessBoard(5,8);
         roleInformation inf = new roleInformation(new unitData(),new List<int>(){0},0);
-        Dictionary<string, object> testdata = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 0 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf} };
+        Dictionary<string, object> testdata = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 2 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf} };
         unitControler controler = createUnit(testdata);
         ((BasicControler)controler).gameObject.name = "單位1";
-        roleInformation inf2 = new roleInformation(new unitData(), new List<int>() { 0 }, 0);
-        Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 0 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf2 } };
+        roleInformation inf2 = new roleInformation(new unitData(), new List<int>() {  }, 0);
+        Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 2 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf2 } };
         unitControler controler2= createUnit(testdata2);
         ((BasicControler)controler2).gameObject.name = "單位2";
     }
