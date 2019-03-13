@@ -68,7 +68,7 @@ public class sp_effection : MonoBehaviour {
     
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("sp_effection update processList len:"+processList.Count);
+        //Debug.Log("sp_effection update processList len:"+processList.Count);
         float delta = Time.deltaTime;
 		foreach(process p in processList)
         {

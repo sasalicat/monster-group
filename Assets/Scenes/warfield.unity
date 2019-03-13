@@ -1220,7 +1220,7 @@ MonoBehaviour:
   hpBar: {fileID: 1165941234298206, guid: d65d6ef1fe27b75458c9b0cb54a8eb6e, type: 2}
   prafebList:
   - {fileID: 1526032178857248, guid: cd5f40564a4f7a84b9ad8f99ba4e9894, type: 2}
-  - {fileID: 0}
+  - {fileID: 1308030970045936, guid: 5749da6e46aa530429ebb05ec667eda7, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1271,7 +1271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   representation:
   - repre_BaseAttack
-  - 
+  - repre_BaseAttackRemote
   - 
   - 
   - 
@@ -1349,7 +1349,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1323059369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9800001, y: -0.9000001, z: 0}
+  m_LocalPosition: {x: -0.9800001, y: -0.87, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 1770124222}

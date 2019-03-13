@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class unitData  {
-    public delegate void withInt(int arg);
+
     public delegate void withFloat2(float arg1, float arg2);
 
     public const int BASE_ABILITY_NUMBER = 100;
@@ -13,12 +13,13 @@ public class unitData  {
     public const int STAND_MAG_REINFOCE = 0;
     public const int STAND_ARMOR = 0;
     public const int STAND_LIFE = 100;
+    public const int STAND_LIFE_RECOVER = 0;
     public const int STAND_COOLDOWN_REINFORCE = 0;
     public const int STAND_MAG_RESISTANCE = 0;
     private int base_attack = STAND_ATK;
     private int attack_offset = 0;
 
-    public withInt _onLifeChange;
+    public BasicDelegate.withInt _onLifeChange;
     public withFloat2 _onCoolDownMutipleChange;
     private bool remote=false;
     public static float calReduce(int strength,int basic)
@@ -182,7 +183,25 @@ public class unitData  {
                 _onLifeChange(Now_Life);
         }
     }
-
+    private int now_life_recover = STAND_LIFE_RECOVER;
+    public int Now_Life_Recover
+    {
+        set
+        {
+            now_life_recover = value;
+        }
+        get
+        {
+            if (now_life_recover < 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return now_life_recover;
+            }
+        }
+    }
     private int cooldown_reinforce = STAND_COOLDOWN_REINFORCE;
     public int Now_Cooldown_Reinforce
     {

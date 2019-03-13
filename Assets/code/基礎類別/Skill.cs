@@ -6,18 +6,7 @@ public abstract class Skill:MonoBehaviour {
     public SkillInf information;
     protected BasicControler owner;
     public abstract void onInit(unitControler owner,Callback4Unit deleg);
-    public abstract void trigger(Dictionary<string,object> args);
-    public abstract unitControler[] findTraget(Environment env);
-    public virtual void arouse(Environment env)
-    {
-        Debug.Log("name:" + name + " owner:" + owner);
-        unitControler[] tragets = findTraget(env);
-        ((BasicControler)owner).useSkill(this,tragets);
-    }
-    public abstract bool canUse
-    {
-        get;
-    }
+
     public unitControler Owner
     {
         get

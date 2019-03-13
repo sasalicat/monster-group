@@ -16,7 +16,18 @@ public abstract class CDSkill : Skill {
         {
             return cdMutiple * StandCoolDown;
         }
-    } 
+    }
+    public abstract unitControler[] findTraget(Environment env);
+    public virtual void arouse(Environment env)
+    {
+        Debug.Log("name:" + name + " owner:" + owner);
+        unitControler[] tragets = findTraget(env);
+        ((BasicControler)owner).useSkill(this, tragets);
+    }
+    public abstract bool canUse
+    {
+        get;
+    }
     public float timeLeft = 0;
     public virtual void timePass(float time)
     {
@@ -27,7 +38,7 @@ public abstract class CDSkill : Skill {
         }
         //Debug.Log("timeLeft - time 後為:" + timeLeft);
     }
-    public override void trigger(Dictionary<string, object> args)
+    public virtual void trigger(Dictionary<string, object> args)
     {
         Debug.Log("設置timeLeft時CoolDown為:" + CoolDown);
         timeLeft = CoolDown;

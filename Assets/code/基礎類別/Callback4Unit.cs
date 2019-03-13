@@ -28,4 +28,9 @@ public interface Callback4Unit {
         set;
         get;
     }
+    BasicDelegate.withInt _onHpChange
+    {
+        set;
+        get;
+    }
 }

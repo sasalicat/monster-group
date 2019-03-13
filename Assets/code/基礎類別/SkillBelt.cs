@@ -99,6 +99,20 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
             _aft_take_damage = value;
         }
     }
+
+    public BasicDelegate.withInt _onHpChange
+    {
+        get
+        {
+            return ((BasicControler)controler).data._onLifeChange;
+        }
+
+        set
+        {
+            ((BasicControler)controler).data._onLifeChange = value;
+        }
+    }
+
     protected void aftCauseDamage_cb(Damage d)
     {
         if(_aft_cause_damage !=null)
@@ -126,7 +140,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         //Debug.Log("updateSkill time:" + time);
         if(_time_pass !=null)
             _time_pass(time);
-        foreach(Skill act in activeSkills)
+        foreach(CDSkill act in activeSkills)
         {
             //Debug.Log("act canUse:" + act.canUse);
             if (act.canUse)

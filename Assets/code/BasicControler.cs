@@ -23,7 +23,8 @@ public class BasicControler : MonoBehaviour,unitControler {
     public virtual Dictionary<string,object> createSkillArg(unitData data)
     {
         Dictionary<string, object> arg = new Dictionary<string, object>();
-
+        arg["miss"] = false;
+        arg["dice"] = Randomer.main.getInt();
         arg["phy_damage_multiple"] = data.Now_Mag_Multiple;
         arg["phy_damage_addition"] = 0;
         arg["mag_damage_multiple"] = 1f;
@@ -89,7 +90,7 @@ public class BasicControler : MonoBehaviour,unitControler {
             ((BasicControler)traget)._beAppoint(skill.information, skillArg);//被指定
         }
         _befUseSkill(skill.information,skillArg,tragets);
-        skill.trigger(skillArg);
+        ((CDSkill)skill).trigger(skillArg);
     }
 
     public void action(float time)
