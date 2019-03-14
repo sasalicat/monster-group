@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class skill_DeityShelterr : Skill {
+public class skill_DeityShelter : Skill {
     unitData data;
     float percentBefore = 1;
     public void onHpChange(int nowHp)
@@ -18,6 +18,7 @@ public class skill_DeityShelterr : Skill {
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         data= ((BasicControler)owner).data;
+        this.information = new SkillInf(true, false, false, new List<string>() { });
     }
 
 

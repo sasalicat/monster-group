@@ -5,7 +5,7 @@ using UnityEngine;
 public class decisionArea : MonoBehaviour {
     protected float timeLeft;
     public float time;
-	// Use this for initialization
+    // Use this for initialization
 	void Start () {
         timeLeft = time;
 	}

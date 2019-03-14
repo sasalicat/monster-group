@@ -23,7 +23,8 @@ public class skill_WildForce : Skill {
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         data = ((BasicControler)owner).data;
-        deleg._onHpChange += onHpChange;  
+        deleg._onHpChange += onHpChange;
+        this.information = new SkillInf(true, false, false, new List<string>() {  });
     }
 
 }

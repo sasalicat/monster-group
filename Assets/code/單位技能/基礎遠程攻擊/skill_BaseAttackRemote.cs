@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class skill_BaseAttackRemote : CDSkill {
+    protected virtual Damage createDamage(Dictionary<string,object> skillArg)
+    {
+        int atk = owner.data.Now_Attack;
+        List<string> tag = new List<string>() { Damage.TAG_ATTACK, Damage.TAG_CLOSE };
+        Damage damage = new Damage((int)(atk * (float)skillArg[Skill.ARG_PHY_MUL]+(int)skillArg[Skill.ARG_PHY_ADD]), Damage.KIND_PHYSICAL, owner);
+        
+        return damage;
+    }
     protected virtual Vector2 offset
     {
         get
@@ -29,7 +37,7 @@ public class skill_BaseAttackRemote : CDSkill {
     {
         get
         {
-            return 1;
+            return owner.data.Now_Attack_Interval;
         }
     }
 
@@ -50,25 +58,29 @@ public class skill_BaseAttackRemote : CDSkill {
     public override void trigger(Dictionary<string, object> args)
     {
         Debug.Log("攻擊被觸發");
-        //BasicControler traget = (BasicControler)args["tragets"];
-        //Debug.Log("traget:"+traget);
-        //Debug.Log("traget type:" + (args["tragets"].GetType()));
-        unitControler[] tragets = (unitControler[])args["tragets"];
-        int atk = owner.data.Now_Attack;
-        BasicControler nowTraget = (BasicControler)tragets[0];
-        Damage damage = new Damage(atk, Damage.KIND_PHYSICAL, owner);
-        //Debug.Log("製造傷害時傷害數值為:" + damage.num);
-        Debug.Log("traget 為:" + ((BasicControler)tragets[0]).gameObject.name);
-        tragets[0].takeDamage(damage);
-        //Debug.Log("冷卻時間:" + CoolDown);
-        //Debug.Log("自身位置:" + transform.position + "相對位置:" + transform.TransformDirection(offset));
-        Vector2 toTraget = nowTraget.transform.position - transform.position;
-        float z_rotate = Vector2.Angle(Vector2.up, toTraget);
+        if (!(bool)args["miss"])
+        {
+            //BasicControler traget = (BasicControler)args["tragets"];
+            //Debug.Log("traget:"+traget);
+            //Debug.Log("traget type:" + (args["tragets"].GetType()));
+            unitControler[] tragets = (unitControler[])args["tragets"];
 
-        GameObject mislobj = Instantiate(objectList.main.prafebList[missileNo],transform.TransformDirection(offset),transform.rotation);
-        Vector2 relat_pos= Quaternion.Euler(0, 0, z_rotate)* offset;
-        mislobj.transform.position = (Vector2)transform.position + relat_pos;
-        mislobj.GetComponent<missile>().traget = ((BasicControler)tragets[0]).gameObject;
+            BasicControler nowTraget = (BasicControler)tragets[0];
+   
+            //Debug.Log("製造傷害時傷害數值為:" + damage.num);
+            Debug.Log("traget 為:" + ((BasicControler)tragets[0]).gameObject.name);
+            tragets[0].takeDamage(createDamage(args));
+            //Debug.Log("冷卻時間:" + CoolDown);
+            //Debug.Log("自身位置:" + transform.position + "相對位置:" + transform.TransformDirection(offset));
+            Vector2 toTraget = nowTraget.transform.position - transform.position;
+            float z_rotate = Vector2.Angle(Vector2.up, toTraget);
+
+            GameObject mislobj = Instantiate(objectList.main.prafebList[missileNo], transform.TransformDirection(offset), transform.rotation);
+            Vector2 relat_pos = Quaternion.Euler(0, 0, z_rotate) * offset;
+            mislobj.transform.position = (Vector2)transform.position + relat_pos;
+            mislobj.GetComponent<missile>().traget = ((BasicControler)tragets[0]).gameObject;
+            
+        }
         base.trigger(args);
     }
 

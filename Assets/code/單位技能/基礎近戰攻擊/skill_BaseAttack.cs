@@ -4,9 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class skill_BaseAttack : CDSkill {
+    protected virtual Damage createDamage(Dictionary<string, object> skillArg)
+    {
+        int atk = owner.data.Now_Attack;
+        List<string> tag = new List<string>() { Damage.TAG_ATTACK, Damage.TAG_CLOSE };
+        Damage damage = new Damage((int)(atk * (float)skillArg[Skill.ARG_PHY_MUL] + (int)skillArg[Skill.ARG_PHY_ADD]), Damage.KIND_PHYSICAL, owner);
 
-    public const float animTime = 0.25f;
-    public const float stayTime = 0.1f;
+        return damage;
+    }
+    public virtual  float animTime
+    {
+        get
+        {
+            return  0.25f;
+        }
+    }
+
+    public virtual float stayTime
+    {
+        get
+        {
+            return 0.1f;
+        }
+    }
     protected readonly Vector2 offset = new Vector2(0.7f, 0.7f);
     public float anim_time = 0;
     public float stay_time = 0;
@@ -14,6 +34,19 @@ public class skill_BaseAttack : CDSkill {
     protected Vector2 oriPos;
     public GameObject nowTraget=null;
     private bool triggerEff = false;
+    public  virtual int effNo{
+        get
+        {
+            return 0;
+        }
+    } 
+    public virtual int effNo_hit
+    {
+        get
+        {
+            return 2;
+        }
+    }
     public override bool canUse
     {
         get
@@ -26,7 +59,7 @@ public class skill_BaseAttack : CDSkill {
     {
         get
         {
-            return 1;
+            return owner.data.Now_Attack_Interval;
         }
     }
 
@@ -50,20 +83,19 @@ public class skill_BaseAttack : CDSkill {
         //BasicControler traget = (BasicControler)args["tragets"];
         //Debug.Log("traget:"+traget);
         //Debug.Log("traget type:" + (args["tragets"].GetType()));
-        unitControler[] tragets =(unitControler[])args["tragets"];
-        int atk = owner.data.Now_Attack;
-        Damage damage = new Damage(atk,Damage.KIND_PHYSICAL,owner);
-        //Debug.Log("製造傷害時傷害數值為:" + damage.num);
-        Debug.Log("traget 為:" + ((BasicControler)tragets[0]).gameObject.name);
-        tragets[0].takeDamage(damage);
-        Debug.Log("冷卻時間:"+CoolDown);
+        if (!(bool)args["miss"])
+        {
+            unitControler[] tragets = (unitControler[])args["tragets"];
+            //Debug.Log("製造傷害時傷害數值為:" + damage.num);
+            tragets[0].takeDamage(createDamage(args));
+            anim_time = 0;
+            stay_time = 0;
+            nowTraget = ((BasicControler)tragets[0]).gameObject;
+            count = 0;
+            triggerEff = false;
+            Timer.main.logInTimer(Anim);
+        }
         base.trigger(args);
-        anim_time = 0;
-        stay_time = 0;
-        nowTraget = ((BasicControler)tragets[0]).gameObject;
-        count = 0;
-        triggerEff = false;
-        Timer.main.logInTimer(Anim);
     }
 
     public virtual void Anim(float time)
@@ -116,13 +148,22 @@ public class skill_BaseAttack : CDSkill {
         {
             if (!triggerEff)
             {
-                GameObject neweff = Instantiate(objectList.main.prafebList[0], transform);
-                neweff.transform.localPosition = Vector2.zero;
-                Vector2 toTraget = (Vector2)transform.position - (Vector2)nowTraget.transform.position;
-                neweff.transform.right = toTraget;
-                sp_effection shaker= nowTraget.GetComponent<sp_effection>();
-                shaker.shakeStart(0.3f, 0.1f);
-                triggerEff = true;
+                if (effNo >= 0)
+                {
+                    GameObject neweff = Instantiate(objectList.main.prafebList[effNo], transform);
+                    neweff.transform.localPosition = Vector2.zero;
+                    Vector2 toTraget = (Vector2)transform.position - (Vector2)nowTraget.transform.position;
+                    neweff.transform.right = toTraget;
+                    sp_effection shaker = nowTraget.GetComponent<sp_effection>();
+                    shaker.shakeStart(0.3f, 0.1f);
+                    triggerEff = true;
+                }
+                if(effNo_hit >= 0)
+                {
+                    GameObject hitPrefab = objectList.main.prafebList[effNo_hit];
+                    GameObject hiteff = Instantiate( hitPrefab,hitPrefab.transform.position,hitPrefab.transform.rotation, nowTraget.transform);
+                    hiteff.transform.localPosition = hitPrefab.transform.position;
+                }
             }
             //Debug.Log("count" + count + "staying");
             stay_time += time;

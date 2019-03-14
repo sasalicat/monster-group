@@ -124,7 +124,10 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         object newrepres= System.Activator.CreateInstance(System.Type.GetType(represName));
         string skillName = ((skill_representation)newrepres).ScriptName;
         Skill newone=(Skill)gameObject.AddComponent(System.Type.GetType(skillName));
-        if (newone.GetComponentInParent(System.Type.GetType("CDSkill")) != null)//如果是CD型技能
+        Debug.Log("skillname:" + skillName+" type:"+ System.Type.GetType(skillName));
+        //Debug.Log("represName name:" + represName + " parent:"+ newone.GetComponentInParent(System.Type.GetType("CDSkill")));
+        if(System.Type.GetType(skillName).IsSubclassOf(System.Type.GetType("CDSkill")))
+        //if (newone.GetComponentInParent(System.Type.GetType("CDSkill")) != null)//如果是CD型技能
         {
             _time_pass += ((CDSkill)newone).timePass;
         }

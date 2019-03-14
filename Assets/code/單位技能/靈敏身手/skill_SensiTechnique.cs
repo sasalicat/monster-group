@@ -16,5 +16,6 @@ public class skill_SensiTechnique : Skill
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         deleg._BeAppoint += beAppoint;
+        this.information = new SkillInf(true, false, false, new List<string>() { });
     }
 }
