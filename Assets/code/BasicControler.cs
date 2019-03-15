@@ -11,7 +11,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     public BasicDelegate.withDamage _aftTakeDamage;
     public BasicDelegate.withDamage _aftCauseDamage;
     public HpBar hpbar = null;
-
+    protected float recover_timeLeft = unitData.STAND_RECOVER_INTERVAL;
     public unitData data;
     public unitState state;
     public SkillBelt skillBelt;
@@ -51,10 +51,11 @@ public class BasicControler : MonoBehaviour,unitControler {
                 //Debug.Log("計算傷害時Physical_Reduce_Multiple為:" + data.Physical_Reduce_Multiple);
                 int hurt = (int)(data.Physical_Reduce_Multiple * damage.num);
                 //Debug.Log("計算傷害時hurt為:"+hurt);
-                Debug.Log("計算傷害時Now_Life為:" + data.Now_Life);
+                //Debug.Log("計算傷害時Now_Life為:" + data.Now_Life);
                 data.Now_Life -= hurt;
-                Debug.Log("計算結束");
+                //Debug.Log("計算結束");
                 _aftTakeDamage(damage);
+                createDamageNum(damage);
                 BasicControler from = (BasicControler)damage.creater;
                 damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
                 if (damage.creater != null)
@@ -67,6 +68,7 @@ public class BasicControler : MonoBehaviour,unitControler {
                 int hurt = (int)(data.Magic_Reduce_Multiple * damage.num);
                 data.Now_Life -= hurt;
                 _aftTakeDamage(damage);
+                createDamageNum(damage);
                 BasicControler from = (BasicControler)damage.creater;
                 damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
                 if (damage.creater != null)
@@ -98,6 +100,13 @@ public class BasicControler : MonoBehaviour,unitControler {
         //Debug.Log("角色 action");
         skillBelt.updateSkill(time,env);
         ai.update(this, env);
+        recover_timeLeft -= time;
+        if (recover_timeLeft <= 0)
+        {
+            data.Now_Life += data.Now_Life_Recover;
+            Debug.Log(gameObject.name + " 恢復:" + data.Now_Life_Recover);
+            recover_timeLeft = unitData.STAND_RECOVER_INTERVAL;
+        }
     }
     public void hpbarCallBack(int nowHp)
     {
@@ -113,5 +122,9 @@ public class BasicControler : MonoBehaviour,unitControler {
         this.state = new unitState();
         this.hpbar = hpbar;
         this.data._onLifeChange += hpbarCallBack;
+    }
+    public void createDamageNum(Damage damage)
+    {
+        NumberCreater.main.CreateFloatingNumber(1234567890,transform.position,0);
     }
 }

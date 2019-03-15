@@ -1163,6 +1163,7 @@ GameObject:
   - component: {fileID: 1241327378}
   - component: {fileID: 1241327379}
   - component: {fileID: 1241327380}
+  - component: {fileID: 1241327381}
   m_Layer: 0
   m_Name: client
   m_TagString: Untagged
@@ -1292,6 +1293,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5610e2a9258081c4280a2cc715f3bdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1241327381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1241327372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac39dd21a72e364294ec13be792605d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normal_interval: 0.21
+  normalNum:
+  - {fileID: 21300004, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300006, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300008, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300010, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300012, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300014, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300022, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300016, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300018, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300020, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  red_interval: 0.21
+  redNum:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  green_interval: 0.21
+  greenNum:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  numberObj: {fileID: 1001948120358198, guid: 0909517e908a98e498c0a096b7479c36, type: 2}
+  bitObj: {fileID: 1049919268143966, guid: e46247de35d00c44d8ab69fcd5b40c4e, type: 2}
 --- !u!1 &1323059369
 GameObject:
   m_ObjectHideFlags: 0

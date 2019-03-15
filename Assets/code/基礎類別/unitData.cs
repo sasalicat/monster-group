@@ -9,6 +9,7 @@ public class unitData  {
     public const int BASE_ABILITY_NUMBER = 100;
     public const int STAND_ATK = 10;
     public const float STAND_ATK_INTERVAL = 1.0f;
+    public const float STAND_RECOVER_INTERVAL = 1.0f;
     public const int STAND_ATK_SPD_REINFORCE = 0;
     public const int STAND_MAG_REINFOCE = 0;
     public const int STAND_ARMOR = 0;
@@ -16,6 +17,7 @@ public class unitData  {
     public const int STAND_LIFE_RECOVER = 0;
     public const int STAND_COOLDOWN_REINFORCE = 0;
     public const int STAND_MAG_RESISTANCE = 0;
+
     private int base_attack = STAND_ATK;
     private int attack_offset = 0;
 

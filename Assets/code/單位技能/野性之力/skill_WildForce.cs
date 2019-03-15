@@ -8,7 +8,8 @@ public class skill_WildForce : Skill {
     float percentBefore = 1;
     public void onHpChange(int nowhp)
     {
-        float percent = nowhp / data.Now_Max_Life;
+        float percent = (float)nowhp / (float)data.Now_Max_Life;
+        Debug.Log("野性之力 nowhp:" + nowhp + " now max life:" + data.Now_Max_Life + "percent before:" + percentBefore);
         if(percentBefore>0.5f && percent <= 0.5f)
         {
             data.Now_Attack += 5;
@@ -19,6 +20,7 @@ public class skill_WildForce : Skill {
             data.Now_Attack -= 5;
             data.Now_Life_Recover -= 5;
         }
+        percentBefore = percent;
     }
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {

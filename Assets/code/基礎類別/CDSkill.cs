@@ -40,7 +40,7 @@ public abstract class CDSkill : Skill {
     }
     public virtual void trigger(Dictionary<string, object> args)
     {
-        Debug.Log("設置timeLeft時CoolDown為:" + CoolDown);
+        //Debug.Log("設置timeLeft時CoolDown為:" + CoolDown);
         timeLeft = CoolDown;
     }
 }

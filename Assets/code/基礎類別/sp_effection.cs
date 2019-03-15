@@ -45,7 +45,7 @@ class shake:process
     {
         
         timeLeft -= time;
-        Debug.Log("shake updateing... time:"+timeLeft);
+        //Debug.Log("shake updateing... time:"+timeLeft);
         Vector2 offset = UnityEngine.Random.insideUnitCircle*dist;
         transform.position = oriPos + offset;
         if (timeLeft <= 0)
