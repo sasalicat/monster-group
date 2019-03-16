@@ -4,6 +4,7 @@ using UnityEngine;
 
 
 public class NumberCreater : MonoBehaviour {
+    public Vector2 createPosOffset=new Vector2(0,0);
     public float normal_interval;
     public List<Sprite> normalNum;
     public float red_interval;
@@ -13,6 +14,7 @@ public class NumberCreater : MonoBehaviour {
     public static NumberCreater main;
     public GameObject numberObj;
     public GameObject bitObj;
+
     // Use this for initialization
     void OnEnable()
     {
@@ -27,7 +29,7 @@ public class NumberCreater : MonoBehaviour {
     }
     public GameObject CreateFloatingNumber(int num,Vector2 pos,int kind)
     {
-        GameObject obj= Instantiate(numberObj, pos, numberObj.transform.rotation);
+        GameObject obj= Instantiate(numberObj, pos+ createPosOffset, numberObj.transform.rotation);
         int numNum = num;
         int counter = 0;
         while (numNum > 0)

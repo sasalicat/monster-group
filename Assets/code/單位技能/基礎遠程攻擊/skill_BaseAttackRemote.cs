@@ -25,6 +25,13 @@ public class skill_BaseAttackRemote : CDSkill {
             return 1;
         }
     }
+    protected virtual int effNo_hit
+    {
+        get
+        {
+            return 3;
+        }
+    }
     public override bool canUse
     {
         get
@@ -54,10 +61,16 @@ public class skill_BaseAttackRemote : CDSkill {
         this.information = new SkillInf(true, true, true, new List<string>() { SkillInf.TAG_DAMAGE });
 
     }
-
+    public virtual void misslieHit(missile m)
+    {
+        Debug.Log("missile Hit被觸發");
+        GameObject effobj= Instantiate(objectList.main.prafebList[effNo_hit], m.traget.gameObject.transform);
+        effobj.transform.localPosition = Vector2.zero;
+        Debug.Log("物件名稱:" + effobj.gameObject.name);
+    }
     public override void trigger(Dictionary<string, object> args)
     {
-        Debug.Log("攻擊被觸發");
+        //Debug.Log("攻擊被觸發");
         if (!(bool)args["miss"])
         {
             //BasicControler traget = (BasicControler)args["tragets"];
@@ -79,6 +92,10 @@ public class skill_BaseAttackRemote : CDSkill {
             Vector2 relat_pos = Quaternion.Euler(0, 0, z_rotate) * offset;
             mislobj.transform.position = (Vector2)transform.position + relat_pos;
             mislobj.GetComponent<missile>().traget = ((BasicControler)tragets[0]).gameObject;
+            if (effNo_hit >= 0)
+            {
+                mislobj.GetComponent<missile>().on_missile_hited += misslieHit;
+            }
             
         }
         base.trigger(args);

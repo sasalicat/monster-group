@@ -53,3 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExistTime: 0.5
   timeLeft: 0
+  speed: {x: 2, y: 2}
+  moveEase: 1

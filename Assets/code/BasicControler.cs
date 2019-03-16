@@ -125,6 +125,6 @@ public class BasicControler : MonoBehaviour,unitControler {
     }
     public void createDamageNum(Damage damage)
     {
-        NumberCreater.main.CreateFloatingNumber(1234567890,transform.position,0);
+        NumberCreater.main.CreateFloatingNumber(damage.num,transform.position,0);
     }
 }
