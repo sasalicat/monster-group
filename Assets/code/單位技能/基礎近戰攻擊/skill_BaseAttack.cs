@@ -30,10 +30,10 @@ public class skill_BaseAttack : CDSkill {
     protected readonly Vector2 offset = new Vector2(0.7f, 0.7f);
     public float anim_time = 0;
     public float stay_time = 0;
-    private int count = 0;
+    protected int count = 0;
     protected Vector2 oriPos;
     public GameObject nowTraget=null;
-    private bool triggerEff = false;
+    protected bool triggerEff = false;
     public  virtual int effNo{
         get
         {
@@ -95,7 +95,7 @@ public class skill_BaseAttack : CDSkill {
             triggerEff = false;
             Timer.main.logInTimer(Anim);
         }
-        base.trigger(args);
+        setTime();
     }
 
     public virtual void Anim(float time)
@@ -151,9 +151,18 @@ public class skill_BaseAttack : CDSkill {
                 if (effNo >= 0)
                 {
                     GameObject neweff = Instantiate(objectList.main.prafebList[effNo], transform);
+                    float Zangle = objectList.main.prafebList[effNo].transform.eulerAngles.z;
                     neweff.transform.localPosition = Vector2.zero;
                     Vector2 toTraget = (Vector2)transform.position - (Vector2)nowTraget.transform.position;
-                    neweff.transform.right = toTraget;
+                    neweff.transform.up = toTraget;
+
+                    //Debug.Log(gameObject.name+" neweff rotation:" + neweff.transform.eulerAngles);
+                    Vector3 nowEuler = neweff.transform.eulerAngles;
+                    //Debug.Log("nowEuler = " + nowEuler);
+                    nowEuler.z += Zangle;
+                    neweff.transform.eulerAngles = nowEuler;
+                    //Debug.Log("neweff rotation +90:" + neweff.transform.eulerAngles);
+
                     sp_effection shaker = nowTraget.GetComponent<sp_effection>();
                     shaker.shakeStart(0.3f, 0.1f);
                     triggerEff = true;

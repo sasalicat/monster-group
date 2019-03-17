@@ -98,7 +98,7 @@ public class skill_BaseAttackRemote : CDSkill {
             }
             
         }
-        base.trigger(args);
+        setTime();
     }
 
 

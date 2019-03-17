@@ -98,8 +98,9 @@ public class BasicControler : MonoBehaviour,unitControler {
     public void action(float time)
     {
         //Debug.Log("角色 action");
-        skillBelt.updateSkill(time,env);
         ai.update(this, env);
+        skillBelt.updateSkill(time,env);
+
         recover_timeLeft -= time;
         if (recover_timeLeft <= 0)
         {

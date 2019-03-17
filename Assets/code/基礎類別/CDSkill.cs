@@ -38,9 +38,9 @@ public abstract class CDSkill : Skill {
         }
         //Debug.Log("timeLeft - time 後為:" + timeLeft);
     }
-    public virtual void trigger(Dictionary<string, object> args)
-    {
-        //Debug.Log("設置timeLeft時CoolDown為:" + CoolDown);
+    public void setTime() {
         timeLeft = CoolDown;
     }
+
+    public abstract void trigger(Dictionary<string, object> args);
 }
