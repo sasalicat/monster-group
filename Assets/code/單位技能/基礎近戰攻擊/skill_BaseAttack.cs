@@ -51,7 +51,7 @@ public class skill_BaseAttack : CDSkill {
     {
         get
         {
-            return timeLeft <= 0 && owner.traget != null;
+            return timeLeft <= 0 && owner.traget != null && owner.state.CanAttack;
         }
     }
 
@@ -76,6 +76,10 @@ public class skill_BaseAttack : CDSkill {
         this.information = new SkillInf(true,true,true,new List<string>() {SkillInf.TAG_DAMAGE});
         oriPos = transform.position;
     }
+    public virtual void actionTo(unitControler[] tragets,Dictionary<string,object> skillArg)
+    {
+        tragets[0].takeDamage(createDamage(skillArg));
+    }
 
     public override void trigger(Dictionary<string, object> args)
     {
@@ -87,7 +91,7 @@ public class skill_BaseAttack : CDSkill {
         {
             unitControler[] tragets = (unitControler[])args["tragets"];
             //Debug.Log("製造傷害時傷害數值為:" + damage.num);
-            tragets[0].takeDamage(createDamage(args));
+            actionTo(tragets,args);
             anim_time = 0;
             stay_time = 0;
             nowTraget = ((BasicControler)tragets[0]).gameObject;

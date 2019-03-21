@@ -80,11 +80,11 @@ public class BasicManager : MonoBehaviour,Manager {
     // Use this for initialization
     void Start () {
         chessBoard = new ChessBoard(5,8);
-        roleInformation inf = new roleInformation(new unitData(),new List<int>(){5},0);
+        roleInformation inf = new roleInformation(new unitData(),new List<int>(){1,7},0);
         Dictionary<string, object> testdata = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 2 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf} };
         unitControler controler = createUnit(testdata);
         ((BasicControler)controler).gameObject.name = "單位1";
-        roleInformation inf2 = new roleInformation(new unitData(), new List<int>() {5}, 1);
+        roleInformation inf2 = new roleInformation(new unitData(), new List<int>() {0}, 1);
         Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 2 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf2 } };
         unitControler controler2= createUnit(testdata2);
         ((BasicControler)controler2).gameObject.name = "單位2";

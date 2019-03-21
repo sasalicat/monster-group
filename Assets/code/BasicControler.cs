@@ -19,15 +19,19 @@ public class BasicControler : MonoBehaviour,unitControler {
     public unitControler traget = null;
     public Environment env;
     public int playerNo = -1;
-
+    public List<Buff> buffList = new List<Buff>();
+    protected List<Buff> failed = new List<Buff>();
+    void buffFail_callback(Buff b) {
+        failed.Add(b);
+    }
     public virtual Dictionary<string,object> createSkillArg(unitData data)
     {
         Dictionary<string, object> arg = new Dictionary<string, object>();
         arg["miss"] = false;
         arg["dice"] = Randomer.main.getInt();
-        arg["phy_damage_multiple"] = data.Now_Mag_Multiple;
+        arg["phy_damage_multiple"] = 1f;
         arg["phy_damage_addition"] = 0;
-        arg["mag_damage_multiple"] = 1f;
+        arg["mag_damage_multiple"] = data.Now_Mag_Multiple;
         arg["mag_damage_addition"] = 0;
         arg["healing_multiple"] = 1f;
         arg["healing_addition"] = 0;
@@ -38,9 +42,32 @@ public class BasicControler : MonoBehaviour,unitControler {
     }
     public virtual void addBuff(string buffName)
     {
-        gameObject.AddComponent(Type.GetType(buffName));
-    }
+        Buff buff= (Buff)gameObject.AddComponent(Type.GetType(buffName));
+        Buff[] before = (Buff[])GetComponents(Type.GetType(buffName));
+        buff.onfail += buffFail_callback;
+        buff.onInit(this, before, null);
 
+        buffList.Add(buff);
+    }
+    public virtual void addBuff(string buffName,Dictionary<string,object> dict)
+    {
+
+        //Debug.Log("buffname:"+buffName+","+GetComponents(Type.GetType(buffName)));
+        Component[] comps = GetComponents(Type.GetType(buffName));
+        Buff buff = (Buff)gameObject.AddComponent(Type.GetType(buffName));
+        Buff[] before = new Buff[comps.Length];
+        for(int i = 0; i < comps.Length; i++)
+        {
+            before[i] = (Buff)comps[i];
+        }
+        buff.onfail += buffFail_callback;
+        if (buff.onInit(this, before, dict))
+            buffList.Add(buff);
+        else
+        {
+            Destroy(buff);
+        }
+    }
     public virtual void takeDamage(Damage damage)
     {
         _befTakeDamage(damage);
@@ -48,12 +75,13 @@ public class BasicControler : MonoBehaviour,unitControler {
         {
             if (damage.kind == Damage.KIND_PHYSICAL && !state.ImmunePhysics)
             {
-                //Debug.Log("計算傷害時Physical_Reduce_Multiple為:" + data.Physical_Reduce_Multiple);
-                int hurt = (int)(data.Physical_Reduce_Multiple * damage.num);
-                //Debug.Log("計算傷害時hurt為:"+hurt);
+                Debug.Log("計算傷害時Physical_Reduce_Multiple為:" + data.Physical_Reduce_Multiple);
+                int hurt = (int)(data.Physical_Reduce_Multiple * (float)damage.num);
+                Debug.Log("計算傷害時hurt為:"+hurt);
                 //Debug.Log("計算傷害時Now_Life為:" + data.Now_Life);
                 data.Now_Life -= hurt;
                 //Debug.Log("計算結束");
+                damage.num = hurt;
                 _aftTakeDamage(damage);
                 createDamageNum(damage);
                 BasicControler from = (BasicControler)damage.creater;
@@ -98,9 +126,23 @@ public class BasicControler : MonoBehaviour,unitControler {
     public void action(float time)
     {
         //Debug.Log("角色 action");
+        //ai更新
         ai.update(this, env);
+        //技能使用
         skillBelt.updateSkill(time,env);
 
+        
+        //處理buff
+        foreach(Buff buff in buffList)
+        {
+            buff.onIntarvel(this, time);
+        }
+        for(int i = 0; i < failed.Count; i++)
+        {
+            buffList.Remove(failed[i]);
+        }
+        failed.Clear();
+        //處理血量恢復
         recover_timeLeft -= time;
         if (recover_timeLeft <= 0)
         {

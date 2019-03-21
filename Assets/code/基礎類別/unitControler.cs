@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface unitControler{
     void takeDamage(Damage damage);
-    void addBuff(string buffName);
+    void addBuff(string buffName,Dictionary<string,object> buffargs);
     void action(float time);
 }

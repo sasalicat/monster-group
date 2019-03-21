@@ -27,9 +27,9 @@ public class unitData  {
     public static float calReduce(int strength,int basic)
     {
         if (strength >= 0)
-            return basic / (basic + strength);
+            return (float)basic / ((float)basic + (float)strength);
         else
-            return (basic - strength) / basic;
+            return ((float)basic - (float)strength) / (float)basic;
     }
     public static float calIncrease(int strength,int basic)
     {
