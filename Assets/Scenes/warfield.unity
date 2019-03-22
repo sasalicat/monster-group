@@ -1320,7 +1320,7 @@ MonoBehaviour:
   - {fileID: 1446132125111694, guid: 461d08266e19c9d4d9885f131d4db2a6, type: 2}
   - {fileID: 1817498524228744, guid: 6969b3f991167194e8e5904ae08c52b8, type: 2}
   - {fileID: 1508587158363926, guid: 1e0631d2f0ef09e45984a4eac94c212a, type: 2}
-  - {fileID: 0}
+  - {fileID: 1506740874792888, guid: e93813fc92a62d34f80c1a8ee5332c4b, type: 2}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &1241327377
@@ -1371,9 +1371,9 @@ MonoBehaviour:
   - repre_SensiTechnique
   - repre_hack
   - repre_Slam
-  - 
-  - 
-  - 
+  - repre_HeavyArmor
+  - repre_BluntUser
+  - repre_ShieldBlock
 --- !u!114 &1241327380
 MonoBehaviour:
   m_ObjectHideFlags: 0
