@@ -17,7 +17,7 @@ public class skill_hack :skill_BaseAttack {
     {
         get
         {
-            return 2 * unitData.STAND_ATK_INTERVAL;
+            return 1 * unitData.STAND_ATK_INTERVAL;
         }
     }
     public override int effNo
@@ -57,11 +57,13 @@ public class skill_hack :skill_BaseAttack {
 
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
+        Debug.Log("順斬劈初始化!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         this.owner = (BasicControler)owner;
         information = new SkillInf(false,true,false,false,new List<string>() {SkillInf.TAG_DAMAGE});
         oriPos = transform.position;
+        effection = GetComponent<sp_effection>();
     }
-    public override void trigger(Dictionary<string, object> args)
+    /*public override void trigger(Dictionary<string, object> args)
     {
         //Debug.Log("攻擊被觸發");
         //BasicControler traget = (BasicControler)args["tragets"];
@@ -80,12 +82,18 @@ public class skill_hack :skill_BaseAttack {
             stay_time = 0;
             nowTraget = ((BasicControler)tragets[0]).gameObject;
             count = 0;
-            triggerEff = false;
-            Timer.main.logInTimer(Anim);
-        }
+            //triggerEff = false;
+            //Timer.main.logInTimer(Anim);
+        //}
         setTime();
+    }*/
+    public override void actionTo(unitControler[] tragets, Dictionary<string, object> skillArg)
+    {
+        foreach (unitControler traget in tragets)
+        {
+            traget.takeDamage(createDamage(skillArg));
+        }
     }
-
     //public override 
 
 }

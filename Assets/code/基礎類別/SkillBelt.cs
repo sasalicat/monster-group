@@ -167,6 +167,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         foreach(int no in skillNos)
         {
             string respName = SkillList.main.representation[no];
+            Debug.Log("no:" + no + "respName:" + respName);
             addSkillBy(respName);
         }
         //Timer.main.logInTimer(interval);

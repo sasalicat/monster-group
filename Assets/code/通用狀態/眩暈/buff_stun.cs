@@ -18,7 +18,7 @@ public class buff_stun : Buff
 
     public override bool onInit(unitControler unit, Buff[] Repetitive, Dictionary<string, object> args)
     {
-        Debug.Log("總共有" + Repetitive.Length + "個重複Buff");
+        //Debug.Log("總共有" + Repetitive.Length + "個重複Buff");
         if (Repetitive.Length == 0)
         {
             timeLeft = (float)args["time"];

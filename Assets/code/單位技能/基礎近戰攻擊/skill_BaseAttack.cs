@@ -33,7 +33,8 @@ public class skill_BaseAttack : CDSkill {
     protected int count = 0;
     protected Vector2 oriPos;
     public GameObject nowTraget=null;
-    protected bool triggerEff = false;
+    //protected bool triggerEff = false;
+    public sp_effection effection;
     public  virtual int effNo{
         get
         {
@@ -75,6 +76,7 @@ public class skill_BaseAttack : CDSkill {
         this.owner = (BasicControler)owner;
         this.information = new SkillInf(true,true,true,new List<string>() {SkillInf.TAG_DAMAGE});
         oriPos = transform.position;
+        effection =GetComponent<sp_effection>();
     }
     public virtual void actionTo(unitControler[] tragets,Dictionary<string,object> skillArg)
     {
@@ -92,16 +94,26 @@ public class skill_BaseAttack : CDSkill {
             unitControler[] tragets = (unitControler[])args["tragets"];
             //Debug.Log("製造傷害時傷害數值為:" + damage.num);
             actionTo(tragets,args);
-            anim_time = 0;
-            stay_time = 0;
             nowTraget = ((BasicControler)tragets[0]).gameObject;
-            count = 0;
-            triggerEff = false;
-            Timer.main.logInTimer(Anim);
+            if (effection.rushMainStart(animTime,stayTime,nowTraget,Effection))
+            {
+
+            }
+            else
+            {
+                Debug.Log("強制觸發Effection");
+                Effection();
+            }
+            //anim_time = 0;
+            //stay_time = 0;
+            //
+            //count = 0;
+            //triggerEff = false;
+            //Timer.main.logInTimer(Anim);
         }
         setTime();
     }
-
+/*
     public virtual void Anim(float time)
     {
         count++;
@@ -139,14 +151,7 @@ public class skill_BaseAttack : CDSkill {
                 toTraget.y += nowOffset.y;
             }
             transform.position = oriPos+ toTraget* process;
-            /*if (stay_time >=  stayTime && !triggerEff)
-            {
-                GameObject neweff= Instantiate(objectList.main.prafebList[0], transform);
-                neweff.transform.localPosition = Vector2.zero;
-                toTraget = (Vector2)transform.position - (Vector2)nowTraget.transform.position;
-                neweff.transform.right = toTraget;
-                triggerEff = true;
-            }*/
+
         }
         else if (stay_time < stayTime)
         {
@@ -187,5 +192,33 @@ public class skill_BaseAttack : CDSkill {
             Timer.main.loginOutTimer(Anim);
         }
     }
-    
+    */
+    public void Effection()
+    {
+        if (effNo >= 0)
+        {
+            GameObject neweff = Instantiate(objectList.main.prafebList[effNo], transform);
+            float Zangle = objectList.main.prafebList[effNo].transform.eulerAngles.z;
+            neweff.transform.localPosition = Vector2.zero;
+            Vector2 toTraget = (Vector2)transform.position - (Vector2)nowTraget.transform.position;
+            neweff.transform.up = toTraget;
+
+            //Debug.Log(gameObject.name+" neweff rotation:" + neweff.transform.eulerAngles);
+            Vector3 nowEuler = neweff.transform.eulerAngles;
+            //Debug.Log("nowEuler = " + nowEuler);
+            nowEuler.z += Zangle;
+            neweff.transform.eulerAngles = nowEuler;
+            //Debug.Log("neweff rotation +90:" + neweff.transform.eulerAngles);
+
+            sp_effection shaker = nowTraget.GetComponent<sp_effection>();
+            shaker.shakeStart(0.3f, 0.1f);
+            
+        }
+        if (effNo_hit >= 0)
+        {
+            GameObject hitPrefab = objectList.main.prafebList[effNo_hit];
+            GameObject hiteff = Instantiate(hitPrefab, hitPrefab.transform.position, hitPrefab.transform.rotation, nowTraget.transform);
+            hiteff.transform.localPosition = hitPrefab.transform.position;
+        }
+    }
 }
