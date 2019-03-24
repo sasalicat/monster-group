@@ -36,7 +36,7 @@ public class skill_BaseAttackRemote : CDSkill {
     {
         get
         {
-            return timeLeft <= 0 && owner.traget != null;
+            return timeLeft <= 0 && owner.traget != null&&owner.state.CanAttack;
         }
     }
 

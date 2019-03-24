@@ -43,12 +43,12 @@ public class skill_hack :skill_BaseAttack {
             tragets.Add((BasicControler)owner.traget);
             if (traget_pos[0] - 1 >= 0) {
                 if (board.board[traget_pos[1], traget_pos[0]-1] != null)
-                    tragets.Add((BasicControler)board.board[traget_pos[0] - 1, traget_pos[1]]);
+                    tragets.Add((BasicControler)board.board[traget_pos[1], traget_pos[0]-1]);
             }
             if (traget_pos[0] + 1< board.X)
             {
                 if (board.board[traget_pos[1], traget_pos[0]+1] != null)
-                    tragets.Add((BasicControler)board.board[traget_pos[0] + 1, traget_pos[1]]);
+                    tragets.Add((BasicControler)board.board[traget_pos[1], traget_pos[0]+1]);
             }
             return tragets.ToArray();
         }

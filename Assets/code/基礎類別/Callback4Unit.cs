@@ -13,6 +13,11 @@ public interface Callback4Unit {
         set;
         get;
     }
+    BasicDelegate.forSkillTrageting _AftUseSkill
+    {
+        set;
+        get;
+    }
     BasicDelegate.withDamage _BefTakeDamage
     {
         set;

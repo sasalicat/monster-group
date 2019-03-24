@@ -14,6 +14,10 @@ public class SkillInf  {
     public bool activeSkill;
     public bool remote = true;
 
+    public static SkillInf passiveSkillInf()
+    {
+        return new SkillInf(false, false, false, new List<string>());
+    }
     public SkillInf() {
         singleTraget = true;
         tags = new List<string>() { "damage" };

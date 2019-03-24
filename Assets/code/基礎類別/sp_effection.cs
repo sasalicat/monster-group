@@ -49,7 +49,7 @@ public class rush_stay : process
 
     public override void update(float time)
     {
-        Debug.Log("rush main update________________________________________");
+        //Debug.Log("rush main update________________________________________");
         anim_time += time;
         if (anim_time <= animTime)
         {

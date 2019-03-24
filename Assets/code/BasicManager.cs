@@ -82,13 +82,29 @@ public class BasicManager : MonoBehaviour,Manager {
     void Start () {
         chessBoard = new ChessBoard(5,8);
         roleInformation inf = new roleInformation(new unitData(),new List<int>(){1,7},0);
-        Dictionary<string, object> testdata = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 2 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf} };
+        Dictionary<string, object> testdata = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 1 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf} };
         unitControler controler = createUnit(testdata);
         ((BasicControler)controler).gameObject.name = "單位1";
-        roleInformation inf2 = new roleInformation(new unitData(), new List<int>() {5,6,8,9}, 1);
-        Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 2 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf2 } };
+
+        roleInformation inf2 = new roleInformation(new unitData(), new List<int>() {0,5,6,10}, 1);
+        Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 1 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf2 } };
         unitControler controler2= createUnit(testdata2);
         ((BasicControler)controler2).gameObject.name = "單位2";
+
+        roleInformation inf3 = new roleInformation(new unitData(), new List<int>() { 0}, 2);
+        Dictionary<string, object> testdata3 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 2 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf3 } };
+        unitControler controler3 = createUnit(testdata3);
+        ((BasicControler)controler3).gameObject.name = "單位3";
+
+        roleInformation inf4 = new roleInformation(new unitData(), new List<int>() { 0 }, 2);
+        Dictionary<string, object> testdata4 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 3 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf4 } };
+        unitControler controler4 = createUnit(testdata4);
+        ((BasicControler)controler4).gameObject.name = "單位4";
+
+        roleInformation inf5 = new roleInformation(new unitData(), new List<int>() { 0 }, 2);
+        Dictionary<string, object> testdata5 = new Dictionary<string, object>() { { STR_POS_X, 1 }, { STR_POS_Y, 1 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf5 } };
+        unitControler controler5 = createUnit(testdata5);
+        ((BasicControler)controler5).gameObject.name = "單位5";
     }
 
 }

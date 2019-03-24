@@ -112,6 +112,24 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
             ((BasicControler)controler).data._onLifeChange = value;
         }
     }
+    protected void aftUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets)
+    {
+        if (_aft_use_skill != null)
+            _aft_use_skill(skillInf, skillArgs, tragets);
+    }
+    BasicDelegate.forSkillTrageting _aft_use_skill;  
+    public BasicDelegate.forSkillTrageting _AftUseSkill
+    {
+        get
+        {
+            return _aft_use_skill;
+        }
+
+        set
+        {
+            _aft_use_skill = value;
+        }
+    }
 
     protected void aftCauseDamage_cb(Damage d)
     {
@@ -158,6 +176,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         this.controler = controler;
         ((BasicControler)controler)._beAppoint += beAppoint_cb;
         ((BasicControler)controler)._befUseSkill += befUseSkill_cb;
+        ((BasicControler)controler)._aftUseSkill += aftUseSkill_cb;
         ((BasicControler)controler)._befTakeDamage += befTakeDamage_cb;
         ((BasicControler)controler)._aftTakeDamage += aftTakeDamage_cb;
         ((BasicControler)controler)._aftCauseDamage += aftCauseDamage_cb;

@@ -40,7 +40,7 @@ public class skill_Slam : skill_BaseAttack {
         Damage d = new Damage((int)(5 * multip + add), Damage.KIND_PHYSICAL, owner);
         tragets[0].takeDamage(d);
         multip = (float)skillArg["control_multiple"];
-        float time =10 * unitData.STAND_ATK_INTERVAL *multip;
+        float time =2 * unitData.STAND_ATK_INTERVAL *multip;
         Dictionary<string, object> buffArg = new Dictionary<string, object>();
         buffArg["time"] = time;
         tragets[0].addBuff("buff_stun",buffArg);

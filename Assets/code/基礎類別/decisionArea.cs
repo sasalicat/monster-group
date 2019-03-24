@@ -7,7 +7,7 @@ public class decisionArea : MonoBehaviour {
     public float time;
     // Use this for initialization
 	void Start () {
-        Debug.Log(gameObject.name + "初始化 time:" + time);
+        //Debug.Log(gameObject.name + "初始化 time:" + time);
         timeLeft = time;
 	}
 	

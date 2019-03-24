@@ -56,6 +56,31 @@ public class ChessBoard : Environment {
         int x = flatten % X;
         return new int[2] { x, y };
     }
+    public unitControler[] unitsBehind(unitControler unit)
+    {
+        List<unitControler> list=new List<unitControler>();
+        int[] pos = getPosFor(unit);
+        if (pos[1] < Y / 2)
+        {
+            for (int y = pos[1] - 1; y >= 0; y--)
+            {
+                if (board[y, pos[0]] != null)
+                {
+                    list.Add(board[y, pos[0]]);
+                }
+            }
+        }
+        else {
+            for(int y = pos[1] + 1; y < Y; y++)
+            {
+                if (board[y, pos[0]] != null)
+                {
+                    list.Add(board[y, pos[0]]);
+                }
+            }
+        }
+        return list.ToArray();
+    }
     public List<unitControler> Units
     {
         get

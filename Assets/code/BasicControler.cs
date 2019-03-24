@@ -7,6 +7,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     
     public BasicDelegate.forSkill _beAppoint;
     public BasicDelegate.forSkillTrageting _befUseSkill;
+    public BasicDelegate.forSkillTrageting _aftUseSkill;
     public BasicDelegate.withDamage _befTakeDamage;
     public BasicDelegate.withDamage _aftTakeDamage;
     public BasicDelegate.withDamage _aftCauseDamage;
@@ -28,6 +29,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     {
         Dictionary<string, object> arg = new Dictionary<string, object>();
         arg["miss"] = false;
+        arg["bonus"] = false;//因為技能效果所而額外觸發的技能
         arg["dice"] = Randomer.main.getInt();
         arg["phy_damage_multiple"] = 1f;
         arg["phy_damage_addition"] = 0;
@@ -37,7 +39,6 @@ public class BasicControler : MonoBehaviour,unitControler {
         arg["healing_addition"] = 0;
         arg["control_multiple"] = 1f;
         arg["control_addition"] = 0;
-
         return arg;
     }
     public virtual void addBuff(string buffName)
@@ -121,8 +122,23 @@ public class BasicControler : MonoBehaviour,unitControler {
         }
         _befUseSkill(skill.information,skillArg,tragets);
         ((CDSkill)skill).trigger(skillArg);
+        _aftUseSkill(skill.information, skillArg, tragets);
     }
-
+    public virtual void useSkill(Skill skill, unitControler[] tragets,Dictionary<string,object> arg)
+    {
+        if (((BasicControler)skill.Owner) != this)
+        {
+            return;
+        }
+        arg["tragets"] = tragets;
+        foreach (unitControler traget in tragets)
+        {
+            ((BasicControler)traget)._beAppoint(skill.information, arg);//被指定
+        }
+        _befUseSkill(skill.information, arg, tragets);
+        ((CDSkill)skill).trigger(arg);
+        _aftUseSkill(skill.information, arg, tragets);
+    }
     public void action(float time)
     {
         //Debug.Log("角色 action");
