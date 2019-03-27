@@ -53,7 +53,7 @@ public class rush_stay : process
         anim_time += time;
         if (anim_time <= animTime)
         {
-            Debug.Log("anim_time=" + anim_time + " animTime=" + animTime);
+            //Debug.Log("anim_time=" + anim_time + " animTime=" + animTime);
             float process = anim_time / animTime;
             process = EasingFunction.EaseInCubic(0, 1, process);
             Vector2 nowOffset = offset;

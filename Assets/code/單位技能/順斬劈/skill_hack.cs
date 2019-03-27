@@ -29,7 +29,12 @@ public class skill_hack :skill_BaseAttack {
     }
     protected override Damage createDamage(Dictionary<string, object> skillArg)
     {
-        return new Damage((int)(owner.data.Now_Attack*0.8f*(float)skillArg["phy_damage_multiple"])+(int)skillArg["phy_damage_addition"],Damage.KIND_PHYSICAL,owner);
+        List<string> tag = new List<string>() {Damage.TAG_CLOSE};
+        if ((bool)skillArg["critical"])
+        {
+            tag.Add(Damage.TAG_CRITICAL);
+        }
+        return new Damage((int)(owner.data.Now_Attack*0.8f*(float)skillArg["phy_damage_multiple"])+(int)skillArg["phy_damage_addition"],Damage.KIND_PHYSICAL,owner, tag);
     }
     public override unitControler[] findTraget(Environment env)
     {

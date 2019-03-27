@@ -12,7 +12,7 @@ public class skill_ArmorBreak : Skill
             foreach(unitControler traget in tragets)
             {
                 Dictionary<string, object> buffArg = new Dictionary<string, object>();
-                buffArg["time"] = 0.5f*unitData.STAND_ATK_INTERVAL;
+                buffArg["time"] = 2.5f*unitData.STAND_ATK_INTERVAL;
                 buffArg["num"] = 50;
                 ((BasicControler)traget).addBuff("buff_ArmorBreak",buffArg);
             }

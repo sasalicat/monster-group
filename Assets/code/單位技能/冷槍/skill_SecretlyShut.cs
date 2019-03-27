@@ -1,18 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class skill_BaseAttackRemote : CDSkill {
-    protected virtual Damage createDamage(Dictionary<string,object> skillArg)
+public class skill_SecretlyShut : CDSkill
+{
+    protected virtual Damage createDamage(Dictionary<string, object> skillArg)
     {
         int atk = owner.data.Now_Attack;
-        List<string> tag = new List<string>() { Damage.TAG_ATTACK, Damage.TAG_CLOSE };
-        if ((bool)skillArg["critical"])
-        {
-            tag.Add("critical");
-        }
-        Damage damage = new Damage((int)(atk * (float)skillArg[Skill.ARG_PHY_MUL]+(int)skillArg[Skill.ARG_PHY_ADD]), Damage.KIND_PHYSICAL, owner,tag);
-        
+        List<string> tag = new List<string>() {  Damage.TAG_REMOTE,Damage.TAG_CRITICAL };
+        Damage damage = new Damage((int)(10 * (float)skillArg[Skill.ARG_PHY_MUL] + (int)skillArg[Skill.ARG_PHY_ADD]), Damage.KIND_PHYSICAL, owner,tag);
+
         return damage;
     }
     protected virtual Vector2 offset
@@ -26,7 +24,7 @@ public class skill_BaseAttackRemote : CDSkill {
     {
         get
         {
-            return 1;
+            return 9;
         }
     }
     protected virtual int effNo_hit
@@ -40,7 +38,7 @@ public class skill_BaseAttackRemote : CDSkill {
     {
         get
         {
-            return timeLeft <= 0 && owner.traget != null&&owner.state.CanAttack;
+            return timeLeft <= 0 && owner.traget != null && owner.state.CanAttack;
         }
     }
 
@@ -55,20 +53,31 @@ public class skill_BaseAttackRemote : CDSkill {
     public override unitControler[] findTraget(Environment env)
     {
         unitControler[] tragets = new unitControler[1];
-        tragets[0] = owner.traget;
+        ChessBoard board = (ChessBoard)env;
+        //Debug.Log("tragets:" + tragets);
+        unitControler[] backs= board.unitsBehind(owner.traget);
+        if (backs.Length > 0)
+        {
+            tragets[0] = backs[0];
+        }
+        else
+        {
+            tragets[0] = owner.traget;
+        }
+
         return tragets;
     }
 
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(true, true, true, new List<string>() { SkillInf.TAG_DAMAGE });
+        this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_DAMAGE });
 
     }
     public virtual void misslieHit(missile m)
     {
         Debug.Log("missile Hit被觸發");
-        GameObject effobj= Instantiate(objectList.main.prafebList[effNo_hit], m.traget.gameObject.transform);
+        GameObject effobj = Instantiate(objectList.main.prafebList[effNo_hit], m.traget.gameObject.transform);
         effobj.transform.localPosition = Vector2.zero;
         Debug.Log("物件名稱:" + effobj.gameObject.name);
     }
@@ -83,7 +92,7 @@ public class skill_BaseAttackRemote : CDSkill {
             unitControler[] tragets = (unitControler[])args["tragets"];
 
             BasicControler nowTraget = (BasicControler)tragets[0];
-   
+
             //Debug.Log("製造傷害時傷害數值為:" + damage.num);
             Debug.Log("traget 為:" + ((BasicControler)tragets[0]).gameObject.name);
             tragets[0].takeDamage(createDamage(args));
@@ -95,15 +104,14 @@ public class skill_BaseAttackRemote : CDSkill {
             GameObject mislobj = Instantiate(objectList.main.prafebList[missileNo], transform.TransformDirection(offset), transform.rotation);
             Vector2 relat_pos = Quaternion.Euler(0, 0, z_rotate) * offset;
             mislobj.transform.position = (Vector2)transform.position + relat_pos;
+            Debug.Log("目標:" + ((BasicControler)tragets[0]).gameObject);
             mislobj.GetComponent<missile>().traget = ((BasicControler)tragets[0]).gameObject;
             if (effNo_hit >= 0)
             {
                 mislobj.GetComponent<missile>().on_missile_hited += misslieHit;
             }
-            
+
         }
         setTime();
     }
-
-
 }

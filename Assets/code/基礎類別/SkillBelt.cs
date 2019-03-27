@@ -139,6 +139,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
 
     public virtual void addSkillBy(string represName)
     {
+        Debug.Log("represName:" + represName);
         object newrepres= System.Activator.CreateInstance(System.Type.GetType(represName));
         string skillName = ((skill_representation)newrepres).ScriptName;
         Skill newone=(Skill)gameObject.AddComponent(System.Type.GetType(skillName));

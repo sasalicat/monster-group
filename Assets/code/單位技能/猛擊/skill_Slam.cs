@@ -37,7 +37,12 @@ public class skill_Slam : skill_BaseAttack {
     {
         float multip=(float)skillArg["phy_damage_multiple"];
         int add = (int)skillArg["phy_damage_addition"];
-        Damage d = new Damage((int)(5 * multip + add), Damage.KIND_PHYSICAL, owner);
+        List<string> tag = new List<string>() { Damage.TAG_CLOSE };
+        if ((bool)skillArg["critical"])
+        {
+            tag.Add(Damage.TAG_CRITICAL);
+        }
+        Damage d = new Damage((int)(5 * multip + add), Damage.KIND_PHYSICAL, owner,tag);
         tragets[0].takeDamage(d);
         multip = (float)skillArg["control_multiple"];
         float time =2 * unitData.STAND_ATK_INTERVAL *multip;

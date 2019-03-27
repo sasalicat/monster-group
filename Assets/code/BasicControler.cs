@@ -31,7 +31,8 @@ public class BasicControler : MonoBehaviour,unitControler {
         arg["miss"] = false;
         arg["bonus"] = false;//因為技能效果所而額外觸發的技能
         arg["dice"] = Randomer.main.getInt();
-        arg["phy_damage_multiple"] = 1f;
+        arg["critical"] = false;
+         arg["phy_damage_multiple"] = 1f;
         arg["phy_damage_addition"] = 0;
         arg["mag_damage_multiple"] = data.Now_Mag_Multiple;
         arg["mag_damage_addition"] = 0;
@@ -184,6 +185,9 @@ public class BasicControler : MonoBehaviour,unitControler {
     }
     public void createDamageNum(Damage damage)
     {
-        NumberCreater.main.CreateFloatingNumber(damage.num,transform.position,0);
+        if (!damage.tag.Contains("critical"))
+            NumberCreater.main.CreateFloatingNumber(damage.num, transform.position, 0);
+        else
+            NumberCreater.main.CreateFloatingNumber(damage.num, transform.position, 1);
     }
 }

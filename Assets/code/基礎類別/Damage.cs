@@ -12,6 +12,7 @@ public class Damage {
     public const string TAG_THUNDER = "thunder";
     public const string TAG_REMOTE = "remote";
     public const string TAG_CLOSE = "close";
+    public const string TAG_CRITICAL = "critical";
     public int num;
     public byte kind;
     public unitControler creater = null;

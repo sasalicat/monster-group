@@ -4,6 +4,9 @@ using UnityEngine;
 
 
 public class NumberCreater : MonoBehaviour {
+    public const int YELLOW= 0;
+    public const int RED = 1;
+    public const int GREEN = 2;
     public Vector2 createPosOffset=new Vector2(0,0);
     public float normal_interval;
     public List<Sprite> normalNum;
@@ -14,7 +17,7 @@ public class NumberCreater : MonoBehaviour {
     public static NumberCreater main;
     public GameObject numberObj;
     public GameObject bitObj;
-
+    public GameObject missPrafeb;
     // Use this for initialization
     void OnEnable()
     {
@@ -58,5 +61,10 @@ public class NumberCreater : MonoBehaviour {
             numNum = numNum / 10;
         }
         return obj;
+    }
+    public  GameObject CreateMissing(Vector2 pos)
+    {
+        GameObject miss = Instantiate(missPrafeb, pos,Quaternion.EulerAngles(0, 0, 0));
+        return miss;
     }
 }

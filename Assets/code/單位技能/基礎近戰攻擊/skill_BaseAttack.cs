@@ -7,8 +7,12 @@ public class skill_BaseAttack : CDSkill {
     protected virtual Damage createDamage(Dictionary<string, object> skillArg)
     {
         int atk = owner.data.Now_Attack;
-        List<string> tag = new List<string>() { Damage.TAG_ATTACK, Damage.TAG_CLOSE };
-        Damage damage = new Damage((int)(atk * (float)skillArg[Skill.ARG_PHY_MUL] + (int)skillArg[Skill.ARG_PHY_ADD]), Damage.KIND_PHYSICAL, owner);
+        List<string> tag = new List<string>() { Damage.TAG_ATTACK, Damage.TAG_CLOSE};
+        if ((bool)skillArg["critical"])
+        {
+            tag.Add(Damage.TAG_CRITICAL);
+        }
+        Damage damage = new Damage((int)(atk * (float)skillArg[Skill.ARG_PHY_MUL] + (int)skillArg[Skill.ARG_PHY_ADD]), Damage.KIND_PHYSICAL, owner,tag);
 
         return damage;
     }
