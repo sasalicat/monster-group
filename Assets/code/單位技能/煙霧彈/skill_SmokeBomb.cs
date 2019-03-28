@@ -36,9 +36,15 @@ public class skill_SmokeBomb : CDSkill
 
     public override void trigger(Dictionary<string, object> args)
     {
+        BasicControler[] tragets = (BasicControler[])args["tragets"];
         BasicControler traget =(BasicControler)((unitControler[])args["tragets"])[0];
         GameObject effection = Instantiate(objectList.main.prafebList[11],traget.transform.position,Quaternion.Euler(0,0,0));
         effection.GetComponent<decisionArea>().time = 2 * unitData.STAND_ATK_INTERVAL;
+        Dictionary<string, object> arg = new Dictionary<string, object>();
+        arg["time"] = 2 * unitData.STAND_ATK_INTERVAL;
+        foreach (BasicControler control in tragets) {
+            control.addBuff("buff_blindness");
+        }
         setTime();
     }
 }

@@ -93,9 +93,10 @@ public class skill_BaseAttack : CDSkill {
         //BasicControler traget = (BasicControler)args["tragets"];
         //Debug.Log("traget:"+traget);
         //Debug.Log("traget type:" + (args["tragets"].GetType()));
+        unitControler[] tragets = (unitControler[])args["tragets"];
         if (!(bool)args["miss"])
         {
-            unitControler[] tragets = (unitControler[])args["tragets"];
+
             //Debug.Log("製造傷害時傷害數值為:" + damage.num);
             actionTo(tragets,args);
             nowTraget = ((BasicControler)tragets[0]).gameObject;
@@ -114,6 +115,11 @@ public class skill_BaseAttack : CDSkill {
             //count = 0;
             //triggerEff = false;
             //Timer.main.logInTimer(Anim);
+        }
+        else
+        {
+            BasicControler traget = (BasicControler)tragets[0];
+            NumberCreater.main.CreateMissing(traget.transform.position);
         }
         setTime();
     }

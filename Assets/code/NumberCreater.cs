@@ -64,6 +64,7 @@ public class NumberCreater : MonoBehaviour {
     }
     public  GameObject CreateMissing(Vector2 pos)
     {
+        Debug.Log("CreateMissing");
         GameObject miss = Instantiate(missPrafeb, pos,Quaternion.EulerAngles(0, 0, 0));
         return miss;
     }
