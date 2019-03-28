@@ -8,7 +8,7 @@ public class buff_blindness : Buff {
     {
         get
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
     public void missJudge(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets)
@@ -18,6 +18,7 @@ public class buff_blindness : Buff {
             int point = Randomer.main.getInt();
             if (point < 50)
             {
+                Debug.Log("missJudge 被觸發~~~~~~");
                 skillArgs["miss"] = true;
             }
         }
@@ -35,6 +36,7 @@ public class buff_blindness : Buff {
         }
         else
         {
+            this.unit = unit;
             timeLeft = time;
             ((BasicControler)unit)._befUseSkill += missJudge;
             return true;

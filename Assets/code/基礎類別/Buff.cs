@@ -23,11 +23,11 @@ public abstract class  Buff :MonoBehaviour {
     //onInit的回传值为是否添加,如果回传false,该buff会被删掉而不触发onRemove
     public virtual void onIntarvel(unitControler unit, float timeBetween)
     {
-        Debug.Log("buff timeLeft:" + timeLeft);
+        //Debug.Log("buff timeLeft:" + timeLeft);
             timeLeft -= timeBetween;
             if (timeLeft <= 0)
             {
-            Debug.Log("觸發deleteSelf");
+            //Debug.Log("觸發deleteSelf");
                 deleteSelf();
             }
     }

@@ -77,9 +77,9 @@ public class BasicControler : MonoBehaviour,unitControler {
         {
             if (damage.kind == Damage.KIND_PHYSICAL && !state.ImmunePhysics)
             {
-                Debug.Log("計算傷害時Physical_Reduce_Multiple為:" + data.Physical_Reduce_Multiple);
+                //Debug.Log("計算傷害時Physical_Reduce_Multiple為:" + data.Physical_Reduce_Multiple);
                 int hurt = (int)(data.Physical_Reduce_Multiple * (float)damage.num);
-                Debug.Log("計算傷害時hurt為:"+hurt);
+                //Debug.Log("計算傷害時hurt為:"+hurt);
                 //Debug.Log("計算傷害時Now_Life為:" + data.Now_Life);
                 data.Now_Life -= hurt;
                 //Debug.Log("計算結束");

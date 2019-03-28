@@ -20,7 +20,7 @@ public abstract class CDSkill : Skill {
     public abstract unitControler[] findTraget(Environment env);
     public virtual void arouse(Environment env)
     {
-        Debug.Log("name:" + name + " owner:" + owner);
+        //Debug.Log("name:" + name + " owner:" + owner);
         unitControler[] tragets = findTraget(env);
         ((BasicControler)owner).useSkill(this, tragets);
     }

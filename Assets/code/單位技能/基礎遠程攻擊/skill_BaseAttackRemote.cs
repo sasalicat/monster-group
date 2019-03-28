@@ -75,12 +75,13 @@ public class skill_BaseAttackRemote : CDSkill {
     public override void trigger(Dictionary<string, object> args)
     {
         //Debug.Log("攻擊被觸發");
+        unitControler[] tragets = (unitControler[])args["tragets"];
         if (!(bool)args["miss"])
         {
             //BasicControler traget = (BasicControler)args["tragets"];
             //Debug.Log("traget:"+traget);
             //Debug.Log("traget type:" + (args["tragets"].GetType()));
-            unitControler[] tragets = (unitControler[])args["tragets"];
+
 
             BasicControler nowTraget = (BasicControler)tragets[0];
    
@@ -101,6 +102,11 @@ public class skill_BaseAttackRemote : CDSkill {
                 mislobj.GetComponent<missile>().on_missile_hited += misslieHit;
             }
             
+        }
+        else
+        {
+            BasicControler traget = (BasicControler)tragets[0];
+            NumberCreater.main.CreateMissing(traget.transform.position);
         }
         setTime();
     }
