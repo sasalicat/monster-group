@@ -1660,6 +1660,7 @@ GameObject:
   - component: {fileID: 1241327379}
   - component: {fileID: 1241327380}
   - component: {fileID: 1241327381}
+  - component: {fileID: 1241327382}
   m_Layer: 0
   m_Name: client
   m_TagString: Untagged
@@ -1852,6 +1853,18 @@ MonoBehaviour:
   numberObj: {fileID: 1001948120358198, guid: 0909517e908a98e498c0a096b7479c36, type: 2}
   bitObj: {fileID: 1049919268143966, guid: e46247de35d00c44d8ab69fcd5b40c4e, type: 2}
   missPrafeb: {fileID: 1408690023858624, guid: 5af096a8cc18d1346a1cfec56df445de, type: 2}
+--- !u!114 &1241327382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1241327372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cac85c0c04e8e04aba74dce8aa8ffad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAX_SIZE: 20
 --- !u!1 &1323059369
 GameObject:
   m_ObjectHideFlags: 0
