@@ -18,7 +18,7 @@ public class inf_test : MonoBehaviour {
         print("load file!");
         dataLoaded.printInf();
         Debug.Log(dataLoaded.army.Count);
-        Debug.Log(dataLoaded.army[0].unitKind);
+        Debug.Log(dataLoaded.army[0].race);
         //dataLoaded.
 
 	}

@@ -247,6 +247,23 @@ public class unitData  {
     }
     public unitData_Profile getProflie()
     {
-        return null;
+        return new unitData_Profile(base_attack,attack_speed_reinforce,magic_strength,armor,max_life_point,
+            now_life_recover,cooldown_reinforce,magic_resistance);
+    }
+    public unitData(unitData_Profile profile)
+    {
+        this.base_attack = profile.base_attack;
+        this.attack_speed_reinforce = profile.attack_speed_reinforce;
+        this.max_life_point = profile.max_life_point;
+        this.now_life_recover = profile.now_life_recover;
+        this.magic_strength = profile.magic_strength;
+        this.cooldown_reinforce = profile.cooldown_reinforce;
+        this.armor = profile.armor;
+        this.magic_resistance = profile.magic_resistance;
+
+    }
+    public unitData()
+    {
+
     }
 }

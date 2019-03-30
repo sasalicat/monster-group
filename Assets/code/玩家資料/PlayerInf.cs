@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using LitJson;
 using System.Text;
 public class PlayerInf  {
     //save&load 參考 https://dev.twsiyuan.com/2018/06/how-to-save-and-load-gamesaves-in-unity.html
@@ -18,7 +19,8 @@ public class PlayerInf  {
 
     public void saveInf()
     {
-        var serializedData = JsonUtility.ToJson(this);
+
+        var serializedData = JsonMapper.ToJson(this);
         Debug.Log("serializedData:" + serializedData);
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(serializedData);
         
@@ -27,6 +29,7 @@ public class PlayerInf  {
     }
     public static PlayerInf loadInf()
     {
+        
         var filePath = Application.persistentDataPath + "/" + fileName;
         string serizliedData = (null);
         try
@@ -39,10 +42,26 @@ public class PlayerInf  {
             return null;
         }
         Debug.Log("serizlied Data:" + serizliedData);
-        return JsonUtility.FromJson<PlayerInf>(serizliedData);
+        PlayerInf_Profile profile= JsonMapper.ToObject<PlayerInf_Profile>(serizliedData);
+        return new PlayerInf(profile);
     }
     public void printInf()
     {
         Debug.Log("player level:" + lv + " money:" + moneyLeft + "\n army type:" + army.GetType() +"size:"+army.Count+ "\n itemInBag:"+itemInBag);
+    }
+    public PlayerInf_Profile getProfile()
+    {
+        return new PlayerInf_Profile(lv,moneyLeft,army,itemInBag);
+    }
+    public PlayerInf(PlayerInf_Profile profile)
+    {
+        this.lv = profile.lv;
+        this.moneyLeft = profile.moneyLeft;
+        this.army = new List<RoleRecord>();
+        foreach(RoleRecord_profile rp in profile.roleRecords)
+        {
+            this.army.Add(new RoleRecord(rp));
+        }
+        this.itemInBag = profile.itemInBag;
     }
 }

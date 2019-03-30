@@ -12,6 +12,14 @@ public class RoleRecord  {
         race = 0;
         data = new unitData();
     }
+    public RoleRecord(RoleRecord_profile profile)
+    {
+        race = profile.race;
+        careers = profile.careers;
+        skillNos = profile.skills;
+        itemNos = profile.items;
+        data = new unitData(profile.unit_profile);
+    }
     public RoleRecord(int kind)
     {
         race = kind;
