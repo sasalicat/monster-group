@@ -21,6 +21,7 @@ public class unitData  {
     private int base_attack = STAND_ATK;
     private int attack_offset = 0;
 
+
     public BasicDelegate.withInt _onLifeChange;
     public withFloat2 _onCoolDownMutipleChange;
     private bool remote=false;
@@ -244,5 +245,8 @@ public class unitData  {
             return calReduce(magic_resistance, BASE_ABILITY_NUMBER);
         }
     }
-
+    public unitData_Profile getProflie()
+    {
+        return null;
+    }
 }

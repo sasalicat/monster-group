@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoleRecord  {
-    public int unitKind;
+    public int race;
     public List<int> careers=new List<int>();
     public List<int> skillNos=new List<int>();
     public List<int> itemNos = new List<int>();
     public unitData data;
+    public RoleRecord() {
+        race = 0;
+        data = new unitData();
+    }
     public RoleRecord(int kind)
     {
-        unitKind = kind;
+        race = kind;
         data = new unitData();
+    }
+    public RoleRecord_profile getProFile()
+    {
+        return new RoleRecord_profile(race,data,careers,skillNos,itemNos);
     }
 }

@@ -9,7 +9,7 @@ public class PlayerInf  {
     public int moneyLeft = 0;
     public List<RoleRecord> army;
     public List<int> itemInBag;
-    protected readonly string fileName = "player.dat";
+    protected static readonly string fileName = "player.dat";
     public PlayerInf()
     {
         army = new List<RoleRecord>();
@@ -19,23 +19,30 @@ public class PlayerInf  {
     public void saveInf()
     {
         var serializedData = JsonUtility.ToJson(this);
-        var filePath = Application.persistentDataPath + "/"+fileName;
-        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(filePath);
+        Debug.Log("serializedData:" + serializedData);
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(serializedData);
+        
+        var filePath = Application.persistentDataPath + "/" + fileName;
         File.WriteAllBytes(filePath, bytes);
     }
-    public void loadInf()
+    public static PlayerInf loadInf()
     {
         var filePath = Application.persistentDataPath + "/" + fileName;
         string serizliedData = (null);
-   try
+        try
         {
             var bytes = File.ReadAllBytes(filePath);
             serizliedData=System.Text.Encoding.UTF8.GetString(bytes);
         }
         catch (System.IO.FileNotFoundException)
         {
-            return;
+            return null;
         }
-        
+        Debug.Log("serizlied Data:" + serizliedData);
+        return JsonUtility.FromJson<PlayerInf>(serizliedData);
+    }
+    public void printInf()
+    {
+        Debug.Log("player level:" + lv + " money:" + moneyLeft + "\n army type:" + army.GetType() +"size:"+army.Count+ "\n itemInBag:"+itemInBag);
     }
 }
