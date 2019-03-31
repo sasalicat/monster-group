@@ -50,7 +50,15 @@ public class PlayerInf  {
         string str = "";
         int count =1;
         foreach (RoleRecord role in army) {
-            str += "單位" + count + ": race:" + role.race + " unit: atk:" + role.data.Now_Attack + " hp:" + role.data.Now_Max_Life + " magic:" + role.data.Now_Mag_Reinforce + " armor:" + role.data.Now_Armor+"\n";
+            str += "單位" + count + ": race:" + role.race + " unit: atk:" + role.data.Now_Attack + " hp:" + role.data.Now_Max_Life + " magic:" + role.data.Now_Mag_Reinforce + " armor:" + role.data.Now_Armor+"pos:";
+            if (role.location == null)
+            {
+                str += "Null \n";
+            }
+            else
+            {
+                str += role.location + "\n";
+            }
         }
         Debug.Log("player level:" + lv + " money:" + moneyLeft + "\n itemInBag:"+itemInBag+"\n"+str);
     }
@@ -68,5 +76,6 @@ public class PlayerInf  {
             this.army.Add(new RoleRecord(rp));
         }
         this.itemInBag = profile.itemInBag;
+
     }
 }

@@ -8,13 +8,15 @@ public class RoleRecord_profile  {
     public List<int> careers;
     public List<int> skills;
     public List<int> items;
+    public vec2i location;
     public RoleRecord_profile() { 
     }
-    public RoleRecord_profile(int race,unitData unit,List<int> careers,List<int> skills,List<int> items) {
+    public RoleRecord_profile(int race,unitData unit,List<int> careers,List<int> skills,List<int> items,vec2i pos) {
         this.race = race;
         unit_profile = unit.getProflie();
         this.careers = careers;
         this.skills = skills;
         this.items = items;
+        this.location = pos;
     }
 }

@@ -23,8 +23,9 @@ public class BasicManager : MonoBehaviour,Manager {
         Debug.Log("創建新的單位");
         int posX = (int)unitInf["position_x"];
         int posY = (int)unitInf["position_y"];
-        roleInformation inf = ((roleInformation)unitInf["information"]);
-        int unitNo = inf.raceNo;
+
+        RoleRecord inf = ((RoleRecord)unitInf["information"]);
+        int unitNo = inf.race;
         int playerNo = (int)unitInf["player_no"];
         List<int> skillnos = inf.skillNos;
         unitData data = inf.data;
@@ -81,6 +82,12 @@ public class BasicManager : MonoBehaviour,Manager {
     // Use this for initialization
     void Start () {
         chessBoard = new ChessBoard(5,8);
+        PlayerInf playdata = dataWarehouse.main.nowData;
+        foreach(RoleRecord unit in playdata.army){
+            Dictionary<string, object> unitDic = new Dictionary<string, object>() { { STR_POS_X, unit.location.x }, { STR_POS_Y, unit.location.y }, { STR_PLAYER_NO, 1 }, { STR_INF, unit.data } };
+            unitControler controler = createUnit(unitDic);
+        }
+        /*
         roleInformation inf = new roleInformation(new unitData(),new List<int>(){1,7},0);
         Dictionary<string, object> testdata = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 1 }, { STR_PLAYER_NO, 1 }, { STR_INF, inf} };
         unitControler controler = createUnit(testdata);
@@ -104,7 +111,7 @@ public class BasicManager : MonoBehaviour,Manager {
         roleInformation inf2 = new roleInformation(new unitData(), new List<int>() { 0, 13,14 }, 1);
         Dictionary<string, object> testdata2 = new Dictionary<string, object>() { { STR_POS_X, 0 }, { STR_POS_Y, 1 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf2 } };
         unitControler controler2 = createUnit(testdata2);
-        ((BasicControler)controler2).gameObject.name = "單位2";
+        ((BasicControler)controler2).gameObject.name = "單位2";*/
 
         /*roleInformation inf6 = new roleInformation(new unitData(), new List<int>() { 0, 5, 6, 10 }, 1);
         Dictionary<string, object> testdata6 = new Dictionary<string, object>() { { STR_POS_X, 1 }, { STR_POS_Y, 1 }, { STR_PLAYER_NO, 0 }, { STR_INF, inf6 } };

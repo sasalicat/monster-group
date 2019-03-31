@@ -29,6 +29,7 @@ public class playerInf_test : MonoBehaviour {
         RoleRecord role2 = new RoleRecord(0);
         role2.data = unit2;
         role2.skillNos = new List<int>() { 1, 2, 26, 10 };
+        role2.location = new vec2i(1, 1);
 
         pinf.army.Add(role1);
         pinf.army.Add(role2);
