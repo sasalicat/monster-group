@@ -20,7 +20,7 @@ public class PlayerInf  {
     public void saveInf()
     {
 
-        var serializedData = JsonMapper.ToJson(this);
+        var serializedData = JsonMapper.ToJson(this.getProfile());
         Debug.Log("serializedData:" + serializedData);
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(serializedData);
         
@@ -47,7 +47,12 @@ public class PlayerInf  {
     }
     public void printInf()
     {
-        Debug.Log("player level:" + lv + " money:" + moneyLeft + "\n army type:" + army.GetType() +"size:"+army.Count+ "\n itemInBag:"+itemInBag);
+        string str = "";
+        int count =1;
+        foreach (RoleRecord role in army) {
+            str += "單位" + count + ": race:" + role.race + " unit: atk:" + role.data.Now_Attack + " hp:" + role.data.Now_Max_Life + " magic:" + role.data.Now_Mag_Reinforce + " armor:" + role.data.Now_Armor+"\n";
+        }
+        Debug.Log("player level:" + lv + " money:" + moneyLeft + "\n itemInBag:"+itemInBag+"\n"+str);
     }
     public PlayerInf_Profile getProfile()
     {
