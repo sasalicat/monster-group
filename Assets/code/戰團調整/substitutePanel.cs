@@ -6,8 +6,8 @@ public class substitutePanel : MonoBehaviour {
     public GameObject panel;
     public GameObject headPrafeb;
     List<GameObject> heads = new List<GameObject>();
-    public const float x_start = 0.013f;
-    public const float x_offset = 0.09f-x_start; 
+    public const float x_start = 0.8f;
+    public const float x_offset = 1.5f; 
 	// Use this for initialization
 	void Start () {
         createHead(0, null, null);
@@ -18,7 +18,7 @@ public class substitutePanel : MonoBehaviour {
     public void createHead(int race,List<int> skillNos,List<int> itemNos)
     {
         GameObject headIcon= Instantiate(headPrafeb, panel.transform);
-        headIcon.transform.localPosition = new Vector2(x_start+x_offset+ 2 * x_offset * heads.Count,0);
+        headIcon.transform.localPosition = new Vector2(x_start+ x_offset * heads.Count,0);
         heads.Add(headIcon);
     }
 }
