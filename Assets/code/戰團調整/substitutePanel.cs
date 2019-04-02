@@ -9,6 +9,7 @@ public class substitutePanel : MonoBehaviour {
     public const float x_start = 0.6f;
     public const float x_offset = 1f;
     public const float y_pos = 0.25f;
+    protected float scale = 1;
 	// Use this for initialization
 	void Start () {
         createHead(0, null, null);
@@ -18,7 +19,7 @@ public class substitutePanel : MonoBehaviour {
         int width = Camera.main.scaledPixelWidth;
         Debug.Log("camera width:"+width+" height:"+height);
 	}
-
+    
     public void createHead(int race,List<int> skillNos,List<int> itemNos)
     {
         GameObject headIcon= Instantiate(headPrafeb, panel.transform);
