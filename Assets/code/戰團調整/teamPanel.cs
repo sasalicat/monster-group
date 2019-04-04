@@ -7,6 +7,14 @@ public class teamPanel : MonoBehaviour {
     public List<GameObject> girds;
     public float scale;
     public float gapPercentage = 0.0f;//間隔在畫面中的百分比
+    public static Vector2 ScreenLeftUp()
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector3(0,Camera.main.pixelHeight));
+    }
+    public static Vector2 ScreenRightDown()
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0));
+    }
     public void createGroup(List<RoleRecord> units,vec2i matric,Vector2 leftUp,Vector2 rightDown){
         Vector2 startPoint;
         float width = rightDown.x - leftUp.x;
@@ -14,25 +22,35 @@ public class teamPanel : MonoBehaviour {
         float gapSize = 0;
         float girdSize = 0;
         float fieldAspect = width / height;
-        float girdAspect = matric.x / matric.y; //(float)(girdSize.x) / (float)girdSize.y;
+        float girdAspect = (float)matric.x / (float)matric.y; //(float)(girdSize.x) / (float)girdSize.y;
         float unitPixel = girds[0].GetComponent<SpriteRenderer>().sprite.pixelsPerUnit;
         float spriteSize = girds[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+        Debug.Log("field aspect:" + fieldAspect +"gird aspect:"+girdAspect);
+        Debug.Log("left up:" + leftUp + "right down:" + rightDown);
+        int bigger = matric.x;
+        if(matric.y > matric.x)
+        {
+            bigger = matric.y;
+        }
         if (fieldAspect > girdAspect)
         {
             Vector2 boundWidth = new Vector2((width - height) / 2, 0);
+            Debug.Log("bound width:" + boundWidth);
             startPoint = leftUp + boundWidth;
-            gapSize = (height * gapPercentage) / (matric.y + 1);
-            girdSize = (height * (1 - gapPercentage) / matric.y);
+            gapSize = (height * gapPercentage) / (bigger + 1);
+            girdSize = (height * (1 - gapPercentage) / bigger);
+            Debug.Log("girdSize:"+ girdSize);
         }
         else {
             startPoint = leftUp;
-            gapSize = width * gapPercentage / (matric.x + 1);
-            girdSize = width * (1 - gapPercentage) / matric.x;
+            gapSize = width * gapPercentage / (bigger + 1);
+            girdSize = width * (1 - gapPercentage) / bigger;
         }
         Vector2 gapVec = new Vector2(gapSize, -gapSize);
         Vector2 halfGridVec = new Vector2(girdSize / 2, -girdSize / 2);
         float gScale = girdSize / spriteSize;
-        Debug.Log("girdSize:" + girdSize + " spriteSize:" + spriteSize + "gscale:" + gScale);
+        //Debug.Log("girdSize:" + girdSize + " spriteSize:" + spriteSize + "gscale:" + gScale);
+        Debug.Log("start point x:" + startPoint.x + "gap x:"+gapSize +"halfGridVec x:"+girdSize/2);
         for (int y = 0; y < matric.y; y++)
         {
             for (int x = 0; x < matric.x; x++)
@@ -40,6 +58,7 @@ public class teamPanel : MonoBehaviour {
                 Vector2 pos = startPoint + new Vector2(x * (gapSize + girdSize), -y * (gapSize + girdSize)) + halfGridVec + gapVec;
 
                 GameObject g = createGrid(pos, gScale, y * matric.x + x);
+                girds.Add(g);
                 g.name = "gird" + x + "-" + y;
             }
         }
@@ -107,10 +126,17 @@ public class teamPanel : MonoBehaviour {
         Sprite sprite = girds[0].GetComponent<SpriteRenderer>().sprite;
         float aspect = sprite.bounds.size.x / sprite.bounds.size.y;
         scale = panelFix.getScale(aspect, sprite.bounds.size);
-        init(null, new vec2i(5, 4));
-
+        //init(null, new vec2i(5, 4));
+        //createGroup(null,new vec2i(5,4),new Vector2(4.37f,0.9f),new Vector2(6.78f,-2.78f));
     }
-	
+	public void deleteGirds()
+    {
+        foreach(GameObject obj in girds)
+        {
+            Destroy(obj);
+        }
+        girds = null;
+    }
 	// Update is called once per frame
 	void Update () {
 		
