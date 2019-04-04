@@ -818,6 +818,7 @@ MonoBehaviour:
   - {fileID: 1460190931316410, guid: c07ec03c7751ec5428609e42f8db80cf, type: 2}
   - {fileID: 1172505711895610, guid: d28ea6d90201f2d45b4728ee07d00c9c, type: 2}
   scale: 0
+  gapPercentage: 0.1
 --- !u!212 &1492530886
 SpriteRenderer:
   m_ObjectHideFlags: 0
