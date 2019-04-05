@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class substitutePanel : MonoBehaviour {
+public class substitutePanel : MonoBehaviour
+{
     public GameObject panel;
     public GameObject headPrafeb;
     public teamPanel girdControl;
@@ -11,11 +12,9 @@ public class substitutePanel : MonoBehaviour {
     public const float x_offset = 1f;
     public const float y_pos = 0.25f;
     protected float scale = 1;
-	// Use this for initialization
-	void Start () {
-        createHead(0, null, null);
-        createHead(1, null, null);
-        createHead(2, null, null);
+    // Use this for initialization
+    void Start()
+    {
         int height = Camera.main.scaledPixelHeight;
         int width = Camera.main.scaledPixelWidth;
         Vector2 s_LU = teamPanel.ScreenLeftUp();
@@ -26,7 +25,7 @@ public class substitutePanel : MonoBehaviour {
         float screen_left = s_LU.x;
         float screen_right = s_RD.x;
 
-        Vector2 team0_lu = new Vector2( screen_left,screen_up);
+        Vector2 team0_lu = new Vector2(screen_left, screen_up);
         Vector2 team0_rd = new Vector2(screen_right, screen_up + 0.4f * screen_height);
         Vector2 team1_lu = new Vector2(screen_left, screen_up + 0.4f * screen_height);
         Vector2 team1_rd = new Vector2(screen_right, screen_up + 0.8f * screen_height);
@@ -35,12 +34,45 @@ public class substitutePanel : MonoBehaviour {
         //Debug.Log("screen right down:" + teamPanel.ScreenRightDown());
         girdControl.createGroup(null, new vec2i(5, 4), team0_lu, team0_rd);
         girdControl.createGroup(null, new vec2i(5, 4), team1_lu, team1_rd);
+        initForPlayerInf(dataWarehouse.main.nowData);
     }
-    
-    public void createHead(int race,List<int> skillNos,List<int> itemNos)
+    public void initForPlayerInf(PlayerInf inf)
     {
-        GameObject headIcon= Instantiate(headPrafeb, panel.transform);
-        headIcon.transform.localPosition = new Vector2(x_start+ x_offset * heads.Count,y_pos);
+        foreach(RoleRecord role in inf.army)
+        {
+            if(role.location == null)
+            {
+                createHead(role);
+            }
+        }
+    }
+    public void createHead(RoleRecord data)
+    {
+        GameObject headIcon = Instantiate(headPrafeb, panel.transform);
+        headIcon.transform.localPosition = new Vector2(x_start + x_offset * heads.Count, y_pos);
+        headIcon.GetComponent<headEvent>().data = data;
         heads.Add(headIcon);
+    }
+    public static void onPhantomDele(headPhantom phantom)
+    {
+        string message = "刪除幻影時gird物件數量為:" + phantom.girdsAttach.Count;
+        if (phantom.girdsAttach.Count > 0)
+        {
+            gird nearest = phantom.girdsAttach[0].GetComponent<gird>();
+            float min_dist = (phantom.girdsAttach[0].transform.position - nearest.transform.position).magnitude;
+            foreach (GameObject gird in phantom.girdsAttach)
+            {
+
+                float dist = (gird.transform.position - phantom.transform.position).magnitude;
+                if (dist > min_dist)
+                {
+                    nearest = gird.GetComponent<gird>();
+                }
+                //message += "  " + gird.gameObject.name + "pos:(" + script.x + "," + script.y + ")";
+                phantom.data.location = new vec2i(nearest.x, nearest.y);
+            }
+
+        }
+        Debug.Log(message);
     }
 }

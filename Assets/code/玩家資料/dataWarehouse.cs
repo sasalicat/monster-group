@@ -27,4 +27,8 @@ public class dataWarehouse : MonoBehaviour {
         Debug.Log("main為:" + main);
         DontDestroyOnLoad(this);
     }
+    private void forDebug()
+    {
+        nowData.
+    }
 }

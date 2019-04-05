@@ -57,7 +57,7 @@ public class teamPanel : MonoBehaviour {
             {
                 Vector2 pos = startPoint + new Vector2(x * (gapSize + girdSize), -y * (gapSize + girdSize)) + halfGridVec + gapVec;
 
-                GameObject g = createGrid(pos, gScale, y * matric.x + x);
+                GameObject g = createGrid(pos, gScale, new vec2i(x,y));
                 girds.Add(g);
                 g.name = "gird" + x + "-" + y;
             }
@@ -111,14 +111,18 @@ public class teamPanel : MonoBehaviour {
             {
                 Vector2 pos = startPoint + new Vector2(x * (gapSize + girdSize), -y * (gapSize + girdSize))+halfGridVec+gapVec;
                 
-                GameObject g= createGrid(pos, gScale, y * size.x + x);
+                GameObject g= createGrid(pos, gScale,new vec2i(x,y));
                 g.name = "gird" + x + "-" + y;
             }
         }
     }
-    public GameObject createGrid(Vector2 pos,float scale,int girdIdx){
+
+    public GameObject createGrid(Vector2 pos,float scale,vec2i index){
+        int girdIdx = index.y * index.x + index.x;
         GameObject gird= Instantiate(girds[girdIdx%girds.Count], pos, Quaternion.Euler(0, 0, 0));
         gird.transform.localScale = new Vector2(scale, scale);
+        gird.GetComponent<gird>().x = index.x;
+        gird.GetComponent<gird>().y = index.y;
         return gird;
     }
 	// Use this for initialization
