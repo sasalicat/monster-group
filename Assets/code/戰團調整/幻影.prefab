@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212623373981753150}
   - component: {fileID: 114392471139718202}
   - component: {fileID: 61699997118353222}
+  - component: {fileID: 50892764536089166}
   m_Layer: 8
   m_Name: "\u5E7B\u5F71"
   m_TagString: Untagged
@@ -42,6 +43,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50892764536089166
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1077057367425018}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61699997118353222
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -78,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea5aecc84e2df341bd573b18be42a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  girdsAttach: []
 --- !u!212 &212623373981753150
 SpriteRenderer:
   m_ObjectHideFlags: 1
