@@ -59,6 +59,7 @@ public class PlayerInf  {
             {
                 str += role.location + "\n";
             }
+            count++;
         }
         Debug.Log("player level:" + lv + " money:" + moneyLeft + "\n itemInBag:"+itemInBag+"\n"+str);
     }

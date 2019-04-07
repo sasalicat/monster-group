@@ -10,6 +10,7 @@ public class StartInterface : MonoBehaviour {
 	void Start () {
 		//buttom1.beforeTrans +=
         buttom1.GetComponent<transScene>().beforeTrans += dataWarehouse.main.createNewArchive;
+        buttom2.GetComponent<transScene>().beforeTrans += dataWarehouse.main.loadArchive;
     }
 	
 	// Update is called once per frame

@@ -20,6 +20,14 @@ public class dataWarehouse : MonoBehaviour {
     {
         Debug.Log("創建新檔案");
         nowData = new PlayerInf();
+        nowData.army.Add(new RoleRecord(1));
+        nowData.army.Add(new RoleRecord(2));
+        nowData.army.Add(new RoleRecord(0));
+    }
+    public void loadArchive() {
+        Debug.Log("加載檔案");
+        nowData = PlayerInf.loadInf();
+        nowData.printInf();
     }
     public void Start()
     {
@@ -29,6 +37,6 @@ public class dataWarehouse : MonoBehaviour {
     }
     private void forDebug()
     {
-        nowData.
+        //nowData.
     }
 }

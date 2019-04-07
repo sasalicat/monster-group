@@ -12,6 +12,18 @@ public class substitutePanel : MonoBehaviour
     public const float x_offset = 1f;
     public const float y_pos = 0.25f;
     protected float scale = 1;
+    public static substitutePanel main;
+    void OnEnable()
+    {
+        if (main != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            main = this;
+        }
+    }
     // Use this for initialization
     void Start()
     {
@@ -40,20 +52,48 @@ public class substitutePanel : MonoBehaviour
     {
         foreach(RoleRecord role in inf.army)
         {
-            if(role.location == null)
+            Debug.Log("創建頭像 location:"+role.location);
+            if (role.location == null)
             {
                 createHead(role);
             }
+            else {
+                createHead(1, role);
+            }
         }
+    }
+    public void deleteHeads()
+    {
+        foreach (GameObject head in heads)
+        {
+            Destroy(head);
+        }
+        heads.Clear();
+    }
+    public void updatePanel(PlayerInf inf)
+    {
+        deleteHeads();
+        initForPlayerInf(inf);
     }
     public void createHead(RoleRecord data)
     {
         GameObject headIcon = Instantiate(headPrafeb, panel.transform);
         headIcon.transform.localPosition = new Vector2(x_start + x_offset * heads.Count, y_pos);
         headIcon.GetComponent<headEvent>().data = data;
+        headIcon.GetComponent<SpriteRenderer>().sprite = ImageList.main.headIcons[data.race];
         heads.Add(headIcon);
     }
-    public static void onPhantomDele(headPhantom phantom)
+    public void createHead(int groupNo, RoleRecord data) {
+        GameObject[,] map = girdControl.girdGroups[groupNo];
+        vec2i location = data.location;
+        Vector2 pos = map[location.y, location.x].transform.position;
+        GameObject headIcon = Instantiate(headPrafeb, pos, Quaternion.Euler(0, 0, 0));
+        headIcon.GetComponent<headEvent>().data = data;
+        heads.Add(headIcon);
+        headIcon.GetComponent<SpriteRenderer>().sprite = ImageList.main.headIcons[data.race];
+        headIcon.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+    }
+    public void onPhantomDele(headPhantom phantom)
     {
         string message = "刪除幻影時gird物件數量為:" + phantom.girdsAttach.Count;
         if (phantom.girdsAttach.Count > 0)
@@ -64,14 +104,14 @@ public class substitutePanel : MonoBehaviour
             {
 
                 float dist = (gird.transform.position - phantom.transform.position).magnitude;
-                if (dist > min_dist)
+                if (dist < min_dist)
                 {
                     nearest = gird.GetComponent<gird>();
                 }
                 //message += "  " + gird.gameObject.name + "pos:(" + script.x + "," + script.y + ")";
                 phantom.data.location = new vec2i(nearest.x, nearest.y);
             }
-
+            updatePanel(dataWarehouse.main.nowData);
         }
         Debug.Log(message);
     }

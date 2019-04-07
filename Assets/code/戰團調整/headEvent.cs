@@ -12,7 +12,7 @@ public class headEvent : MonoBehaviour {
         if (nowPhantomObj == null)
         {
             nowPhantomObj = Instantiate(phantom);
-            nowPhantomObj.GetComponent<headPhantom>().BefDelete += substitutePanel.onPhantomDele;
+            nowPhantomObj.GetComponent<headPhantom>().BefDelete += substitutePanel.main.onPhantomDele;
             nowPhantomObj.GetComponent<headPhantom>().data = data;
             //nowPhantomObj.AddComponent<headPhantom>();
         }
