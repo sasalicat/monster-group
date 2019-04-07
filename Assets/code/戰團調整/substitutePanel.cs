@@ -7,6 +7,7 @@ public class substitutePanel : MonoBehaviour
     public GameObject panel;
     public GameObject headPrafeb;
     public teamPanel girdControl;
+    public GameObject root;
     List<GameObject> heads = new List<GameObject>();
     public const float x_start = 0.6f;
     public const float x_offset = 1f;
@@ -111,8 +112,22 @@ public class substitutePanel : MonoBehaviour
                 //message += "  " + gird.gameObject.name + "pos:(" + script.x + "," + script.y + ")";
                 phantom.data.location = new vec2i(nearest.x, nearest.y);
             }
-            updatePanel(dataWarehouse.main.nowData);
+            
         }
+        else
+        {
+            phantom.data.location = null;
+        }
+        updatePanel(dataWarehouse.main.nowData);
         Debug.Log(message);
+    }
+    public void saveInf() {
+        dataWarehouse.main.nowData.saveInf();
+    }
+    public void quit()
+    {
+        deleteHeads();
+        girdControl.deleteGirds();
+        root.SetActive(false);
     }
 }

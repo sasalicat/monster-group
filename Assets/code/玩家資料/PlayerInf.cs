@@ -26,6 +26,7 @@ public class PlayerInf  {
         
         var filePath = Application.persistentDataPath + "/" + fileName;
         File.WriteAllBytes(filePath, bytes);
+        Debug.Log("存data到:" + filePath);
     }
     public static PlayerInf loadInf()
     {

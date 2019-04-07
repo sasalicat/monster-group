@@ -7,6 +7,11 @@ public class headPhantom : MonoBehaviour {
     public delegate void withPhantom(headPhantom phantom);
     public withPhantom BefDelete;
     public RoleRecord data;
+    public void init(RoleRecord data)
+    {
+        this.data = data;
+        GetComponent<SpriteRenderer>().sprite = ImageList.main.headIcons[data.race];
+    }
 	// Use this for initialization
 	void Start () {
 		
