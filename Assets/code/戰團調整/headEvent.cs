@@ -5,6 +5,7 @@ using UnityEngine;
 public class headEvent : MonoBehaviour {
     public GameObject phantom;
     protected GameObject nowPhantomObj = null;
+    public GameObject rolePanel;
     public RoleRecord data;
     public void onDrag()
     {
@@ -17,13 +18,8 @@ public class headEvent : MonoBehaviour {
             //nowPhantomObj.AddComponent<headPhantom>();
         }
     }
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void onClick()
+    {
+
+    }
 }

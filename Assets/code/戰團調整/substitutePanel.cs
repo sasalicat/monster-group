@@ -7,6 +7,7 @@ public class substitutePanel : MonoBehaviour
     public GameObject panel;
     public GameObject headPrafeb;
     public teamPanel girdControl;
+    public GameObject rolePanel;
     public GameObject root;
     List<GameObject> heads = new List<GameObject>();
     public const float x_start = 0.6f;
@@ -90,6 +91,7 @@ public class substitutePanel : MonoBehaviour
         Vector2 pos = map[location.y, location.x].transform.position;
         GameObject headIcon = Instantiate(headPrafeb, pos, Quaternion.Euler(0, 0, 0));
         headIcon.GetComponent<headEvent>().data = data;
+        headIcon.GetComponent<headEvent>().rolePanel = rolePanel;
         heads.Add(headIcon);
         headIcon.GetComponent<SpriteRenderer>().sprite = ImageList.main.headIcons[data.race];
         headIcon.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
