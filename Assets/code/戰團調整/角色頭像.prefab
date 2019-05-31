@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 61171922033204838}
   m_Layer: 0
   m_Name: "\u89D2\u8272\u982D\u50CF"
-  m_TagString: Untagged
+  m_TagString: RoleUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114521346709818892}
-          m_MethodName: onDrag
+          m_MethodName: onClick
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: d7d975c4e332af64395b3d4eeefc94e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

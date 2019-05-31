@@ -20,6 +20,7 @@ public class headEvent : MonoBehaviour {
     }
     public void onClick()
     {
-
+        rolePanel.SetActive(true);
+        rolePanel.GetComponent<rolePanel>().init(data);
     }
 }

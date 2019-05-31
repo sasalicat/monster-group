@@ -64,6 +64,7 @@ public class substitutePanel : MonoBehaviour
             }
         }
     }
+
     public void deleteHeads()
     {
         foreach (GameObject head in heads)
