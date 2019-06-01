@@ -12,6 +12,14 @@ public class showSkillInf : MonoBehaviour {
     }
     public void onMouseDown()
     {
-       
+        panel.transform.position = transform.position;
+        panel.SetActive(true);
+        skillPanel sk_panel= panel.GetComponent<skillPanel>();
+        sk_panel.SkillName = skillInf.SkillName;
+        sk_panel.SkillIntroduce = skillInf.Explanation;
+    }
+    public void onMouseUp()
+    {
+        panel.SetActive(false);
     }
 }
