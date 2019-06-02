@@ -2127,11 +2127,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.size
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 4792524521651514, guid: de1879047eb717344bb8072a5cf7e5d7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2164,96 +2159,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: d83f4120e0fc7934fa773acdef735295,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: ac32979836d3db4419ba7c72c9594a9b,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: c714286fdc43a5e4a993610a83f48d98,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: d97614b4dbccafb46bcf3aa4749e7abd,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 1173734d4dba1124aa54bd905f39e61a,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: 84b0f10d3c4f8ba459f3a5211f47bc90,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[6]
-      value: 
-      objectReference: {fileID: 21300000, guid: a18f81f7babf2934890c385df82a6a03,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[8]
-      value: 
-      objectReference: {fileID: 21300000, guid: 8ce934928a6a1884191e05e7d49b631a,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[9]
-      value: 
-      objectReference: {fileID: 21300000, guid: 5547dae39ac1788408280bbc56db9855,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[10]
-      value: 
-      objectReference: {fileID: 21300000, guid: 682bde8002818b54fa8aa19f9c57b6f3,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[11]
-      value: 
-      objectReference: {fileID: 21300000, guid: 2aa95fe927255b440a9c727d16c00ac4,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[7]
-      value: 
-      objectReference: {fileID: 21300000, guid: 081a51c5592c814458ac84f77d92919b,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[12]
-      value: 
-      objectReference: {fileID: 21300000, guid: f9901151e7edcba42ad0794207476e5c,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[13]
-      value: 
-      objectReference: {fileID: 21300000, guid: 589411d2e39759046b3f388b07b10c8e,
-        type: 3}
-    - target: {fileID: 114321688105721138, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: skillIcons.Array.data[14]
-      value: 
-      objectReference: {fileID: 21300000, guid: 267f5aa97d46e504ea50701e036f39c9,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de1879047eb717344bb8072a5cf7e5d7, type: 2}
   m_IsPrefabAsset: 0

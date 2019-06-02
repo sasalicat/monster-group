@@ -17,4 +17,5 @@ public class ImageList : MonoBehaviour {
     }
     public List<Sprite> headIcons;
     public List<Sprite> skillIcons;
+    public List<Sprite> itemIcon;
 }
