@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class unitData  {
-
+    public enum  attribute:byte {atk,atk_spd,magic,armor,life,recover,cd,mg_resist};
     public delegate void withFloat2(float arg1, float arg2);
 
     public const int BASE_ABILITY_NUMBER = 100;

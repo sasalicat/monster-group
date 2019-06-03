@@ -12,7 +12,16 @@ public interface item_representation  {
     {
         get;
     }
+    string Commentary
+    {
+        get;
+    }
+
     string ScriptName//可以回傳null,如果回傳了腳本名,這個腳本必須是技能類別
+    {
+        get;
+    }
+    int Price
     {
         get;
     }
