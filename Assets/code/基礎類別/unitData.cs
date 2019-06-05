@@ -266,4 +266,40 @@ public class unitData  {
     {
 
     }
+    public Dictionary<byte,int> attributeUpdate
+    {
+        set
+        {
+            foreach (KeyValuePair<byte,int> pair in value)
+            {
+                switch (pair.Key)
+                {
+                    case (byte)attribute.atk:
+                        Now_Attack += pair.Value;
+                        break;
+                    case (byte)attribute.atk_spd:
+                        Now_Attack_Speed += pair.Value;
+                        break;
+                    case (byte)attribute.magic:
+                        Now_Mag_Reinforce += pair.Value;
+                        break;
+                    case (byte)attribute.armor:
+                        Now_Armor += pair.Value;
+                        break;
+                    case (byte)attribute.life:
+                        Now_Max_Life += pair.Value;
+                        break;
+                    case (byte)attribute.recover:
+                        Now_Life_Recover += pair.Value;
+                        break;
+                    case (byte)attribute.cd:
+                        Now_Cooldown_Reinforce += pair.Value;
+                        break;
+                    case (byte)attribute.mg_resist:
+                        Now_Mag_Resistance += pair.Value;
+                        break;
+                }
+            }
+        }
+    }
 }

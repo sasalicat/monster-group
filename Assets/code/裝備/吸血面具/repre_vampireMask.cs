@@ -49,7 +49,7 @@ public class repre_vampireMask : item_representation
     {
         get
         {
-            return "skill_phyVampire";//需要實做這個技能
+            return "skill_phyVampire10";//需要實做這個技能
         }
     }
 }
