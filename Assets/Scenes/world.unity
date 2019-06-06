@@ -475,6 +475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e343f141a10f942a5b013990b366b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IconPrab: {fileID: 0}
+  skillPanel: {fileID: 0}
 --- !u!1001 &156747538
 Prefab:
   m_ObjectHideFlags: 0
@@ -1423,6 +1425,7 @@ GameObject:
   - component: {fileID: 732593048}
   - component: {fileID: 732593050}
   - component: {fileID: 732593049}
+  - component: {fileID: 732593051}
   m_Layer: 0
   m_Name: "\u88DD\u5099\u4FE1\u606F\u9762\u677F"
   m_TagString: Untagged
@@ -1486,6 +1489,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 732593047}
   m_CullTransparentMesh: 0
+--- !u!114 &732593051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 732593047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38774b13bf99774890cd7f4779c0a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &789701829
 GameObject:
   m_ObjectHideFlags: 0
@@ -3149,7 +3163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1637206900
 SpriteRenderer:
   m_ObjectHideFlags: 0

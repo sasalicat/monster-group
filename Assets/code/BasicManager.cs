@@ -28,6 +28,7 @@ public class BasicManager : MonoBehaviour,Manager {
         int unitNo = inf.race;
         int playerNo = (int)unitInf["player_no"];
         List<int> skillnos = inf.skillNos;
+        List<int> itemnos = inf.itemNos;
         unitData data = inf.data;
         int realX = 0;
         int realY = 0;
@@ -61,7 +62,8 @@ public class BasicManager : MonoBehaviour,Manager {
             SkillBelt belt= newone.AddComponent<SkillBelt>();
             controler.skillBelt = belt;
             belt.init(controler, skillnos);
-
+            itemBelt item_belt = newone.AddComponent<itemBelt>();
+            item_belt.init(controler, itemnos);
             //是否要用字串來儲存技能名?
             return controler;
         }

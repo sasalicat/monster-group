@@ -23,6 +23,8 @@ public class dataWarehouse : MonoBehaviour {
         nowData.army.Add(new RoleRecord(1));
         nowData.army[0].skillNos.Add(1);
         nowData.army[0].skillNos.Add(5);
+        nowData.army[0].itemNos.Add(1);
+        nowData.army[0].itemNos.Add(2);
         nowData.army.Add(new RoleRecord(2));
         nowData.army[1].skillNos.Add(1);
         nowData.army[1].skillNos.Add(8);
