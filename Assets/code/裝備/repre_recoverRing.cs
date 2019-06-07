@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class repre_recoverRing : item_representation
 {
+    public void init(unitData data)
+    {
+
+    }
     public Dictionary<byte, int> Attributes
     {
         get

@@ -28,4 +28,5 @@ public interface item_representation  {
     Dictionary<byte, int> Attributes {//唯一和skill_represention不一樣的地方,以為裝備絕大多數都會加屬性所以統一用一個字典儲存
         get;
     }
+    void init(unitData nowdata);
 }
