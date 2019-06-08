@@ -52,4 +52,9 @@ public class repre_vampireMask : item_representation
             return "skill_phyVampire10";//需要實做這個技能
         }
     }
+
+    public void init(unitData nowdata)
+    {
+        
+    }
 }

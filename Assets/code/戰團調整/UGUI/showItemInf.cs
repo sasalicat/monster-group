@@ -18,8 +18,8 @@ public class showItemInf : MonoBehaviour {
         itemPanel itemPanel = panel.GetComponent<itemPanel>();
         itemPanel.ItemName = itemInf.itemName;
         itemPanel.ItemPrice = itemInf.Price;
-        itemPanel.ItemAttri = itemInf.Attributes;
-        itemPanel.ItemStatement = itemInf.Explanation;
+        itemPanel.ItemExplanation = itemInf.Explanation;
+        itemPanel.ItemCommentary = itemInf.Commentary;
 
     }
     public void onMouseUp()

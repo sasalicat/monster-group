@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class itemPanel : MonoBehaviour {
-    Text name;//全部手動拉去
-    Text price;
-    Text attribute;
-    Text statement;
+    public Text name;//全部手動拉去
+    public Text price;
+    public Text attribute;
+    public Text statement;
     public string ItemName
     {
         set
@@ -22,16 +22,15 @@ public class itemPanel : MonoBehaviour {
             price.text = "" + value;
         }
     }
-    public Dictionary<byte, int> ItemAttri
-    {
-        set
-        {
 
-        }
-    }
-    public string ItemStatement
+    public string ItemExplanation
     {
         set {
+            attribute.text = value;
+        }
+    }
+    public string ItemCommentary{
+        set{
             statement.text = value;
         }
     }

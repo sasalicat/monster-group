@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class equipBar : MonoBehaviour {
     public RoleRecord role;
     public GameObject IconPrab;
-    public GameObject skillPanel;
+    public GameObject itemPanel;
     List<GameObject> heads = new List<GameObject>();
     public void init(RoleRecord data)
     {
@@ -22,10 +22,10 @@ public class equipBar : MonoBehaviour {
             heads.Add(pobj);
             print("no:" + no);
             pobj.GetComponent<Image>().sprite = ImageList.main.itemIcon[no];
-            print("技能" + IconPrab.name + "添加skillPanel" + skillPanel);
-            pobj.GetComponent<showSkillInf>().panel = skillPanel;
-            pobj.GetComponent<showSkillInf>().initInf(itemList.main.representation[no], role.data);
-            print("showSkillInf:" + IconPrab.GetComponent<showSkillInf>().panel);
+            print("技能" + IconPrab.name + "添加skillPanel" + itemPanel);
+            pobj.GetComponent<showItemInf>().panel = itemPanel;
+            pobj.GetComponent<showItemInf>().initInf(itemList.main.representation[no], role.data);
+            //print("showSkillInf:" + IconPrab.GetComponent<showSkillInf>().panel);
         }
     }
 }

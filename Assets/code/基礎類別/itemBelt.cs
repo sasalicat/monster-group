@@ -128,10 +128,10 @@ public class itemBelt : MonoBehaviour, Callback4Unit
             onHpChange = value;
         }
     }
-    public virtual void addItemBy(string represName)
+    public virtual void addItemBy(string represName)//這個方法是在遊戲開始時執行的,這個時候已經不可能更換裝備了,所以無視屬性更新,只加上裝備技能
     {
         object newrepres = System.Activator.CreateInstance(System.Type.GetType(represName));
-        ((BasicControler)controler).data.attributeUpdate = ((item_representation)newrepres).Attributes;
+        //((BasicControler)controler).data.attributeUpdate = ((item_representation)newrepres).Attributes;
         if (((item_representation)newrepres).ScriptName!=null)
         {
             skillBelt.addSkillBy(((item_representation)newrepres).ScriptName);
