@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - RoleUI
+  - itemIcon
   layers:
   - Default
   - TransparentFX

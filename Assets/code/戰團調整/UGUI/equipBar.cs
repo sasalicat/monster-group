@@ -8,13 +8,13 @@ public class equipBar : MonoBehaviour {
     public GameObject IconPrab;
     public GameObject itemPanel;
     List<GameObject> heads = new List<GameObject>();
-    public void init(RoleRecord data)
+    public void updateItemList(List<int> list)
     {
         foreach (GameObject head in heads)
         {
             Destroy(head);
         }
-        role = data;
+        int count = 0;
         foreach (int no in role.itemNos)
         {
             //記得做createheadIcon
@@ -24,7 +24,37 @@ public class equipBar : MonoBehaviour {
             pobj.GetComponent<Image>().sprite = ImageList.main.itemIcon[no];
             print("技能" + IconPrab.name + "添加skillPanel" + itemPanel);
             pobj.GetComponent<showItemInf>().panel = itemPanel;
-            pobj.GetComponent<showItemInf>().initInf(itemList.main.representation[no], role.data);
+            pobj.GetComponent<showItemInf>().initInf(no, itemList.main.representation[no], role.data, role.index, count);
+            count++;
+            //print("showSkillInf:" + IconPrab.GetComponent<showSkillInf>().panel);
+        }
+    }
+    public void Awake()
+    {
+        foreach(RoleRecord role in dataWarehouse.main.nowData.army)
+        {
+            role.onItemsUpdate += updateItemList;
+        }
+    }
+    public void init(RoleRecord data)
+    {
+        foreach (GameObject head in heads)
+        {
+            Destroy(head);
+        }
+        role = data;
+        int count = 0;
+        foreach (int no in role.itemNos)
+        {
+            //記得做createheadIcon
+            GameObject pobj = Instantiate(IconPrab, transform);
+            heads.Add(pobj);
+            print("no:" + no);
+            pobj.GetComponent<Image>().sprite = ImageList.main.itemIcon[no];
+            print("技能" + IconPrab.name + "添加skillPanel" + itemPanel);
+            pobj.GetComponent<showItemInf>().panel = itemPanel;
+            pobj.GetComponent<showItemInf>().initInf(no,itemList.main.representation[no], role.data,role.index,count);
+            count++;
             //print("showSkillInf:" + IconPrab.GetComponent<showSkillInf>().panel);
         }
     }

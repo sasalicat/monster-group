@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class repre_smaillSapphire : item_representation
+public class repre_smallSapphire : item_representation
 {
     public void init(unitData data)
     {

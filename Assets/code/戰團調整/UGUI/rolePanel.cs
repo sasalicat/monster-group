@@ -12,6 +12,7 @@ public class rolePanel : MonoBehaviour
     public Text career;
     public skillBar skillBar;
     public equipBar equipBar;
+
     public enum attribute {atk,max_hp,atk_accelerate,atk_interval,magic,mg_damage_reinforce,cd_reinforce,cd_time_reduce,armor,phy_damage_reduce,resistance,mg_damage_reduce}
     public void updateAttr(attribute attr,string context)
     {
@@ -44,7 +45,13 @@ public class rolePanel : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 10, -1); ;
-                if (hit.collider)
+                //Debug.Log("caster.cast() 結果:" + caster.cast());
+                if (castItem.main.cast() != null)
+                {
+                    //因為點裝備欄的時候也不希望把裝備面板關掉,
+                    //關掉就不能拖進裝備欄了
+                }
+                else if (hit.collider)
                 {
                     //Debug.DrawLine(ray.origin, hit.transform.position, Color.red, 0.1f, true);
                     Debug.Log("hitted:" + hit.transform.name + "tag:" + hit.transform.tag);
@@ -61,6 +68,7 @@ public class rolePanel : MonoBehaviour
                 }
 
             }
+
         }
         
     }

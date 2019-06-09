@@ -6,10 +6,27 @@ using LitJson;
 using System.Text;
 public class PlayerInf  {
     //save&load 參考 https://dev.twsiyuan.com/2018/06/how-to-save-and-load-gamesaves-in-unity.html
+    public delegate void withIntList(List<int> nos);
+    public withIntList bagItemsUpdate;
     public int lv = 0;
     public int moneyLeft = 0;
     public List<RoleRecord> army;
-    public List<int> itemInBag;
+    private List<int> inbag=new List<int>();
+    public List<int> itemInBag
+    {
+        set {
+            inbag = value;
+            if (bagItemsUpdate != null)
+            {
+                bagItemsUpdate(value);
+            }
+        }
+        get
+        {
+            return inbag;
+        }
+    }
+    
     protected static readonly string fileName = "player.dat";
     public PlayerInf()
     {
@@ -76,6 +93,7 @@ public class PlayerInf  {
         foreach(RoleRecord_profile rp in profile.roleRecords)
         {
             this.army.Add(new RoleRecord(rp));
+            army[army.Count - 1].index = (army.Count - 1);
         }
         this.itemInBag = profile.itemInBag;
 
