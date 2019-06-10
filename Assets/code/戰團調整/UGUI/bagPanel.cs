@@ -14,8 +14,7 @@ public class bagPanel : MonoBehaviour {
 	void Start () {
         List<int> noList = dataWarehouse.main.nowData.itemInBag;
         init(noList);
-        dataWarehouse.main.nowData.bagItemsUpdate += init;
-
+        dataWarehouse.main.updateBagItem += init;
     }
     public void init(List<int> itemNos)
     {

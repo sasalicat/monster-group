@@ -25,26 +25,13 @@ public class vec2i
 
 
 public class RoleRecord  {
-    public delegate void withIntList(List<int> nos);
-    public withIntList onItemsUpdate;
+
     public int index=-1;
     public int race;
     public List<int> careers=new List<int>();
     public List<int> skillNos=new List<int>();
-    private List<int> item_nos=new List<int>();
-    public List<int> itemNos
-    {
-        set {
-            item_nos = value;
-            if (onItemsUpdate != null)
-            {
-                onItemsUpdate(value);
-            }
-        }
-        get {
-            return item_nos;
-        }
-    }
+    public List<int> itemNos = new List<int>();
+
     public unitData data;
     public vec2i location=null;
     public RoleRecord() {

@@ -5,6 +5,9 @@ using UnityEngine;
 public class dataWarehouse : MonoBehaviour {
     public PlayerInf nowData;
     public static dataWarehouse main;
+    public delegate void withIntList(List<int> list);
+    public withIntList updateBagItem;//主要用於itemInBag更新時觸發對應UI的更新(bagPanel)
+    public withIntList updateNowRoleItems;//主要用於army[index].itemNos更新時觸發對應UI的更新(equipBar)
     void OnEnable()
     {
         if (main != null)

@@ -33,15 +33,19 @@ public class castItem : MonoBehaviour {
         m_Raycaster.Raycast(m_PointerEventData, results);
 
         //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
-        foreach (RaycastResult result in results)
-        {
-            Debug.Log("rayCast1 Hit " + result.gameObject.name);
-        }
+
         m_Raycaster2.Raycast(m_PointerEventData, results);
-        foreach (RaycastResult result in results)
+        foreach (RaycastResult result in results)//優先回傳頭像
         {
             Debug.Log("rayCast2 Hit " + result.gameObject.name);
             if (result.gameObject.tag == "itemIcon")
+            {
+                return result.gameObject;
+            }
+        }
+        foreach (RaycastResult result in results)
+        {//再回傳裝備欄
+            if(result.gameObject.tag == "itemBar")
             {
                 return result.gameObject;
             }
@@ -51,6 +55,7 @@ public class castItem : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Check if the left Mouse button is clicked
+        /*
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //Set up the new Pointer Event
@@ -74,6 +79,6 @@ public class castItem : MonoBehaviour {
             {
                 Debug.Log("rayCast2 Hit " + result.gameObject.name);
             }
-        }
+        }*/
     }
 }

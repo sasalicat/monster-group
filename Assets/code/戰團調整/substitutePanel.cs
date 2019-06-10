@@ -83,6 +83,7 @@ public class substitutePanel : MonoBehaviour
         GameObject headIcon = Instantiate(headPrafeb, panel.transform);
         headIcon.transform.localPosition = new Vector2(x_start + x_offset * heads.Count, y_pos);
         headIcon.GetComponent<headEvent>().data = data;
+        headIcon.GetComponent<headEvent>().rolePanel = rolePanel;
         headIcon.GetComponent<SpriteRenderer>().sprite = ImageList.main.headIcons[data.race];
         heads.Add(headIcon);
     }
