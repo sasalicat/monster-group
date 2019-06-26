@@ -64,6 +64,13 @@ public class substitutePanel : MonoBehaviour
             }
         }
     }
+    public void initForEnemyList(List<RoleRecord> enemyList)
+    {
+        foreach(RoleRecord enemy in enemyList)
+        {
+            createHead(0, enemy);
+        }
+    }
 
     public void deleteHeads()
     {
