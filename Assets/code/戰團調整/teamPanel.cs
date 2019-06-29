@@ -18,6 +18,7 @@ public class teamPanel : MonoBehaviour {
         return Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0));
     }
     public void createGroup(List<RoleRecord> units,vec2i matric,Vector2 leftUp,Vector2 rightDown){
+        Debug.Log("創建group!!!!!!!!!!!!!!!!");
         GameObject[,] girds = new GameObject[matric.y,matric.x];
         Vector2 startPoint;
         float width = rightDown.x - leftUp.x;

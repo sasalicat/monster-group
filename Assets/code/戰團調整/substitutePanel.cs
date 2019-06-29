@@ -17,7 +17,7 @@ public class substitutePanel : MonoBehaviour
     public static substitutePanel main;
     void OnEnable()
     {
-        if (main != null)
+        if (main != null&&main!=this)
         {
             Destroy(this);
         }
@@ -29,6 +29,7 @@ public class substitutePanel : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Debug.Log("panel start");
         int height = Camera.main.scaledPixelHeight;
         int width = Camera.main.scaledPixelWidth;
         Vector2 s_LU = teamPanel.ScreenLeftUp();
