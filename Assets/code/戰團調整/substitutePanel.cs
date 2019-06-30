@@ -24,10 +24,12 @@ public class substitutePanel : MonoBehaviour
         else
         {
             main = this;
+            initPanel();
         }
+
     }
     // Use this for initialization
-    void Start()
+    void initPanel()
     {
         Debug.Log("panel start");
         int height = Camera.main.scaledPixelHeight;
@@ -50,8 +52,10 @@ public class substitutePanel : MonoBehaviour
         girdControl.createGroup(null, new vec2i(5, 4), team0_lu, team0_rd);
         girdControl.createGroup(null, new vec2i(5, 4), team1_lu, team1_rd);
         initForPlayerInf(dataWarehouse.main.nowData);
+        initForEnemyList(fightingPoint.nowEnermyList);
     }
-    public void initForPlayerInf(PlayerInf inf)
+
+    protected void initForPlayerInf(PlayerInf inf)
     {
         foreach(RoleRecord role in inf.army)
         {
@@ -65,8 +69,9 @@ public class substitutePanel : MonoBehaviour
             }
         }
     }
-    public void initForEnemyList(List<RoleRecord> enemyList)
+    protected void initForEnemyList(List<RoleRecord> enemyList)
     {
+        Debug.Log("create init for enemy list !!!");
         foreach(RoleRecord enemy in enemyList)
         {
             createHead(0, enemy);

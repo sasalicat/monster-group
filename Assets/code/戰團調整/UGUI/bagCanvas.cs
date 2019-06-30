@@ -23,4 +23,7 @@ public class bagCanvas : MonoBehaviour {
         //Debug.Log("右上角位置為:" + posrt);
 
     }
+    public void onPanelQuit() {
+        gameObject.SetActive(false);
+    }
 }

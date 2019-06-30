@@ -38,6 +38,8 @@ public class itemPhantom : MonoBehaviour {
                     player.itemInBag.Add(itemNo);
                     dataWarehouse.main.updateBagItem(player.itemInBag);
                     dataWarehouse.main.updateNowRoleItems(player.army[srcRoleIndex].itemNos);
+                  
+                    dataWarehouse.main.denyNowRoleAttr(itemList.main.objects[itemNo].Attributes);
                 }
             }
             else if (obj.tag == "itemBar")
@@ -52,6 +54,7 @@ public class itemPhantom : MonoBehaviour {
                     //player.army[bar.role.index].itemNos.Add(itemNo);
                     dataWarehouse.main.updateBagItem(player.itemInBag);
                     dataWarehouse.main.updateNowRoleItems(bar.role.itemNos);
+                    dataWarehouse.main.updateNowRoleAttr(itemList.main.objects[itemNo].Attributes);
                 }
                 else//角色上的物品
                 {
@@ -72,6 +75,8 @@ public class itemPhantom : MonoBehaviour {
                     player.army[inf.ownerIndex].itemNos[inf.itemIndex] = itemNo;
                     dataWarehouse.main.updateBagItem(player.itemInBag);
                     dataWarehouse.main.updateNowRoleItems(player.army[inf.ownerIndex].itemNos);
+                    dataWarehouse.main.updateNowRoleAttr(itemList.main.objects[itemNo].Attributes);
+                    dataWarehouse.main.denyNowRoleAttr(itemList.main.objects[inf.itemNo].Attributes);
                 }
                 else {//從角色身上掏出的東西
                     PlayerInf player = dataWarehouse.main.nowData;
@@ -80,6 +85,8 @@ public class itemPhantom : MonoBehaviour {
                     player.itemInBag[inf.itemIndex] = itemNo;
                     dataWarehouse.main.updateBagItem(player.itemInBag);
                     dataWarehouse.main.updateNowRoleItems(player.army[srcRoleIndex].itemNos);
+                    dataWarehouse.main.updateNowRoleAttr(itemList.main.objects[inf.itemNo].Attributes);
+                    dataWarehouse.main.denyNowRoleAttr(itemList.main.objects[itemNo].Attributes);
                 }
             }
         }

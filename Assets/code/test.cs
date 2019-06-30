@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class test : MonoBehaviour {
-
+    void OnEnable() {
+        Debug.Log("onenable 被呼叫");
+    }
 	// Use this for initialization
 	void Start () {
-        skillTest obj = gameObject.AddComponent<skillTest>();
-        Debug.Log(obj.GetComponentsInParent(obj.GetType()));
-        Component coms = obj.GetComponentInParent(System.Type.GetType("CDSkill"));
-        Debug.Log(coms);
+        Debug.Log("start 被呼叫");
 	}
 
 }

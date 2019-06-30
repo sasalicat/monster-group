@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class repre_headkerchief : item_representation
+public class repre_headerchief : item_representation
 {
     public void init(unitData data)
     {

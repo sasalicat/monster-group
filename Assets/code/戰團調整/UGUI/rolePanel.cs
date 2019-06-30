@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class rolePanel : MonoBehaviour
 {
+    public RoleRecord nowRole;
     public Image headIcon;
     public Text[] Attributes;
     public string[] Prefix;
@@ -14,12 +15,13 @@ public class rolePanel : MonoBehaviour
     public equipBar equipBar;
 
     public enum attribute {atk,max_hp,atk_accelerate,atk_interval,magic,mg_damage_reinforce,cd_reinforce,cd_time_reduce,armor,phy_damage_reduce,resistance,mg_damage_reduce}
-    public void updateAttr(attribute attr,string context)
+    protected void updateAttr(attribute attr,string context)
     {
         Attributes[(int)attr].text = Prefix[(int)attr] + context;
     }
     public void init(RoleRecord role)
     {
+        nowRole = role;
         headIcon.sprite = ImageList.main.headIcons[role.race];
         updateAttr(attribute.atk, "" + role.data.Now_Attack);
         updateAttr(attribute.max_hp, "" + role.data.Now_Max_Life);
@@ -35,6 +37,44 @@ public class rolePanel : MonoBehaviour
         updateAttr(attribute.mg_damage_reduce, "" + role.data.Magic_Reduce_Multiple);
         skillBar.init(role);
         equipBar.init(role);
+    }
+    public void Awake()
+    {
+        dataWarehouse.main.updateNowRoleAttr += updateUnitAttr;
+        dataWarehouse.main.denyNowRoleAttr += denyUnitAttr;
+    }
+    public void updateUnitAttr(Dictionary<byte, int> attr)
+    {
+        nowRole.data.attributeUpdate =attr;
+        updateAttr(attribute.atk, "" + nowRole.data.Now_Attack);
+        updateAttr(attribute.max_hp, "" + nowRole.data.Now_Max_Life);
+        updateAttr(attribute.atk_accelerate, "" + nowRole.data.Now_Attack_Speed);
+        updateAttr(attribute.atk_interval, "" + nowRole.data.Now_Attack_Interval);
+        updateAttr(attribute.magic, "" + nowRole.data.Now_Mag_Reinforce);
+        Debug.Log("nowdata 智力:" + nowRole.data.Now_Mag_Reinforce+"nowData 技能加強:"+nowRole.data.Now_Mag_Multiple);
+        updateAttr(attribute.mg_damage_reinforce, "" + nowRole.data.Now_Mag_Multiple);
+        updateAttr(attribute.cd_reinforce, "" + nowRole.data.Now_Cooldown_Reinforce);
+        updateAttr(attribute.cd_time_reduce, "" + nowRole.data.Now_Cooldown_Mutiple);
+        updateAttr(attribute.armor, "" + nowRole.data.Now_Armor);
+        updateAttr(attribute.phy_damage_reduce, "" + nowRole.data.Physical_Reduce_Multiple);
+        updateAttr(attribute.resistance, "" + nowRole.data.Now_Mag_Resistance);
+        updateAttr(attribute.mg_damage_reduce, "" + nowRole.data.Magic_Reduce_Multiple);
+    }
+    public void denyUnitAttr(Dictionary<byte, int> attr)
+    {
+        nowRole.data.attributeDeny = attr;
+        updateAttr(attribute.atk, "" + nowRole.data.Now_Attack);
+        updateAttr(attribute.max_hp, "" + nowRole.data.Now_Max_Life);
+        updateAttr(attribute.atk_accelerate, "" + nowRole.data.Now_Attack_Speed);
+        updateAttr(attribute.atk_interval, "" + nowRole.data.Now_Attack_Interval);
+        updateAttr(attribute.magic, "" + nowRole.data.Now_Mag_Reinforce);
+        updateAttr(attribute.mg_damage_reinforce, "" + nowRole.data.Now_Mag_Multiple);
+        updateAttr(attribute.cd_reinforce, "" + nowRole.data.Now_Cooldown_Reinforce);
+        updateAttr(attribute.cd_time_reduce, "" + nowRole.data.Now_Cooldown_Mutiple);
+        updateAttr(attribute.armor, "" + nowRole.data.Now_Armor);
+        updateAttr(attribute.phy_damage_reduce, "" + nowRole.data.Physical_Reduce_Multiple);
+        updateAttr(attribute.resistance, "" + nowRole.data.Now_Mag_Resistance);
+        updateAttr(attribute.mg_damage_reduce, "" + nowRole.data.Magic_Reduce_Multiple);
     }
     void Update()
     {

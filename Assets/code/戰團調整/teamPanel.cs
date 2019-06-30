@@ -150,6 +150,7 @@ public class teamPanel : MonoBehaviour {
                 Destroy(obj);
             }
         }
+        girdGroups.RemoveRange(0,2);
     }
 	// Update is called once per frame
 	void Update () {

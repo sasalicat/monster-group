@@ -35,9 +35,9 @@ public class unitData  {
     public static float calIncrease(int strength,int basic)
     {
         if (strength >= 0)
-            return (basic + strength) / basic;
+            return ((float)basic +(float)strength) / (float)basic;
         else
-            return basic / (basic - strength);
+            return (float)basic / ((float)basic - (float)strength);
     }
     public bool Remote
     {
@@ -297,6 +297,41 @@ public class unitData  {
                         break;
                     case (byte)attribute.mg_resist:
                         Now_Mag_Resistance += pair.Value;
+                        break;
+                }
+            }
+        }
+    }
+    public Dictionary<byte, int> attributeDeny {
+        set
+        {
+            foreach (KeyValuePair<byte, int> pair in value)
+            {
+                switch (pair.Key)
+                {
+                    case (byte)attribute.atk:
+                        Now_Attack -= pair.Value;
+                        break;
+                    case (byte)attribute.atk_spd:
+                        Now_Attack_Speed -= pair.Value;
+                        break;
+                    case (byte)attribute.magic:
+                        Now_Mag_Reinforce -= pair.Value;
+                        break;
+                    case (byte)attribute.armor:
+                        Now_Armor -= pair.Value;
+                        break;
+                    case (byte)attribute.life:
+                        Now_Max_Life -= pair.Value;
+                        break;
+                    case (byte)attribute.recover:
+                        Now_Life_Recover -= pair.Value;
+                        break;
+                    case (byte)attribute.cd:
+                        Now_Cooldown_Reinforce -= pair.Value;
+                        break;
+                    case (byte)attribute.mg_resist:
+                        Now_Mag_Resistance -= pair.Value;
                         break;
                 }
             }
