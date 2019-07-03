@@ -56,4 +56,12 @@ public class repre_headerchief : item_representation
             return null;
         }
     }
+
+    public List<int> Parts
+    {
+        get
+        {
+            return null;
+        }
+    }
 }

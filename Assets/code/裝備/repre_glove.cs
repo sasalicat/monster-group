@@ -56,4 +56,12 @@ public class repre_glove : item_representation
             return null;
         }
     }
+
+    public List<int> Parts
+    {
+        get
+        {
+            return null;
+        }
+    }
 }

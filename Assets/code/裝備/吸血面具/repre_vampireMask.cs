@@ -57,4 +57,11 @@ public class repre_vampireMask : item_representation
     {
         
     }
+    public List<int> Parts
+    {
+        get
+        {
+            return null;
+        }
+    }
 }

@@ -56,4 +56,11 @@ public class repre_smallSapphire : item_representation
             return null;
         }
     }
+    public List<int> Parts
+    {
+        get
+        {
+            return null;
+        }
+    }
 }
