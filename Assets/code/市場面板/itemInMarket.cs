@@ -38,6 +38,7 @@ public class itemInMarket : MonoBehaviour {
             Icon.color = new Color(0.5f, 0.5f, 0.5f);
             buyButtom.gameObject.SetActive(false);
             dataWarehouse.main.updateBagItem(player.itemInBag);
+            dataWarehouse.main.onPlayerUpdate();
         }
     }
 }

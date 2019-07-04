@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class bagCanvas : MonoBehaviour {
-
+   
 	// Use this for initialization
 	void Start () {
         Vector3 pos = Camera.main.ScreenToWorldPoint(Vector2.zero);
@@ -25,5 +25,9 @@ public class bagCanvas : MonoBehaviour {
     }
     public void onPanelQuit() {
         gameObject.SetActive(false);
+    }
+    public void ActivePanel()
+    {
+        gameObject.SetActive(true);
     }
 }

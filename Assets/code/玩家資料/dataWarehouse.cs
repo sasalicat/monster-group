@@ -47,6 +47,8 @@ public class dataWarehouse : MonoBehaviour {
         nowData.itemInBag.Add(1);
         nowData.itemInBag.Add(2);
         nowData.itemInBag.Add(3);
+        //給點初始資金
+        nowData.moneyLeft = 10;
     }
     public void loadArchive() {
         Debug.Log("加載檔案");

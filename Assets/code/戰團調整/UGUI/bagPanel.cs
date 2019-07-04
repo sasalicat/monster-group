@@ -7,6 +7,8 @@ public class bagPanel : MonoBehaviour {
 
     public GameObject iconPrefab;
     public GameObject itemPanel;
+    public GameObject mainPanel;
+
     public List<GameObject> heads;
     public unitData none = new unitData();
     public castItem caster;
@@ -27,7 +29,7 @@ public class bagPanel : MonoBehaviour {
         foreach (int no in itemNos)
         {
             //記得做createheadIcon
-            GameObject pobj = Instantiate(iconPrefab, transform);
+            GameObject pobj = Instantiate(iconPrefab, mainPanel.transform);
             heads.Add(pobj);
             print("no:" + no);
             pobj.GetComponent<Image>().sprite = ImageList.main.itemIcon[no];
