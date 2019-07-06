@@ -23,10 +23,14 @@ public class itemInMarket : MonoBehaviour {
     }
     public void onClicking() {
         panel.gameObject.SetActive(true);
+        panel.transform.position = transform.position;
         panel.ItemName = itemInf.itemName;
         panel.ItemPrice = itemInf.Price;
         panel.ItemCommentary = itemInf.Commentary;
         panel.ItemExplanation = itemInf.Explanation;
+    }
+    public void onUnClick() {
+        panel.gameObject.SetActive(false);
     }
     public void buy()
     {

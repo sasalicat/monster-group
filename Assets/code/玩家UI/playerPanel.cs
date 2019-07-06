@@ -16,4 +16,8 @@ public class playerPanel : MonoBehaviour {
         lv_num.text = "" + dataWarehouse.main.nowData.lv;
         gold_num.text = "" + dataWarehouse.main.nowData.moneyLeft;
     }
+    public void ActivePanel()
+    {
+        gameObject.SetActive(true);
+    }
 }

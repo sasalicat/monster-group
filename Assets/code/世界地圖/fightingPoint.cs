@@ -6,6 +6,7 @@ public class fightingPoint : MonoBehaviour {
     public List<RoleRecord> enermys=new List<RoleRecord>();
     public GameObject teamPanel;
     public GameObject teamCanvas;
+    public GameObject playerCanvas;
     public static List<RoleRecord> nowEnermyList;
     public void Start() {
         Debug.Log("dataWarehouse main:" + dataWarehouse.main);
@@ -28,5 +29,6 @@ public class fightingPoint : MonoBehaviour {
         nowEnermyList = enermys;
         teamPanel.SetActive(true);
         teamCanvas.SetActive(true);
+        playerCanvas.SetActive(false);
     }
 }

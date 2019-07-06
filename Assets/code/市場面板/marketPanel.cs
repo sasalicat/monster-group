@@ -19,4 +19,8 @@ public class marketPanel : MonoBehaviour {
             itemObjs.Add(obj);
         }
     }
+    public void quit()
+    {
+        gameObject.SetActive(false);
+    }
 }
