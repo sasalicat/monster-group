@@ -1699,7 +1699,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5E02\u5834"
+  m_Text: "\u5408\u6210"
 --- !u!222 &353562383
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3779,7 +3779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1107039424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4022,7 +4022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1208178198
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4082,7 +4082,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1750661297}
-        m_MethodName: quit
+        m_MethodName: marketButtomClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4958,7 +4958,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1750661297}
-        m_MethodName: quit
+        m_MethodName: compositeButtomClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5527,7 +5527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1517645632
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5637,6 +5637,7 @@ MonoBehaviour:
   strip: {fileID: 1658528035290570, guid: c9f1f72abe6242d4aa27c232ca1a0468, type: 2}
   mainpanel: {fileID: 1248570006}
   itemPanel: {fileID: 2119973576}
+  objs: []
 --- !u!1 &1605240674
 GameObject:
   m_ObjectHideFlags: 0
@@ -6030,7 +6031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1750661290
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6159,7 +6160,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemObj: {fileID: 1479568601898944, guid: b82c0179552bb304daf9920145d8cac5, type: 2}
   itemPanel: {fileID: 2119973576}
-  mainPanel: {fileID: 1107039423}
+  soldPanel: {fileID: 1107039423}
+  composPanel: {fileID: 1517645631}
+  soldButtom: {fileID: 1208178197}
+  composButtom: {fileID: 1335616182}
 --- !u!1 &1776178572
 GameObject:
   m_ObjectHideFlags: 0
@@ -6806,7 +6810,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2030349811}
   - component: {fileID: 2030349810}
-  - component: {fileID: 2030349809}
   - component: {fileID: 2030349808}
   - component: {fileID: 2030349812}
   - component: {fileID: 2030349807}
@@ -6872,20 +6875,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &2030349809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2030349806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aa6308a1f4f432468cb78eb6ea16f70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamPanel: {fileID: 1857409333}
-  teamCanvas: {fileID: 13653273}
-  playerCanvas: {fileID: 0}
 --- !u!212 &2030349810
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6958,7 +6947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bagPanel: {fileID: 13653273}
   marketPanel: {fileID: 1750661289}
-  goods: 030000000400000006000000
+  goods: 03000000040000000600000000000000
 --- !u!1 &2064863147
 GameObject:
   m_ObjectHideFlags: 0

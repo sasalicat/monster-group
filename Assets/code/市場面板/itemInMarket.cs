@@ -16,8 +16,10 @@ public class itemInMarket : MonoBehaviour {
     {
         no = itemNo;
         Icon.sprite = ImageList.main.itemIcon[no];
-        itemName.text = inf.itemName;
-        itemCost.text = ""+inf.Price;
+        if(itemName!=null)
+            itemName.text = inf.itemName;
+        if(itemCost!=null)
+            itemCost.text = ""+inf.Price;
         itemInf = inf;
         this.panel = panel.GetComponent<itemPanel>();
     }
