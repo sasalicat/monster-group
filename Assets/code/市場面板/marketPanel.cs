@@ -9,8 +9,15 @@ public class marketPanel : MonoBehaviour {
     public GameObject composPanel;//手動拉取
     public GameObject soldButtom;//手動拉取
     public GameObject composButtom;//手動拉取
-    List<GameObject> itemObjs ;
-	public void init(List<int> itemNos)
+    List<GameObject> itemObjs;
+    List<int> nos;
+    public delegate void withList(List<int> arg);
+    private withList callback;
+    public void removeNo(int no)
+    {
+        nos.Remove(no);
+    }
+	public void init(List<int> itemNos,withList update_cb)
     {
         Debug.Log("market panel init:");
         itemObjs = new List<GameObject>();
@@ -19,13 +26,21 @@ public class marketPanel : MonoBehaviour {
             Debug.Log("item No:" + no);
             GameObject obj= (GameObject)Instantiate(itemObj,  soldPanel.transform);
             obj.GetComponent<itemInMarket>().init(no, itemList.main.objects[no], itemPanel);
+            obj.GetComponent<itemInMarket>().onSoldOut += removeNo;
             itemObjs.Add(obj);
+            
         }
-        
+        nos = itemNos;
+        callback += update_cb;
     }
     public void quit()
     {
+        foreach(GameObject obj in itemObjs)
+        {
+            Destroy(obj);
+        }
         gameObject.SetActive(false);
+        callback(nos);
     }
     public void compositeButtomClick()
     {

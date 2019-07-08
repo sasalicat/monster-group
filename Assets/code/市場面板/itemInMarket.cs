@@ -11,6 +11,8 @@ public class itemInMarket : MonoBehaviour {
     public Text itemCost;//手動拉取
     public Button buyButtom;//手動拉取
     public itemPanel panel;//初始化時賦予
+    public delegate void withInt(int arg);
+    public withInt onSoldOut;
 
     public void init(int itemNo,item_representation inf,GameObject panel)
     {
@@ -45,6 +47,7 @@ public class itemInMarket : MonoBehaviour {
             buyButtom.gameObject.SetActive(false);
             dataWarehouse.main.updateBagItem(player.itemInBag);
             dataWarehouse.main.onPlayerUpdate();
+            onSoldOut(no);
         }
     }
 }

@@ -34,6 +34,10 @@ public class compositePanel : MonoBehaviour {
                         break;
                     }
                 }
+                if (dataWarehouse.main.nowData.moneyLeft < inf.Price)
+                {
+                    complete = false;
+                }
                 if (complete)
                 {
                     GameObject obj = Instantiate(strip, mainpanel.transform);

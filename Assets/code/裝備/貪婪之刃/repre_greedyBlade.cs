@@ -24,7 +24,7 @@ public class repre_greedyBlade : item_representation {
     {
         get
         {
-            throw new NotImplementedException();
+            return "攻擊力+5,物理吸血25%";
         }
     }
 
@@ -32,7 +32,7 @@ public class repre_greedyBlade : item_representation {
     {
         get
         {
-            return "攻擊力+5,物理吸血25%";
+            return "貪婪之刃";
         }
     }
 

@@ -53,6 +53,10 @@ public class compositeStrip : MonoBehaviour {
                 break;
             }
         }
+        if (dataWarehouse.main.nowData.moneyLeft < repre.Price)
+        {
+            complete = false;
+        }
         if (complete) {
             foreach(int no in repre.Parts)
             {
@@ -61,6 +65,8 @@ public class compositeStrip : MonoBehaviour {
             dataWarehouse.main.nowData.itemInBag.Add(itemNo);
             dataWarehouse.main.updateBagItem(dataWarehouse.main.nowData.itemInBag);
             compos_callback();
+            dataWarehouse.main.nowData.moneyLeft -= repre.Price;
+            dataWarehouse.main.onPlayerUpdate();
         }
     }
 }
