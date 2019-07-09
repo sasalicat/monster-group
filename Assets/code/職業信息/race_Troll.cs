@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class race_Troll : Career {
-    public List<int> NextNo
+public class race_troll: careerInf
+{
+    public Dictionary<byte, int> Attributes
     {
         get
         {
-            return null;
+            return new Dictionary<byte, int>() { { (byte)unitData.attribute.atk, 2 }, { (byte)unitData.attribute.atk_spd, 25 }, { (byte)unitData.attribute.mg_resist, 25 }, { (byte)unitData.attribute.magic, 35 } };
         }
     }
 
-    public int No
+    public int careerNo
     {
         get
         {
@@ -20,18 +20,44 @@ public class race_Troll : Career {
         }
     }
 
-    public void addProperty(unitData data)
+    public string Commentary
     {
-        data.Now_Attack += 2;
-        data.Now_Attack_Speed += 25;
-        data.Now_Mag_Resistance += 25;
-        data.Now_Mag_Reinforce += 35;
+        get
+        {
+            return "艾澤拉斯冒險者日常必做的三件事:吃飯,睡覺,打巨魔";
+        }
     }
 
-    public void addSkill(List<int> skillNos)
+    public string name
     {
-        skillNos.Add(3);
+        get
+        {
+            return "巨魔";
+        }
     }
 
+    public List<int> nexrCareer
+    {
+        get
+        {
+            return null;
+        }
+    }
+
+    public int Price
+    {
+        get
+        {
+            return 5;
+        }
+    }
+
+    public List<int> skillPool
+    {
+        get
+        {
+            return new List<int>() { 3 };
+        }
+    }
 
 }

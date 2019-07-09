@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class race_orc : careerInf
-{
+public class race_elf : careerInf {
     public Dictionary<byte, int> Attributes
     {
         get
         {
-            return new Dictionary<byte, int>() { {(byte)unitData.attribute.atk,5}, { (byte)unitData.attribute.life, 50 } };
+            return new Dictionary<byte, int>() { { (byte)unitData.attribute.atk_spd, 50 }, { (byte)unitData.attribute.cd, 50 } };
         }
     }
 
@@ -17,7 +16,7 @@ public class race_orc : careerInf
     {
         get
         {
-            return 0;
+            return 1;
         }
     }
 
@@ -25,7 +24,7 @@ public class race_orc : careerInf
     {
         get
         {
-            return "獸人永不為奴!除非包吃包住";
+            return "巨魔的剋星,獸人的殺手,永恆之井的終結者";
         }
     }
 
@@ -33,7 +32,7 @@ public class race_orc : careerInf
     {
         get
         {
-            return "獸人";
+            return "精靈";
         }
     }
 
@@ -57,7 +56,8 @@ public class race_orc : careerInf
     {
         get
         {
-            return new List<int>() { 2 };
+            return new List<int>() {4};
         }
     }
+
 }

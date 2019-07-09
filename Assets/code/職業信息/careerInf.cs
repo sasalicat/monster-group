@@ -19,7 +19,15 @@ public interface careerInf{
     {
         get;
     }
-    int nexrCareer
+    List<int> nexrCareer
+    {
+        get;
+    }
+    Dictionary<byte,int> Attributes
+    {
+        get;
+    }
+    int Price
     {
         get;
     }
