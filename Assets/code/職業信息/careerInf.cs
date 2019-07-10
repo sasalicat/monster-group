@@ -23,6 +23,10 @@ public interface careerInf{
     {
         get;
     }
+    int frontCareer
+    {
+        get;
+    }
     Dictionary<byte,int> Attributes
     {
         get;

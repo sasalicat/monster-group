@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class race_orc : careerInf
+public class career_warrior_lv2 : careerInf
 {
     public Dictionary<byte, int> Attributes
     {
         get
         {
-            return new Dictionary<byte, int>() { {(byte)unitData.attribute.atk,5}, { (byte)unitData.attribute.life, 50 } };
+            return new Dictionary<byte, int>() { { (byte)unitData.attribute.atk, 2 }, { (byte)unitData.attribute.armor, 10 }, { (byte)unitData.attribute.life, 20 } };
         }
     }
 
@@ -17,7 +16,7 @@ public class race_orc : careerInf
     {
         get
         {
-            return 0;
+            return 6;
         }
     }
 
@@ -25,7 +24,7 @@ public class race_orc : careerInf
     {
         get
         {
-            return "獸人永不為奴!除非包吃包住";
+            return "天堂在左,戰士在右";
         }
     }
 
@@ -33,7 +32,7 @@ public class race_orc : careerInf
     {
         get
         {
-            return -1;
+            return 5;
         }
     }
 
@@ -41,7 +40,7 @@ public class race_orc : careerInf
     {
         get
         {
-            return "獸人";
+            return "專家級戰士";
         }
     }
 
@@ -49,7 +48,7 @@ public class race_orc : careerInf
     {
         get
         {
-            return null;
+            return new List<int> { 7 };
         }
     }
 
@@ -65,7 +64,9 @@ public class race_orc : careerInf
     {
         get
         {
-            return new List<int>() { 2 };
+            return new List<int> { 5, 6, 8, 9 };
         }
     }
+
 }
+

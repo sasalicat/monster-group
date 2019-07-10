@@ -2,40 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class marketPanel : MonoBehaviour {
-    public GameObject itemObj;//手動拉取
-    public GameObject itemPanel;//手動拉取
+public class enlistPanel : MonoBehaviour {
+    public GameObject mercenaryObj;//手動拉取
+    public GameObject rolePanel;//手動拉取
     public GameObject soldPanel;//手動拉取
     public GameObject composPanel;//手動拉取
     public GameObject soldButtom;//手動拉取
     public GameObject composButtom;//手動拉取
     List<GameObject> itemObjs;
-    List<int> nos;
-    public delegate void withList(List<int> arg);
-    private withList callback;
-    public void removeNo(int no)
+    List<RoleRecord> roles;
+    public delegate void withRoleList(List<RoleRecord> arg);
+    private withRoleList callback;
+    public void removeRole(RoleRecord role)
     {
-        nos.Remove(no);
+        roles.Remove(role);
     }
-	public void init(List<int> itemNos,withList update_cb)
+    public void init(List<RoleRecord> roles, withRoleList update_cb)
     {
         Debug.Log("market panel init:");
         itemObjs = new List<GameObject>();
-        foreach(int no in itemNos)
+        foreach (RoleRecord role in roles)
         {
-            Debug.Log("item No:" + no);
-            GameObject obj= (GameObject)Instantiate(itemObj,  soldPanel.transform);
-            obj.GetComponent<itemInMarket>().init(no, itemList.main.objects[no], itemPanel);
-            obj.GetComponent<itemInMarket>().onSoldOut += removeNo;
-            itemObjs.Add(obj);
             
+            GameObject obj = (GameObject)Instantiate(mercenaryObj, soldPanel.transform);
+            obj.GetComponent<roleInPanel>().init(role, rolePanel);
+            obj.GetComponent<roleInPanel>().onSoldOut += removeRole;
+            itemObjs.Add(obj);
+
         }
         nos = itemNos;
         callback = update_cb;
     }
     public void quit()
     {
-        foreach(GameObject obj in itemObjs)
+        foreach (GameObject obj in itemObjs)
         {
             Destroy(obj);
         }

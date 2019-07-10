@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +26,14 @@ public class race_troll: careerInf
         get
         {
             return "艾澤拉斯冒險者日常必做的三件事:吃飯,睡覺,打巨魔";
+        }
+    }
+
+    public int frontCareer
+    {
+        get
+        {
+            return -1;
         }
     }
 

@@ -28,6 +28,14 @@ public class race_elf : careerInf {
         }
     }
 
+    public int frontCareer
+    {
+        get
+        {
+            return -1;
+        }
+    }
+
     public string name
     {
         get

@@ -26,8 +26,8 @@ GameObject:
   - component: {fileID: 114324146867005514}
   - component: {fileID: 114529366815161500}
   - component: {fileID: 114988285080521978}
-  - component: {fileID: 114855947986323770}
   - component: {fileID: 114660399509043134}
+  - component: {fileID: 114381664419861970}
   m_Layer: 0
   m_Name: public
   m_TagString: Untagged
@@ -162,6 +162,25 @@ MonoBehaviour:
   - 
   - 
   - 
+--- !u!114 &114381664419861970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1216355410532394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdff5c13421e944080b97e258d30a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  careerNames:
+  - race_orc
+  - race_elf
+  - race_troll
+  - race_lizardMan
+  - race_boarMan
+  baseRaceNos: 000000000100000002000000
+  baseCareerNos: 05000000
 --- !u!114 &114529366815161500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,18 +250,6 @@ MonoBehaviour:
   - 
   - 
   - 
---- !u!114 &114855947986323770
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1216355410532394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cac85c0c04e8e04aba74dce8aa8ffad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MAX_SIZE: 20
 --- !u!114 &114988285080521978
 MonoBehaviour:
   m_ObjectHideFlags: 1
