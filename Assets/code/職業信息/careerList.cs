@@ -26,7 +26,7 @@ public class careerList : MonoBehaviour {
             {
                 if (Type.GetType(name) == null)
                 {//若無此類
-                    Debug.Log("item_representation:" + name + "不存在");
+                    Debug.Log("careerInf:" + name + "不存在");
                     objects.Add(null);
                 }
                 else
@@ -143,8 +143,10 @@ public class careerList : MonoBehaviour {
         int race= baseRaceNos[UnityEngine.Random.Range(0,baseRaceNos.Count)];
         level -= 2;
         giveRace(newRole, objects[race]);
-        int idx = baseCareerNos[UnityEngine.Random.Range(0, baseRaceNos.Count)];
-        careerInf nowCareer = objects[idx];
+        int index = UnityEngine.Random.Range(0, baseCareerNos.Count);
+        int no = baseCareerNos[index];
+        careerInf nowCareer = objects[no];
+        transferTo(newRole, nowCareer);
         for(int nowlv = 0; nowlv < level; nowlv++)
         {
             int nextNo= nowCareer.nexrCareer[UnityEngine.Random.Range(0, nowCareer.nexrCareer.Count)];

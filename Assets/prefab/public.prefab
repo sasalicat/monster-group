@@ -179,6 +179,9 @@ MonoBehaviour:
   - race_troll
   - race_lizardMan
   - race_boarMan
+  - career_warrior_lv1
+  - career_warrior_lv2
+  - career_warrior_lv3
   baseRaceNos: 000000000100000002000000
   baseCareerNos: 05000000
 --- !u!114 &114529366815161500

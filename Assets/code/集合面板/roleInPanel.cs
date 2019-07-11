@@ -16,9 +16,10 @@ public class roleInPanel : MonoBehaviour
 
     public void init(RoleRecord inf, GameObject panel)
     {
-        Icon.sprite = ImageList.main.itemIcon[inf.race];
+        roleInf = inf;
+        Icon.sprite = ImageList.main.headIcons[inf.race];
         if (itemName != null) {
-            string name= careerList.main.objects[inf.careers.Count - 1].name;
+            string name= careerList.main.objects[inf.careers[inf.careers.Count - 1]].name;
             itemName.text = name;
 
         }
@@ -30,7 +31,7 @@ public class roleInPanel : MonoBehaviour
             }
             itemCost.text = "" + price;
         }
-        roleInf = inf;
+
         this.panel = panel.GetComponent<rolePanel>();
     }
     public void onClicking()
@@ -52,7 +53,12 @@ public class roleInPanel : MonoBehaviour
         }
         if (player.moneyLeft >= price && !soldOut)
         {
+            player.army.Add(roleInf);
+            player.moneyLeft -= price;
+            Icon.color = new Color(0.5f, 0.5f, 0.5f);
+            buyButtom.gameObject.SetActive(false);
             onSoldOut(roleInf);
+            dataWarehouse.main.onPlayerUpdate();
         }
     }
 }

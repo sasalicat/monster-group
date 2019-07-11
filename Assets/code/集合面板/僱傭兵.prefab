@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 222512228913869064}
   - component: {fileID: 114911626921803508}
   - component: {fileID: 114502002827333844}
-  - component: {fileID: 114475134335494504}
+  - component: {fileID: 114038889600683210}
   m_Layer: 0
   m_Name: "\u50F1\u50AD\u5175"
   m_TagString: Untagged
@@ -82,6 +82,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114038889600683210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479568601898944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a8f11746d1e84499a9b38a79a10857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 114911626921803508}
+  itemName: {fileID: 114925690475037782}
+  itemCost: {fileID: 114057386812774806}
+  buyButtom: {fileID: 114113294295630638}
+  panel: {fileID: 0}
 --- !u!114 &114057386812774806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,7 +170,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114475134335494504}
+      - m_Target: {fileID: 114038889600683210}
         m_MethodName: buy
         m_Mode: 1
         m_Arguments:
@@ -194,22 +210,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114475134335494504
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1479568601898944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0b4884a53fd04e4bb48af5f8b2f5bb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Icon: {fileID: 114911626921803508}
-  itemName: {fileID: 114925690475037782}
-  itemCost: {fileID: 114057386812774806}
-  buyButtom: {fileID: 114113294295630638}
-  panel: {fileID: 0}
 --- !u!114 &114502002827333844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,8 +226,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114475134335494504}
-          m_MethodName: onClicking
+        - m_Target: {fileID: 114038889600683210}
+          m_MethodName: buy
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

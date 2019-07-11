@@ -30,7 +30,7 @@ public class enlistPanel : MonoBehaviour {
             itemObjs.Add(obj);
 
         }
-        nos = itemNos;
+        this.roles = roles;
         callback = update_cb;
     }
     public void quit()
@@ -40,7 +40,7 @@ public class enlistPanel : MonoBehaviour {
             Destroy(obj);
         }
         gameObject.SetActive(false);
-        callback(nos);
+        callback(roles);
     }
     public void compositeButtomClick()
     {

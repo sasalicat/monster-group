@@ -212,7 +212,8 @@ public class unitData  {
         {
             int origen = cooldown_reinforce;
             cooldown_reinforce = value;
-            _onCoolDownMutipleChange(calReduce(origen, BASE_ABILITY_NUMBER), calReduce(cooldown_reinforce, BASE_ABILITY_NUMBER));
+            if(_onCoolDownMutipleChange!=null)
+                _onCoolDownMutipleChange(calReduce(origen, BASE_ABILITY_NUMBER), calReduce(cooldown_reinforce, BASE_ABILITY_NUMBER));
         }
         get
         {
