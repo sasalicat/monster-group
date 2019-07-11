@@ -59,6 +59,7 @@ public class roleInPanel : MonoBehaviour
             buyButtom.gameObject.SetActive(false);
             onSoldOut(roleInf);
             dataWarehouse.main.onPlayerUpdate();
+            dataWarehouse.main.onArmyUpdate();
         }
     }
 }

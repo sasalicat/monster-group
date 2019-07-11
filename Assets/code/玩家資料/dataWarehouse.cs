@@ -10,9 +10,11 @@ public class dataWarehouse : MonoBehaviour {
     public delegate void withNone();
     public withIntList updateBagItem;//主要用於itemInBag更新時觸發對應UI的更新(bagPanel)
     public withIntList updateNowRoleItems;//主要用於army[index].itemNos更新時觸發對應UI的更新(equipBar)
+    //其實以上withIntList都可以用withNone代替的
     public withBIdict updateNowRoleAttr;
     public withBIdict denyNowRoleAttr;
     public withNone onPlayerUpdate;
+    public withNone onArmyUpdate;
     void OnEnable()
     {
         if (main != null)
@@ -48,7 +50,7 @@ public class dataWarehouse : MonoBehaviour {
         nowData.itemInBag.Add(2);
         nowData.itemInBag.Add(3);
         //給點初始資金
-        nowData.moneyLeft = 10;
+        nowData.moneyLeft = 100;
     }
     public void loadArchive() {
         Debug.Log("加載檔案");
