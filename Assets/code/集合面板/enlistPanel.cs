@@ -46,13 +46,11 @@ public class enlistPanel : MonoBehaviour {
     {
         soldPanel.SetActive(false);
         composPanel.SetActive(true);
-        composPanel.GetComponent<compositePanel>().init();
         soldButtom.SetActive(true);
         composButtom.SetActive(false);
     }
     public void marketButtomClick()
-    {
-        composPanel.GetComponent<compositePanel>().cancer();
+    {   
         composPanel.SetActive(false);
         soldPanel.SetActive(true);
         composButtom.SetActive(true);
