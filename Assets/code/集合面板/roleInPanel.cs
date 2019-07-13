@@ -13,6 +13,7 @@ public class roleInPanel : MonoBehaviour
     public rolePanel panel;//初始化時賦予
     public delegate void withRole(RoleRecord arg);
     public withRole onSoldOut;
+    public GameObject phantomObj;
 
     public void init(RoleRecord inf, GameObject panel)
     {
@@ -61,5 +62,17 @@ public class roleInPanel : MonoBehaviour
             dataWarehouse.main.onPlayerUpdate();
             dataWarehouse.main.onArmyUpdate();
         }
+    }
+    void onPhantomDelete(headPhantom phant)
+    {
+        if (phant.girdsAttach.Count > 0) {
+            //if()
+        }
+    }
+    void onDragBeg()
+    {
+        GameObject obj= Instantiate(phantomObj);
+        obj.GetComponent<headPhantom>().init(roleInf);
+        obj.GetComponent<headPhantom>().BefDelete
     }
 }

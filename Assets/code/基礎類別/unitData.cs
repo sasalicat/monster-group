@@ -267,6 +267,43 @@ public class unitData  {
     {
 
     }
+    public string getAttributeString(attribute key) {
+        switch (key) {
+            case attribute.atk: {
+                    return "攻擊力";
+                }
+            case attribute.atk_spd: {
+                    return "攻速加成";
+                }
+            case attribute.magic:
+                {
+                    return "智力";
+                }
+            case attribute.armor:
+                {
+                    return "護甲";
+                }
+            case attribute.life: {
+                    return "生命值上限";
+                }
+            case attribute.recover:
+                {
+                    return "每秒恢復";
+                }
+            case attribute.cd:
+                {
+                    return "冷卻強化";
+                }
+            case attribute.mg_resist:
+                {
+                    return "抗性";
+                }
+            default:
+                {
+                    return null;
+                }
+        }
+    }
     public Dictionary<byte,int> attributeUpdate
     {
         set
