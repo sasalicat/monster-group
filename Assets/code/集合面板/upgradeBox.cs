@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class upgradeBox : MonoBehaviour {
     public upgradePanel master;
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void onPick(RoleRecord role) {
+        master.prepareRole(role);
+    }
 }

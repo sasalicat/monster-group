@@ -36,15 +36,18 @@ public class dataWarehouse : MonoBehaviour {
         nowData.army[0].skillNos.Add(5);
         nowData.army[0].itemNos.Add(1);
         nowData.army[0].itemNos.Add(2);
+        nowData.army[0].careers = new List<int>() {5};
         nowData.army.Add(new RoleRecord(2));
         nowData.army[1].index = 1;
         nowData.army[1].skillNos.Add(1);
         nowData.army[1].skillNos.Add(8);
         nowData.army[1].skillNos.Add(10);
+        nowData.army[1].careers = new List<int>() { 6 };
         nowData.army.Add(new RoleRecord(0));
         nowData.army[2].index = 2;
         nowData.army[2].skillNos.Add(3);
         nowData.army[2].skillNos.Add(5);
+        nowData.army[2].careers = new List<int>() { 5 };
         //加一點測試用的裝備
         nowData.itemInBag.Add(1);
         nowData.itemInBag.Add(2);

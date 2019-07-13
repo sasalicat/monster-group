@@ -66,13 +66,16 @@ public class roleInPanel : MonoBehaviour
     void onPhantomDelete(headPhantom phant)
     {
         if (phant.girdsAttach.Count > 0) {
-            //if()
+            upgradeBox box =phant.girdsAttach[0].GetComponent<upgradeBox>();
+            if (box != null) {
+                box.onPick(roleInf);
+            }
         }
     }
-    void onDragBeg()
+    public void onDragBeg()
     {
         GameObject obj= Instantiate(phantomObj);
         obj.GetComponent<headPhantom>().init(roleInf);
-        obj.GetComponent<headPhantom>().BefDelete
+        obj.GetComponent<headPhantom>().BefDelete += onPhantomDelete;
     }
 }

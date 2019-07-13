@@ -117,7 +117,7 @@ public class substitutePanel : MonoBehaviour
         if (phantom.girdsAttach.Count > 0)
         {
             gird nearest = phantom.girdsAttach[0].GetComponent<gird>();
-            float min_dist = (phantom.girdsAttach[0].transform.position - nearest.transform.position).magnitude;
+            float min_dist = (phantom.transform.position - nearest.transform.position).magnitude;
             foreach (GameObject gird in phantom.girdsAttach)
             {
 
@@ -125,6 +125,7 @@ public class substitutePanel : MonoBehaviour
                 if (dist < min_dist)
                 {
                     nearest = gird.GetComponent<gird>();
+                    min_dist = dist;
                 }
                 //message += "  " + gird.gameObject.name + "pos:(" + script.x + "," + script.y + ")";
                 phantom.data.location = new vec2i(nearest.x, nearest.y);

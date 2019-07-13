@@ -73,6 +73,7 @@ MonoBehaviour:
   itemCost: {fileID: 0}
   buyButtom: {fileID: 0}
   panel: {fileID: 0}
+  phantomObj: {fileID: 1077057367425018, guid: fe2695535fdd63f41b86abc1c40f608e, type: 2}
 --- !u!114 &114984597115428918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,12 +103,12 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 5
+  - eventID: 13
     callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114774306885792106}
-          m_MethodName: onClicking
+          m_MethodName: onDragBeg
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 222139274170978660}
   - component: {fileID: 114464966580768904}
   - component: {fileID: 114139025625394426}
-  - component: {fileID: 114877478777117326}
+  - component: {fileID: 114669461836232578}
   m_Layer: 0
   m_Name: "\u8F49\u8077\u76EE\u6A19"
   m_TagString: Untagged
@@ -98,8 +98,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114877478777117326}
-          m_MethodName: buy
+        - m_Target: {fileID: 114669461836232578}
+          m_MethodName: onClick
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -211,8 +211,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114877478777117326}
-        m_MethodName: buy
+      - m_Target: {fileID: 114669461836232578}
+        m_MethodName: upgrade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -251,6 +251,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114669461836232578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1639171167230474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971bdbd8a22831741be8050c8fa86265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 114464966580768904}
+  itemName: {fileID: 114323934849052280}
+  itemCost: {fileID: 114791146883136424}
+  buyButtom: {fileID: 114388803472218130}
+  panel: {fileID: 0}
 --- !u!114 &114791146883136424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,22 +300,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 17
---- !u!114 &114877478777117326
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1639171167230474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a8f11746d1e84499a9b38a79a10857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Icon: {fileID: 114464966580768904}
-  itemName: {fileID: 114323934849052280}
-  itemCost: {fileID: 114791146883136424}
-  buyButtom: {fileID: 114388803472218130}
-  panel: {fileID: 0}
 --- !u!222 &222139274170978660
 CanvasRenderer:
   m_ObjectHideFlags: 1
