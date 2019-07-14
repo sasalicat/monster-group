@@ -7,16 +7,17 @@ public class roleForUpgrade : MonoBehaviour {
     private RoleRecord roleInf;
     private careerInf career;
     private bool soldOut = false;
-
+    public delegate void withNone();
     public delegate void withCareer(careerInf career);
 
     public withCareer onClick_callback;
+    public withNone onUpgradeFinsh_callback;
     public Image Icon;//手動拉取
     public Text itemName;//手動拉取
     public Text itemCost;//手動拉取
     public Button buyButtom;//手動拉取
     public rolePanel panel;//初始化時賦予
-    public void init(RoleRecord inf,careerInf career,withCareer callback)
+    public void init(RoleRecord inf,careerInf career,withCareer callback,withNone upgrade_callback)
     {
         roleInf = inf;
         this.career =career;
@@ -33,6 +34,7 @@ public class roleForUpgrade : MonoBehaviour {
             itemCost.text = "" +career.Price;
         }
         onClick_callback = callback;
+        onUpgradeFinsh_callback = upgrade_callback;
     }
     public void onClick()
     {
@@ -40,6 +42,13 @@ public class roleForUpgrade : MonoBehaviour {
     }
     public void upgrade()
     {
-        careerList.transferTo(roleInf,career);
+        if (dataWarehouse.main.nowData.moneyLeft >= career.Price)
+        {
+
+            careerList.transferTo(roleInf, career);
+            onUpgradeFinsh_callback();
+            dataWarehouse.main.nowData.moneyLeft -= career.Price;
+            dataWarehouse.main.onPlayerUpdate();
+        }
     }
 }

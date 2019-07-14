@@ -46,7 +46,6 @@ MonoBehaviour:
   itemNo: 0
   panel: {fileID: 0}
   phantom: {fileID: 1795603530219902, guid: 2d78c9153a0d29d4b8a62fca5e463aeb, type: 2}
-  caster: {fileID: 0}
 --- !u!114 &114289229814008634
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -98,6 +98,7 @@ MonoBehaviour:
   itemCost: {fileID: 114057386812774806}
   buyButtom: {fileID: 114113294295630638}
   panel: {fileID: 0}
+  phantomObj: {fileID: 0}
 --- !u!114 &114057386812774806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,7 +228,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114038889600683210}
-          m_MethodName: buy
+          m_MethodName: onClicking
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

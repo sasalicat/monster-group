@@ -80,14 +80,17 @@ public class rolePanel : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            print("點擊");
+            print("點擊"+Input.mousePosition);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  //摄像机需要设置MainCamera的Tag这里才能找到
             if (Input.GetMouseButton(0))
             {
-                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 10, -1); ;
+
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 10, -1);
+                Debug.Log("origin:" + ray.origin + " direction:" + ray.direction+"hit pos:"+hit.point);
                 //Debug.Log("caster.cast() 結果:" + caster.cast());
                 if (castItem.main.cast() != null)
                 {
+                    Debug.Log("物品結果null~~~");
                     //因為點裝備欄的時候也不希望把裝備面板關掉,
                     //關掉就不能拖進裝備欄了
                 }
@@ -95,7 +98,7 @@ public class rolePanel : MonoBehaviour
                 {
                     //Debug.DrawLine(ray.origin, hit.transform.position, Color.red, 0.1f, true);
                     Debug.Log("hitted:" + hit.transform.name + "tag:" + hit.transform.tag);
-                    if (hit.transform.tag != "RoleUI")
+                    if (hit.transform.tag != "RoleUI"&& hit.transform)
                     {
                         Debug.Log("沒點擊到roleUI");
                         gameObject.SetActive(false);

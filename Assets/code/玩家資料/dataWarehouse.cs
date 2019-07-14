@@ -6,8 +6,25 @@ public class dataWarehouse : MonoBehaviour {
     public PlayerInf nowData;
     public static dataWarehouse main;
     public delegate void withIntList(List<int> list);
+    private void none(List<int> arg)
+    {
+
+    }
     public delegate void withBIdict(Dictionary<byte, int> dict);
+    private void none(Dictionary<byte,int> arg)
+    {
+
+    }
     public delegate void withNone();
+    public void none()
+    {
+
+    }
+    public delegate void withRoleRecord(RoleRecord roledata);
+    public void none(RoleRecord arg)
+    {
+
+    }
     public withIntList updateBagItem;//主要用於itemInBag更新時觸發對應UI的更新(bagPanel)
     public withIntList updateNowRoleItems;//主要用於army[index].itemNos更新時觸發對應UI的更新(equipBar)
     //其實以上withIntList都可以用withNone代替的
@@ -15,6 +32,8 @@ public class dataWarehouse : MonoBehaviour {
     public withBIdict denyNowRoleAttr;
     public withNone onPlayerUpdate;
     public withNone onArmyUpdate;
+    //public withRoleRecord onNowRoleChange;
+      
     void OnEnable()
     {
         if (main != null)
@@ -65,7 +84,14 @@ public class dataWarehouse : MonoBehaviour {
         Debug.Log("dataWarehouse 初始化----------------------------------------");
         Debug.Log("main為:" + main);
         DontDestroyOnLoad(this);
-    }
+        updateBagItem += none;//主要用於itemInBag更新時觸發對應UI的更新(bagPanel)
+        updateNowRoleItems += none;//主要用於army[index].itemNos更新時觸發對應UI的更新(equipBar)
+    //其實以上withIntList都可以用withNone代替的
+        updateNowRoleAttr += none;
+        denyNowRoleAttr += none;
+        onPlayerUpdate += none;
+        onArmyUpdate += none;
+}
     private void forDebug()
     {
         //nowData.

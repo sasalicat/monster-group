@@ -267,7 +267,7 @@ public class unitData  {
     {
 
     }
-    public string getAttributeString(attribute key) {
+    public static string getAttributeString(attribute key) {
         switch (key) {
             case attribute.atk: {
                     return "攻擊力";
@@ -295,6 +295,48 @@ public class unitData  {
                     return "冷卻強化";
                 }
             case attribute.mg_resist:
+                {
+                    return "抗性";
+                }
+            default:
+                {
+                    return null;
+                }
+        }
+    }
+    public static string getAttributeString(byte key)
+    {
+        switch (key)
+        {
+            case (byte)attribute.atk:
+                {
+                    return "攻擊力";
+                }
+            case (byte)attribute.atk_spd:
+                {
+                    return "攻速加成";
+                }
+            case (byte)attribute.magic:
+                {
+                    return "智力";
+                }
+            case (byte)attribute.armor:
+                {
+                    return "護甲";
+                }
+            case (byte)attribute.life:
+                {
+                    return "生命值上限";
+                }
+            case (byte)attribute.recover:
+                {
+                    return "每秒恢復";
+                }
+            case (byte)attribute.cd:
+                {
+                    return "冷卻強化";
+                }
+            case (byte)attribute.mg_resist:
                 {
                     return "抗性";
                 }

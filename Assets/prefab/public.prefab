@@ -182,8 +182,11 @@ MonoBehaviour:
   - career_warrior_lv1
   - career_warrior_lv2
   - career_warrior_lv3
+  - career_thug_lv1
+  - career_thug_lv2
+  - career_thug_lv3
   baseRaceNos: 000000000100000002000000
-  baseCareerNos: 05000000
+  baseCareerNos: 0500000008000000
 --- !u!114 &114529366815161500
 MonoBehaviour:
   m_ObjectHideFlags: 1
