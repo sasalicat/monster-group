@@ -32,6 +32,7 @@ public class RoleRecord  {
     public List<int> skillNos=new List<int>();
     public List<int> itemNos = new List<int>();
 
+    public bool teammate = true;
     public unitData data;
     public vec2i location=null;
     public RoleRecord() {

@@ -10,11 +10,11 @@ public class fightingPoint : MonoBehaviour {
     public static List<RoleRecord> nowEnermyList;
     public void Start() {
         Debug.Log("dataWarehouse main:" + dataWarehouse.main);
-        RoleRecord default1 = new RoleRecord(1);
+        RoleRecord default1 = careerList.main.randomRoleFor(3, false);
         default1.location = new vec2i(1, 1);
         enermys.Add(default1);
 
-        RoleRecord default2 = new RoleRecord(2);
+        RoleRecord default2 = careerList.main.randomRoleFor(3, false);
         default2.location = new vec2i(4, 3);
         enermys.Add(default2);
     }

@@ -133,6 +133,12 @@ public class careerList : MonoBehaviour {
         }
         return price;
     }
+    public RoleRecord randomRoleFor(int level,bool teammate)
+    {
+        RoleRecord newRole = randomRoleFor(level);
+        newRole.teammate = teammate;
+        return newRole;
+    }
     public RoleRecord randomRoleFor(int level)
     {//level1為種族 level2為基礎職業
         if (level < 2) {

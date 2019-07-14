@@ -15,6 +15,7 @@ public class substitutePanel : MonoBehaviour
     public const float y_pos = 0.25f;
     protected float scale = 1;
     public static substitutePanel main;
+    public transScene trans;
     void OnEnable()
     {
         if (main != null&&main!=this)
@@ -27,6 +28,10 @@ public class substitutePanel : MonoBehaviour
             initPanel();
         }
 
+    }
+    private void beforeWarStart()
+    {
+        dataWarehouse.main.currentEnemy = fightingPoint.nowEnermyList;
     }
     // Use this for initialization
     void initPanel()
@@ -53,8 +58,9 @@ public class substitutePanel : MonoBehaviour
         girdControl.createGroup(null, new vec2i(5, 4), team1_lu, team1_rd);
         initForPlayerInf(dataWarehouse.main.nowData);
         initForEnemyList(fightingPoint.nowEnermyList);
+        trans.beforeTrans = beforeWarStart;
     }
-
+    
     protected void initForPlayerInf(PlayerInf inf)
     {
         foreach(RoleRecord role in inf.army)
@@ -86,9 +92,18 @@ public class substitutePanel : MonoBehaviour
         }
         heads.Clear();
     }
+    public void deleteHeads(bool teammate)
+    {
+        foreach (GameObject head in heads)
+        {
+            if(head.GetComponent<headEvent>().data.teammate == teammate)
+                Destroy(head);
+        }
+        heads.Clear();
+    }
     public void updatePanel(PlayerInf inf)
     {
-        deleteHeads();
+        deleteHeads(true);
         initForPlayerInf(inf);
     }
     public void createHead(RoleRecord data)

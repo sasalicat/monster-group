@@ -102,7 +102,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     BasicDelegate.withInt _on_life_change;
     protected void onLifeChange_cb(int hp)
     {
-        _on_life_change(hp);
+        if(_on_life_change!=null)
+            _on_life_change(hp);
     }
     public BasicDelegate.withInt _onHpChange
     {

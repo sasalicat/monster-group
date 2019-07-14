@@ -86,8 +86,17 @@ public class BasicManager : MonoBehaviour,Manager {
         chessBoard = new ChessBoard(5,8);
         PlayerInf playdata = dataWarehouse.main.nowData;
         foreach(RoleRecord unit in playdata.army){
-            Dictionary<string, object> unitDic = new Dictionary<string, object>() { { STR_POS_X, unit.location.x }, { STR_POS_Y, unit.location.y }, { STR_PLAYER_NO, 1 }, { STR_INF, unit.data } };
-            unitControler controler = createUnit(unitDic);
+            if (unit.location != null)
+            {
+                Dictionary<string, object> unitDic = new Dictionary<string, object>() { { STR_POS_X, unit.location.x }, { STR_POS_Y, unit.location.y }, { STR_PLAYER_NO, 1 }, { STR_INF, unit } };
+                unitControler controler = createUnit(unitDic);
+            }
+        }
+        List<RoleRecord> enemys = dataWarehouse.main.currentEnemy;
+        foreach(RoleRecord enemy in enemys)
+        {
+            Dictionary<string, object> enemyDic = new Dictionary<string, object>() { { STR_POS_X, enemy.location.x }, { STR_POS_Y, enemy.location.y }, { STR_PLAYER_NO, 0 }, { STR_INF, enemy } };
+            createUnit(enemyDic);
         }
         /*
         roleInformation inf = new roleInformation(new unitData(),new List<int>(){1,7},0);

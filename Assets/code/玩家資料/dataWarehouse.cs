@@ -6,6 +6,7 @@ public class dataWarehouse : MonoBehaviour {
     public PlayerInf nowData;
     public static dataWarehouse main;
     public delegate void withIntList(List<int> list);
+    public List<RoleRecord> currentEnemy=null;
     private void none(List<int> arg)
     {
 

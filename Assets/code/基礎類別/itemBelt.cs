@@ -10,7 +10,8 @@ public class itemBelt : MonoBehaviour, Callback4Unit
     BasicDelegate.withDamage aftCauseDamage;
     void aftCauseDamage_cb(Damage damage)
     {
-        aftTakeDamage(damage);
+        if(aftCauseDamage!=null)
+            aftCauseDamage(damage);
     }
     public BasicDelegate.withDamage _AftCauseDamage
     {
@@ -26,7 +27,8 @@ public class itemBelt : MonoBehaviour, Callback4Unit
     }
     public void aftTakeDamage_cb(Damage damage)
     {
-        aftTakeDamage(damage);
+        if(aftTakeDamage!=null)
+            aftTakeDamage(damage);
     }
     BasicDelegate.withDamage aftTakeDamage;
     public BasicDelegate.withDamage _AftTakeDamage
@@ -44,7 +46,8 @@ public class itemBelt : MonoBehaviour, Callback4Unit
     BasicDelegate.forSkillTrageting aftUseSkill;
     public void aftUseSkill_cb(SkillInf skillInf,Dictionary<string,object> skillArgs,unitControler[] tragets)
     {
-        aftUseSkill(skillInf, skillArgs,tragets);
+        if(aftUseSkill!=null)
+            aftUseSkill(skillInf, skillArgs,tragets);
     }
     public BasicDelegate.forSkillTrageting _AftUseSkill
     {
@@ -62,7 +65,8 @@ public class itemBelt : MonoBehaviour, Callback4Unit
     BasicDelegate.forSkill be_appoint;
     private void beAppoint_cb(SkillInf skillInf, Dictionary<string, object> skillArgs)
     {
-        be_appoint(skillInf, skillArgs);
+        if(be_appoint!=null)
+            be_appoint(skillInf, skillArgs);
     }
     public BasicDelegate.forSkill _BeAppoint
     {
@@ -79,7 +83,8 @@ public class itemBelt : MonoBehaviour, Callback4Unit
     BasicDelegate.withDamage befTakeDamage;
     void befTakeDamage_cb(Damage damage)
     {
-        befTakeDamage(damage);
+        if(befTakeDamage !=null)
+            befTakeDamage(damage);
     }
     public BasicDelegate.withDamage _BefTakeDamage
     {
@@ -95,7 +100,8 @@ public class itemBelt : MonoBehaviour, Callback4Unit
     }
     void befUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets)
     {
-        befUseSkill(skillInf, skillArgs, tragets);
+        if(befUseSkill!=null)
+            befUseSkill(skillInf, skillArgs, tragets);
     }
     BasicDelegate.forSkillTrageting befUseSkill;
     public BasicDelegate.forSkillTrageting _BefUseSkill
@@ -114,7 +120,8 @@ public class itemBelt : MonoBehaviour, Callback4Unit
     BasicDelegate.withInt onHpChange;
     void onLifeChange_cb(int hp)
     {
-        onHpChange(hp);
+        if(onHpChange!=null)
+            onHpChange(hp);
     }
     public BasicDelegate.withInt _onHpChange
     {
