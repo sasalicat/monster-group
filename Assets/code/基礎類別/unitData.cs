@@ -23,6 +23,7 @@ public class unitData  {
 
 
     public BasicDelegate.withInt _onLifeChange;
+    public BasicDelegate.withNone _onDeath;
     public withFloat2 _onCoolDownMutipleChange;
     private bool remote=false;
     public static float calReduce(int strength,int basic)
@@ -173,7 +174,7 @@ public class unitData  {
             if (value > Now_Max_Life) {
                 now_life_point = Now_Max_Life;
             }
-            else if (value >= 0)
+            else if (value > 0)
             {
                 now_life_point = value;
             }
@@ -181,6 +182,10 @@ public class unitData  {
             {
                 now_life_point = 0;
                 Debug.Log("設置now_life_point為:" + now_life_point);
+                if (_onDeath!=null)
+                {
+                    _onDeath();
+                }
             }
             if(_onLifeChange!=null)
                 _onLifeChange(Now_Life);

@@ -11,6 +11,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     public BasicDelegate.withDamage _befTakeDamage;
     public BasicDelegate.withDamage _aftTakeDamage;
     public BasicDelegate.withDamage _aftCauseDamage;
+    public BasicDelegate.withGameObject _onDeath;
     public HpBar hpbar = null;
     protected float recover_timeLeft = unitData.STAND_RECOVER_INTERVAL;
     public unitData data;
@@ -24,6 +25,10 @@ public class BasicControler : MonoBehaviour,unitControler {
     protected List<Buff> failed = new List<Buff>();
     void buffFail_callback(Buff b) {
         failed.Add(b);
+    }
+    public void onUnitDeath()
+    {
+        _onDeath(gameObject);
     }
     public virtual Dictionary<string,object> createSkillArg(unitData data)
     {
@@ -182,6 +187,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         this.state = new unitState();
         this.hpbar = hpbar;
         this.data._onLifeChange += hpbarCallBack;
+        this.data._onDeath = onUnitDeath;
     }
     public void createDamageNum(Damage damage)
     {

@@ -33,6 +33,14 @@ public class ChessBoard : Environment {
         board = new unitControler[y, x];
         units = new List<unitControler>();
     }
+    public unitControler removeAt(int pos_x,int pos_y)
+    {
+        unitControler unit = board[pos_y, pos_x];
+        board[pos_y, pos_x] = null;
+        units.Remove(unit);
+        unit2pos.Remove(unit);
+        return unit; 
+    }
     public bool enter(unitControler unit,int pos_x,int pos_y)
     {
         Debug.Log("pos_y:" + pos_y + ",pos_x" + pos_x);

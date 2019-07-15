@@ -18,6 +18,21 @@ public class BasicManager : MonoBehaviour,Manager {
 
     protected ChessBoard chessBoard;
     protected Dictionary<int, Color> playerColor = new Dictionary<int, Color>() { {0,Color.red}, { 1,Color.blue} };
+    public void forRoleDeath(GameObject gobj)
+    {
+        gobj.AddComponent<fadeOut>();
+        BasicControler control = gobj.GetComponent<BasicControler>();
+        int[] coor=  chessBoard.getPosFor(control);
+        chessBoard.removeAt(coor[0],coor[1]);
+        Timer.main.loginOutTimer(control.action);
+        foreach(unitControler unit in chessBoard.units)
+        {
+            if(control == ((BasicControler)unit).traget)
+            {
+                Debug.Log("control == ((BasicControler)unit).traget");
+            }
+        }
+    }
     public unitControler createUnit(Dictionary<string, object> unitInf)
     {
         Debug.Log("創建新的單位");
@@ -57,6 +72,7 @@ public class BasicManager : MonoBehaviour,Manager {
             hpbar.GetComponent<HpBar>().HpColor = playerColor[playerNo];
 
             controler.init(new BasicAI(),chessBoard,data, hpbar.GetComponent<HpBar>());
+            controler._onDeath = forRoleDeath;
             Timer.main.logInTimer(controler.action);
             newone.AddComponent<sp_effection>();
             SkillBelt belt= newone.AddComponent<SkillBelt>();
