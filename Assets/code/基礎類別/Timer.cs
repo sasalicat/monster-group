@@ -6,6 +6,7 @@ public  class Timer:MonoBehaviour{
     public delegate void onTimePass(float time);
     public static Timer main=null;
     protected onTimePass functions;
+
     public  void logInTimer(onTimePass function)
     {
         functions += function;

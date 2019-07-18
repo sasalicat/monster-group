@@ -19,6 +19,9 @@ public class fadeOut : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        img.color = new Color(1, 1, 1, timeLeft / totalTime);
-	}
+        else
+        {
+            img.color = new Color(1, 1, 1, timeLeft / totalTime);
+        }
+    }
 }

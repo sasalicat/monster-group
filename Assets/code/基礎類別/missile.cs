@@ -21,23 +21,30 @@ public class missile : decisionArea {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector2 toTraget = traget.transform.position - transform.position;
-        transform.right = toTraget;
-        transform.Rotate(0, 0, Zrotate);
-        if(toTraget.magnitude <= minDist)
+        if (traget == null)
         {
-            if (on_missile_hited != null)
-            {
-                on_missile_hited(this);
-            }
-        }
-        else if (toTraget.magnitude < speed*Time.deltaTime)
-        {
-            transform.position = traget.transform.position;   
+            Destroy(gameObject);
         }
         else
         {
-            transform.Translate(-Vector2.up * speed * Time.deltaTime);
+            Vector2 toTraget = traget.transform.position - transform.position;
+            transform.right = toTraget;
+            transform.Rotate(0, 0, Zrotate);
+            if (toTraget.magnitude <= minDist)
+            {
+                if (on_missile_hited != null)
+                {
+                    on_missile_hited(this);
+                }
+            }
+            else if (toTraget.magnitude < speed * Time.deltaTime)
+            {
+                transform.position = traget.transform.position;
+            }
+            else
+            {
+                transform.Translate(-Vector2.up * speed * Time.deltaTime);
+            }
         }
 	}
 }

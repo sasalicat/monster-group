@@ -18,6 +18,10 @@ public class BasicManager : MonoBehaviour,Manager {
 
     protected ChessBoard chessBoard;
     protected Dictionary<int, Color> playerColor = new Dictionary<int, Color>() { {0,Color.red}, { 1,Color.blue} };
+
+    public GameObject failedPanel;//手動拉取
+    public GameObject successPanel;//手動拉取
+
     public void forRoleDeath(GameObject gobj)
     {
         gobj.AddComponent<fadeOut>();
@@ -25,13 +29,35 @@ public class BasicManager : MonoBehaviour,Manager {
         int[] coor=  chessBoard.getPosFor(control);
         chessBoard.removeAt(coor[0],coor[1]);
         Timer.main.loginOutTimer(control.action);
+        int enemyCount = 0;
+        int playerCount = 0;
         foreach(unitControler unit in chessBoard.units)
         {
             if(control == ((BasicControler)unit).traget)
             {
-                Debug.Log("control == ((BasicControler)unit).traget");
+                Debug.LogWarning("control == ((BasicControler)unit).traget");
+                ((BasicControler)unit).traget = null;
+            }
+            if (((BasicControler)unit).playerNo==0)
+            {
+                enemyCount += 1;
+            }
+            else if (((BasicControler)unit).playerNo == 1)
+            {
+                playerCount += 1;
             }
         }
+        if(playerCount == 0)//只要全隊陣亡就輸了,就算同歸於盡也沒用
+        {
+            TimerDriver.main.pause = true;
+            failedPanel.SetActive(true);
+            return;
+        }
+        if (enemyCount == 0) {//勝利
+            TimerDriver.main.pause = true;
+        }
+
+        
     }
     public unitControler createUnit(Dictionary<string, object> unitInf)
     {

@@ -10,6 +10,7 @@ public abstract class PostOffice:MonoBehaviour  {
     public abstract void addOrder(Dictionary<string, object> order);
     public Empty beforeFrameEnd;
     private int counter = 0;
+    public bool pause = false;
     protected void OnEnable()
     {
         frameTimeLeft = cycleTime;
@@ -25,17 +26,20 @@ public abstract class PostOffice:MonoBehaviour  {
 
     protected void Update()
     {
-        frameTimeLeft -= Time.deltaTime;
-        //Debug.Log("deltaTime:" + Time.deltaTime);
-        //Debug.Log("in post office update:"+frameTimeLeft);
-        if (frameTimeLeft <= 0)
+        if (!pause)
         {
-            //Debug.Log("send");
-            if(beforeFrameEnd!=null)
-                beforeFrameEnd();
-            updateFrame();
-            frameTimeLeft = cycleTime;
-            counter++;
+            frameTimeLeft -= Time.deltaTime;
+            //Debug.Log("deltaTime:" + Time.deltaTime);
+            //Debug.Log("in post office update:"+frameTimeLeft);
+            if (frameTimeLeft <= 0)
+            {
+                //Debug.Log("send");
+                if (beforeFrameEnd != null)
+                    beforeFrameEnd();
+                updateFrame();
+                frameTimeLeft = cycleTime;
+                counter++;
+            }
         }
        
     }

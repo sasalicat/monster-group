@@ -20,15 +20,18 @@ public class skill_GunFu : Skill
     public void aftSkillUsed(SkillInf inf, Dictionary<string, object> skillArgs, unitControler[] tragets)
     {
         Debug.Log("槍鬥術觸發");
-        if (inf.attack)
+        if (tragets[0] != null)
         {
-            unitControler[] backs = env.unitsBehind(tragets[0]);
-            if ( backs.Length> 0 && !(bool)skillArgs["bonus"])
+            if (inf.attack)
             {
-                Dictionary<string, object> args = owner.createSkillArg(owner.data);
-                args["phy_damage_multiple"] = 0.6f;
-                args["bonus"] = true;
-                owner.useSkill(bonusAttack, new unitControler[1] {backs[0]}, args);//主要目標背後的第一個單位選為攻擊目標
+                unitControler[] backs = env.unitsBehind(tragets[0]);
+                if (backs.Length > 0 && !(bool)skillArgs["bonus"])
+                {
+                    Dictionary<string, object> args = owner.createSkillArg(owner.data);
+                    args["phy_damage_multiple"] = 0.6f;
+                    args["bonus"] = true;
+                    owner.useSkill(bonusAttack, new unitControler[1] { backs[0] }, args);//主要目標背後的第一個單位選為攻擊目標
+                }
             }
         }
 

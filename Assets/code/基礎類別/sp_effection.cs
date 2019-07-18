@@ -57,6 +57,12 @@ public class rush_stay : process
             float process = anim_time / animTime;
             process = EasingFunction.EaseInCubic(0, 1, process);
             Vector2 nowOffset = offset;
+            if(nowTraget == null)
+            {
+                transform.position = oriPos;
+                waste = true;
+                return;
+            }
             Vector2 dist = nowTraget.transform.position - transform.position;
             if (Mathf.Abs(dist.x) < nowOffset.x)
             {
@@ -67,32 +73,35 @@ public class rush_stay : process
                 nowOffset.y = Mathf.Abs(dist.y);
             }
             //Debug.Log("count"+count+" tragetPos:" + (Vector2)nowTraget.transform.position + " oriPos:" + oriPos+" ans:" + ((Vector2)nowTraget.transform.position - oriPos) * process);
-            Vector2 toTraget = ((Vector2)nowTraget.transform.position - oriPos);
-            if (toTraget.x > 0)
-            {
-                toTraget.x -= nowOffset.x;
-            }
-            else
-            {
-                toTraget.x += nowOffset.x;
-            }
-            if (toTraget.y > 0)
-            {
-                toTraget.y -= nowOffset.y;
-            }
-            else
-            {
-                toTraget.y += nowOffset.y;
-            }
-            transform.position = oriPos + toTraget * process;
-            /*if (stay_time >=  stayTime && !triggerEff)
-            {
-                GameObject neweff= Instantiate(objectList.main.prafebList[0], transform);
-                neweff.transform.localPosition = Vector2.zero;
-                toTraget = (Vector2)transform.position - (Vector2)nowTraget.transform.position;
-                neweff.transform.right = toTraget;
-                triggerEff = true;
-            }*/
+
+
+                Vector2 toTraget = ((Vector2)nowTraget.transform.position - oriPos);
+                if (toTraget.x > 0)
+                {
+                    toTraget.x -= nowOffset.x;
+                }
+                else
+                {
+                    toTraget.x += nowOffset.x;
+                }
+                if (toTraget.y > 0)
+                {
+                    toTraget.y -= nowOffset.y;
+                }
+                else
+                {
+                    toTraget.y += nowOffset.y;
+                }
+                transform.position = oriPos + toTraget * process;
+                /*if (stay_time >=  stayTime && !triggerEff)
+                {
+                    GameObject neweff= Instantiate(objectList.main.prafebList[0], transform);
+                    neweff.transform.localPosition = Vector2.zero;
+                    toTraget = (Vector2)transform.position - (Vector2)nowTraget.transform.position;
+                    neweff.transform.right = toTraget;
+                    triggerEff = true;
+                }*/
+            
         }
         else if (stay_time < stayTime)
         {
