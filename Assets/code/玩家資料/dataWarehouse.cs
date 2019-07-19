@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public struct reward
+{
+    public List<RoleRecord> roles;
+    public List<int> itemNos;
+    public int bonus;
+}
 public class dataWarehouse : MonoBehaviour {
     public PlayerInf nowData;
     public static dataWarehouse main;
     public delegate void withIntList(List<int> list);
     public List<RoleRecord> currentEnemy=null;
+    public reward levelReward;
     private void none(List<int> arg)
     {
 

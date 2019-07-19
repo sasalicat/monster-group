@@ -422,4 +422,16 @@ public class unitData  {
             }
         }
     }
+    public unitData(unitData another)
+    {
+        this.base_attack = another.base_attack;
+        this.attack_speed_reinforce = another.attack_speed_reinforce;
+        this.max_life_point = another.max_life_point;
+        this.now_life_recover = another.now_life_recover;
+        this.magic_strength = another.magic_strength;
+        this.cooldown_reinforce = another.cooldown_reinforce;
+        this.armor = another.armor;
+        this.magic_resistance = another.magic_resistance;
+    }
 }
+

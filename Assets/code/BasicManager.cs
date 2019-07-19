@@ -74,6 +74,7 @@ public class BasicManager : MonoBehaviour,Manager {
         int realX = 0;
         int realY = 0;
         GameObject newone = Instantiate(objectList.main.mainUnit);
+        newone.name = "隨機"+UnityEngine.Random.Range(0, 100);
         Debug.Log("playerNo:" + playerNo+" chessx:"+chessBoard.X+" chessy:"+chessBoard.Y);
         if(playerNo%2 ==0)
         {
@@ -96,8 +97,8 @@ public class BasicManager : MonoBehaviour,Manager {
             GameObject hpbar= Instantiate(objectList.main.hpBar, newone.transform);
             hpbar.transform.localPosition = objectList.main.hpBar.transform.position;
             hpbar.GetComponent<HpBar>().HpColor = playerColor[playerNo];
-
-            controler.init(new BasicAI(),chessBoard,data, hpbar.GetComponent<HpBar>());
+            //要複製一個新的unitData,不然在戰鬥中的技能可能會永久地改變角色屬性
+            controler.init(new BasicAI(),chessBoard,new unitData(data), hpbar.GetComponent<HpBar>());
             controler._onDeath = forRoleDeath;
             Timer.main.logInTimer(controler.action);
             newone.AddComponent<sp_effection>();

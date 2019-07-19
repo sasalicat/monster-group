@@ -17,8 +17,13 @@ public  class Timer:MonoBehaviour{
     }
     public void callAllFunction(float interval)
     {
-        if(functions!=null)
+
+        if (functions != null)
+        {
+            int len = functions.GetInvocationList().Length;
+            Debug.Log("共" + len + "個function");
             functions(interval);
+        }
     }
     protected void OnEnable()
     {
@@ -30,6 +35,8 @@ public  class Timer:MonoBehaviour{
         {
             Destroy(this);
         }
+        Debug.Log("####Timer onEnable");
+        functions = null;
     }
 }
 

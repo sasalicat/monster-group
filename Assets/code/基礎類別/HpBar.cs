@@ -16,6 +16,7 @@ public class HpBar : MonoBehaviour {
             {
                 percentage = 1f;
             }
+            Debug.Log("hpBar role name:"+gameObject.name);
             Debug.Log(transform.parent.name+ "設置血量:" + percentage);
             bar.transform.localPosition = new Vector2(ZERO_X + (FULL_X - ZERO_X) * percentage, 0);
         }

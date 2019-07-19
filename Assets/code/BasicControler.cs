@@ -176,6 +176,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     public void hpbarCallBack(int nowHp)
     {
         //Debug.Log("now_max_life為:" + data.Now_Max_Life);
+        Debug.Log("角色:" + gameObject.name);
         hpbar.Percentage = (float)nowHp / (float)data.Now_Max_Life;
        
     }
