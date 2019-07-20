@@ -50,6 +50,11 @@ public class rush_stay : process
     public override void update(float time)
     {
         //Debug.Log("rush main update________________________________________");
+        if(transform == null)
+        {
+            waste = true;
+            return;
+        }
         anim_time += time;
         if (anim_time <= animTime)
         {

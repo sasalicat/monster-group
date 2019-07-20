@@ -22,6 +22,7 @@ public class castItem : MonoBehaviour {
 	}
 	public GameObject cast()
     {
+        Debug.Log("cast gameObject name:" + gameObject.name);
         m_PointerEventData = new PointerEventData(m_EventSystem);
         //Set the Pointer Event Position to that of the mouse position
         m_PointerEventData.position = Input.mousePosition;

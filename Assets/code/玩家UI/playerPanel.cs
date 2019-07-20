@@ -13,6 +13,7 @@ public class playerPanel : MonoBehaviour {
 	}
     void updatePlayer()
     {
+        Debug.Log("updatePlayer");
         lv_num.text = "" + dataWarehouse.main.nowData.lv;
         gold_num.text = "" + dataWarehouse.main.nowData.moneyLeft;
     }

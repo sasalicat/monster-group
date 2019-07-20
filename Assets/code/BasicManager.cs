@@ -55,6 +55,8 @@ public class BasicManager : MonoBehaviour,Manager {
         }
         if (enemyCount == 0) {//勝利
             TimerDriver.main.pause = true;
+            successPanel.SetActive(true);
+            successPanel.GetComponent<rewardPanel>().init(dataWarehouse.main.levelReward);
         }
 
         

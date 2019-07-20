@@ -266,6 +266,7 @@ public class unitData  {
         this.cooldown_reinforce = profile.cooldown_reinforce;
         this.armor = profile.armor;
         this.magic_resistance = profile.magic_resistance;
+        this.now_life_point = max_life_point;
 
     }
     public unitData()
@@ -432,6 +433,7 @@ public class unitData  {
         this.cooldown_reinforce = another.cooldown_reinforce;
         this.armor = another.armor;
         this.magic_resistance = another.magic_resistance;
+        now_life_point = max_life_point;
     }
 }
 
