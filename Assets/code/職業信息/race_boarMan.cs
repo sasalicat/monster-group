@@ -67,5 +67,11 @@ public class race_boarMan : careerInf
             return new List<int>() { };
         }
     }
-
+    public List<int> giftSkills
+    {
+        get
+        {
+            return new List<int>();
+        }
+    }
 }

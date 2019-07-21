@@ -65,7 +65,14 @@ public class race_orc : careerInf
     {
         get
         {
-            return new List<int>() { 2 };
+            return new List<int>() {  };
+        }
+    }
+    public List<int> giftSkills
+    {
+        get
+        {
+            return new List<int>() { 2};
         }
     }
 }

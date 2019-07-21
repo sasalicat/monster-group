@@ -39,7 +39,7 @@ public class career_thug_lv3 : careerInf
     {
         get
         {
-            return "剛入伙的暴徒";
+            return "大師級暴徒";
         }
     }
 
@@ -64,6 +64,13 @@ public class career_thug_lv3 : careerInf
         get
         {
             return new List<int> { 11, 12, 13, 14 };
+        }
+    }
+    public List<int> giftSkills
+    {
+        get
+        {
+            return new List<int>();
         }
     }
 

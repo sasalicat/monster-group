@@ -15,8 +15,11 @@ public interface careerInf{
     {
         get;
     }
-    List<int> skillPool
+    List<int> skillPool//隨機獲得一個的技能
     {
+        get;
+    }
+    List<int> giftSkills {//全部獲得
         get;
     }
     List<int> nexrCareer

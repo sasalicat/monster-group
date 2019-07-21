@@ -67,5 +67,12 @@ public class career_warrior_lv1 : careerInf {
             return new List<int> {7};
         }
     }
+    public List<int> giftSkills
+    {
+        get
+        {
+            return new List<int>() {0};
+        }
+    }
 
 }

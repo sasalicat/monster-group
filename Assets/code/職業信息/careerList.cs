@@ -52,7 +52,7 @@ public class careerList : MonoBehaviour {
         {
             Debug.LogWarning("添加種族"+traget.name+"的時候技能欄不為空");
         }
-        foreach(int no in traget.skillPool)
+        foreach(int no in traget.giftSkills)
         {
             role.skillNos.Add(no);
         }
@@ -62,7 +62,12 @@ public class careerList : MonoBehaviour {
     public static void transferTo(RoleRecord role,careerInf traget){
         role.careers.Add(traget.careerNo);
         List<int> skills = new List<int>();//所有技能池內角色尚未擁有的技能
-        foreach(int no in traget.skillPool)
+        foreach (int no in traget.giftSkills)//添加所有必定獲得的技能
+        {
+            role.skillNos.Add(no);
+        }
+
+        foreach (int no in traget.skillPool)
         {
             if (!role.skillNos.Contains(no))
             {

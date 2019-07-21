@@ -65,8 +65,14 @@ public class race_troll: careerInf
     {
         get
         {
-            return new List<int>() { 3 };
+            return new List<int>() {  };
         }
     }
-
+    public List<int> giftSkills
+    {
+        get
+        {
+            return new List<int>() {3};
+        }
+    }
 }

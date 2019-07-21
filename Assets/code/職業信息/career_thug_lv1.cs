@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class career_thug_lv1 : careerInf
@@ -32,6 +33,14 @@ public class career_thug_lv1 : careerInf
         get
         {
             return -1;
+        }
+    }
+
+    public List<int> giftSkills
+    {
+        get
+        {
+            return new List<int>() { 0 };
         }
     }
 
