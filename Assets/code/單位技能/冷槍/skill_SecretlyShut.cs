@@ -94,7 +94,7 @@ public class skill_SecretlyShut : CDSkill
             BasicControler nowTraget = (BasicControler)tragets[0];
 
             //Debug.Log("製造傷害時傷害數值為:" + damage.num);
-            Debug.Log("traget 為:" + ((BasicControler)tragets[0]).gameObject.name);
+            //Debug.Log("traget 為:" + ((BasicControler)tragets[0]).gameObject.name);
             tragets[0].takeDamage(createDamage(args));
             //Debug.Log("冷卻時間:" + CoolDown);
             //Debug.Log("自身位置:" + transform.position + "相對位置:" + transform.TransformDirection(offset));
@@ -104,7 +104,7 @@ public class skill_SecretlyShut : CDSkill
             GameObject mislobj = Instantiate(objectList.main.prafebList[missileNo], transform.TransformDirection(offset), transform.rotation);
             Vector2 relat_pos = Quaternion.Euler(0, 0, z_rotate) * offset;
             mislobj.transform.position = (Vector2)transform.position + relat_pos;
-            Debug.Log("目標:" + ((BasicControler)tragets[0]).gameObject);
+            //Debug.Log("目標:" + ((BasicControler)tragets[0]).gameObject);
             mislobj.GetComponent<missile>().traget = ((BasicControler)tragets[0]).gameObject;
             if (effNo_hit >= 0)
             {

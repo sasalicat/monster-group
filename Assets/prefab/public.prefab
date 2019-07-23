@@ -105,8 +105,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f9901151e7edcba42ad0794207476e5c, type: 3}
   - {fileID: 21300000, guid: 589411d2e39759046b3f388b07b10c8e, type: 3}
   - {fileID: 21300000, guid: 267f5aa97d46e504ea50701e036f39c9, type: 3}
-  - {fileID: 21300000, guid: 28485a862e7978143b1e8017e4d9374e, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 2ad71fbcfc410ea45962c3e77757bc52, type: 3}
+  - {fileID: 21300000, guid: 9d99c2a9a1d8b2f4dad558dbb2aece9e, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -159,7 +159,7 @@ MonoBehaviour:
   - repre_Brutal
   - repre_SmokeBomb
   - repre_FireBall
-  - 
+  - repre_fireRain
   - 
   - 
   - 
@@ -227,6 +227,7 @@ MonoBehaviour:
   - {fileID: 1546345223994770, guid: dae3fc76cbc12124ab2bfbb1d172f6fc, type: 2}
   - {fileID: 1957414052402682, guid: e420013ecb4127c4294b43d32009e988, type: 2}
   - {fileID: 1001998031926558, guid: 81c93d00d2bc9cb4485a43f21fd01bd9, type: 2}
+  - {fileID: 1446438322097668, guid: b74da4cfb8f99e14ba137c35e334e0ad, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1

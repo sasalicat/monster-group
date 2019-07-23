@@ -89,7 +89,7 @@ public class skill_BaseAttack : CDSkill {
 
     public override void trigger(Dictionary<string, object> args)
     {
-        Debug.Log("攻擊被觸發");
+        //Debug.Log("攻擊被觸發");
         //BasicControler traget = (BasicControler)args["tragets"];
         //Debug.Log("traget:"+traget);
         //Debug.Log("traget type:" + (args["tragets"].GetType()));

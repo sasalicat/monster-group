@@ -19,7 +19,7 @@ public class skill_GunFu : Skill
     }
     public void aftSkillUsed(SkillInf inf, Dictionary<string, object> skillArgs, unitControler[] tragets)
     {
-        Debug.Log("槍鬥術觸發");
+        //Debug.Log("槍鬥術觸發");
         if (tragets[0] != null&&env.units.Contains(tragets[0]))
         {
             if (inf.attack)
