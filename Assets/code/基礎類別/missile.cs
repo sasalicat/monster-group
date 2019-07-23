@@ -43,7 +43,8 @@ public class missile : decisionArea {
             }
             else
             {
-                transform.Translate(-Vector2.up * speed * Time.deltaTime);
+                //transform.Translate(-Vector2.up * speed * Time.deltaTime);
+                transform.position += (Vector3)(toTraget.normalized * Time.deltaTime*speed);
             }
         }
 	}
