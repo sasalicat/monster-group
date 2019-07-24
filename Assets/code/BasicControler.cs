@@ -182,7 +182,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         recover_timeLeft -= time;
         if (recover_timeLeft <= 0)
         {
-            data.Now_Life += data.Now_Life_Recover;
+            heal(data.Now_Life_Recover,this);
             Debug.Log(gameObject.name + " 恢復:" + data.Now_Life_Recover);
             recover_timeLeft = unitData.STAND_RECOVER_INTERVAL;
         }

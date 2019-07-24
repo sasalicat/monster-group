@@ -160,7 +160,7 @@ MonoBehaviour:
   - repre_SmokeBomb
   - repre_FireBall
   - repre_fireRain
-  - 
+  - repre_burn
   - 
   - 
 --- !u!114 &114381664419861970
@@ -229,6 +229,7 @@ MonoBehaviour:
   - {fileID: 1001998031926558, guid: 81c93d00d2bc9cb4485a43f21fd01bd9, type: 2}
   - {fileID: 1446438322097668, guid: b74da4cfb8f99e14ba137c35e334e0ad, type: 2}
   - {fileID: 1076878144423290, guid: 085bf46e2bd0aba4d8cf3605b625b3a6, type: 2}
+  - {fileID: 1976169411454762, guid: ab992817f5a39d842bb58b24374abaf3, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1

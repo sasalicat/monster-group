@@ -5,9 +5,11 @@ using UnityEngine;
 public class buff_burn : Buff {
     public int layer;
     public const int DAMAGE_PER_LAYER =5;
-    protected BasicControler unit;
+    //protected BasicControler unit;
     protected GameObject effection;
     protected BasicControler creater;
+    public readonly float TriggerCycle = unitData.STAND_ATK_INTERVAL;
+    public float trigger_time_left;
     public override float Duration
     {
         get
@@ -23,13 +25,16 @@ public class buff_burn : Buff {
         creater = (BasicControler)args["creater"];
         if (Repetitive.Length == 0)
         {
+
+            layer = selfLayer;
+            trigger_time_left = TriggerCycle;
             timeLeft = (float)args["time"];
             this.unit = (BasicControler)unit;
 
 
             GameObject prefab = objectList.main.prafebList[15];
-            effection = Instantiate(prefab, this.unit.transform);
-            effection.transform.localPosition = prefab.transform.position;
+            effection = Instantiate(prefab, ((BasicControler)this.unit).transform);
+            effection.transform.localPosition = new Vector2(0,-0.67f);
             return true;
 
         }
@@ -54,13 +59,16 @@ public class buff_burn : Buff {
             else
             {
                 before.deleteSelf();
+
+                layer = selfLayer;
+                trigger_time_left = TriggerCycle;
                 timeLeft = (float)args["time"];
                 this.unit = (BasicControler)unit;
 
 
                 GameObject prefab = objectList.main.prafebList[15];
-                effection = Instantiate(prefab, this.unit.transform);
-                effection.transform.localPosition = prefab.transform.position;
+                effection = Instantiate(prefab, ((BasicControler)this.unit).transform);
+                effection.transform.localPosition = new Vector2(0, -0.67f);
                 return true;
             }
             
@@ -69,7 +77,14 @@ public class buff_burn : Buff {
     }
     public override void onIntarvel(unitControler unit, float timeBetween)
     {
-        unit.takeDamage(new Damage(layer * DAMAGE_PER_LAYER, Damage.KIND_MAGICAL, creater));
+        Debug.Log("burn onIntarvel 被呼叫 time left:"+ trigger_time_left);
+        trigger_time_left -= timeBetween;
+        if (trigger_time_left <= 0)
+        {
+            Debug.Log("trigger_time_left 小於等於0 unit 名字:"+((BasicControler)unit).gameObject.name+" layer:"+layer);
+            this.unit.takeDamage(new Damage(layer * DAMAGE_PER_LAYER, Damage.KIND_MAGICAL, creater));
+            trigger_time_left = TriggerCycle;
+        }
         base.onIntarvel(unit, timeBetween);
        
     }
