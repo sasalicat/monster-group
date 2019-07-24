@@ -11,6 +11,8 @@ public class BasicControler : MonoBehaviour,unitControler {
     public BasicDelegate.withDamage _befTakeDamage;
     public BasicDelegate.withDamage _aftTakeDamage;
     public BasicDelegate.withDamage _aftCauseDamage;
+    public BasicDelegate.withInt _befHealing;
+    public BasicDelegate.withInt _aftHealing;
     public BasicDelegate.withGameObject _onDeath;
     public HpBar hpbar = null;
     protected float recover_timeLeft = unitData.STAND_RECOVER_INTERVAL;
@@ -73,6 +75,18 @@ public class BasicControler : MonoBehaviour,unitControler {
         else
         {
             Destroy(buff);
+        }
+    }
+    public virtual void heal(int num, unitControler creater)
+    {
+        if (_befHealing != null)
+        {
+            _befHealing(num);
+        }
+        data.Now_Life += num;
+        if (_aftHealing != null)
+        {
+            _aftHealing(num);
         }
     }
     public virtual void takeDamage(Damage damage)

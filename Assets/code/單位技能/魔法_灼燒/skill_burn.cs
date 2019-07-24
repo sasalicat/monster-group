@@ -34,9 +34,52 @@ public class skill_burn : CDSkill
         this.information = new SkillInf(true, true, true, new List<string>() { SkillInf.TAG_DAMAGE });
 
     }
-
+    private  Damage createDamage(Dictionary<string,object> skillArg)
+    {
+        int num = 5;
+        List<string> tag = new List<string>() { Damage.TAG_ATTACK, Damage.TAG_CLOSE };
+        if ((bool)skillArg["critical"])
+        {
+            tag.Add("critical");
+        }
+        Damage damage = new Damage((int)(num * (float)skillArg[Skill.ARG_PHY_MUL]+(int)skillArg[Skill.ARG_PHY_ADD]), Damage.KIND_MAGICAL, owner,tag);
+        
+        return damage;
+    }
     public override void trigger(Dictionary<string, object> args)
     {
-        
+        unitControler[] tragets = (unitControler[])args["tragets"];
+        if (!(bool)args["miss"])
+        {
+            //BasicControler traget = (BasicControler)args["tragets"];
+            //Debug.Log("traget:"+traget);
+            //Debug.Log("traget type:" + (args["tragets"].GetType()));
+            foreach (unitControler traget in tragets)
+            {
+
+                BasicControler nowTraget = (BasicControler)traget;
+
+                //Debug.Log("製造傷害時傷害數值為:" + damage.num);
+                Debug.Log("traget 為:" + ((BasicControler)traget).gameObject.name);
+                traget.takeDamage(createDamage(args));
+                //Debug.Log("冷卻時間:" + CoolDown);
+                //Debug.Log("自身位置:" + transform.position + "相對位置:" + transform.TransformDirection(offset));
+                GameObject effobj= Instantiate(objectList.main.prafebList[13], nowTraget.transform);
+                effobj.transform.localPosition = Vector2.zero;
+                Dictionary<string,object> buffArgs = new Dictionary<string,object>();
+                buffArgs["time"] = 3.0f;
+                buffArgs["layer"] =1;
+                buffArgs["creater"] =owner;
+                nowTraget.addBuff("buff_burn",buffArgs);
+            }
+            
+        }
+        else
+        {
+            BasicControler traget = (BasicControler)tragets[0];
+            NumberCreater.main.CreateMissing(traget.transform.position);
+        }
+        setTime();
     }
+    
 }
