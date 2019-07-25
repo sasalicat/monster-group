@@ -17,7 +17,10 @@ public class buff_burn : Buff {
             return 0;
         }
     }
-
+    private void befHeal(HealMsg msg)
+    {
+        msg.num = (int)(msg.num * 0.5f);
+    }
     public override bool onInit(unitControler unit, Buff[] Repetitive, Dictionary<string, object> args)
     {
         int selfLayer = (int)args["layer"];
@@ -31,7 +34,7 @@ public class buff_burn : Buff {
             timeLeft = (float)args["time"];
             this.unit = (BasicControler)unit;
 
-
+            ((BasicControler)unit)._befHealing += befHeal;
             GameObject prefab = objectList.main.prafebList[15];
             effection = Instantiate(prefab, ((BasicControler)this.unit).transform);
             effection.transform.localPosition = new Vector2(0,-0.67f);
@@ -65,7 +68,7 @@ public class buff_burn : Buff {
                 timeLeft = (float)args["time"];
                 this.unit = (BasicControler)unit;
 
-
+                ((BasicControler)unit)._befHealing += befHeal;
                 GameObject prefab = objectList.main.prafebList[15];
                 effection = Instantiate(prefab, ((BasicControler)this.unit).transform);
                 effection.transform.localPosition = new Vector2(0, -0.67f);

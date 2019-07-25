@@ -71,9 +71,10 @@ public class dataWarehouse : MonoBehaviour {
         nowData.army[1].careers = new List<int>() { 6 };
         nowData.army.Add(new RoleRecord(0));
         nowData.army[2].index = 2;
-        nowData.army[2].skillNos.Add(17);
+        nowData.army[2].skillNos.Add(18);
         nowData.army[2].careers = new List<int>() { 5 };
         nowData.army[2].data.Now_Max_Life = 3000;
+        nowData.army[2].data.Now_Life_Recover = 2;
         //加一點測試用的裝備
         nowData.itemInBag.Add(1);
         nowData.itemInBag.Add(2);

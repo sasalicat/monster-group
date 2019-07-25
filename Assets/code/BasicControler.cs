@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BasicControler : MonoBehaviour,unitControler {
     
     public BasicDelegate.forSkill _beAppoint;
@@ -11,8 +12,8 @@ public class BasicControler : MonoBehaviour,unitControler {
     public BasicDelegate.withDamage _befTakeDamage;
     public BasicDelegate.withDamage _aftTakeDamage;
     public BasicDelegate.withDamage _aftCauseDamage;
-    public BasicDelegate.withInt _befHealing;
-    public BasicDelegate.withInt _aftHealing;
+    public BasicDelegate.withHealMsg _befHealing;
+    public BasicDelegate.withHealMsg _aftHealing;
     public BasicDelegate.withGameObject _onDeath;
     public HpBar hpbar = null;
     protected float recover_timeLeft = unitData.STAND_RECOVER_INTERVAL;
@@ -79,14 +80,16 @@ public class BasicControler : MonoBehaviour,unitControler {
     }
     public virtual void heal(int num, unitControler creater)
     {
+        HealMsg msg = new HealMsg(num, creater);
         if (_befHealing != null)
         {
-            _befHealing(num);
+            _befHealing(msg);
         }
         data.Now_Life += num;
+        createHealNum(msg);
         if (_aftHealing != null)
         {
-            _aftHealing(num);
+            _aftHealing(msg);
         }
     }
     public virtual void takeDamage(Damage damage)
@@ -203,6 +206,10 @@ public class BasicControler : MonoBehaviour,unitControler {
         this.hpbar = hpbar;
         this.data._onLifeChange += hpbarCallBack;
         this.data._onDeath = onUnitDeath;
+    }
+    public void createHealNum(HealMsg msg)
+    {
+        NumberCreater.main.CreateFloatingNumber(msg.num, transform.position, 2);
     }
     public void createDamageNum(Damage damage)
     {
