@@ -102,6 +102,34 @@ public class ChessBoard : Environment {
         }
         return list.ToArray();
     }
+    public unitControler[] getColOf(unitControler unit)
+    {
+        List<unitControler> list = new List<unitControler>();
+        int[] pos = getPosFor(unit);
+        Debug.Log("getPosFor:(" + pos[0]+","+pos[1]+")");
+        int x = pos[0];
+        if (pos[1] < Y / 2)
+        {
+            for (int y = Y / 2 - 1; y >= 0; y--)
+            {
+                if (board[y, x] != null)
+                {
+                    list.Add(board[y, x]);
+                }
+            }
+        }
+        else
+        {
+            for (int y = pos[1] + 1; y < Y; y++)
+            {
+                if (board[y, x] != null)
+                {
+                    list.Add(board[y, x]);
+                }
+            }
+        }
+        return list.ToArray();
+    }
     public unitControler[] unitsBehind(unitControler unit)
     {
         List<unitControler> list=new List<unitControler>();

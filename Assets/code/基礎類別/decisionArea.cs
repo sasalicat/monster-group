@@ -6,13 +6,13 @@ public class decisionArea : MonoBehaviour {
     protected float timeLeft;
     public float time;
     // Use this for initialization
-	void Start () {
+	protected void Start () {
         //Debug.Log(gameObject.name + "初始化 time:" + time);
         timeLeft = time;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
         {
