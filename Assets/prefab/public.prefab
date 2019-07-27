@@ -111,9 +111,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5a938c1f115dcd546b1e803dd53aaba3, type: 3}
   - {fileID: 21300000, guid: be8ec45aab3dad840bf8a3201d95446f, type: 3}
   - {fileID: 21300000, guid: 3340cc6b21d59ae409f088dfcaead4e6, type: 3}
-  - {fileID: 21300000, guid: 3340cc6b21d59ae409f088dfcaead4e6, type: 3}
-  - {fileID: 21300000, guid: 3340cc6b21d59ae409f088dfcaead4e6, type: 3}
-  - {fileID: 21300000, guid: 3340cc6b21d59ae409f088dfcaead4e6, type: 3}
+  - {fileID: 21300000, guid: dfac700f4d65265438984c4a16deecd4, type: 3}
+  - {fileID: 21300000, guid: 074f045453c0622469169a627c213f09, type: 3}
+  - {fileID: 21300000, guid: d3aa6f6c0fc5ce14cab071d4ca289cf8, type: 3}
+  - {fileID: 21300000, guid: d96f79fb66da41f45874c8cf5eb8659a, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
   - {fileID: 21300000, guid: f6ab2ba24bb01cf48ab5dd612a010280, type: 3}
@@ -171,6 +172,7 @@ MonoBehaviour:
   - repre_thunderHit
   - repre_skyPunishment
   - repre_electShield
+  - repre_thunderArrow
 --- !u!114 &114381664419861970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,6 +244,9 @@ MonoBehaviour:
   - {fileID: 1580222919908090, guid: 7258c652c07cd1c42bfc81b986cab1fc, type: 2}
   - {fileID: 1172640730628130, guid: 82a3c02e826d1bb4f8aeaf09aa34af23, type: 2}
   - {fileID: 1641715008299842, guid: ae04bd9b437fd944f843f45d1ea5638d, type: 2}
+  - {fileID: 1717473946584086, guid: 2b1c21b00a2073c4bae81ead391a02d4, type: 2}
+  - {fileID: 1129134953569704, guid: 978956d014dda4f4fbd20a2a48e2e52d, type: 2}
+  - {fileID: 1952146042001482, guid: 0cd5c59cdaf81a54fb814abfdb4d098f, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1

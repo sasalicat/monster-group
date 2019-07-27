@@ -42,7 +42,7 @@ public class skill_FlameWave : CDSkill {
         {
             tag.Add("critical");
         }
-        Damage damage = new Damage((int)(atk*multipe * (float)skillArg[Skill.ARG_PHY_MUL] + (int)skillArg[Skill.ARG_PHY_ADD]), Damage.KIND_PHYSICAL, owner, tag);
+        Damage damage = new Damage((int)(atk*multipe * (float)skillArg[Skill.ARG_MAG_MUL] + (int)skillArg[Skill.ARG_MAG_ADD]), Damage.KIND_MAGICAL, owner, tag);
 
         return damage;
     }

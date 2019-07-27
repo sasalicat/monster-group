@@ -38,9 +38,9 @@ public class buff_palsy : Buff {
             this.unit = (BasicControler)unit;
 
             ((BasicControler)unit)._aftUseSkill += aftRoleSkill;
-            GameObject prefab = objectList.main.prafebList[15];
+            GameObject prefab = objectList.main.prafebList[21];
             effection = Instantiate(prefab, ((BasicControler)this.unit).transform);
-            effection.transform.localPosition = new Vector2(0, -0.67f);
+            effection.transform.localPosition = new Vector2(0, 0);
             return true;
 
         }
