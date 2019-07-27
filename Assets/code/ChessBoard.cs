@@ -155,6 +155,83 @@ public class ChessBoard : Environment {
         }
         return list.ToArray();
     }
+    public unitControler[] get3by3Of(unitControler unit)
+    {
+        List<unitControler> list = new List<unitControler>();
+        int[] pos = getPosFor(unit);
+        for(int y = pos[1] - 1; y <= pos[1] + 1; y++)
+        {
+            for(int x = pos[0] - 1; x <= pos[0] + 1; x++)
+            {
+                if(pos[1] < Y / 2)
+                {
+                    if (y < Y / 2 && y >= 0 && x >= 0 && x < X)//在player0的範圍內
+                    {
+                        if (board[y, x] != null) {
+                            list.Add(board[y,x]);
+                        }
+
+                    }
+                }
+                else
+                {
+                    if (y >= Y / 2 && y <Y && x >= 0 && x < X)//在player0的範圍內
+                    {
+                        if (board[y, x] != null)
+                        {
+                            list.Add(board[y, x]);
+                        }
+
+                    }
+                }
+
+            }
+        }
+        return list.ToArray();
+        
+    }
+    public unitControler[] get3by3Of(unitControler unit,bool containSource)
+    {
+        if (!containSource)
+        {
+            List<unitControler> list = new List<unitControler>();
+            int[] pos = getPosFor(unit);
+            for (int y = pos[1] - 1; y <= pos[1] + 1; y++)
+            {
+                for (int x = pos[0] - 1; x <= pos[0] + 1; x++)
+                {
+                    if (pos[1] < Y / 2)
+                    {
+                        if (y < Y / 2 && y >= 0 && x >= 0 && x < X)//在player0的範圍內
+                        {
+                            if (board[y, x] != null && board[y,x] != unit)
+                            {
+                                list.Add(board[y, x]);
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        if (y >= Y / 2 && y < Y && x >= 0 && x < X)//在player0的範圍內
+                        {
+                            if (board[y, x] != null && board[y, x] != unit)
+                            {
+                                list.Add(board[y, x]);
+                            }
+
+                        }
+                    }
+
+                }
+            }
+            return list.ToArray();
+        }
+        else {
+            return get3by3Of(unit);
+        }
+
+    }
     public List<unitControler> Units
     {
         get

@@ -42,7 +42,7 @@ public class skill_burn : CDSkill
         {
             tag.Add("critical");
         }
-        Damage damage = new Damage((int)(num * (float)skillArg[Skill.ARG_PHY_MUL]+(int)skillArg[Skill.ARG_PHY_ADD]), Damage.KIND_MAGICAL, owner,tag);
+        Damage damage = new Damage((int)(num * (float)skillArg[Skill.ARG_MAG_MUL]+(int)skillArg[Skill.ARG_MAG_ADD]), Damage.KIND_MAGICAL, owner,tag);
         
         return damage;
     }
