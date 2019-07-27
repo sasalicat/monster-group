@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buff_flameShield : buff_shieldTemplate
+public class buff_electShield : buff_shieldTemplate
 {
-
 
     public override GameObject effection_prefab
     {
         get
         {
-            return objectList.main.prafebList[16];
+            return objectList.main.prafebList[20];
         }
     }
     protected override void beforeDamage(Damage income)
@@ -20,9 +18,7 @@ public class buff_flameShield : buff_shieldTemplate
         buffArgs["time"] = 3.0f;
         buffArgs["layer"] = 1;
         buffArgs["creater"] = creater;
-        income.creater.addBuff("buff_burn", buffArgs);
+        income.creater.addBuff("buff_palsy", buffArgs);
     }
-
-
 
 }

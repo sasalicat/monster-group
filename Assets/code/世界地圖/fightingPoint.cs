@@ -18,6 +18,14 @@ public class fightingPoint : MonoBehaviour {
         default2.location = new vec2i(1, 2);
         enermys.Add(default2);
 
+        RoleRecord default3 = careerList.main.randomRoleFor(2, false);
+        default3.location = new vec2i(1, 3);
+        enermys.Add(default3);
+
+        RoleRecord default4 = careerList.main.randomRoleFor(2, false);
+        default4.location = new vec2i(3, 3);
+        enermys.Add(default4);
+
         RoleRecord reward_role1 = careerList.main.randomRoleFor(3, true);
         RoleRecord reward_role2 = careerList.main.randomRoleFor(2, true);
         dataWarehouse.main.levelReward.roles = new List<RoleRecord>() { reward_role1, reward_role2 };

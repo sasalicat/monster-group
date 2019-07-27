@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class skill_burn : CDSkill
-{
+public class skill_skyPunishment : CDSkill {
     public override bool canUse
     {
         get
@@ -17,14 +15,36 @@ public class skill_burn : CDSkill
     {
         get
         {
-            return 4*owner.data.Now_Attack_Interval; ;
+            return 6 * owner.data.Now_Attack_Interval; ;
         }
     }
 
     public override unitControler[] findTraget(Environment env)
     {
-        unitControler[] tragets = new unitControler[1];
-        tragets[0] = owner.traget;
+        List<BasicControler> Subs = new List<BasicControler>();
+        foreach (BasicControler unit in ((ChessBoard)env).units)
+        {
+            if (unit.playerNo != owner.playerNo)
+            {
+                Subs.Add(unit);
+            }
+        }
+        unitControler[] tragets ;
+        if (Subs.Count < 3)
+        {
+            tragets = new unitControler[Subs.Count];
+        }
+        else
+        {
+            tragets = new unitControler[3];
+        }
+        for (int i = 0; i < tragets.Length; i++)
+        {
+            int index = Randomer.main.getInt() % Subs.Count;
+            tragets[i] = Subs[index];
+            Subs.RemoveAt(index);
+        }
+
         return tragets;
     }
 
@@ -34,16 +54,17 @@ public class skill_burn : CDSkill
         this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_DAMAGE });
 
     }
-    private  Damage createDamage(Dictionary<string,object> skillArg)
+    private Damage createDamage(Dictionary<string, object> skillArg)
     {
-        int num = 5;
-        List<string> tag = new List<string>() { Damage.TAG_REMOTE, Damage.TAG_THUNDER };
+        int base_num = 5;
+        List<string> tag = new List<string>() { Damage.TAG_THUNDER, Damage.TAG_REMOTE };
         if ((bool)skillArg["critical"])
         {
             tag.Add("critical");
         }
-        Damage damage = new Damage((int)(num * (float)skillArg[Skill.ARG_MAG_MUL]+(int)skillArg[Skill.ARG_MAG_ADD]), Damage.KIND_MAGICAL, owner,tag);
-        
+        base_num += Randomer.main.getInt() % 11;
+        Damage damage = new Damage((int)(base_num * (float)skillArg[Skill.ARG_MAG_MUL] + (int)skillArg[Skill.ARG_MAG_ADD]), Damage.KIND_MAGICAL, owner, tag);
+
         return damage;
     }
     public override void trigger(Dictionary<string, object> args)
@@ -64,15 +85,10 @@ public class skill_burn : CDSkill
                 traget.takeDamage(createDamage(args));
                 //Debug.Log("冷卻時間:" + CoolDown);
                 //Debug.Log("自身位置:" + transform.position + "相對位置:" + transform.TransformDirection(offset));
-                GameObject effobj= Instantiate(objectList.main.prafebList[13], nowTraget.transform);
+                GameObject effobj = Instantiate(objectList.main.prafebList[19], nowTraget.transform);
                 effobj.transform.localPosition = Vector2.zero;
-                Dictionary<string,object> buffArgs = new Dictionary<string,object>();
-                buffArgs["time"] = 3.0f;
-                buffArgs["layer"] =1;
-                buffArgs["creater"] =owner;
-                nowTraget.addBuff("buff_burn",buffArgs);
             }
-            
+
         }
         else
         {
@@ -82,4 +98,5 @@ public class skill_burn : CDSkill
         setTime();
     }
     
+
 }

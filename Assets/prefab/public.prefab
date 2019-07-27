@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131b07a30570daf4ea7f322be17b875d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cycleTime: 0.03
+  cycleTime: 0.05
   pause: 0
 --- !u!114 &114321688105721138
 MonoBehaviour:
@@ -110,6 +110,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8bbeb22734feefc49b65abe672661bd3, type: 3}
   - {fileID: 21300000, guid: 5a938c1f115dcd546b1e803dd53aaba3, type: 3}
   - {fileID: 21300000, guid: be8ec45aab3dad840bf8a3201d95446f, type: 3}
+  - {fileID: 21300000, guid: 3340cc6b21d59ae409f088dfcaead4e6, type: 3}
+  - {fileID: 21300000, guid: 3340cc6b21d59ae409f088dfcaead4e6, type: 3}
+  - {fileID: 21300000, guid: 3340cc6b21d59ae409f088dfcaead4e6, type: 3}
   - {fileID: 21300000, guid: 3340cc6b21d59ae409f088dfcaead4e6, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
@@ -165,6 +168,9 @@ MonoBehaviour:
   - repre_flameShield
   - repre_FlameWave
   - repre_lightingChain
+  - repre_thunderHit
+  - repre_skyPunishment
+  - repre_electShield
 --- !u!114 &114381664419861970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -234,6 +240,8 @@ MonoBehaviour:
   - {fileID: 1381451003645488, guid: 29c1f41360cad8f49a0177f5e579d8db, type: 2}
   - {fileID: 1190786946607476, guid: 133b202dda1cf2e4cb61a80f6ed88c65, type: 2}
   - {fileID: 1580222919908090, guid: 7258c652c07cd1c42bfc81b986cab1fc, type: 2}
+  - {fileID: 1172640730628130, guid: 82a3c02e826d1bb4f8aeaf09aa34af23, type: 2}
+  - {fileID: 1641715008299842, guid: ae04bd9b437fd944f843f45d1ea5638d, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1

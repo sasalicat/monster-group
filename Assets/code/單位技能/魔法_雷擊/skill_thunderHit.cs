@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class skill_burn : CDSkill
-{
+public class skill_thunderHit : CDSkill {
     public override bool canUse
     {
         get
@@ -17,7 +15,7 @@ public class skill_burn : CDSkill
     {
         get
         {
-            return 4*owner.data.Now_Attack_Interval; ;
+            return 5 * owner.data.Now_Attack_Interval; ;
         }
     }
 
@@ -34,16 +32,16 @@ public class skill_burn : CDSkill
         this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_DAMAGE });
 
     }
-    private  Damage createDamage(Dictionary<string,object> skillArg)
+    private Damage createDamage(Dictionary<string, object> skillArg)
     {
-        int num = 5;
-        List<string> tag = new List<string>() { Damage.TAG_REMOTE, Damage.TAG_THUNDER };
+        int num = 10;
+        List<string> tag = new List<string>() { Damage.TAG_THUNDER, Damage.TAG_REMOTE };
         if ((bool)skillArg["critical"])
         {
             tag.Add("critical");
         }
-        Damage damage = new Damage((int)(num * (float)skillArg[Skill.ARG_MAG_MUL]+(int)skillArg[Skill.ARG_MAG_ADD]), Damage.KIND_MAGICAL, owner,tag);
-        
+        Damage damage = new Damage((int)(num * (float)skillArg[Skill.ARG_MAG_MUL] + (int)skillArg[Skill.ARG_MAG_ADD]), Damage.KIND_MAGICAL, owner, tag);
+
         return damage;
     }
     public override void trigger(Dictionary<string, object> args)
@@ -64,15 +62,15 @@ public class skill_burn : CDSkill
                 traget.takeDamage(createDamage(args));
                 //Debug.Log("冷卻時間:" + CoolDown);
                 //Debug.Log("自身位置:" + transform.position + "相對位置:" + transform.TransformDirection(offset));
-                GameObject effobj= Instantiate(objectList.main.prafebList[13], nowTraget.transform);
+                GameObject effobj = Instantiate(objectList.main.prafebList[19], nowTraget.transform);
                 effobj.transform.localPosition = Vector2.zero;
-                Dictionary<string,object> buffArgs = new Dictionary<string,object>();
+                Dictionary<string, object> buffArgs = new Dictionary<string, object>();
                 buffArgs["time"] = 3.0f;
-                buffArgs["layer"] =1;
-                buffArgs["creater"] =owner;
-                nowTraget.addBuff("buff_burn",buffArgs);
+                buffArgs["layer"] = 1;
+                buffArgs["creater"] = owner;
+                nowTraget.addBuff("buff_palsy", buffArgs);
             }
-            
+
         }
         else
         {
@@ -82,4 +80,5 @@ public class skill_burn : CDSkill
         setTime();
     }
     
+
 }

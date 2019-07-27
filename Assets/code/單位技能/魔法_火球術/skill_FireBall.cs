@@ -11,7 +11,7 @@ public class skill_FireBall : skill_BaseAttackRemote {
         {
             tag.Add("critical");
         }
-        return new Damage(num, Damage.KIND_PHYSICAL, owner, tag);
+        return new Damage(num, Damage.KIND_MAGICAL, owner, tag);
     }
     protected override Vector2 offset
     {

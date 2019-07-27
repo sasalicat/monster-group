@@ -5230,11 +5230,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114324146867005514, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: representation.Array.size
-      value: 21
-      objectReference: {fileID: 0}
     - target: {fileID: 4792524521651514, guid: de1879047eb717344bb8072a5cf7e5d7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5266,11 +5261,6 @@ Prefab:
     - target: {fileID: 4792524521651514, guid: de1879047eb717344bb8072a5cf7e5d7, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114324146867005514, guid: de1879047eb717344bb8072a5cf7e5d7,
-        type: 2}
-      propertyPath: representation.Array.data[20]
-      value: repre_lightingChain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de1879047eb717344bb8072a5cf7e5d7, type: 2}
