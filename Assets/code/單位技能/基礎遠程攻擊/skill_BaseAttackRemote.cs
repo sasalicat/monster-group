@@ -15,6 +15,10 @@ public class skill_BaseAttackRemote : CDSkill {
         
         return damage;
     }
+    protected virtual void ActionForTraget(unitControler traget)
+    {
+
+    } 
     protected virtual Vector2 offset
     {
         get
@@ -89,6 +93,7 @@ public class skill_BaseAttackRemote : CDSkill {
                 //Debug.Log("製造傷害時傷害數值為:" + damage.num);
                 Debug.Log("traget 為:" + ((BasicControler)traget).gameObject.name);
                 traget.takeDamage(createDamage(args));
+                ActionForTraget(traget);
                 //Debug.Log("冷卻時間:" + CoolDown);
                 //Debug.Log("自身位置:" + transform.position + "相對位置:" + transform.TransformDirection(offset));
                 Vector2 toTraget = nowTraget.transform.position - transform.position;
