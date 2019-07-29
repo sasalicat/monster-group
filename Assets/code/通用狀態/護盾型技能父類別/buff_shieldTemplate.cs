@@ -79,5 +79,6 @@ public abstract class buff_shieldTemplate : Buff {
         //Debug.LogWarning("flame shield onRemove!!!");
         if(effection_prefab!=null)
             Destroy(effection);
+        ((BasicControler)unit)._befTakeDamage -= beforeTakeDamage;
     }
 }

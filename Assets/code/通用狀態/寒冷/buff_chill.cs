@@ -41,7 +41,7 @@ public class buff_chill : Buff {
         }
         else
         {
-            buff_palsy before = ((buff_palsy)Repetitive[0]);
+            buff_chill before = ((buff_chill)Repetitive[0]);
             if (before.layer > selfLayer)//之前的燃燒層數比較高
             {
                 return false;

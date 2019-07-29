@@ -31,7 +31,7 @@ public class equipBar : MonoBehaviour {
     }
     public void Awake()
     {
-        dataWarehouse.main.updateNowRoleItems += updateItemList;
+        dataWarehouse.main.updateNowRoleItems = updateItemList;
     }
     public void init(RoleRecord data)
     {

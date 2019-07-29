@@ -16,7 +16,7 @@ public class bagPanel : MonoBehaviour {
 	void Start () {
         List<int> noList = dataWarehouse.main.nowData.itemInBag;
         init(noList);
-        dataWarehouse.main.updateBagItem += init;
+        dataWarehouse.main.updateBagItem = init;
     }
     public void init(List<int> itemNos)
     {
@@ -24,7 +24,7 @@ public class bagPanel : MonoBehaviour {
         {
             Destroy(head);
         }
-
+        Debug.Log("iconPrefab:"+ iconPrefab+ "mainPanel:"+mainPanel);
         int count = 0;
         foreach (int no in itemNos)
         {

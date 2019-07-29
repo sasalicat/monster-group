@@ -40,8 +40,8 @@ public class rolePanel : MonoBehaviour
     }
     public void Awake()
     {
-        dataWarehouse.main.updateNowRoleAttr += updateUnitAttr;
-        dataWarehouse.main.denyNowRoleAttr += denyUnitAttr;
+        dataWarehouse.main.updateNowRoleAttr = updateUnitAttr;
+        dataWarehouse.main.denyNowRoleAttr = denyUnitAttr;
     }
     public void updateUnitAttr(Dictionary<byte, int> attr)
     {

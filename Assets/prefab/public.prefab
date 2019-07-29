@@ -116,6 +116,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d3aa6f6c0fc5ce14cab071d4ca289cf8, type: 3}
   - {fileID: 21300000, guid: d96f79fb66da41f45874c8cf5eb8659a, type: 3}
   - {fileID: 21300000, guid: b1fb473b225ead64cbe951876d88fe8f, type: 3}
+  - {fileID: 21300000, guid: 68eb2ce54a6fbbe4dbe8d4b28e890991, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
   - {fileID: 21300000, guid: f6ab2ba24bb01cf48ab5dd612a010280, type: 3}
@@ -175,6 +176,7 @@ MonoBehaviour:
   - repre_electShield
   - repre_thunderArrow
   - repre_iceArrow
+  - repre_iceShield
 --- !u!114 &114381664419861970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,6 +254,7 @@ MonoBehaviour:
   - {fileID: 1461656089646050, guid: cbbced4f08629604ba27664507f3b125, type: 2}
   - {fileID: 1263702201338170, guid: bd6a77ea4a17cbd489b1c35121cc109b, type: 2}
   - {fileID: 1655329317809850, guid: e4f8f15d249efef48a756bb195ef99ef, type: 2}
+  - {fileID: 1658320425495620, guid: 07149d9dadcd3bb42b0d8f9deb9c4eb5, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1

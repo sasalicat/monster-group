@@ -9,7 +9,7 @@ public class playerPanel : MonoBehaviour {
 	void Start () {
         lv_num.text = "" + dataWarehouse.main.nowData.lv;
         gold_num.text = "" + dataWarehouse.main.nowData.moneyLeft;
-        dataWarehouse.main.onPlayerUpdate += updatePlayer;
+        dataWarehouse.main.onPlayerUpdate = updatePlayer;
 	}
     void updatePlayer()
     {
