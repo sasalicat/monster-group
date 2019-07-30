@@ -69,7 +69,7 @@ public class buff_chill : Buff {
                 ((BasicControler)unit).data.Now_Attack_Speed -= layer * ATK_SLOW_PER_LAYER;
                 ((BasicControler)unit).data.Now_Cooldown_Reinforce -= layer * SKILL_SLOW_PER_LAYER;
 
-                GameObject prefab = objectList.main.prafebList[25];
+                GameObject prefab = objectList.main.prafebList[26];
                 effection = Instantiate(prefab, ((BasicControler)this.unit).transform);
                 effection.transform.localPosition = prefab.transform.position;
                 return true;
