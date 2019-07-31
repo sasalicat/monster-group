@@ -17,4 +17,6 @@ public class SkillList : MonoBehaviour {
         }
     }
     public List<string> representation;
+    public Dictionary<int, List<string>> Substitute;
+    public List<int> singleTragetMagicNo;
 }

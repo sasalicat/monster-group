@@ -112,7 +112,18 @@ public class careerList : MonoBehaviour {
             if (skills.Count > 0)
             {
                 int index = UnityEngine.Random.Range(0, skills.Count);
-                role.skillNos.Add(skills[index]);
+                string name = SkillList.main.representation[skills[index]];
+                if (Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")))
+                {//如果技能敘述繼承了subst_skill_representation
+                    //則改為從subst_skill_representation的替補中選擇一個技能名稱
+                    object repre = System.Activator.CreateInstance(System.Type.GetType(name));
+                    role.skillNos.Add(((subst_skill_representation)repre).substitutNo());
+
+                }
+                else
+                {
+                    role.skillNos.Add(skills[index]);
+                }
             }
             else
             {
