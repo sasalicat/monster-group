@@ -133,6 +133,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     }
     public virtual void useSkill(Skill skill,unitControler[] tragets)
     {
+        Debug.Log("skill:" + skill.name);
         if(((BasicControler)skill.Owner) != this)
         {
             return;
