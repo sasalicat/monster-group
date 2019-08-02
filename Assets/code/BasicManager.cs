@@ -78,6 +78,7 @@ public class BasicManager : MonoBehaviour,Manager {
         GameObject newone = Instantiate(objectList.main.mainUnit);
         newone.name = "隨機"+UnityEngine.Random.Range(0, 100);
         Debug.Log("playerNo:" + playerNo+" chessx:"+chessBoard.X+" chessy:"+chessBoard.Y);
+        //Debug.Log("realY")
         if(playerNo%2 ==0)
         {
             realX = posX;

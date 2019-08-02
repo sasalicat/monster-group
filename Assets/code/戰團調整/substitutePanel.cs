@@ -116,9 +116,20 @@ public class substitutePanel : MonoBehaviour
         heads.Add(headIcon);
     }
     public void createHead(int groupNo, RoleRecord data) {
+
         GameObject[,] map = girdControl.girdGroups[groupNo];
-        vec2i location = data.location;
-        Vector2 pos = map[location.y, location.x].transform.position;
+        vec2i location;
+        Vector2 pos = new Vector2(0,0);
+        if (groupNo % 2 == 1)
+        {
+            location = data.location;
+            pos = map[location.y, location.x].transform.position;
+        }
+        else if (groupNo % 2 == 0)
+        {
+            location = data.location;
+            pos = map[3 - data.location.y, location.x].transform.position;
+        }
         GameObject headIcon = Instantiate(headPrafeb, pos, Quaternion.Euler(0, 0, 0));
         headIcon.GetComponent<headEvent>().data = data;
         headIcon.GetComponent<headEvent>().rolePanel = rolePanel;

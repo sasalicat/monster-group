@@ -85,6 +85,12 @@ public class BasicAI : AI
                     Debug.Log("path3");
                     for (int y = 4; y < 8; y++)
                     {
+                        if (map.board[y, posx] != null && ((BasicControler)map.board[y, posx]).playerNo != 0)
+                        {
+                            ((BasicControler)self).traget = map.board[y, posx];
+                                solve = true;
+                                break;
+                        }
                         for (int x = 0; x < 5; x++)
                         {
                             if (map.board[y, x] != null && ((BasicControler)map.board[y, x]).playerNo != 0)
@@ -105,6 +111,12 @@ public class BasicAI : AI
                     Debug.Log("path4 objname:"+ ((BasicControler)self).gameObject.name);
                     for (int y = 3; y >= 0; y--)
                     {
+                        if (map.board[y, posx] != null && ((BasicControler)map.board[y, posx]).playerNo != 1)
+                        {
+                            ((BasicControler)self).traget = map.board[y, posx];
+                            solve = true;
+                            break;
+                        }
                         for (int x = 0; x < 5; x++)
                         {
                             if (map.board[y, x] != null && ((BasicControler)map.board[y, x]).playerNo != 1)
