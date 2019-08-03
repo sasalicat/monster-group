@@ -120,6 +120,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: de4634c503d72324985842c608302e3a, type: 3}
   - {fileID: 21300000, guid: f782fdbca870d824bb63c5168732c0ca, type: 3}
   - {fileID: 21300000, guid: 7038cd8a2d8c43a4b8e874479ddb85e2, type: 3}
+  - {fileID: 21300000, guid: a3685c42709dea642b95215efb7e3c15, type: 3}
+  - {fileID: 21300000, guid: b351e1cea28ac8e4995b89568bc710c1, type: 3}
+  - {fileID: 21300000, guid: 85f3894a0e94b9a46bb01a084143f16f, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
   - {fileID: 21300000, guid: f6ab2ba24bb01cf48ab5dd612a010280, type: 3}
@@ -183,7 +186,12 @@ MonoBehaviour:
   - repre_iceCone
   - repre_polarWind
   - repre_fastfrost
-  singleTragetMagicNo: 0f00000012000000150000001700000018000000190000001a0000001b000000
+  - repre_obtainSingleTragetMagic
+  - repre_obtainMultipTragetMagic
+  - repre_obtainRandomMagic
+  MagicNos: 0f0000001100000012000000150000001700000018000000190000001a0000001b0000001d000000100000001300000014000000160000001c000000
+  singleTragetMagicNo: 0f00000012000000150000001700000018000000190000001a0000001b0000001d00000011000000
+  multipTragetMagicNo: 100000001300000014000000160000001c000000
 --- !u!114 &114381664419861970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,8 +215,11 @@ MonoBehaviour:
   - career_thug_lv1
   - career_thug_lv2
   - career_thug_lv3
+  - career_magic_lv1
+  - career_magic_lv2
+  - career_magic_lv3
   baseRaceNos: 000000000100000002000000
-  baseCareerNos: 0500000008000000
+  baseCareerNos: 05000000080000000b000000
 --- !u!114 &114529366815161500
 MonoBehaviour:
   m_ObjectHideFlags: 1

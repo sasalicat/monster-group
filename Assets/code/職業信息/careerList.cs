@@ -64,7 +64,18 @@ public class careerList : MonoBehaviour {
         List<int> skills = new List<int>();//所有技能池內角色尚未擁有的技能
         foreach (int no in traget.giftSkills)//添加所有必定獲得的技能
         {
-            role.skillNos.Add(no);
+            string name = SkillList.main.representation[no];
+            if (Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")))
+            {//如果技能敘述繼承了subst_skill_representation
+                //則改為從subst_skill_representation的替補中選擇一個技能名稱
+                object repre = System.Activator.CreateInstance(System.Type.GetType(name));
+                role.skillNos.Add(((subst_skill_representation)repre).substitutNo());
+
+            }
+            else
+            {
+                role.skillNos.Add(no);
+            }
         }
 
         foreach (int no in traget.skillPool)
@@ -77,7 +88,19 @@ public class careerList : MonoBehaviour {
         if (skills.Count > 0)
         {
             int index = UnityEngine.Random.Range(0, skills.Count);
-            role.skillNos.Add(skills[index]);
+            string name = SkillList.main.representation[skills[index]];
+            if (Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")))
+            {//如果技能敘述繼承了subst_skill_representation
+                //則改為從subst_skill_representation的替補中選擇一個技能名稱
+                object repre = System.Activator.CreateInstance(System.Type.GetType(name));
+                role.skillNos.Add(((subst_skill_representation)repre).substitutNo());
+
+            }
+            else
+            {
+                role.skillNos.Add(skills[index]);
+            }
+            //role.skillNos.Add(skills[index]);
         }
         else {
             Debug.LogWarning("在轉職成"+ traget.name+"的過程中並沒有新增任何人技能");

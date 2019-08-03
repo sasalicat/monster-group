@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class skill_obtainSingleTragetMagic : randomRepre
+public class repre_obtainRandomMagic : randomRepre
 {
     public override string Explanation
     {
         get
         {
-            return "隨機學習一個單體目標的魔法師魔法";
+            return "隨機學習一個魔法師魔法";
         }
     }
 
@@ -25,7 +24,7 @@ public class skill_obtainSingleTragetMagic : randomRepre
     {
         get
         {
-            return "修習單體魔法";
+            return "修習隨機魔法";
         }
     }
 
@@ -33,12 +32,12 @@ public class skill_obtainSingleTragetMagic : randomRepre
     {
         get
         {
-            return SkillList.main.singleTragetMagicNo;
+            return SkillList.main.MagicNos;
         }
     }
 
     public override void init(unitData nowdata)
     {
-        
+
     }
 }
