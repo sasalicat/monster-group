@@ -119,6 +119,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 68eb2ce54a6fbbe4dbe8d4b28e890991, type: 3}
   - {fileID: 21300000, guid: de4634c503d72324985842c608302e3a, type: 3}
   - {fileID: 21300000, guid: f782fdbca870d824bb63c5168732c0ca, type: 3}
+  - {fileID: 21300000, guid: 7038cd8a2d8c43a4b8e874479ddb85e2, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
   - {fileID: 21300000, guid: f6ab2ba24bb01cf48ab5dd612a010280, type: 3}
@@ -181,6 +182,7 @@ MonoBehaviour:
   - repre_iceShield
   - repre_iceCone
   - repre_polarWind
+  - repre_fastfrost
   singleTragetMagicNo: 0f00000012000000150000001700000018000000190000001a0000001b000000
 --- !u!114 &114381664419861970
 MonoBehaviour:
@@ -262,6 +264,7 @@ MonoBehaviour:
   - {fileID: 1658320425495620, guid: 07149d9dadcd3bb42b0d8f9deb9c4eb5, type: 2}
   - {fileID: 1113754888064972, guid: ea37c2b758f7ac94faf373c62362494a, type: 2}
   - {fileID: 1030364281826516, guid: 26134b547b666e647b1f4aa56bd23c60, type: 2}
+  - {fileID: 1786397449841446, guid: 526ef7adb159a614e9574717fe792106, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1
