@@ -65,7 +65,8 @@ public class careerList : MonoBehaviour {
         foreach (int no in traget.giftSkills)//添加所有必定獲得的技能
         {
             string name = SkillList.main.representation[no];
-            if (Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")))
+            if (Type.GetType("subst_skill_representation").IsAssignableFrom(Type.GetType(name)))
+            //if (Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")))
             {//如果技能敘述繼承了subst_skill_representation
                 //則改為從subst_skill_representation的替補中選擇一個技能名稱
                 object repre = System.Activator.CreateInstance(System.Type.GetType(name));
@@ -89,7 +90,9 @@ public class careerList : MonoBehaviour {
         {
             int index = UnityEngine.Random.Range(0, skills.Count);
             string name = SkillList.main.representation[skills[index]];
-            if (Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")))
+            //Debug.Log("skill representation name:" + name + " issubclass:" + Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")));
+            if (Type.GetType("subst_skill_representation").IsAssignableFrom(Type.GetType(name)))
+            //if (Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")))
             {//如果技能敘述繼承了subst_skill_representation
                 //則改為從subst_skill_representation的替補中選擇一個技能名稱
                 object repre = System.Activator.CreateInstance(System.Type.GetType(name));
@@ -136,7 +139,8 @@ public class careerList : MonoBehaviour {
             {
                 int index = UnityEngine.Random.Range(0, skills.Count);
                 string name = SkillList.main.representation[skills[index]];
-                if (Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")))
+                if(Type.GetType("subst_skill_representation").IsAssignableFrom(Type.GetType(name)))
+                //if (Type.GetType(name).IsSubclassOf(Type.GetType("subst_skill_representation")))
                 {//如果技能敘述繼承了subst_skill_representation
                     //則改為從subst_skill_representation的替補中選擇一個技能名稱
                     object repre = System.Activator.CreateInstance(System.Type.GetType(name));
