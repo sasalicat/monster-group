@@ -6,6 +6,9 @@ public abstract class Skill:MonoBehaviour {
     public SkillInf information;
     protected BasicControler owner;
     public abstract void onInit(unitControler owner,Callback4Unit deleg);
+    public virtual void onEnvReady(Manager manager) {
+
+    }
     public const string ARG_MISS = "miss";
     public const string ARG_DICE = "dice";
     public const string ARG_PHY_MUL = "phy_damage_multiple";

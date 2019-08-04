@@ -135,6 +135,40 @@ public class itemBelt : MonoBehaviour, Callback4Unit
             onHpChange = value;
         }
     }
+    BasicDelegate.withBuffAndControler onGetBuff;
+    void onGetBuff_cb(Buff buff,unitControler creater)
+    {
+        onGetBuff(buff, creater);
+    }
+    public BasicDelegate.withBuffAndControler _onGetBuff
+    {
+        get
+        {
+            return onGetBuff;
+        }
+
+        set
+        {
+            onGetBuff = value;
+        }
+    }
+    BasicDelegate.withBuffAndControler onCreateBuff;
+    void onCreateBuff_cb(Buff buff, unitControler traget) {
+        onCreateBuff(buff, traget);
+    }
+    public BasicDelegate.withBuffAndControler _onCreateBuff
+    {
+        get
+        {
+            return onCreateBuff;
+        }
+
+        set
+        {
+            onCreateBuff = value;
+        }
+    }
+
     public virtual void addItemBy(string represName)//這個方法是在遊戲開始時執行的,這個時候已經不可能更換裝備了,所以無視屬性更新,只加上裝備技能
     {
         object newrepres = System.Activator.CreateInstance(System.Type.GetType(represName));

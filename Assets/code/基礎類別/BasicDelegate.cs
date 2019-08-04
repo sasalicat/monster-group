@@ -12,4 +12,5 @@ public class BasicDelegate {
     public delegate void withHealMsg(HealMsg message);
     public delegate void forSkill(SkillInf skillInf, Dictionary<string, object> skillArgs);
     public delegate void forSkillTrageting(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets);
+    public delegate void withBuffAndControler(Buff buff, unitControler unit);
 }

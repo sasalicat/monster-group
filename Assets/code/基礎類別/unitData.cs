@@ -46,6 +46,10 @@ public class unitData  {
         {
             return remote;
         }
+        set
+        {
+            remote = value;
+        }
     }
     public int Now_Attack
     {
@@ -171,6 +175,7 @@ public class unitData  {
         }
         set
         {
+            int before = now_life_point;
             if (value > Now_Max_Life) {
                 now_life_point = Now_Max_Life;
             }
@@ -188,7 +193,7 @@ public class unitData  {
                 }
             }
             if(_onLifeChange!=null)
-                _onLifeChange(Now_Life);
+                _onLifeChange(before);
         }
     }
     private int now_life_recover = STAND_LIFE_RECOVER;

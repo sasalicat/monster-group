@@ -64,7 +64,7 @@ public class career_magic_lv2 : careerInf
     {
         get
         {
-            return new List<int> { 30,31 };
+            return new List<int> { 30,31,33,34};
         }
     }
     public List<int> giftSkills

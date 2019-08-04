@@ -135,7 +135,43 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
             _aft_use_skill = value;
         }
     }
+    BasicDelegate.withBuffAndControler _on_get_buff;
+    public BasicDelegate.withBuffAndControler _onGetBuff
+    {
+        get
+        {
+            return _on_get_buff;
+        }
 
+        set
+        {
+            _on_get_buff = value;
+        }
+    }
+    protected void onGetBuff_cb(Buff buff,unitControler creater)
+    {
+        if (_on_get_buff != null) {
+            _on_get_buff(buff, creater);
+        }
+    }
+    BasicDelegate.withBuffAndControler _on_create_buff;
+    public BasicDelegate.withBuffAndControler _onCreateBuff
+    {
+        get
+        {
+            return _on_create_buff;
+        }
+
+        set
+        {
+            _on_create_buff = value;
+        }
+    }
+    protected void onCreateBuff_cb(Buff buff,unitControler traget)
+    {
+        if (_on_create_buff != null)
+            _on_create_buff(buff, traget);
+    }
     protected void aftCauseDamage_cb(Damage d)
     {
         if(_aft_cause_damage !=null)
@@ -162,6 +198,13 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         }
         skills.Add(newone);
     }
+    public virtual void aftAllUnitInit(Manager manager)
+    {
+        foreach(Skill skill in skills)
+        {
+            skill.onEnvReady(manager);
+        }
+    }
     public virtual void updateSkill(float time,Environment env)
     {
         //Debug.Log("updateSkill time:" + time);
@@ -187,6 +230,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         ((BasicControler)controler)._aftTakeDamage += aftTakeDamage_cb;
         ((BasicControler)controler)._aftCauseDamage += aftCauseDamage_cb;
         ((BasicControler)controler).data._onLifeChange += onLifeChange_cb;
+        ((BasicControler)controler)._onGetBuff += onGetBuff_cb;
+        ((BasicControler)controler)._onCreateBuff += onCreateBuff_cb;
         skills =new List<Skill>();
         activeSkills = new List<Skill>();
         repres = new List<skill_representation>();

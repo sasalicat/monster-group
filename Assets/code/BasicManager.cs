@@ -21,7 +21,18 @@ public class BasicManager : MonoBehaviour,Manager {
 
     public GameObject failedPanel;//手動拉取
     public GameObject successPanel;//手動拉取
-
+    public static BasicManager main = null;
+    void OnEnable()
+    {
+        if (main != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            main = this;
+        }
+    }
     public void forRoleDeath(GameObject gobj)
     {
         gobj.AddComponent<fadeOut>();
@@ -61,7 +72,7 @@ public class BasicManager : MonoBehaviour,Manager {
 
         
     }
-    public unitControler createUnit(Dictionary<string, object> unitInf)
+    public  unitControler createUnit(Dictionary<string, object> unitInf)
     {
         Debug.Log("創建新的單位");
         int posX = (int)unitInf["position_x"];
@@ -143,6 +154,16 @@ public class BasicManager : MonoBehaviour,Manager {
         {
             Dictionary<string, object> enemyDic = new Dictionary<string, object>() { { STR_POS_X, enemy.location.x }, { STR_POS_Y, enemy.location.y }, { STR_PLAYER_NO, 0 }, { STR_INF, enemy } };
             createUnit(enemyDic);
+        }
+        //完成了所有單位的創建
+        List<BasicControler> units = new List<BasicControler>();
+        foreach(unitControler unit in chessBoard.Units)
+        {
+            units.Add((BasicControler)unit);
+        }
+        foreach(unitControler unit in units)
+        {
+            ((BasicControler)unit).GetComponent<SkillBelt>().aftAllUnitInit(this);
         }
         /*
         roleInformation inf = new roleInformation(new unitData(),new List<int>(){1,7},0);

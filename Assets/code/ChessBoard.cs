@@ -245,5 +245,4 @@ public class ChessBoard : Environment {
         }
     }
 
-
 }

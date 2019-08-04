@@ -38,4 +38,13 @@ public interface Callback4Unit {
         set;
         get;
     }
+    BasicDelegate.withBuffAndControler _onGetBuff {
+        set;
+        get;
+    }
+    BasicDelegate.withBuffAndControler _onCreateBuff
+    {
+        set;
+        get;
+    }
 }

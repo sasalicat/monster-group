@@ -15,6 +15,8 @@ public class BasicControler : MonoBehaviour,unitControler {
     public BasicDelegate.withHealMsg _befHealing;
     public BasicDelegate.withHealMsg _aftHealing;
     public BasicDelegate.withGameObject _onDeath;
+    public BasicDelegate.withBuffAndControler _onCreateBuff;
+    public BasicDelegate.withBuffAndControler _onGetBuff;
     public HpBar hpbar = null;
     protected float recover_timeLeft = unitData.STAND_RECOVER_INTERVAL;
     public unitData data;
@@ -56,12 +58,16 @@ public class BasicControler : MonoBehaviour,unitControler {
         Buff[] before = (Buff[])GetComponents(Type.GetType(buffName));
         buff.onfail += buffFail_callback;
         buff.onInit(this, before, null);
-
+        _onGetBuff(buff, null);
         buffList.Add(buff);
     }
     public virtual void addBuff(string buffName,Dictionary<string,object> dict)
     {
-
+        BasicControler creater = null;
+        if (dict.ContainsKey("creater"))
+        {
+            creater = (BasicControler)dict["creater"];
+        }
         //Debug.Log("buffname:"+buffName+","+GetComponents(Type.GetType(buffName)));
         Component[] comps = GetComponents(Type.GetType(buffName));
         Buff buff = (Buff)gameObject.AddComponent(Type.GetType(buffName));
@@ -72,7 +78,14 @@ public class BasicControler : MonoBehaviour,unitControler {
         }
         buff.onfail += buffFail_callback;
         if (buff.onInit(this, before, dict))
+        {
             buffList.Add(buff);
+            if (creater != null && creater._onCreateBuff!=null) {
+                creater._onCreateBuff(buff,this);
+            }
+            if(_onGetBuff!=null)
+                _onGetBuff(buff, creater);
+        }
         else
         {
             Destroy(buff);
