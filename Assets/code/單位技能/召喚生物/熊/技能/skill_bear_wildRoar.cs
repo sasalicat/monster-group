@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class skill_wildRoar : CDSkill
+public class skill_bear_wildRoar : CDSkill
 {
     public override bool canUse
     {
@@ -24,15 +24,32 @@ public class skill_wildRoar : CDSkill
     public override unitControler[] findTraget(Environment env)
     {
         unitControler[] tragets = new unitControler[1];
+        List<BasicControler> firstTragets = new List<BasicControler>();
         List<BasicControler> enemy = new List<BasicControler>();
         foreach(BasicControler unit in ((ChessBoard)env).Units)
         {
-            if (unit.playerNo != this.owner.playerNo && unit.traget != owner) {
+            if (unit.playerNo != this.owner.playerNo) {
                 enemy.Add(unit);
+                if (unit.traget != owner)
+                {
+                    firstTragets.Add(unit);
+                }
             }
         }
-        int index = Randomer.main.getInt() % enemy.Count;
-        tragets[0] = enemy[index];
+        if (firstTragets.Count != 0)
+        {
+            int index = Randomer.main.getInt() % firstTragets.Count;
+            tragets[0] = firstTragets[index];
+        }
+        else if (enemy.Count != 0) 
+        {
+            int index = Randomer.main.getInt() % enemy.Count;
+            tragets[0] = enemy[index];
+        }
+        else
+        {
+            tragets = new unitControler[0];
+        }
         return tragets;
     }
 
@@ -75,6 +92,11 @@ public class skill_wildRoar : CDSkill
             BasicControler traget = (BasicControler)tragets[0];
             NumberCreater.main.CreateMissing(traget.transform.position);
         }
+        Dictionary<string, object> barg = new Dictionary<string, object>();
+        barg["creater"] = owner;
+        barg["time"] = 5f;
+        barg["num"] = 30;
+        owner.addBuff("buff_heavySkin",barg);
         setTime();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class beast_wildBoar : RoleRecord {
     public beast_wildBoar()
     {
-        race = 6;
+        race = 5;
         data = new unitData();
         data.Remote = false;
         data.Now_Attack += 5;

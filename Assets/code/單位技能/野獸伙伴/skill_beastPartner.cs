@@ -29,7 +29,8 @@ public class skill_beastPartner : Skill
     public override void onEnvReady(Manager manager)
     {
         int index= Randomer.main.getInt();
-        index = index % creatureList.main.names.Count; 
+        //index = index % creatureList.main.names.Count; 
+        index = 1;
         RoleRecord data= creatureList.main.getObjectIn(index);
         BasicManager bm = (BasicManager)manager;
         int[] pos = ((ChessBoard)owner.env).getPosFor(owner);

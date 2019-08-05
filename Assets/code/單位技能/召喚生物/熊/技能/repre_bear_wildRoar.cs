@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class repre_wildRoar : skill_representation
+public class repre_bear_wildRoar : skill_representation
 {
     public string Explanation
     {
@@ -17,7 +17,7 @@ public class repre_wildRoar : skill_representation
     {
         get
         {
-            return "skill_wildRoar";
+            return "skill_bear_wildRoar";
         }
     }
 

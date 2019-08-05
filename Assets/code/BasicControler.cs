@@ -54,6 +54,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     }
     public virtual void addBuff(string buffName)
     {
+        Debug.LogWarning("addBuff中 buffname:" + buffName);
         Buff buff= (Buff)gameObject.AddComponent(Type.GetType(buffName));
         Buff[] before = (Buff[])GetComponents(Type.GetType(buffName));
         buff.onfail += buffFail_callback;
@@ -146,7 +147,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     }
     public virtual void useSkill(Skill skill,unitControler[] tragets)
     {
-        Debug.Log("skill:" + skill.name);
+        //Debug.Log("skill:" + skill.name);
         if(((BasicControler)skill.Owner) != this)
         {
             return;

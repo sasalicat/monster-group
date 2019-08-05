@@ -78,7 +78,7 @@ public class skill_BaseAttackRemote : CDSkill {
     }
     public override void trigger(Dictionary<string, object> args)
     {
-        //Debug.Log("攻擊被觸發");
+        Debug.Log("角色名稱:"+gameObject.name);
         unitControler[] tragets = (unitControler[])args["tragets"];
         if (!(bool)args["miss"])
         {
