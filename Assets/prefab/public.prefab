@@ -92,7 +92,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d7d975c4e332af64395b3d4eeefc94e9, type: 3}
   - {fileID: 21300000, guid: a164d36e1764896488ce99b50194ba45, type: 3}
   - {fileID: 21300000, guid: c409470a566202a4f92bca460dfc915c, type: 3}
-  - {fileID: 21300000, guid: d7d975c4e332af64395b3d4eeefc94e9, type: 3}
+  - {fileID: 21300000, guid: 05cb697012a92b646b7525a3e96b6980, type: 3}
   - {fileID: 21300000, guid: d7d975c4e332af64395b3d4eeefc94e9, type: 3}
   - {fileID: 21300000, guid: d7d975c4e332af64395b3d4eeefc94e9, type: 3}
   skillIcons:
@@ -134,6 +134,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a164d36e1764896488ce99b50194ba45, type: 3}
   - {fileID: 21300000, guid: 9281a574bf9c96f40b6bb68bc63101a6, type: 3}
   - {fileID: 21300000, guid: c409470a566202a4f92bca460dfc915c, type: 3}
+  - {fileID: 21300000, guid: 05cb697012a92b646b7525a3e96b6980, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
   - {fileID: 21300000, guid: f6ab2ba24bb01cf48ab5dd612a010280, type: 3}
@@ -205,6 +206,7 @@ MonoBehaviour:
   - repre_wlidBoar_rush
   - repre_beastPartner
   - repre_bear_wildRoar
+  - repre_turtle_shrinkShell
   MagicNos: 0f0000001100000012000000150000001700000018000000190000001a0000001b0000001d000000100000001300000014000000160000001c000000
   singleTragetMagicNo: 0f00000012000000150000001700000018000000190000001a0000001b0000001d00000011000000
   multipTragetMagicNo: 100000001300000014000000160000001c000000
@@ -250,6 +252,7 @@ MonoBehaviour:
   names:
   - beast_wildBoar
   - beast_bear
+  - beast_turtle
 --- !u!114 &114529366815161500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -307,6 +310,7 @@ MonoBehaviour:
   - {fileID: 1030364281826516, guid: 26134b547b666e647b1f4aa56bd23c60, type: 2}
   - {fileID: 1786397449841446, guid: 526ef7adb159a614e9574717fe792106, type: 2}
   - {fileID: 1644031296869594, guid: 9444c93f95df87640ac39fa495a325d4, type: 2}
+  - {fileID: 1234562824980884, guid: e2b2fd57943fbe243958e9988a68cfe1, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1
