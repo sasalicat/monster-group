@@ -11,7 +11,7 @@ public class buff_blindness : Buff {
             return 0;
         }
     }
-    public void missJudge(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets)
+    public void missJudge(SkillInf skillInf, Dictionary<string, object> skillArgs,ref unitControler[] tragets)
     {
         if (skillInf.singleTraget)
         {

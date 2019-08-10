@@ -61,13 +61,13 @@ public abstract class buff_shieldTemplate : Buff {
         }
         else
         {
-            if (((buff_flameShield)Repetitive[0]).TimeLeft < (float)args["time"])
+            if (((buff_shieldTemplate)Repetitive[0]).TimeLeft < (float)args["time"])
             {
-                ((buff_flameShield)Repetitive[0]).timeLeft = (float)args["time"];
+                ((buff_shieldTemplate)Repetitive[0]).timeLeft = (float)args["time"];
             }
-            if (((buff_flameShield)Repetitive[0]).shieldNum < (int)args["num"])
+            if (((buff_shieldTemplate)Repetitive[0]).shieldNum < (int)args["num"])
             {
-                ((buff_flameShield)Repetitive[0]).shieldNum = (int)args["num"];
+                ((buff_shieldTemplate)Repetitive[0]).shieldNum = (int)args["num"];
             }
             return false;
         }

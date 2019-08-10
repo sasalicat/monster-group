@@ -26,6 +26,14 @@ public class unitData  {
     public BasicDelegate.withNone _onDeath;
     public withFloat2 _onCoolDownMutipleChange;
     private bool remote=false;
+    protected bool dead=false;
+    public bool Dead
+    {
+        get
+        {
+            return dead;
+        }
+    }
     public static float calReduce(int strength,int basic)
     {
         if (strength >= 0)
@@ -186,11 +194,12 @@ public class unitData  {
             else
             {
                 now_life_point = 0;
-                Debug.Log("設置now_life_point為:" + now_life_point);
+                //Debug.Log("設置now_life_point為:" + now_life_point);
                 if (_onDeath!=null)
                 {
                     _onDeath();
                 }
+                dead = true;
             }
             if(_onLifeChange!=null)
                 _onLifeChange(before);

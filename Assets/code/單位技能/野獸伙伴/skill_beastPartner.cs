@@ -30,7 +30,7 @@ public class skill_beastPartner : Skill
     {
         int index= Randomer.main.getInt();
         //index = index % creatureList.main.names.Count; 
-        index = 2;
+        index = 3;
         RoleRecord data= creatureList.main.getObjectIn(index);
         BasicManager bm = (BasicManager)manager;
         int[] pos = ((ChessBoard)owner.env).getPosFor(owner);

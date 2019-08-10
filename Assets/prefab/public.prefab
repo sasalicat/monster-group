@@ -93,7 +93,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a164d36e1764896488ce99b50194ba45, type: 3}
   - {fileID: 21300000, guid: c409470a566202a4f92bca460dfc915c, type: 3}
   - {fileID: 21300000, guid: 05cb697012a92b646b7525a3e96b6980, type: 3}
-  - {fileID: 21300000, guid: d7d975c4e332af64395b3d4eeefc94e9, type: 3}
+  - {fileID: 21300000, guid: 4d6082b0adbae5a4ebe81d741146fc9e, type: 3}
   - {fileID: 21300000, guid: d7d975c4e332af64395b3d4eeefc94e9, type: 3}
   skillIcons:
   - {fileID: 21300000, guid: d83f4120e0fc7934fa773acdef735295, type: 3}
@@ -135,6 +135,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9281a574bf9c96f40b6bb68bc63101a6, type: 3}
   - {fileID: 21300000, guid: c409470a566202a4f92bca460dfc915c, type: 3}
   - {fileID: 21300000, guid: 05cb697012a92b646b7525a3e96b6980, type: 3}
+  - {fileID: 21300000, guid: 4d6082b0adbae5a4ebe81d741146fc9e, type: 3}
+  - {fileID: 21300000, guid: 6353a1ca30417ac42a1133610d67dc9c, type: 3}
+  - {fileID: 21300000, guid: 6e4b5b277dc293944bb11eeecb6a5c19, type: 3}
+  - {fileID: 21300000, guid: fab555831e784614bb9f0341d1ec035d, type: 3}
+  - {fileID: 21300000, guid: a7efd1c9afd7aba4bb9e0987dff2bdcd, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
   - {fileID: 21300000, guid: f6ab2ba24bb01cf48ab5dd612a010280, type: 3}
@@ -208,6 +213,10 @@ MonoBehaviour:
   - repre_bear_wildRoar
   - repre_turtle_shrinkShell
   - repre_spider_poisonAttack
+  - repre_snakeShoot
+  - repre_rake
+  - repre_dropWeapon
+  - repre_criticalHit
   MagicNos: 0f0000001100000012000000150000001700000018000000190000001a0000001b0000001d000000100000001300000014000000160000001c000000
   singleTragetMagicNo: 0f00000012000000150000001700000018000000190000001a0000001b0000001d00000011000000
   multipTragetMagicNo: 100000001300000014000000160000001c000000
@@ -237,8 +246,11 @@ MonoBehaviour:
   - career_magic_lv1
   - career_magic_lv2
   - career_magic_lv3
+  - career_hunter_lv1
+  - career_hunter_lv2
+  - career_hunter_lv3
   baseRaceNos: 000000000100000002000000
-  baseCareerNos: 05000000080000000b000000
+  baseCareerNos: 05000000080000000b0000000e000000
 --- !u!114 &114406188847283274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,6 +266,7 @@ MonoBehaviour:
   - beast_wildBoar
   - beast_bear
   - beast_turtle
+  - beast_spider
 --- !u!114 &114529366815161500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,6 +325,11 @@ MonoBehaviour:
   - {fileID: 1786397449841446, guid: 526ef7adb159a614e9574717fe792106, type: 2}
   - {fileID: 1644031296869594, guid: 9444c93f95df87640ac39fa495a325d4, type: 2}
   - {fileID: 1234562824980884, guid: e2b2fd57943fbe243958e9988a68cfe1, type: 2}
+  - {fileID: 1682712759176330, guid: 4052296d86577f44fbba2d2a15b23703, type: 2}
+  - {fileID: 1023976669479574, guid: 19be382996e86a34d985a05f954c82af, type: 2}
+  - {fileID: 1955332982934812, guid: 66bcd2d9edc5a5e42917f9d6648780bd, type: 2}
+  - {fileID: 1415585068037356, guid: 7e55abfef35cd4e408b4a623e7a3361a, type: 2}
+  - {fileID: 1349150450503538, guid: 78eac3a1e7a5f4349ad140608b44410b, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1

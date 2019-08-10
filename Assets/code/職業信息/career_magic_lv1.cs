@@ -39,7 +39,7 @@ public class career_magic_lv1 : careerInf {
     {
         get
         {
-            return "專家級巫師";
+            return "學徒級巫師";
         }
     }
 

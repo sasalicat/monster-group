@@ -42,7 +42,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
             _bef_use_skill = value;
         }
     }
-    protected void befUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets)
+    protected void befUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs,ref unitControler[] tragets)
     {
         if(_bef_use_skill !=null)
             _bef_use_skill( skillInf,  skillArgs,tragets);

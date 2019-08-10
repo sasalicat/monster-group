@@ -84,7 +84,8 @@ public class skill_BaseAttack : CDSkill {
     }
     public virtual void actionTo(unitControler[] tragets,Dictionary<string,object> skillArg)
     {
-        tragets[0].takeDamage(createDamage(skillArg));
+        if(tragets[0]!=null)
+            tragets[0].takeDamage(createDamage(skillArg));
     }
 
     public override void trigger(Dictionary<string, object> args)

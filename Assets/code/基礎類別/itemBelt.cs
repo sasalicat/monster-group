@@ -98,7 +98,7 @@ public class itemBelt : MonoBehaviour, Callback4Unit
             befTakeDamage += value;
         }
     }
-    void befUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets)
+    void befUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs,ref unitControler[] tragets)
     {
         if(befUseSkill!=null)
             befUseSkill(skillInf, skillArgs, tragets);

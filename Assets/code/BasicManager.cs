@@ -35,6 +35,7 @@ public class BasicManager : MonoBehaviour,Manager {
     }
     public void forRoleDeath(GameObject gobj)
     {
+        Debug.LogWarning(gobj.name + " dead");
         gobj.AddComponent<fadeOut>();
         BasicControler control = gobj.GetComponent<BasicControler>();
         int[] coor=  chessBoard.getPosFor(control);

@@ -17,7 +17,7 @@ public class repre_spider_poisonAttack : skill_representation
     {
         get
         {
-            return "skill_spider_poisonAttack";
+            return "skill_spider_poison";
         }
     }
 

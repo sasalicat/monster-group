@@ -37,7 +37,7 @@ public class buff_poison : Buff {
             this.unit = (BasicControler)unit;
 
             ((BasicControler)unit)._befHealing += befHeal;
-            GameObject prefab = objectList.main.prafebList[15];
+            GameObject prefab = objectList.main.prafebList[33];
             effection = Instantiate(prefab, ((BasicControler)this.unit).transform);
             effection.transform.localPosition = new Vector2(0, -0.67f);
             return true;
@@ -45,7 +45,7 @@ public class buff_poison : Buff {
         }
         else
         {
-            buff_burn before = ((buff_burn)Repetitive[0]);
+            buff_poison before = ((buff_poison)Repetitive[0]);
             if (selfLayer + before.layer <= MAX_LAYER) {
                 before.layer += selfLayer;
             }

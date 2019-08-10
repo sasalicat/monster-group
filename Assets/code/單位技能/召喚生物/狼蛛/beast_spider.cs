@@ -12,5 +12,6 @@ public class beast_spider : RoleRecord {
         data.Now_Life_Recover += 2;
         data.Now_Mag_Resistance += 30;
         skillNos.Add(0);
+        skillNos.Add(39);
     }
 }

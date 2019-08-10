@@ -7,7 +7,7 @@ using UnityEngine;
 public class BasicControler : MonoBehaviour,unitControler {
     
     public BasicDelegate.forSkill _beAppoint;
-    public BasicDelegate.forSkillTrageting _befUseSkill;
+    public BasicDelegate.forRefSkillTrageting _befUseSkill;
     public BasicDelegate.forSkillTrageting _aftUseSkill;
     public BasicDelegate.withDamage _befTakeDamage;
     public BasicDelegate.withDamage _aftTakeDamage;
@@ -109,7 +109,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     public virtual void takeDamage(Damage damage)
     {
         _befTakeDamage(damage);
-        if (damage.vaild)
+        if (damage.vaild&&!data.Dead)
         {
             if (damage.kind == Damage.KIND_PHYSICAL && !state.ImmunePhysics)
             {
@@ -142,6 +142,17 @@ public class BasicControler : MonoBehaviour,unitControler {
                     from._aftCauseDamage(damage);
                 }
             }
+            else if (damage.kind == Damage.KIND_REAL) {
+                data.Now_Life -= damage.num;
+                _aftTakeDamage(damage);
+                createDamageNum(damage);
+                BasicControler from = (BasicControler)damage.creater;
+                damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
+                if (damage.creater != null)
+                {
+                    from._aftCauseDamage(damage);
+                }
+            }
         }
 
     }
@@ -153,12 +164,14 @@ public class BasicControler : MonoBehaviour,unitControler {
             return;
         }
         Dictionary<string, object> skillArg = createSkillArg(data);
-        skillArg["tragets"] = tragets;
+
         foreach (unitControler traget in tragets)
         {
             ((BasicControler)traget)._beAppoint(skill.information, skillArg);//被指定
         }
-        _befUseSkill(skill.information,skillArg,tragets);
+        _befUseSkill(skill.information,skillArg,ref tragets);
+        //Debug.LogWarning("在useSkill后tragets Count:"+tragets.Length);
+        skillArg["tragets"] = tragets;
         ((CDSkill)skill).trigger(skillArg);
         _aftUseSkill(skill.information, skillArg, tragets);
     }
@@ -173,7 +186,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         {
             ((BasicControler)traget)._beAppoint(skill.information, arg);//被指定
         }
-        _befUseSkill(skill.information, arg, tragets);
+        _befUseSkill(skill.information, arg,ref tragets);
         ((CDSkill)skill).trigger(arg);
         _aftUseSkill(skill.information, arg, tragets);
     }
