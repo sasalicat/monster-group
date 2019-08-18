@@ -46,7 +46,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         arg["phy_damage_addition"] = 0;
         arg["mag_damage_multiple"] = data.Now_Mag_Multiple;
         arg["mag_damage_addition"] = 0;
-        arg["healing_multiple"] = 1f;
+        arg["healing_multiple"] = data.Now_Mag_Multiple;
         arg["healing_addition"] = 0;
         arg["control_multiple"] = 1f;
         arg["control_addition"] = 0;

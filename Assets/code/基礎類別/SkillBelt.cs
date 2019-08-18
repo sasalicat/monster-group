@@ -167,6 +167,12 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
             _on_create_buff = value;
         }
     }
+    public List<Skill> ActiveSkills
+    {
+        get {
+            return activeSkills;
+        }
+    }
     protected void onCreateBuff_cb(Buff buff,unitControler traget)
     {
         if (_on_create_buff != null)
@@ -243,4 +249,5 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         }
         //Timer.main.logInTimer(interval);
     }
+
 }

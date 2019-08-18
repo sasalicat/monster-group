@@ -41,6 +41,37 @@ public class ChessBoard : Environment {
         unit2pos.Remove(unit);
         return unit; 
     }
+    public unitControler[] teammateOf(unitControler unit)
+    {
+        List<BasicControler> teammate = new List<BasicControler>();
+        int[] pos = getPosFor(unit);
+        if (pos[1] < Y / 2)
+        {
+            for (int y = 0; y < Y / 2; y++)
+            {
+                for (int x = 0; x < X; x++)
+                {
+                    if (board[y, x] != null)
+                    {
+                        teammate.Add((BasicControler)board[y, x]);
+                    }
+                }
+            }
+        }
+        else {
+            for (int y = Y/2; y < Y; y++)
+            {
+                for (int x = 0; x < X; x++)
+                {
+                    if (board[y, x] != null)
+                    {
+                        teammate.Add((BasicControler)board[y, x]);
+                    }
+                }
+            }
+        }
+        return teammate.ToArray(); 
+    }
     public bool enter(unitControler unit,int pos_x,int pos_y)
     {
         Debug.Log("pos_y:" + pos_y + ",pos_x" + pos_x);
@@ -154,6 +185,52 @@ public class ChessBoard : Environment {
             }
         }
         return list.ToArray();
+    }
+    public unitControler[] getDist1Of(unitControler unit)
+    {
+        List<unitControler> list = new List<unitControler>();
+        List<int[]> offsets = new List<int[]>() { new int[2]{0,1},new int[2] {0,-1},new int[2] {1,0},new int[2] {-1,0} };
+        int[] pos = getPosFor(unit);
+        foreach (int[] offset in offsets) {
+            int x = pos[0] + offset[0];
+            int y = pos[1] + offset[1];
+            if (pos[1] < Y / 2)
+            {
+                if (y < Y / 2 && y >= 0 && x >= 0 && x < X)//在player0的範圍內
+                {
+                    if (board[y, x] != null)
+                    {
+                        list.Add(board[y, x]);
+                    }
+
+                }
+            }
+            else
+            {
+                if (y >= Y / 2 && y < Y && x >= 0 && x < X)//在player0的範圍內
+                {
+                    if (board[y, x] != null)
+                    {
+                        list.Add(board[y, x]);
+                    }
+
+                }
+            }
+        }
+        return list.ToArray();
+    }
+    public unitControler[] getDist1Of(unitControler unit,bool containSource)
+    {
+        unitControler[] results = getDist1Of(unit);
+        if (containSource){
+            List<unitControler> list = new List<unitControler>() {unit};
+            foreach(unitControler control in results)
+            {
+                list.Add(control);
+            }
+            results = list.ToArray();
+        }
+        return results;
     }
     public unitControler[] get3by3Of(unitControler unit)
     {
