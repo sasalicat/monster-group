@@ -1,14 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class skill_iceShield : CDSkill {
-    public const int SHIELD_NUMBER = 20;
+public class skill_powerBless : CDSkill
+{
+    protected const int POWER_NUMBER = 5;
     public override bool canUse
     {
         get
         {
-            return timeLeft <= 0 && owner.traget != null && owner.state.CanSkill;
+            return timeLeft <= 0 && owner.state.CanSkill && owner.traget != null;
         }
     }
 
@@ -16,7 +18,7 @@ public class skill_iceShield : CDSkill {
     {
         get
         {
-            return 5.5f * unitData.STAND_ATK_INTERVAL;
+            return 4 * unitData.STAND_ATK_INTERVAL;
         }
     }
 
@@ -56,11 +58,11 @@ public class skill_iceShield : CDSkill {
         {
             BasicControler nowTraget = (BasicControler)traget;
             Dictionary<string, object> buff_arg = new Dictionary<string, object>();
-            buff_arg["num"] = (int)(SHIELD_NUMBER * ((BasicControler)owner).data.Now_Mag_Multiple);
+            buff_arg["power"] = (int)(POWER_NUMBER * ((BasicControler)owner).data.Now_Mag_Multiple);
             //Debug.LogWarning("arg[num]設置為:" + buff_arg["num"]);
-            buff_arg["time"] = 4 * unitData.STAND_ATK_INTERVAL;
+            buff_arg["time"] = 6 * unitData.STAND_ATK_INTERVAL;
             buff_arg["creater"] = owner;
-            nowTraget.addBuff("buff_iceShield", buff_arg);
+            nowTraget.addBuff("buff_powerBless", buff_arg);
             //Debug.LogWarning("加上buff_flameShield");
 
         }
