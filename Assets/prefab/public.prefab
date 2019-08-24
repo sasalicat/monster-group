@@ -145,6 +145,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a617fd310650ecc49bb46cc812107ccc, type: 3}
   - {fileID: 21300000, guid: 42fe4a84132bd174e95d899730ba30b2, type: 3}
   - {fileID: 21300000, guid: ce27fd5ca4d24a4458386f3aa414a0de, type: 3}
+  - {fileID: 21300000, guid: 1862acb697b95ef45b6310853f7cdcda, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
   - {fileID: 21300000, guid: f6ab2ba24bb01cf48ab5dd612a010280, type: 3}
@@ -227,6 +228,7 @@ MonoBehaviour:
   - repre_sacredCharge
   - repre_sacredArmor
   - repre_powerBless
+  - repre_heavenFire
   MagicNos: 0f0000001100000012000000150000001700000018000000190000001a0000001b0000001d000000100000001300000014000000160000001c000000
   singleTragetMagicNo: 0f00000012000000150000001700000018000000190000001a0000001b0000001d00000011000000
   multipTragetMagicNo: 100000001300000014000000160000001c000000
@@ -344,6 +346,7 @@ MonoBehaviour:
   - {fileID: 1764104209985094, guid: 508703ab773723a4ab4252ab251631e6, type: 2}
   - {fileID: 1392743236325012, guid: 6f9bc887883232c47805508c51f4b839, type: 2}
   - {fileID: 1292302724050210, guid: dc35e9606a730334587d6c33eb4c0d7a, type: 2}
+  - {fileID: 1197450324114692, guid: c4f801a9e60a1b046b36250f7554941a, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1
