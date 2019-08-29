@@ -202,7 +202,10 @@ public class BasicControler : MonoBehaviour,unitControler {
         //處理buff
         foreach(Buff buff in buffList)
         {
-            buff.onIntarvel(this, time);
+            if (!failed.Contains(buff))
+            {
+                buff.onIntarvel(this, time);
+            }
         }
         for(int i = 0; i < failed.Count; i++)
         {

@@ -14,6 +14,16 @@ public abstract class  Buff :MonoBehaviour {
     }
     public  float timeLeft=1;
     public unitControler unit;
+    public const int NEGATIVE = 0;
+    public const int POSITIVE = 1;
+    public const int NEUTRAL = 2;
+    public virtual int kind//表明本狀態是正面狀態還是負面狀態
+    {
+        get
+        {
+            return NEGATIVE;
+        }
+    }
     public abstract float Duration
     {
         get;

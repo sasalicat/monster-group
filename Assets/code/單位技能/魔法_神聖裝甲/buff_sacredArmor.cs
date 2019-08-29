@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class buff_sacredArmor : Buff
 {
+    public override int kind
+    {
+        get
+        {
+            return POSITIVE;
+        }
+    }
     protected int number;
     protected int r_number;
     private GameObject effection;

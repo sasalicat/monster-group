@@ -41,6 +41,39 @@ public class ChessBoard : Environment {
         unit2pos.Remove(unit);
         return unit; 
     }
+    public unitControler[] enemyOf(unitControler unit)
+    {
+        List<BasicControler> enemys = new List<BasicControler>();
+        int[] pos = getPosFor(unit);
+        if (pos[1] < Y / 2)
+        {
+            for (int y = Y / 2; y < Y; y++)
+            {
+                for (int x = 0; x < X; x++)
+                {
+                    if (board[y, x] != null)
+                    {
+                        enemys.Add((BasicControler)board[y, x]);
+                    }
+                }
+            }
+
+        }
+        else
+        {
+            for (int y = 0; y < Y / 2; y++)
+            {
+                for (int x = 0; x < X; x++)
+                {
+                    if (board[y, x] != null)
+                    {
+                        enemys.Add((BasicControler)board[y, x]);
+                    }
+                }
+            }
+        }
+        return enemys.ToArray();
+    }
     public unitControler[] teammateOf(unitControler unit)
     {
         List<BasicControler> teammate = new List<BasicControler>();

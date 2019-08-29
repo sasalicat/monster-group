@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class buff_iceShield : buff_shieldTemplate
 {
+    public override int kind
+    {
+        get
+        {
+            return POSITIVE;
+        }
+    }
     public override GameObject effection_prefab
     {
         get

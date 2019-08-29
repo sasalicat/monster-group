@@ -6,7 +6,13 @@ using UnityEngine;
 public class buff_flameShield : buff_shieldTemplate
 {
 
-
+    public override int kind
+    {
+        get
+        {
+            return POSITIVE;
+        }
+    }
     public override GameObject effection_prefab
     {
         get
