@@ -11,6 +11,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     public BasicDelegate.forSkillTrageting _aftUseSkill;
     public BasicDelegate.withDamage _befTakeDamage;
     public BasicDelegate.withDamage _aftTakeDamage;
+    public BasicDelegate.withDamage _befCauseDamage;
     public BasicDelegate.withDamage _aftCauseDamage;
     public BasicDelegate.withHealMsg _befHealing;
     public BasicDelegate.withHealMsg _aftHealing;
@@ -108,50 +109,40 @@ public class BasicControler : MonoBehaviour,unitControler {
     }
     public virtual void takeDamage(Damage damage)
     {
+        Debug.Log("before _befTakeDamage");
         _befTakeDamage(damage);
+        BasicControler from = (BasicControler)damage.creater;
+        damage.creater = this;
+        from._befCauseDamage(damage);
+        damage.creater = from;
+
+        Debug.Log("after _befTakeDamage");
         if (damage.vaild&&!data.Dead)
         {
+            
+            int hurt=damage.num;
             if (damage.kind == Damage.KIND_PHYSICAL && !state.ImmunePhysics)
             {
                 //Debug.Log("計算傷害時Physical_Reduce_Multiple為:" + data.Physical_Reduce_Multiple);
-                int hurt = (int)(data.Physical_Reduce_Multiple * (float)damage.num);
+                hurt = (int)(data.Physical_Reduce_Multiple * (float)damage.num);
                 //Debug.Log("計算傷害時hurt為:"+hurt);
                 //Debug.Log("計算傷害時Now_Life為:" + data.Now_Life);
-                data.Now_Life -= hurt;
-                //Debug.Log("計算結束");
-                damage.num = hurt;
-                _aftTakeDamage(damage);
-                createDamageNum(damage);
-                BasicControler from = (BasicControler)damage.creater;
-                damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
-                if (damage.creater != null)
-                {
-                    from._aftCauseDamage(damage);
-                }
+
             }
             else if (damage.kind == Damage.KIND_MAGICAL && !state.ImmuneMagic)
             {
-                int hurt = (int)(data.Magic_Reduce_Multiple * damage.num);
-                data.Now_Life -= hurt;
-                _aftTakeDamage(damage);
-                createDamageNum(damage);
-                BasicControler from = (BasicControler)damage.creater;
-                damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
-                if (damage.creater != null)
-                {
-                    from._aftCauseDamage(damage);
-                }
+                hurt = (int)(data.Magic_Reduce_Multiple * damage.num);
             }
-            else if (damage.kind == Damage.KIND_REAL) {
-                data.Now_Life -= damage.num;
-                _aftTakeDamage(damage);
-                createDamageNum(damage);
-                BasicControler from = (BasicControler)damage.creater;
-                damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
-                if (damage.creater != null)
-                {
-                    from._aftCauseDamage(damage);
-                }
+            data.Now_Life -= hurt;
+            //Debug.Log("計算結束");
+            damage.num = hurt;
+            _aftTakeDamage(damage);
+            createDamageNum(damage);
+
+            damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
+            if (damage.creater != null)
+            {
+                from._aftCauseDamage(damage);
             }
         }
 
@@ -217,7 +208,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         if (recover_timeLeft <= 0)
         {
             heal(data.Now_Life_Recover,this);
-            Debug.Log(gameObject.name + " 恢復:" + data.Now_Life_Recover);
+            //Debug.Log(gameObject.name + " 恢復:" + data.Now_Life_Recover);
             recover_timeLeft = unitData.STAND_RECOVER_INTERVAL;
         }
     }

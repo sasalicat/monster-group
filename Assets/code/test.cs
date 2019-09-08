@@ -15,6 +15,7 @@ using UnityEngine;
 }
 public class test : MonoBehaviour {
     RoleRecord data;
+    BasicDelegate.withDamage withDamage;
     List<RoleRecord> list = new List<RoleRecord>() { new RoleRecord() };
     void setData(RoleRecord d) {
         data = d;
@@ -36,8 +37,13 @@ public class test : MonoBehaviour {
     {
         msg.num = (int)(msg.num * 0.5f);
     }
+    void damageTest(Damage d) {
+        d.num = 47;
+        d.tag = new List<string>() { "critical" };
+    }
 	// Use this for initialization
 	void Start () {
+        /*
         Debug.Log("start 被呼叫");
         Debug.Log("list 長度:" + list.Count);
         bool result=list.Remove(data);
@@ -47,7 +53,13 @@ public class test : MonoBehaviour {
         Debug.Log("num after half:" + ori);
         HealMsg msg = new HealMsg(100, null);
         halfHealMsg(msg);
-        Debug.Log("HealMsg:"+msg.num);
+        Debug.Log("HealMsg:"+msg.num);*/
+        Damage d = new Damage(1, Damage.KIND_PHYSICAL, null);
+        //damageTest(d);
+        //Debug.Log("damage num"+d.num+"tag len:"+tag.Length);
+        withDamage += damageTest;
+        withDamage(d);
+        Debug.Log("damage num" + d.num + "tag len:" + tag.Length);
     }
 
 }

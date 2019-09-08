@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class skill_BluntUser : Skill {
     protected float stun_time = 1.3f;
-    public void callback(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets) {
+    public void callback(SkillInf skillInf, Dictionary<string, object> skillArgs,ref unitControler[] tragets) {
         Debug.Log("blunt user callback被觸發:"+skillInf.attack);
         if (skillInf.attack) {
             int rpoint = Randomer.main.getInt();

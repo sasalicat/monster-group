@@ -24,6 +24,13 @@ public abstract class  Buff :MonoBehaviour {
             return NEGATIVE;
         }
     }
+    public virtual bool endless//如果endless 是true的話,timeLeft小於等於0不會造成
+    {
+        get
+        {
+            return false;
+        }
+    }
     public abstract float Duration
     {
         get;
@@ -35,7 +42,7 @@ public abstract class  Buff :MonoBehaviour {
     {
         //Debug.Log("buff timeLeft:" + timeLeft);
             timeLeft -= timeBetween;
-            if (timeLeft <= 0)
+            if (timeLeft <= 0&&!endless)
             {
             //Debug.Log("觸發deleteSelf");
                 deleteSelf();

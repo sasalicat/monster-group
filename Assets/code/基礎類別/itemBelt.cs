@@ -101,10 +101,10 @@ public class itemBelt : MonoBehaviour, Callback4Unit
     void befUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs,ref unitControler[] tragets)
     {
         if(befUseSkill!=null)
-            befUseSkill(skillInf, skillArgs, tragets);
+            befUseSkill(skillInf, skillArgs,ref tragets);
     }
-    BasicDelegate.forSkillTrageting befUseSkill;
-    public BasicDelegate.forSkillTrageting _BefUseSkill
+    BasicDelegate.forRefSkillTrageting befUseSkill;
+    public BasicDelegate.forRefSkillTrageting _BefUseSkill
     {
         get
         {
@@ -168,14 +168,30 @@ public class itemBelt : MonoBehaviour, Callback4Unit
             onCreateBuff = value;
         }
     }
+    BasicDelegate.withDamage befCauseDamage;
+    public BasicDelegate.withDamage _befCauseDamage
+    {
+        get
+        {
+            return befCauseDamage;
+        }
 
+        set
+        {
+            befCauseDamage = value;
+        }
+    }
+    void befCauseDamage_cb(Damage damage) {
+        if(befCauseDamage!=null)
+            befCauseDamage(damage);
+    }
     public virtual void addItemBy(string represName)//這個方法是在遊戲開始時執行的,這個時候已經不可能更換裝備了,所以無視屬性更新,只加上裝備技能
     {
         object newrepres = System.Activator.CreateInstance(System.Type.GetType(represName));
         //((BasicControler)controler).data.attributeUpdate = ((item_representation)newrepres).Attributes;
         if (((item_representation)newrepres).ScriptName!=null)
         {
-            skillBelt.addSkillBy(((item_representation)newrepres).ScriptName);
+            skillBelt.addSkillDirectBy(((item_representation)newrepres).ScriptName);
         }
     }
     public virtual void init(unitControler controler, List<int> itemNos)
@@ -187,6 +203,7 @@ public class itemBelt : MonoBehaviour, Callback4Unit
         ((BasicControler)controler)._aftUseSkill += aftUseSkill_cb;
         ((BasicControler)controler)._befTakeDamage += befTakeDamage_cb;
         ((BasicControler)controler)._aftTakeDamage += aftTakeDamage_cb;
+        ((BasicControler)controler)._befCauseDamage += befCauseDamage_cb;
         ((BasicControler)controler)._aftCauseDamage += aftCauseDamage_cb;
         ((BasicControler)controler).data._onLifeChange += onLifeChange_cb;
         foreach(int no in itemNos)

@@ -8,7 +8,7 @@ public interface Callback4Unit {
         get;
         set;
     }
-    BasicDelegate.forSkillTrageting _BefUseSkill
+    BasicDelegate.forRefSkillTrageting _BefUseSkill
     {
         set;
         get;
@@ -25,6 +25,10 @@ public interface Callback4Unit {
     }
     BasicDelegate.withDamage _AftTakeDamage
     {
+        set;
+        get;
+    }
+    BasicDelegate.withDamage _befCauseDamage {
         set;
         get;
     }

@@ -29,8 +29,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
             _be_appoint(skillInf, skillArgs);
     }
 
-    protected BasicDelegate.forSkillTrageting _bef_use_skill;
-    public BasicDelegate.forSkillTrageting _BefUseSkill
+    protected BasicDelegate.forRefSkillTrageting _bef_use_skill;
+    public BasicDelegate.forRefSkillTrageting _BefUseSkill
     {
         get
         {
@@ -45,7 +45,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     protected void befUseSkill_cb(SkillInf skillInf, Dictionary<string, object> skillArgs,ref unitControler[] tragets)
     {
         if(_bef_use_skill !=null)
-            _bef_use_skill( skillInf,  skillArgs,tragets);
+            _bef_use_skill( skillInf,  skillArgs,ref tragets);
     }
 
     protected BasicDelegate.withDamage _bef_take_damage;
@@ -82,10 +82,27 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     }
     protected void aftTakeDamage_cb(Damage d)
     {
-        if(_aft_cause_damage!=null)
+        if(_aft_take_damage != null)
             _aft_take_damage(d);
     }
+    BasicDelegate.withDamage befCauseDamage;
+    public BasicDelegate.withDamage _befCauseDamage
+    {
+        get
+        {
+            return befCauseDamage;
+        }
 
+        set
+        {
+            befCauseDamage = value;
+        }
+    }
+    void befCauseDamage_cb(Damage damage)
+    {
+        if (befCauseDamage != null)
+            befCauseDamage(damage);
+    }
     BasicDelegate.withDamage _aft_cause_damage;
     public BasicDelegate.withDamage _AftCauseDamage
     {
@@ -189,7 +206,8 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         Debug.Log("represName:" + represName);
         object newrepres= System.Activator.CreateInstance(System.Type.GetType(represName));
         string skillName = ((skill_representation)newrepres).ScriptName;
-        Skill newone=(Skill)gameObject.AddComponent(System.Type.GetType(skillName));
+        addSkillDirectBy(skillName);
+        /*Skill newone=(Skill)gameObject.AddComponent(System.Type.GetType(skillName));
         Debug.Log("skillname:" + skillName+" type:"+ System.Type.GetType(skillName));
         //Debug.Log("represName name:" + represName + " parent:"+ newone.GetComponentInParent(System.Type.GetType("CDSkill")));
         if(System.Type.GetType(skillName).IsSubclassOf(System.Type.GetType("CDSkill")))
@@ -198,6 +216,23 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
             _time_pass += ((CDSkill)newone).timePass;
         }
         newone.onInit(controler,this);
+        if (newone.information.activeSkill)//如果是
+        {
+            activeSkills.Add(newone);
+        }
+        skills.Add(newone);*/
+    }
+    public virtual void addSkillDirectBy(string scriptName)
+    {
+        Skill newone = (Skill)gameObject.AddComponent(System.Type.GetType(scriptName));
+        //Debug.Log("skillname:" + scriptName + " type:" + System.Type.GetType(scriptName));
+        //Debug.Log("represName name:" + represName + " parent:"+ newone.GetComponentInParent(System.Type.GetType("CDSkill")));
+        if (System.Type.GetType(scriptName).IsSubclassOf(System.Type.GetType("CDSkill")))
+        //if (newone.GetComponentInParent(System.Type.GetType("CDSkill")) != null)//如果是CD型技能
+        {
+            _time_pass += ((CDSkill)newone).timePass;
+        }
+        newone.onInit(controler, this);
         if (newone.information.activeSkill)//如果是
         {
             activeSkills.Add(newone);
@@ -234,6 +269,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         ((BasicControler)controler)._aftUseSkill += aftUseSkill_cb;
         ((BasicControler)controler)._befTakeDamage += befTakeDamage_cb;
         ((BasicControler)controler)._aftTakeDamage += aftTakeDamage_cb;
+        ((BasicControler)controler)._befCauseDamage += befCauseDamage_cb;
         ((BasicControler)controler)._aftCauseDamage += aftCauseDamage_cb;
         ((BasicControler)controler).data._onLifeChange += onLifeChange_cb;
         ((BasicControler)controler)._onGetBuff += onGetBuff_cb;

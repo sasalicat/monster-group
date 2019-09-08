@@ -71,14 +71,14 @@ public class skill_BaseAttackRemote : CDSkill {
     }
     public virtual void misslieHit(missile m)
     {
-        Debug.Log("missile Hit被觸發");
+        //Debug.Log("missile Hit被觸發");
         GameObject effobj= Instantiate(objectList.main.prafebList[effNo_hit], m.traget.gameObject.transform);
         effobj.transform.localPosition = Vector2.zero;
-        Debug.Log("物件名稱:" + effobj.gameObject.name);
+        //Debug.Log("物件名稱:" + effobj.gameObject.name);
     }
     public override void trigger(Dictionary<string, object> args)
     {
-        Debug.Log("角色名稱:"+gameObject.name);
+        //Debug.Log("角色名稱:"+gameObject.name);
         unitControler[] tragets = (unitControler[])args["tragets"];
         if (!(bool)args["miss"])
         {

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillList : MonoBehaviour {
+public class SkillList : MonoBehaviour
+{
 
     public static SkillList main = null;
     void OnEnable()
@@ -21,4 +22,7 @@ public class SkillList : MonoBehaviour {
     public List<int> MagicNos;
     public List<int> singleTragetMagicNo;
     public List<int> multipTragetMagicNo;
+    public List<int> holyMagicNos;
+    public List<int> holyHealingMagicNos;
+    public List<int> holySupportMagicNos;
 }

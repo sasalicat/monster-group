@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class skill_Brutal : Skill
 {
-    public void befSkill(SkillInf skillInf,Dictionary<string,object> args,unitControler[] tragets)
+    public void befSkill(SkillInf skillInf,Dictionary<string,object> args,ref unitControler[] tragets)
     {
         BasicControler traget = (BasicControler)tragets[0];
         if (skillInf.attack&& ((float)traget.data.Now_Life/(float)traget.data.Now_Max_Life)<=0.5f)

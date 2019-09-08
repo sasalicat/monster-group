@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class repre_brokenTomahawk : item_representation
+public class repre_notherSabre : item_representation
 {
     public Dictionary<byte, int> Attributes
     {
         get
         {
-            return new Dictionary<byte, int>() { { (byte)unitData.attribute.atk, 10 },};
+            return new Dictionary<byte, int>() { {(byte)unitData.attribute.atk, 3 }, { (byte)unitData.attribute.atk_spd, 60 } };
         }
     }
 
@@ -17,7 +17,7 @@ public class repre_brokenTomahawk : item_representation
     {
         get
         {
-            return "曾是部落的英雄-加摩爾使用的武器,在斬殺了無數鋼鐵獸人後破損,被遺棄在了霜火嶺的白雪中";
+            return "風吹的我喘不過氣 --風行者";
         }
     }
 
@@ -25,7 +25,7 @@ public class repre_brokenTomahawk : item_representation
     {
         get
         {
-            return "攻擊力+10,被動:攻擊有25%的幾率造成額外50%的暴擊傷害";
+            return "攻擊力+3 攻擊速度+60,戰鬥開始時獲得輕盈 4秒";
         }
     }
 
@@ -33,7 +33,7 @@ public class repre_brokenTomahawk : item_representation
     {
         get
         {
-            return "碎刃戰斧";
+            return "北風佩刀";
         }
     }
 
@@ -41,7 +41,7 @@ public class repre_brokenTomahawk : item_representation
     {
         get
         {
-            return new List<int>() {0,4};
+            return new List<int>() { 0, 1 };
         }
     }
 
@@ -57,7 +57,7 @@ public class repre_brokenTomahawk : item_representation
     {
         get
         {
-            return "skill_critical_25p_15t";
+            return "skill_notherSabre";
         }
     }
 

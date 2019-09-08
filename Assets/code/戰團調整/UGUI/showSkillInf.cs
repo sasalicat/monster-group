@@ -7,6 +7,7 @@ public class showSkillInf : MonoBehaviour {
     public GameObject panel;
     public void initInf(string name,unitData data)
     {
+        Debug.Log("initInf name:" + name);
         skillInf = (skill_representation)System.Activator.CreateInstance(System.Type.GetType(name));
         skillInf.init(data);
     }

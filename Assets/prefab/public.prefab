@@ -148,6 +148,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1862acb697b95ef45b6310853f7cdcda, type: 3}
   - {fileID: 21300000, guid: 5003370f740940747b735d466eca0506, type: 3}
   - {fileID: 21300000, guid: 183ae6d5ab5ade342bf6ef70eea89d02, type: 3}
+  - {fileID: 21300000, guid: 45d3a407c58f45f4fb3a72b4effb002a, type: 3}
+  - {fileID: 21300000, guid: 4a1018854ea179a469250961c625fc61, type: 3}
+  - {fileID: 21300000, guid: 5d9912f909e1dc8469a27e1493634e59, type: 3}
+  - {fileID: 21300000, guid: 2d1eca8ef7e515a4a8449309e347a516, type: 3}
+  - {fileID: 21300000, guid: 75ca2267bde669049a6ff4e256cc99aa, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
   - {fileID: 21300000, guid: f6ab2ba24bb01cf48ab5dd612a010280, type: 3}
@@ -166,7 +171,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 44371423f2f012a4f89e8d379c032c01, type: 3}
   - {fileID: 21300000, guid: 39becfe9e51f788488bb95d70ce71f1b, type: 3}
   - {fileID: 21300000, guid: 8dbbaae833d6e8448a42e201246d4cdd, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: c960ceaa5c1b2f548a72e51fe661061d, type: 3}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &114324146867005514
@@ -233,9 +238,17 @@ MonoBehaviour:
   - repre_heavenFire
   - repre_slowHealing
   - repre_purify
+  - repre_obtainHolyMagic
+  - repre_obtainHolyHealingMagic
+  - repre_obtainHolySupportMagic
+  - repre_lightBarrier
+  - repre_lightEnvoy
   MagicNos: 0f0000001100000012000000150000001700000018000000190000001a0000001b0000001d000000100000001300000014000000160000001c000000
   singleTragetMagicNo: 0f00000012000000150000001700000018000000190000001a0000001b0000001d00000011000000
   multipTragetMagicNo: 100000001300000014000000160000001c000000
+  holyMagicNos: 2c0000002d0000002e0000002f00000030000000310000003200000033000000
+  holyHealingMagicNos: 2c0000002d0000002e0000003100000032000000
+  holySupportMagicNos: 2f0000003000000033000000
 --- !u!114 &114381664419861970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,8 +278,11 @@ MonoBehaviour:
   - career_hunter_lv1
   - career_hunter_lv2
   - career_hunter_lv3
+  - career_pastor_lv1
+  - career_pastor_lv2
+  - career_pastor_lv3
   baseRaceNos: 000000000100000002000000
-  baseCareerNos: 05000000080000000b0000000e000000
+  baseCareerNos: 05000000080000000b0000000e00000011000000
 --- !u!114 &114406188847283274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -353,6 +369,7 @@ MonoBehaviour:
   - {fileID: 1197450324114692, guid: c4f801a9e60a1b046b36250f7554941a, type: 2}
   - {fileID: 1434168505615224, guid: 24cab23ad17f50645b5834c2ea17e7ed, type: 2}
   - {fileID: 1102024580210186, guid: d81e322a472a34342989d2a4ff8924c1, type: 2}
+  - {fileID: 1951858036498054, guid: 8b10e1eb1bfb9b140a24fafc5d71800c, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -382,7 +399,7 @@ MonoBehaviour:
   - 
   - repre_brokenTomahawk
   - repre_greedyBlade
-  - 
+  - repre_notherSabre
   - 
   - 
 --- !u!114 &114988285080521978

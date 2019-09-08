@@ -7,7 +7,7 @@ public class skill_GunFu : Skill
 {
     protected ChessBoard env;
     protected skill_BaseAttackRemote bonusAttack;
-    public void befSkillUsed(SkillInf inf, Dictionary<string, object> skillArgs, unitControler[] tragets)
+    public void befSkillUsed(SkillInf inf, Dictionary<string, object> skillArgs,ref unitControler[] tragets)
     {
         if (inf.attack){
             if (env.unitsBehind(tragets[0]).Length > 0 && !(bool)skillArgs["bonus"])

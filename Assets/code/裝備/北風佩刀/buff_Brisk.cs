@@ -1,17 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buff_powerBless : Buff {
+public class buff_Brisk : Buff
+{
     private GameObject effection;
     protected int number;
-    public override int kind
-    {
-        get
-        {
-            return POSITIVE;
-        }
-    }
     public override float Duration
     {
         get
@@ -22,14 +17,14 @@ public class buff_powerBless : Buff {
 
     public override bool onInit(unitControler unit, Buff[] Repetitive, Dictionary<string, object> args)
     {
-        int num = (int)args["power"];
+        int num = (int)args["number"];
         float time = (float)args["time"];
         if (Repetitive.Length > 0)
         {
-            buff_powerBless buff = (buff_powerBless)Repetitive[0];
+            buff_Brisk buff = (buff_Brisk)Repetitive[0];
             if (buff.number < num)
             {
-                ((BasicControler)unit).data.Now_Attack += (num - buff.number);
+                ((BasicControler)unit).data.Now_Attack_Speed += (num - buff.number);
                 buff.number = num;
             }
             if (buff.TimeLeft < time)
@@ -42,9 +37,9 @@ public class buff_powerBless : Buff {
         {
 
             timeLeft = time;
-            ((BasicControler)unit).data.Now_Attack += num;
+            ((BasicControler)unit).data.Now_Attack_Speed += num;
             number = num;
-            GameObject prafeb = objectList.main.prafebList[41];
+            GameObject prafeb = objectList.main.prafebList[45];
             effection = Instantiate(prafeb, gameObject.transform);
             effection.transform.localPosition = prafeb.transform.position;
             effection.transform.localScale = prafeb.transform.localScale;
@@ -55,7 +50,7 @@ public class buff_powerBless : Buff {
 
     public override void onRemove()
     {
-        ((BasicControler)unit).data.Now_Attack -= number;
+        ((BasicControler)unit).data.Now_Attack_Speed -= number;
         Destroy(effection);
     }
 }
