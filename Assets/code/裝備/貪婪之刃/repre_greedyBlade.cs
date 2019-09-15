@@ -56,7 +56,7 @@ public class repre_greedyBlade : item_representation {
     {
         get
         {
-            throw new NotImplementedException();
+            return "skill_phyVampire25";
         }
     }
 

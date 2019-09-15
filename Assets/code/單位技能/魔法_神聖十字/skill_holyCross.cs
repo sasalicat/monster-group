@@ -67,6 +67,6 @@ public class skill_holyCross : CDSkill
                 
             }
         }
-        setTime();
+        setTime(args);
     }
 }

@@ -40,7 +40,7 @@ public class skill_turtle_shrinkShell : CDSkill {
         barg["time"] = 4f;
         barg["creater"] = owner;
         owner.addBuff("buff_shrinkShell",barg);
-        setTime();
+        setTime(args);
     }
 
 }

@@ -41,7 +41,7 @@ public class repre_notherSabre : item_representation
     {
         get
         {
-            return new List<int>() { 0, 1 };
+            return new List<int>() { 0, 11 };
         }
     }
 

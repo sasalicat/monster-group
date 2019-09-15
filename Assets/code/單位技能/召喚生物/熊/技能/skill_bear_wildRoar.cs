@@ -97,6 +97,6 @@ public class skill_bear_wildRoar : CDSkill
         barg["time"] = 5f;
         barg["num"] = 30;
         owner.addBuff("buff_heavySkin",barg);
-        setTime();
+        setTime(args);
     }
 }

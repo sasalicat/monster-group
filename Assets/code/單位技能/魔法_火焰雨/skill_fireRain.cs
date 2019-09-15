@@ -47,7 +47,7 @@ public class skill_fireRain : CDSkill
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_DAMAGE});
+        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_DAMAGE,SkillInf.TAG_FIRE});
     }
     public virtual void misslieHit(missile m)
     {
@@ -101,7 +101,7 @@ public class skill_fireRain : CDSkill
             foreach(BasicControler traget in tragets)
                 NumberCreater.main.CreateMissing(traget.transform.position);
         }
-        setTime();
+        setTime(args);
     }
 }
 

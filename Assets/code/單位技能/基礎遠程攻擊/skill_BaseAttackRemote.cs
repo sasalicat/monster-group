@@ -115,7 +115,7 @@ public class skill_BaseAttackRemote : CDSkill {
             BasicControler traget = (BasicControler)tragets[0];
             NumberCreater.main.CreateMissing(traget.transform.position);
         }
-        setTime();
+        setTime(args);
     }
 
 

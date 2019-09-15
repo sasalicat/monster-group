@@ -8,6 +8,11 @@ public class SkillInf  {
     public const string TAG_CURE = "cure";
     public const string TAG_BUFF = "buff";
     public const string TAG_NUFF = "nuff";
+    public const string TAG_FIRE = "fire";
+    public const string TAG_ICE = "ice";
+    public const string TAG_THUNDER = "thunder";
+    public const string TAG_HOLY = "holy";
+
     public bool attack;
     public bool singleTraget;
     public List<string> tags;

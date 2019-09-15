@@ -53,7 +53,7 @@ public class skill_lightingChain : CDSkill
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_DAMAGE });
+        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_DAMAGE,SkillInf.TAG_THUNDER });
     }
 
     public override void trigger(Dictionary<string, object> args)
@@ -72,6 +72,6 @@ public class skill_lightingChain : CDSkill
         GameObject chain = Instantiate(objectList.main.prafebList[18]);
 
         chain.GetComponent<chain_stoker>().tragets = objs;
-        setTime();
+        setTime(args);
     }
 }

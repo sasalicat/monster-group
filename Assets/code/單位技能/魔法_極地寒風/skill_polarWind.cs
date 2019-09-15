@@ -79,7 +79,7 @@ public class skill_polarWind : CDSkill
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_DAMAGE });
+        this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_DAMAGE,SkillInf.TAG_ICE });
 
     }
     public override void trigger(Dictionary<string, object> args)
@@ -121,6 +121,6 @@ public class skill_polarWind : CDSkill
             BasicControler traget = (BasicControler)tragets[0];
             NumberCreater.main.CreateMissing(traget.transform.position);
         }
-        setTime();
+        setTime(args);
     }
 }

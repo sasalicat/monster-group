@@ -41,7 +41,7 @@ public class skill_electShield : CDSkill {
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_DAMAGE });
+        this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_DAMAGE,SkillInf.TAG_THUNDER});
 
     }
 
@@ -64,6 +64,6 @@ public class skill_electShield : CDSkill {
             //Debug.LogWarning("加上buff_flameShield");
 
         }
-        setTime();
+        setTime(args);
     }
 }

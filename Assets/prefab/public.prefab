@@ -169,11 +169,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cfcb2b0b6c5c1fc489c6451ae97c2292, type: 3}
   - {fileID: 21300000, guid: 235a745109700d649a5bc0ed6aba6449, type: 3}
   - {fileID: 21300000, guid: 44371423f2f012a4f89e8d379c032c01, type: 3}
+  - {fileID: 21300000, guid: 7cd097837be80eb4b8941c5f89fb9075, type: 3}
+  - {fileID: 21300000, guid: e61279a19d2b9fe4db0a93ca7cd89439, type: 3}
   - {fileID: 21300000, guid: 39becfe9e51f788488bb95d70ce71f1b, type: 3}
-  - {fileID: 21300000, guid: 8dbbaae833d6e8448a42e201246d4cdd, type: 3}
   - {fileID: 21300000, guid: c960ceaa5c1b2f548a72e51fe661061d, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 8dbbaae833d6e8448a42e201246d4cdd, type: 3}
+  - {fileID: 21300000, guid: c8067cb4ef625e748a070b8e112c13ca, type: 3}
+  - {fileID: 21300000, guid: 29c4e7ad76c189b4bb57b8d7337abe32, type: 3}
 --- !u!114 &114324146867005514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,18 +392,20 @@ MonoBehaviour:
   - repre_headerchief
   - repre_recoverRing
   - repre_vampireMask
-  - 
-  - 
-  - 
-  - 
-  - 
+  - repre_woodenStick
+  - repre_windbreaker
+  - repre_plate
+  - repre_silverGlove
+  - repre_heavyAxe
+  - repre_necklace
+  - repre_emeraldNecklace
   - 
   - 
   - repre_brokenTomahawk
-  - repre_greedyBlade
   - repre_notherSabre
-  - 
-  - 
+  - repre_greedyBlade
+  - repre_gladiatorSword
+  - repre_shadowSacrifice
 --- !u!114 &114988285080521978
 MonoBehaviour:
   m_ObjectHideFlags: 1

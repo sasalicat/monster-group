@@ -31,13 +31,13 @@ public class skill_burn : CDSkill
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_DAMAGE });
+        this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_DAMAGE,SkillInf.TAG_FIRE});
 
     }
     private  Damage createDamage(Dictionary<string,object> skillArg)
     {
         int num = 5;
-        List<string> tag = new List<string>() { Damage.TAG_REMOTE, Damage.TAG_THUNDER };
+        List<string> tag = new List<string>() { Damage.TAG_REMOTE, Damage.TAG_FIRE };
         if ((bool)skillArg["critical"])
         {
             tag.Add("critical");
@@ -79,7 +79,7 @@ public class skill_burn : CDSkill
             BasicControler traget = (BasicControler)tragets[0];
             NumberCreater.main.CreateMissing(traget.transform.position);
         }
-        setTime();
+        setTime(args);
     }
     
 }

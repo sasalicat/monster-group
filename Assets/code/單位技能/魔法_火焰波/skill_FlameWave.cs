@@ -31,7 +31,7 @@ public class skill_FlameWave : CDSkill {
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_DAMAGE });
+        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_DAMAGE,SkillInf.TAG_FIRE});
 
     }
     protected virtual Damage createDamage(Dictionary<string, object> skillArg,float multipe)
@@ -68,7 +68,7 @@ public class skill_FlameWave : CDSkill {
             traget.takeDamage(d);
             multipe *= decay;
         }
-        setTime();
+        setTime(args);
     }
 
 }

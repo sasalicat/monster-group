@@ -102,6 +102,6 @@ public class skill_rake : CDSkill
                 effection.transform.localPosition = prafeb.transform.position;
             }
         }
-        setTime();
+        setTime(args);
     }
 }

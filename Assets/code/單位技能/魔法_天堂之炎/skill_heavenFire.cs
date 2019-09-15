@@ -43,7 +43,7 @@ public class skill_heavenFire : CDSkill
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(true,true,false,new List<string>() {SkillInf.TAG_CURE,SkillInf.TAG_DAMAGE});
+        this.information = new SkillInf(true,true,false,new List<string>() {SkillInf.TAG_CURE,SkillInf.TAG_DAMAGE,SkillInf.TAG_HOLY});
     }
     
     public override void trigger(Dictionary<string, object> args)
@@ -54,11 +54,11 @@ public class skill_heavenFire : CDSkill
             Instantiate(objectList.main.prafebList[42],((BasicControler)tragets[0]).transform.position, ((BasicControler)tragets[0]).transform.rotation);
             int num = (int)(DAMAGE * (float)args[Skill.ARG_MAG_MUL]) + (int)args[Skill.ARG_MAG_ADD];
             int hnum = (int)(HEALING*(float)args[Skill.ARG_HEAL_MUL] + (int)args[Skill.ARG_HEAL_ADD]);
-            Damage d = new Damage(num,Damage.KIND_MAGICAL,owner,new List<string>() {Damage.TAG_REMOTE});
+            Damage d = new Damage(num,Damage.KIND_MAGICAL,owner,new List<string>() {Damage.TAG_REMOTE,Damage.TAG_HOLY});
             tragets[0].takeDamage(d);
 
             tragets[1].heal(hnum, owner);
         }
-        setTime();
+        setTime(args);
     }
 }

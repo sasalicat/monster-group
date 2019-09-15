@@ -45,6 +45,6 @@ public class skill_SmokeBomb : CDSkill
         foreach (BasicControler control in tragets) {
             control.addBuff("buff_blindness",arg);
         }
-        setTime();
+        setTime(args);
     }
 }

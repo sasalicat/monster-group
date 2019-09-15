@@ -112,6 +112,6 @@ public class skill_SecretlyShut : CDSkill
             }
 
         }
-        setTime();
+        setTime(args);
     }
 }

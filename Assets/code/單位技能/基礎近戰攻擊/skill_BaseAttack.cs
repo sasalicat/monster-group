@@ -122,7 +122,7 @@ public class skill_BaseAttack : CDSkill {
             BasicControler traget = (BasicControler)tragets[0];
             NumberCreater.main.CreateMissing(traget.transform.position);
         }
-        setTime();
+        setTime(args);
     }
 /*
     public virtual void Anim(float time)

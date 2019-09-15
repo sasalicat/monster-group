@@ -38,8 +38,9 @@ public abstract class CDSkill : Skill {
         }
         //Debug.Log("timeLeft - time 後為:" + timeLeft);
     }
-    public void setTime() {
-        timeLeft = CoolDown;
+    public void setTime(Dictionary<string,object> args) {
+
+        timeLeft = CoolDown*(float)args["cooldown_multiple"];
     }
 
     public abstract void trigger(Dictionary<string, object> args);

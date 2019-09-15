@@ -40,7 +40,7 @@ public class skill_sacredCharge : CDSkill {
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_CURE });
+        this.information = new SkillInf(true, true, false, new List<string>() { SkillInf.TAG_CURE,SkillInf.TAG_HOLY });
     }
 
     public override void trigger(Dictionary<string, object> args)
@@ -62,6 +62,6 @@ public class skill_sacredCharge : CDSkill {
                 }
             }
         }
-        setTime();
+        setTime(args);
     }
 }

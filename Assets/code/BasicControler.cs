@@ -51,6 +51,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         arg["healing_addition"] = 0;
         arg["control_multiple"] = 1f;
         arg["control_addition"] = 0;
+        arg["cooldown_multiple"] = 1f;
         return arg;
     }
     public virtual void addBuff(string buffName)

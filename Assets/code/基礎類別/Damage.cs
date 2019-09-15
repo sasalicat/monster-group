@@ -10,6 +10,7 @@ public class Damage {
     public const string TAG_FIRE = "fire";
     public const string TAG_ICE = "ice";
     public const string TAG_THUNDER = "thunder";
+    public const string TAG_HOLY = "holy";
     public const string TAG_REMOTE = "remote";
     public const string TAG_CLOSE = "close";
     public const string TAG_CRITICAL = "critical";

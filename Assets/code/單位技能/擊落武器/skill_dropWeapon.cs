@@ -49,6 +49,6 @@ public class skill_dropWeapon : CDSkill
             BasicControler traget = (BasicControler)tragets[0];
             NumberCreater.main.CreateMissing(traget.transform.position);
         }
-        setTime();
+        setTime(args);
     }
 }

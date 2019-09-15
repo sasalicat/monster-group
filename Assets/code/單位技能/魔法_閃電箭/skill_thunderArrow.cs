@@ -32,7 +32,7 @@ public class skill_thunderArrow : CDSkill {
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_DAMAGE });
+        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_DAMAGE,SkillInf.TAG_THUNDER });
 
     }
     protected virtual Damage createDamage(Dictionary<string, object> skillArg)
@@ -65,7 +65,7 @@ public class skill_thunderArrow : CDSkill {
 
             ((GameObject)Instantiate(objectList.main.prafebList[22], traget.transform)).transform.localPosition = Vector2.zero;
         }
-        setTime();
+        setTime(args);
     }
 
 

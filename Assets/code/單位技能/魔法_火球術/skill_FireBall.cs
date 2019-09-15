@@ -48,5 +48,9 @@ public class skill_FireBall : skill_BaseAttackRemote {
             return 2*owner.data.Now_Attack_Interval;
         }
     }
-
+    public override void onInit(unitControler owner, Callback4Unit deleg)
+    {
+        base.onInit(owner, deleg);
+        information = new SkillInf(true,true,false,new List<string>() {SkillInf.TAG_DAMAGE,SkillInf.TAG_FIRE});
+    }
 }

@@ -53,7 +53,7 @@ public class skill_slowHealing : CDSkill {
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         this.owner = (BasicControler)owner;
-        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_CURE,SkillInf.TAG_BUFF});
+        this.information = new SkillInf(false, true, false, new List<string>() { SkillInf.TAG_CURE,SkillInf.TAG_BUFF,SkillInf.TAG_HOLY});
 
     }
 
@@ -71,7 +71,7 @@ public class skill_slowHealing : CDSkill {
                 traget.addBuff("buff_slowHealing", buff_arg);
             }
         }
-        setTime();
+        setTime(args);
     }
 
     // Use this for initialization
