@@ -40,6 +40,8 @@ public class itemList : MonoBehaviour {
             }
         }
     }
+    public List<bool> basicItem;
+
     public List<string> representation;
     public List<item_representation> objects;
 }
