@@ -101,9 +101,10 @@ public class skill_BaseAttack : CDSkill {
             //Debug.Log("製造傷害時傷害數值為:" + damage.num);
             actionTo(tragets,args);
             nowTraget = ((BasicControler)tragets[0]).gameObject;
+            Debug.LogWarning("技能名:" + name);
             if (effection.rushMainStart(animTime,stayTime,nowTraget,Effection))
             {
-
+                Debug.LogWarning("effection.rushMainStart true animTime:"+animTime+"stayTime:"+stayTime+"nowTraget:"+nowTraget);
             }
             else
             {

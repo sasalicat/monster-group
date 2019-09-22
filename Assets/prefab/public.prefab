@@ -153,6 +153,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5d9912f909e1dc8469a27e1493634e59, type: 3}
   - {fileID: 21300000, guid: 2d1eca8ef7e515a4a8449309e347a516, type: 3}
   - {fileID: 21300000, guid: 75ca2267bde669049a6ff4e256cc99aa, type: 3}
+  - {fileID: 21300000, guid: 718419168445c794d97e3ef87ab263ad, type: 3}
+  - {fileID: 21300000, guid: 4001cd95305836e42a1a314112bf9d1a, type: 3}
+  - {fileID: 21300000, guid: 39fa5dc2b9c0ef54c9882b4008098a10, type: 3}
+  - {fileID: 21300000, guid: 4f78a5cf87fd60f4ca0e65da3c5fa402, type: 3}
   itemIcon:
   - {fileID: 21300000, guid: 48d52f54dad8cff43afe7b08f7c3102b, type: 3}
   - {fileID: 21300000, guid: f6ab2ba24bb01cf48ab5dd612a010280, type: 3}
@@ -248,6 +252,10 @@ MonoBehaviour:
   - repre_obtainHolySupportMagic
   - repre_lightBarrier
   - repre_lightEnvoy
+  - repre_angry
+  - repre_bloodSlam
+  - repre_headSmash
+  - repre_drinkBlood
   MagicNos: 0f0000001100000012000000150000001700000018000000190000001a0000001b0000001d000000100000001300000014000000160000001c000000
   singleTragetMagicNo: 0f00000012000000150000001700000018000000190000001a0000001b0000001d00000011000000
   multipTragetMagicNo: 100000001300000014000000160000001c000000
@@ -375,6 +383,8 @@ MonoBehaviour:
   - {fileID: 1434168505615224, guid: 24cab23ad17f50645b5834c2ea17e7ed, type: 2}
   - {fileID: 1102024580210186, guid: d81e322a472a34342989d2a4ff8924c1, type: 2}
   - {fileID: 1951858036498054, guid: 8b10e1eb1bfb9b140a24fafc5d71800c, type: 2}
+  - {fileID: 1383208678824180, guid: 0f968f4fc32d4144f85489eb813ead80, type: 2}
+  - {fileID: 1665014299810996, guid: a006cd4c54cbe4f4da1dab6874a055c0, type: 2}
 --- !u!114 &114660399509043134
 MonoBehaviour:
   m_ObjectHideFlags: 1
