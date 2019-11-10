@@ -22,6 +22,14 @@ public class unitData_v2 : unitData {
             dodge_point = value;
         }
     }
+    //在確定計算公式前都用0.5湊合下
+    public float Dodge_Rate
+    {
+        get
+        {
+            return 0.5f;
+        }
+    }
 
     private int block_point = STAND_BLOCK;
     public int Now_Block_Point
@@ -33,6 +41,13 @@ public class unitData_v2 : unitData {
         set
         {
             block_point = value;
+        }
+    }
+    public float Block_Rate
+    {
+        get
+        {
+            return 0.5f;
         }
     }
 
@@ -48,6 +63,13 @@ public class unitData_v2 : unitData {
             insight_point = value;
         }
     }
+    public float Insight_Rate
+    {
+        get
+        {
+            return 0.5f;
+        }
+    }
 
     private int crit_point = STAND_CRIT;
     public int Now_Crit_Point
@@ -59,6 +81,13 @@ public class unitData_v2 : unitData {
         set
         {
             crit_point = value;
+        }
+    }
+    public float Crit_Rate
+    {
+        get
+        {
+            return 0.5f;
         }
     }
 
@@ -74,6 +103,11 @@ public class unitData_v2 : unitData {
             batter_point = value;
         }
     }
+    public float Batter_Rate{
+        get{
+            return 0.5f;
+        }
+    }
 
     private int counter_point = STAND_COUNTER;
     public int Now_Counter_Point
@@ -86,6 +120,12 @@ public class unitData_v2 : unitData {
         {
             counter_point = value;
         }
-    } 
-
+    }
+    public float Counter_Rate
+    {
+        get
+        {
+            return 0.5f;
+        }
+    }
 }
