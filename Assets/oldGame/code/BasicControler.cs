@@ -220,7 +220,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         hpbar.Percentage = (float)nowHp / (float)data.Now_Max_Life;
        
     }
-    public void init(AI ai,Environment env,unitData data,HpBar hpbar)
+    public virtual void init(AI ai,Environment env,unitData data,HpBar hpbar)
     {
         this.ai = ai;
         this.env = env;
