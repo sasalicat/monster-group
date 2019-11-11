@@ -18,7 +18,8 @@ public class comboControler : BasicControler{
 
     public BasicDelegate.forSkill _aftDodge;
     public void dodgeAction(SkillInf skillInf, Dictionary<string, object> skillArgs){
-        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Dodge_Rate)//如果閃避成功
+        float denyRate = (float)skillArgs["dodgeDeny"];
+        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Dodge_Rate-denyRate)//如果閃避成功
             ((Dictionary<comboControler, bool>)skillArgs["miss"])[this] = true;
             _aftDodge(skillInf, skillArgs);   
     }
@@ -26,7 +27,7 @@ public class comboControler : BasicControler{
   
     public void counterAction(SkillInf skillInf, Dictionary<string, object> skillArgs)
     {
-        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Counter_Rate)
+        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Counter_Rate)
         {
             unitControler[] traget = new unitControler[]{(unitControler)skillArgs["user"]};
             Dictionary<string,object> args= createSkillArg(data);
@@ -36,12 +37,31 @@ public class comboControler : BasicControler{
     }
     public void batterAction(SkillInf skillInf, Dictionary<string, object> skillArgs,unitControler[] tragets)
     {
-        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Batter_Rate)
+        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Batter_Rate)
         {
             Dictionary<string, object> args = createSkillArg(data);
             args["bonus"] = bonus_kind.Batter;
-            useSkill(counterSkill, tragets, args);
+            bool canBatter = false;
+            if (!args.ContainsKey("batterTime"))
+            {
+                args["batterTime"] = 1;
+                canBatter = true;
+            }
+            else
+            {
+                if ((int)args["batterTime"] < ((unitData_v2)data).Now_Batter_Limmit) {
+                    args["batterTime"] = (int)args["batterTime"]+1;
+                    canBatter = true;
+                 }
+            }
+            if(canBatter)
+                useSkill(counterSkill, tragets, args);
         }
+    }
+    public void blockAction(Damage damage)
+    {
+        float denyRate = (float)skillArgs["blockDeny"];
+
     }
     public virtual Dictionary<string,object> createSkillArg(unitData data,unitControler[] tragets)
     {
@@ -55,6 +75,8 @@ public class comboControler : BasicControler{
         arg["bonus"] = bonus_kind.NoBonus;//因為技能效果所而額外觸發的技能
         arg["dice"] = Randomer.main.getInt();
         arg["critical"] = false;
+        arg["dodgeDeny"] = ((unitData_v2)data).Now_Insight_Rate * ((unitData_v2)data).Now_Insight_Reduce;
+        arg["blockDeny"] = ((unitData_v2)data).Now_Insight_Rate * ((unitData_v2)data).Now_Insight_Reduce;
         return arg;
     }
     public override void takeDamage(Damage damage)
