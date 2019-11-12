@@ -13,6 +13,8 @@ public class comboControler : BasicControler{
         this._beAppoint += dodgeAction;
         this._aftBeSkill += counterAction;
         this._aftUseSkill += batterAction;
+        this._befTakeDamage += blockAction;
+        this._befCauseDamage += critAction;
         base.init(ai, env, data, hpbar);
     }
 
@@ -24,7 +26,6 @@ public class comboControler : BasicControler{
             _aftDodge(skillInf, skillArgs);   
     }
     public Skill counterSkill = null;
-  
     public void counterAction(SkillInf skillInf, Dictionary<string, object> skillArgs)
     {
         if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Counter_Rate)
@@ -55,13 +56,31 @@ public class comboControler : BasicControler{
                  }
             }
             if(canBatter)
-                useSkill(counterSkill, tragets, args);
+                useSkill(((SkillInf_v2)skillInf).skill, tragets, args);
         }
     }
+    public BasicDelegate.withDamage _aftBlock;
     public void blockAction(Damage damage)
     {
-        float denyRate = (float)skillArgs["blockDeny"];
-
+        float denyRate = (float)((Damage_v2)damage).extraArgs["blockDeny"];
+        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Batter_Rate - denyRate)
+        {
+            damage.num -= ((unitData_v2)data).Now_Block_Point;
+            if (damage.num < 0)
+            {
+                damage.num = 0;
+            }
+            _aftBlock(damage);
+        }
+    }
+    public BasicDelegate.withDamage _aftCrit;
+    public void critAction(Damage damage)
+    {
+        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Crit_Rate)
+        {
+            damage.num = (int)((unitData_v2)data).Now_Crit_Rate*damage.num;
+            _aftCrit(damage);
+        }
     }
     public virtual Dictionary<string,object> createSkillArg(unitData data,unitControler[] tragets)
     {
