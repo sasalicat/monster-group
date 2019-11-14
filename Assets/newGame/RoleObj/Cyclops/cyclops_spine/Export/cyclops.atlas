@@ -1,0 +1,300 @@
+
+cyclops.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm_l_1
+  rotate: true
+  xy: 290, 128
+  size: 66, 78
+  orig: 66, 78
+  offset: 0, 0
+  index: -1
+arm_l_2
+  rotate: true
+  xy: 792, 94
+  size: 64, 84
+  orig: 64, 84
+  offset: 0, 0
+  index: -1
+arm_l_3
+  rotate: false
+  xy: 926, 94
+  size: 58, 54
+  orig: 58, 54
+  offset: 0, 0
+  index: -1
+arm_r_1
+  rotate: false
+  xy: 392, 194
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: -1
+arm_r_2
+  rotate: true
+  xy: 306, 5
+  size: 50, 74
+  orig: 50, 74
+  offset: 0, 0
+  index: -1
+arm_r_3
+  rotate: false
+  xy: 878, 114
+  size: 46, 44
+  orig: 46, 44
+  offset: 0, 0
+  index: -1
+body_1
+  rotate: false
+  xy: 826, 160
+  size: 96, 46
+  orig: 96, 46
+  offset: 0, 0
+  index: -1
+body_2
+  rotate: false
+  xy: 926, 150
+  size: 96, 102
+  orig: 96, 102
+  offset: 0, 0
+  index: -1
+buttock
+  rotate: true
+  xy: 630, 55
+  size: 102, 56
+  orig: 102, 56
+  offset: 0, 0
+  index: -1
+coat
+  rotate: false
+  xy: 290, 260
+  size: 150, 92
+  orig: 150, 92
+  offset: 0, 0
+  index: -1
+eye_1
+  rotate: false
+  xy: 290, 196
+  size: 100, 62
+  orig: 100, 62
+  offset: 0, 0
+  index: -1
+eye_2
+  rotate: false
+  xy: 690, 128
+  size: 100, 62
+  orig: 100, 62
+  offset: 0, 0
+  index: -1
+head_1
+  rotate: false
+  xy: 688, 64
+  size: 100, 62
+  orig: 100, 62
+  offset: 0, 0
+  index: -1
+head_2
+  rotate: false
+  xy: 790, 36
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1
+leg_l_1
+  rotate: false
+  xy: 533, 678
+  size: 34, 44
+  orig: 34, 44
+  offset: 0, 0
+  index: -1
+leg_l_2
+  rotate: true
+  xy: 792, 166
+  size: 24, 32
+  orig: 24, 32
+  offset: 0, 0
+  index: -1
+leg_l_3
+  rotate: false
+  xy: 878, 94
+  size: 40, 18
+  orig: 40, 18
+  offset: 0, 0
+  index: -1
+leg_r_1
+  rotate: false
+  xy: 848, 44
+  size: 30, 48
+  orig: 30, 48
+  offset: 0, 0
+  index: -1
+leg_r_2
+  rotate: true
+  xy: 986, 120
+  size: 28, 36
+  orig: 28, 36
+  offset: 0, 0
+  index: -1
+leg_r_3
+  rotate: false
+  xy: 2, 2
+  size: 40, 20
+  orig: 40, 20
+  offset: 0, 0
+  index: -1
+skill1_1
+  rotate: false
+  xy: 2, 724
+  size: 286, 296
+  orig: 286, 296
+  offset: 0, 0
+  index: -1
+skill1_2
+  rotate: false
+  xy: 2, 426
+  size: 286, 296
+  orig: 286, 296
+  offset: 0, 0
+  index: -1
+skill1_3
+  rotate: false
+  xy: 290, 724
+  size: 286, 296
+  orig: 286, 296
+  offset: 0, 0
+  index: -1
+skill1_4
+  rotate: false
+  xy: 2, 128
+  size: 286, 296
+  orig: 286, 296
+  offset: 0, 0
+  index: -1
+skill2_11
+  rotate: false
+  xy: 386, 121
+  size: 242, 36
+  orig: 242, 36
+  offset: 0, 0
+  index: -1
+skill2_12
+  rotate: false
+  xy: 386, 83
+  size: 242, 36
+  orig: 242, 36
+  offset: 0, 0
+  index: -1
+skill2_13
+  rotate: false
+  xy: 386, 45
+  size: 242, 36
+  orig: 242, 36
+  offset: 0, 0
+  index: -1
+skill2_21
+  rotate: true
+  xy: 462, 340
+  size: 382, 69
+  orig: 382, 69
+  offset: 0, 0
+  index: -1
+skill2_22
+  rotate: true
+  xy: 948, 638
+  size: 382, 69
+  orig: 382, 69
+  offset: 0, 0
+  index: -1
+skill2_23
+  rotate: false
+  xy: 2, 57
+  size: 382, 69
+  orig: 382, 69
+  offset: 0, 0
+  index: -1
+skill2_24
+  rotate: true
+  xy: 936, 254
+  size: 382, 69
+  orig: 382, 69
+  offset: 0, 0
+  index: -1
+skill2_25
+  rotate: false
+  xy: 442, 263
+  size: 382, 69
+  orig: 382, 69
+  offset: 0, 0
+  index: -1
+skill2_26
+  rotate: false
+  xy: 442, 192
+  size: 382, 69
+  orig: 382, 69
+  offset: 0, 0
+  index: -1
+skill2_31
+  rotate: true
+  xy: 290, 354
+  size: 368, 170
+  orig: 368, 170
+  offset: 0, 0
+  index: -1
+skill2_32
+  rotate: false
+  xy: 578, 850
+  size: 368, 170
+  orig: 368, 170
+  offset: 0, 0
+  index: -1
+skill2_33
+  rotate: false
+  xy: 578, 678
+  size: 368, 170
+  orig: 368, 170
+  offset: 0, 0
+  index: -1
+skill2_34
+  rotate: false
+  xy: 533, 506
+  size: 368, 170
+  orig: 368, 170
+  offset: 0, 0
+  index: -1
+skill2_35
+  rotate: false
+  xy: 533, 334
+  size: 368, 170
+  orig: 368, 170
+  offset: 0, 0
+  index: -1
+skill_1
+  rotate: true
+  xy: 903, 374
+  size: 302, 31
+  orig: 302, 31
+  offset: 0, 0
+  index: -1
+skill_2
+  rotate: false
+  xy: 2, 24
+  size: 302, 31
+  orig: 302, 31
+  offset: 0, 0
+  index: -1
+skill_3
+  rotate: false
+  xy: 386, 159
+  size: 302, 31
+  orig: 302, 31
+  offset: 0, 0
+  index: -1
+weapon
+  rotate: true
+  xy: 826, 208
+  size: 124, 98
+  orig: 124, 98
+  offset: 0, 0
+  index: -1
