@@ -12,6 +12,8 @@ public class closeupStage : MonoBehaviour,battleStage {
     public float closeUp_time = 0.3f;
     protected float timeBefore = 0;
     protected clock clockFunc;
+    public GameObject[] team1;
+    public GameObject[] team2;
     protected void closeUp_process(float time)
     {
         Debug.Log("closeUp_process timeBefore:"+timeBefore);
