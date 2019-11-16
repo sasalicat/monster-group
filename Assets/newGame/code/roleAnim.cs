@@ -13,19 +13,19 @@ public class roleAnim : MonoBehaviour {
 	void Update () {
 		
 	}
-    void amim_attack()
+    public void anim_attack()
     {
         anim.SetBool("skill_1",true);
     }
-    void anim_magic()
+    public void anim_magic()
     {
         anim.SetBool("skill_3", true);
     }
-    void anim_behit()
+    public void anim_behit()
     {
         anim.SetBool("hit_1", true);
     }
-    void anim_died()
+    public void anim_died()
     {
         anim.SetBool("death", true);
     }
