@@ -16,8 +16,9 @@ public class demoButtom : MonoBehaviour {
     public void onFightClick()
     {
         stage.closeUp();
+        stage.display_onStage(stage.team1[0], stage.team2);
         stage.team1[0].GetComponent<roleAnim>().anim_attack();
-        foreach(GameObject enermy in stage.team2)
+        foreach(BasicControler enermy in stage.team2)
         {
             enermy.GetComponent<roleAnim>().anim_behit();
         }
@@ -25,6 +26,6 @@ public class demoButtom : MonoBehaviour {
     public void onUnfightClick()
     {
         stage.uncloseUp();
-        
+        stage.setCurtain(false);
     }
 }

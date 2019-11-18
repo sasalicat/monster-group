@@ -6,14 +6,27 @@ using System.Collections;
 public class AnimationEvent : MonoBehaviour {
 
 	public GameObject enemy;
-
+    public Animator anim;
 	private int atkTimes = 0;
-
+    public roleAnim father;
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+        if (transform.parent != null)
+        {
+            father= transform.parent.GetComponent<roleAnim>();
+        }
+    }
+    public void resetBack()
+    {
+        anim.SetBool("back",false);
+    }
 	public void AttackStart () {
 		Debug.Log ("Attack Start");
 
 		//Just for demonstration, you can replace it with your own code logic.
-		atkTimes++;
+		/*
+        atkTimes++;
 		if (enemy && atkTimes <= 3) {
 			Animator enemyAnimator = enemy.GetComponent<Animator> ();
 			if (atkTimes == 1) {
@@ -24,11 +37,15 @@ public class AnimationEvent : MonoBehaviour {
 				enemyAnimator.SetTrigger ("hit_2");
 				enemyAnimator.SetTrigger ("death");
 			} 
-		}
+		}*/
 	}
 
 	public void AttackStartEffectObject () {
 		Debug.Log ("Fire Effect Object");
 	}
+    public void father_goEffect()
+    {
+        father.goEffect();
+    }
 
 }
