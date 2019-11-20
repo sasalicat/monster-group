@@ -13,15 +13,23 @@ public class demoButtom : MonoBehaviour {
 	void Update () {
 		
 	}
+    public void clearEnemyHitAnim()
+    {
+        foreach (BasicControler enermy in stage.team2)
+        {
+            enermy.GetComponent<roleAnim>().endNowAnim();
+        }
+    }
     public void onFightClick()
     {
-        stage.closeUp(null);
+        stage.closeUp(closeupStage.CU_RIGHT_TOLEFT);
         stage.display_onStage(stage.team1[0], stage.team2);
-        stage.team1[0].GetComponent<roleAnim>().anim_attack();
+        roleAnim anim= stage.team1[0].GetComponent<roleAnim>();
         foreach(BasicControler enermy in stage.team2)
         {
-            enermy.GetComponent<roleAnim>().anim_behit();
+            anim.forNextEffect+= enermy.GetComponent<roleAnim>().anim_behit;
         }
+        anim.anim_attack(clearEnemyHitAnim);
     }
     public void onUnfightClick()
     {

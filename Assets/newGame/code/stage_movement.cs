@@ -26,14 +26,28 @@ public class skill_movement:stage_movement
         : base(order, argList)
     {
         this.user_before = (comboControler)user_bef;
-        foreach (comboControler traget in tragets_bef)
+        if (tragets_bef == null)
         {
-            tragets_before.Add(traget);
+            tragets_before = null;
+        }
+        else
+        {
+            foreach (comboControler traget in tragets_bef)
+            {
+                tragets_before.Add(traget);
+            }
         }
         this.user = (comboControler)user;
-        foreach (comboControler traget in tragetlist)
+        if (tragetlist == null)
         {
-            tragets.Add(traget);
+            tragets = null;
+        }
+        else
+        {
+            foreach (comboControler traget in tragetlist)
+            {
+                tragets.Add(traget);
+            }
         }
     }
 }

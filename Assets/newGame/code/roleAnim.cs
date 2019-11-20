@@ -6,13 +6,12 @@ using UnityEngine.Rendering;
 public class roleAnim : MonoBehaviour {
     public Animator anim;//手動拉取
     public SortingGroup sorter;
+    public state_test.withNothing forNextEffect;
+    public state_test[] stateList;
+    //public withNothing onAttackEnd;
     // Use this for initialization
 	void Start () {
-		state_test[] list= anim.GetBehaviours<state_test>();
-        foreach (state_test state in list)
-        {
-            //state
-        }
+        stateList = anim.GetBehaviours<state_test>();
 	}
 	
 	// Update is called once per frame
@@ -22,10 +21,32 @@ public class roleAnim : MonoBehaviour {
     public void goEffect()
     {
         Debug.Log("time to show effect");
+        if (forNextEffect != null)
+        {
+            forNextEffect();
+        }
+        forNextEffect = null;
     }
+    public void endNowAnim()
+    {
+        foreach (state_test state in stateList)
+        {
+            if (state.stateActive)
+            {
+                state.force2End();
+            }
+        }
+    }
+
+
     public void anim_attack()
     {
         anim.SetBool("skill_1",true);
+    }
+    public void anim_attack(state_test.withNothing cb)
+    {
+        anim.GetBehaviour<state_atk>().forNextEnd += cb;
+        anim.SetBool("skill_1", true);
     }
     public void anim_magic()
     {

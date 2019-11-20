@@ -5,12 +5,22 @@ using UnityEngine;
 public class state_test : StateMachineBehaviour
 {
     public delegate void withNothing();
+    public float stillStartTime = -1;
     float speed_baseline = 3f;
-    float still_percentage = 0.2f;
+    //float still_percentage = 0.2f;
     float minSpeed = 0.1f;
     bool end = false;
+    public bool stateActive
+    {
+        get
+        {
+            return !end;
+        }
+    }
     float oriAnimLength=1;
-
+    Animator nowAnimator=null;
+    public virtual void onEnd(bool endBySelf){
+    }
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //Debug.Log(animator.gameObject.name+":state_test OnStateEnter");
@@ -18,6 +28,7 @@ public class state_test : StateMachineBehaviour
         //Debug.Log("修改speed到:" + animator.speed);
         oriAnimLength = stateInfo.length;
         end = false;
+        nowAnimator = animator;
         //stateInfo.speed = 2;
     }
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -25,6 +36,8 @@ public class state_test : StateMachineBehaviour
         //Debug.Log(name+":state_test OnStateExit !!!!!!!!!!!!!!!!!!");
         animator.speed = 1;
         end = true;
+        nowAnimator = null;
+        onEnd(true);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -37,6 +50,10 @@ public class state_test : StateMachineBehaviour
         {
             //Debug.Log("1-still_percentage:" + (1 - still_percentage) + "normalizedTime:" + stateInfo.normalizedTime);
             float time = (stateInfo.normalizedTime / oriAnimLength);
+            if (stillStartTime >= 0) {
+                time = (stateInfo.normalizedTime / stillStartTime);
+            }
+            
             if (time > 1)
             {
                 time = 1;
@@ -53,5 +70,15 @@ public class state_test : StateMachineBehaviour
 
             //Debug.Log();
         }
+    }
+    public void force2End()
+    {
+        end = true;
+        if (nowAnimator != null)
+        {
+            nowAnimator.speed = 1;
+            nowAnimator = null;
+        }
+        onEnd(false);
     }
 }
