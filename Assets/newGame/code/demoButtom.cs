@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class demoButtom : MonoBehaviour {
     public closeupStage stage;
+    public GameObject effect; 
 	// Use this for initialization
 	void Start () {
 		
@@ -20,6 +21,20 @@ public class demoButtom : MonoBehaviour {
             enermy.GetComponent<roleAnim>().endNowAnim();
         }
     }
+    public void createEffect(GameObject gobj)
+    {
+        Debug.Log(gobj.name + "create effect");
+        Instantiate(effect,gobj.transform.position,gobj.transform.rotation);
+    }
+    public void createEffects()
+    {
+        Debug.Log("createEffects !!!");
+        foreach (BasicControler enermy in stage.team2)
+        {
+            GameObject rObj = enermy.GetComponent<roleAnim>().rootObj;
+            Instantiate(effect, rObj.transform.position, rObj.transform.rotation);
+        }
+    }
     public void onFightClick()
     {
         stage.closeUp(closeupStage.CU_RIGHT_TOLEFT);
@@ -28,7 +43,9 @@ public class demoButtom : MonoBehaviour {
         foreach(BasicControler enermy in stage.team2)
         {
             anim.forNextEffect+= enermy.GetComponent<roleAnim>().anim_behit;
+            
         }
+        anim.forNextEffect += createEffects;
         anim.anim_attack(clearEnemyHitAnim);
     }
     public void onUnfightClick()

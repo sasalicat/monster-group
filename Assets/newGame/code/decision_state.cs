@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class state_test : StateMachineBehaviour
+public class decision_state : StateMachineBehaviour
 {
     public delegate void withNothing();
+    public withNothing onAnimEnd;
     public float stillStartTime = -1;
     public float stillTime = 0;
     public float speed_baseline = 5f;
     //float still_percentage = 0.2f;
     public float minSpeed = 0.15f;
     bool end = false;
+    int counter = 0;
     public bool stateActive
     {
         get
@@ -18,9 +20,12 @@ public class state_test : StateMachineBehaviour
             return !end;
         }
     }
-    float oriAnimLength=1;
-    Animator nowAnimator=null;
-    public virtual void onEnd(bool endBySelf){
+    float oriAnimLength = 1;
+    Animator nowAnimator = null;
+    public virtual void onEnd(bool endBySelf)
+    {
+        if (onAnimEnd!=null)
+            onAnimEnd();
     }
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -35,42 +40,51 @@ public class state_test : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //Debug.Log(name+":state_test OnStateExit !!!!!!!!!!!!!!!!!!");
-        animator.speed = 1;
-        end = true;
-        nowAnimator = null;
-        onEnd(true);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //Debug.Log(name+":state_test OnStateUpdate");
+        //Debug.Log(name+":state_test OnStateUpdate time:"+counter);
+        //counter += 1;
     }
+    override public void OnStateMachineExit(Animator animator, int stateMachinePathHash)
+    {
+        Debug.Log("OnStateMachineExit!!!");
+    } 
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //Debug.Log(name + ":state_test OnStateMove " + "length:" + stateInfo.length + "loop:" + stateInfo.loop + "normalizedTime:" + stateInfo.normalizedTime + "speed:" + stateInfo.speed);
+        Debug.Log(name + ":state_test OnStateMove " + "length:" + stateInfo.length + "loop:" + stateInfo.loop + "normalizedTime:" + stateInfo.normalizedTime + "speed:" + stateInfo.speed);
         if (!end)
         {
             //Debug.Log("1-still_percentage:" + (1 - still_percentage) + "normalizedTime:" + stateInfo.normalizedTime);
             float time = (stateInfo.normalizedTime / oriAnimLength);
-            if (stillStartTime >= 0) {
+            if (stillStartTime >= 0)
+            {
                 time = (stateInfo.normalizedTime / stillStartTime);
             }
-            
+
             if (time > 1)
             {
                 time = 1;
             }
             float evalue = EasingFunction.EaseInCirc(1, 0, time);
             //Debug.Log("time"+time+"eValue:"+evalue);
-            float now_speed =evalue * speed_baseline;
+            float now_speed = evalue * speed_baseline;
             //Debug.Log("time:"+time+"evalue:"+evalue+ "now_speed:" + now_speed);
             if (now_speed < minSpeed)
             {
                 now_speed = minSpeed;
             }
-           animator.speed = now_speed;
+            animator.speed = now_speed;
 
             //Debug.Log();
         }
+        /*if (stateInfo.normalizedTime >= stateInfo.length)
+        {
+            animator.speed = 1;
+            end = true;
+            nowAnimator = null;
+            onEnd(true);
+        }*/
     }
     public void force2End()
     {

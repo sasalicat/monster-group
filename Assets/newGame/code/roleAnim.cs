@@ -7,7 +7,10 @@ public class roleAnim : MonoBehaviour {
     public Animator anim;//手動拉取
     public SortingGroup sorter;
     public state_test.withNothing forNextEffect;
+    public delegate void withGameObject(GameObject gobj);
+    public withGameObject forNextEffect_GOBJ;
     public state_test[] stateList;
+    public GameObject rootObj;
     //public withNothing onAttackEnd;
     // Use this for initialization
 	void Start () {
@@ -24,8 +27,14 @@ public class roleAnim : MonoBehaviour {
         if (forNextEffect != null)
         {
             forNextEffect();
+            
+        }
+        if (forNextEffect_GOBJ !=null)
+        {
+            forNextEffect_GOBJ(gameObject);
         }
         forNextEffect = null;
+        forNextEffect_GOBJ=null;
     }
     public void endNowAnim()
     {

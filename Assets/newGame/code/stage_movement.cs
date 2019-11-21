@@ -15,6 +15,7 @@ public class stage_movement {
         this.argList = argList;
     }
 }
+
 public class skill_movement:stage_movement
 {
     protected comboControler user_before=null;

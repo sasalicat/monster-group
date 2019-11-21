@@ -30,7 +30,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public BasicControler[] team2;
     public GameObject curtain;
     public const int CURTAIN_MASKER_NUMBER = 101;
-
+    //用於存放異步的order
     protected skill_movement rootMovement;
     protected List<skill_movement> heap;
     protected with_movement[] handleFuncs;
@@ -39,6 +39,8 @@ public class closeupStage : MonoBehaviour, battleStage
     //記錄當前黑幕前有哪些角色
     unitControler now_protagonist;
     unitControler now_tragets;
+    //用於解讀異步的order
+    public List<skillpackage> package=new List<skillpackage>();
     protected void closeUp_process(float time)
     {
         Debug.Log("closeUp_process timeBefore:" + timeBefore);
@@ -171,7 +173,7 @@ public class closeupStage : MonoBehaviour, battleStage
         setCurtain(true);
         ((BasicControler)actioner).GetComponent<roleAnim>().addSortLayout(CURTAIN_MASKER_NUMBER);
         foreach (unitControler unit in tragets)
-        {
+        {  
             ((BasicControler)unit).GetComponent<roleAnim>().addSortLayout(CURTAIN_MASKER_NUMBER);
         }
     }
@@ -188,8 +190,10 @@ public class closeupStage : MonoBehaviour, battleStage
         nowMachine = new handle_SkillStart(move);
     }
 }
+public delegate void skillpackage_func(skillpackage package);
 abstract class state_machine
 {
+
     public state_machine(stage_movement movement)
     {
 
@@ -198,18 +202,31 @@ abstract class state_machine
     public abstract void Next();
 }
 
- class handle_SkillStart : state_machine
+ class skillpackage : state_machine
 {
+    int stage=0;
+              //stage0前置作業,目前為拉近鏡頭,移動角色到攻擊位置
+              //stage1開始角色的攻擊動畫 stage1->2為對應攻擊動畫觸發doEffect
+              //stage2專為missile設計,如果沒有創建missile則跳過這個stage stage2->3為所有missile hit觸發
+              //stage3依次開始所有目標的behit動畫和創建被擊特效 stage3->4為所有behit動畫結束
+              //stage4設置為End 為True,整個技能的表現結束
     skill_movement now_movement;
+    public List<object> stage2_condition;//存還未打中的missile
+    public List<object> stage3_condition;//存還未完成的動畫
+    public List<List<skillpackage_func>> stage_funcs;
+
     public override void Next(object arg)
     {
 
     }
     public override void Next()
     {
-
+        if (stage == 0) { 
+            
+        }
     }
-    public handle_SkillStart(stage_movement movement):base(movement)
+    public skillpackage(stage_movement movement)
+        : base(movement)
     {
         now_movement = (skill_movement)movement;
         bool isTrigger = ((skill_movement)movement).isTrigger;
@@ -221,6 +238,13 @@ abstract class state_machine
         else
         {
 
+        }
+    }
+    public bool End
+    {
+        get
+        {
+            return stage == 4;
         }
     }
 }
