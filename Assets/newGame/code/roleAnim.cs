@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 public class roleAnim : MonoBehaviour {
+    public const int BEHIT = 0;
+    public const int ATTACK = 1;
+    public const int MAGIC = 2;
+
     public Animator anim;//手動拉取
     public SortingGroup sorter;
     public state_test.withNothing forNextEffect;
@@ -61,8 +65,18 @@ public class roleAnim : MonoBehaviour {
     {
         anim.SetBool("skill_3", true);
     }
+    public void anim_magic(state_test.withNothing cb)
+    {
+        anim.GetBehaviour<state_atk>().forNextEnd += cb;
+        anim.SetBool("skill_3", true);
+    }
     public void anim_behit()
     {
+        anim.SetBool("hit_1", true);
+    }
+    public void anim_behit(state_test.withNothing cb)
+    {
+        anim.GetBehaviour<state_atk>().forNextEnd += cb;
         anim.SetBool("hit_1", true);
     }
     public void anim_died()
