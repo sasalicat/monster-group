@@ -10,6 +10,7 @@ public class state_test : StateMachineBehaviour
     public float speed_baseline = 5f;
     //float still_percentage = 0.2f;
     public float minSpeed = 0.15f;
+    public bool slowDown = false;
     bool end = false;
     public bool stateActive
     {
@@ -47,7 +48,7 @@ public class state_test : StateMachineBehaviour
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //Debug.Log(name + ":state_test OnStateMove " + "length:" + stateInfo.length + "loop:" + stateInfo.loop + "normalizedTime:" + stateInfo.normalizedTime + "speed:" + stateInfo.speed);
-        if (!end)
+        if (!end && slowDown)
         {
             //Debug.Log("1-still_percentage:" + (1 - still_percentage) + "normalizedTime:" + stateInfo.normalizedTime);
             float time = (stateInfo.normalizedTime / oriAnimLength);

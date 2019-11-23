@@ -33,7 +33,7 @@ public class BasicManager : MonoBehaviour,Manager {
             main = this;
         }
     }
-    public void forRoleDeath(GameObject gobj)
+    public virtual void forRoleDeath(GameObject gobj)
     {
         Debug.LogWarning(gobj.name + " dead");
         gobj.AddComponent<fadeOut>();
@@ -73,7 +73,7 @@ public class BasicManager : MonoBehaviour,Manager {
 
         
     }
-    public  unitControler createUnit(Dictionary<string, object> unitInf)
+    public virtual unitControler createUnit(Dictionary<string, object> unitInf)
     {
         Debug.Log("創建新的單位");
         int posX = (int)unitInf["position_x"];

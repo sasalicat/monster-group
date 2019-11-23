@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ public class skill_movement:stage_movement
         }
         else
         {
+            tragets_before = new List<comboControler>();
             foreach (comboControler traget in tragets_bef)
             {
                 tragets_before.Add(traget);
@@ -44,6 +46,7 @@ public class skill_movement:stage_movement
         }
         else
         {
+            tragets = new List<comboControler>();
             foreach (comboControler traget in tragetlist)
             {
                 tragets.Add(traget);
@@ -63,6 +66,28 @@ public abstract class stage_action:stage_movement
         skp.stage_funcs[stage] += action;
     }
     public abstract void action(skillpackage skp);
+}
+public class closeUp_action : stage_action
+{
+    public closeUp_action(move order, List<object> argList)
+        : base(order, argList)
+    {
+
+    }
+    public override int stage
+    {
+        get
+        {
+            return 0;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        int kind = (int)argList[0];
+        closeupStage.main.closeUp(kind);
+
+    }
 }
 public class animSkill_action : stage_action {
     public animSkill_action(move order, List<object> argList)

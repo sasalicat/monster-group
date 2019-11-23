@@ -58,7 +58,7 @@ public class roleAnim : MonoBehaviour {
     }
     public void anim_attack(state_test.withNothing cb)
     {
-        anim.GetBehaviour<state_atk>().forNextEnd += cb;
+        forNextEffect += cb;
         anim.SetBool("skill_1", true);
     }
     public void anim_magic()
@@ -67,7 +67,7 @@ public class roleAnim : MonoBehaviour {
     }
     public void anim_magic(state_test.withNothing cb)
     {
-        anim.GetBehaviour<state_atk>().forNextEnd += cb;
+        forNextEffect += cb;
         anim.SetBool("skill_3", true);
     }
     public void anim_behit()
@@ -76,7 +76,7 @@ public class roleAnim : MonoBehaviour {
     }
     public void anim_behit(state_test.withNothing cb)
     {
-        anim.GetBehaviour<state_atk>().forNextEnd += cb;
+        anim.GetBehaviour<state_behit>().forNextEnd += cb;
         anim.SetBool("hit_1", true);
     }
     public void anim_died()
@@ -86,5 +86,9 @@ public class roleAnim : MonoBehaviour {
     public void addSortLayout(int layout)
     {
         sorter.sortingOrder+=layout;
+    }
+    public void setSortLayout(int layout)
+    {
+        sorter.sortingOrder = layout;
     }
 }
