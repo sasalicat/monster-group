@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class stage_movement {
     public enum state {unActive,Active,Finish}
-    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number};
+    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage};
 	// Use this for initialization
     public move order;
     public List<object> argList;
@@ -22,6 +22,7 @@ public class skill_movement:stage_movement
     protected List<comboControler> tragets_before = new List<comboControler>();
     public comboControler user;
     public List<comboControler> tragets;
+    public List<comboControler> nowDomain;
     public bool isTrigger=false;
     public skill_movement(move order, List<object> argList, unitControler user, List<unitControler> tragetlist,unitControler user_bef,List<unitControler> tragets_bef)
         : base(order, argList)
@@ -67,10 +68,27 @@ public abstract class stage_action:stage_movement
     }
     public abstract void action(skillpackage skp);
 }
-public class closeUp_action : stage_action
+public abstract class stage_action_withskp : stage_action
 {
-    public closeUp_action(move order, List<object> argList)
-        : base(order, argList)
+    public stage_action_withskp(move order, List<object> argList):base(order,argList)
+    {
+    }
+    protected skillpackage skp;
+    public override void onLoad(skillpackage skp)
+    {
+        this.skp = skp;
+        base.onLoad(skp);
+        skp.stage_conditions[stage].Add(this);
+    }
+    public void conditionNext()
+    {
+        skp.Next(this);
+    }
+}
+public class closeUp_action : stage_action_withskp
+{
+    public  closeUp_action( List<object> argList)
+        : base(move.CloseUp, argList)
     {
 
     }
@@ -85,13 +103,81 @@ public class closeUp_action : stage_action
     public override void action(skillpackage skp)
     {
         int kind = (int)argList[0];
-        closeupStage.main.closeUp(kind);
+        closeupStage.main.closeUp(kind,conditionNext);
+
+    }
+}
+public class uncloseUp_action : stage_action_withskp
+{
+    public uncloseUp_action( List<object> argList)
+        : base(move.UnCloseUp, argList)
+    {
+
+    }
+    public override int stage
+    {
+        get
+        {
+            return 0;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        int kind = (int)argList[0];
+        closeupStage.main.uncloseUp(conditionNext);
+
+    }
+}
+public class recloseUp_action : stage_action_withskp
+{
+    public recloseUp_action( List<object> argList)
+        : base(move.ReCloseUp, argList)
+    {
+
+    }
+    public override int stage
+    {
+        get
+        {
+            return 0;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        int kind = (int)argList[0];
+        closeupStage.main.recloseUp(kind, conditionNext);
+
+    }
+}
+public class onstage_action : stage_action_withskp
+{
+    public onstage_action(List<object> list):
+        base(move.onStage,list)
+    {
+       
+    }
+    public override int stage
+    {
+        get
+        {
+            return 0;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        unitControler mainRole = (unitControler)argList[0];
+        List<unitControler> tragets= (List<unitControler>)argList[1];
+        closeupStage.main.onStage(mainRole, tragets.ToArray());
+        conditionNext();//因為onStage是立刻結束的過程所以直接在後面呼叫就行了
 
     }
 }
 public class animSkill_action : stage_action {
-    public animSkill_action(move order, List<object> argList)
-        : base(order, argList)
+    public animSkill_action( List<object> argList)
+        : base(move.Anim, argList)
     {
         
     }
@@ -103,7 +189,7 @@ public class animSkill_action : stage_action {
         }
     }
     public override void action(skillpackage skp) {
-        comboControler control = (comboControler)argList[0]; 
+        comboControler control = (comboControler)argList[0];
         int code = (int)argList[1];
         if (code == roleAnim.ATTACK)
             control.GetComponent<roleAnim>().anim_attack(skp.Next);
@@ -113,11 +199,11 @@ public class animSkill_action : stage_action {
             Debug.LogError("animSkill_action code錯誤,不正確的code:" + code);
     }
 }
-public class animBenhit_action : stage_action
+public class animBenhit_action : stage_action_withskp
 {
-    public skillpackage skp;
-    public animBenhit_action(move order, List<object> argList)
-        : base(order, argList)
+
+    public animBenhit_action( List<object> argList)
+        : base(move.Anim, argList)
     {
         
     }
@@ -128,23 +214,17 @@ public class animBenhit_action : stage_action
             return 3;
         }
     }
-    public virtual void animEnd()
-    {
-        skp.Next(this);
-    }
     public override void action(skillpackage skp)
     {
-        this.skp=skp;
         comboControler control = (comboControler)argList[0]; 
         int code = (int)argList[1];
-        skp.stage3_condition.Add(this);
         if (code != roleAnim.BEHIT)
         {
             Debug.Log("animBenhit_action code錯誤,code:"+code);
         }
         else
         {
-            control.GetComponent<roleAnim>().anim_behit(animEnd);
+            control.GetComponent<roleAnim>().anim_behit(conditionNext);
         }
 
     }

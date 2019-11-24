@@ -8,20 +8,28 @@ public class demoButtom : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         stage.team1 = new BasicControler[stage.team1_pos.Length];
+        stage.team1_anim = new roleAnim[stage.team1_pos.Length];
 		for(int i=0;i<stage.team1_pos.Length;i++)
         {
             Vector3 pos = stage.team1_pos[i];
             GameObject newrole= Instantiate(stage.rolePrefab, pos, stage.rolePrefab.transform.rotation);
             stage.team1[i] = newrole.GetComponent<comboControler>();
-            newrole.GetComponent<roleAnim>().addSortLayout(100 + i);
+            stage.team1[i].playerNo = 0;
+            stage.team1_anim[i] = newrole.GetComponent<roleAnim>();
+            newrole.GetComponent<roleAnim>().setSortLayout(100 + i);
+            newrole.name = "team1:no" + i;
         }
         stage.team2 = new BasicControler[stage.team2_pos.Length];
+        stage.team2_anim = new roleAnim[stage.team2_pos.Length];
         for(int i = 0; i < stage.team2_pos.Length; i++)
         {
             Vector3 pos = stage.team2_pos[i];
             GameObject newrole = Instantiate(stage.rolePrefab, pos, Quaternion.Euler(0,0,0));
             stage.team2[i] = newrole.GetComponent<comboControler>();
+            stage.team2[i].playerNo = 1;
+            stage.team2_anim[i] = newrole.GetComponent<roleAnim>();
             newrole.GetComponent<roleAnim>().setSortLayout(100 + i);
+            newrole.name = "team2:no" + i;
         }
 	}
 	
@@ -82,13 +90,26 @@ public class demoButtom : MonoBehaviour {
         stage.display_anim(stage.team2[1], roleAnim.BEHIT);
         stage.display_anim(stage.team2[2], roleAnim.BEHIT);
         stage.display_anim(stage.team2[4], roleAnim.BEHIT);
+
         List<unitControler> sk2_tgs = new List<unitControler>();
         sk2_tgs.Add(stage.team1[0]);
-        sk2_tgs.Add(stage.team1[1]);
+    
         stage.display_skill(stage.team2[1], null, sk2_tgs, true);
         stage.display_anim(stage.team2[1], roleAnim.ATTACK);
         stage.display_anim(stage.team1[0], roleAnim.BEHIT);
+
+        List<unitControler> sk3_tgs = new List<unitControler>();
+        sk3_tgs.Add(stage.team2[3]);
+        sk3_tgs.Add(stage.team2[5]);
+        sk3_tgs.Add(stage.team1[1]);
+        stage.display_skill(stage.team1[0], null, sk3_tgs, true);
+        stage.display_anim(stage.team1[0], roleAnim.ATTACK);
+        stage.display_anim(stage.team2[3], roleAnim.BEHIT);
+        stage.display_anim(stage.team2[5], roleAnim.BEHIT);
         stage.display_anim(stage.team1[1], roleAnim.BEHIT);
+        stage.display_skillEnd();
+
+ 
         stage.display_skillEnd();
         stage.display_skillEnd();
 

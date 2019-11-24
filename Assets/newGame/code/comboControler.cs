@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class comboControler : BasicControler{
+    public const int PLAYER_ROLE_NO= 0;
+    public const int ENEMY_ROLE_NO = 1;
     enum bonus_kind {NoBonus,Batter,Counter};
     public BasicDelegate.forSkill _aftBeSkill;//basicControler沒有被使用技能后的時間,這裡作為補全
 

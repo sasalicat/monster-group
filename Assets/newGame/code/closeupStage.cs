@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class closeupStage : MonoBehaviour, battleStage
 {
@@ -11,6 +12,8 @@ public class closeupStage : MonoBehaviour, battleStage
     public const int CU_RIGHT_ONLY = 2;
     public const int CU_LEFT_ONLY = 3;
     public const int CU_NOCU = 4;
+    public const int BASE_ROLE_LAYOUT = 100;
+    public const int CURTAIN_MASKER_NUMBER = 101;
     protected enum cu_state {no_cu,cu_ing,cu_ed};//標記當前鏡頭的closeUp狀態
     protected delegate void clock(float time);
  //   public delegate object with_movement(stage_movement move);
@@ -20,6 +23,8 @@ public class closeupStage : MonoBehaviour, battleStage
     public Vector3 camera_closeUp_right2left = new Vector3(-2.76f, -2.33f, -4.46f);
     public Vector3 camera_closeUp_left2right = new Vector3(2.76f, -2.33f, -4.46f);
     public Vector3 camera_normal = new Vector3(0.6f, -1.21f, -8.27f);
+    public Vector3 camera_right_only =new Vector3(4f,-2.4f,-4.07f);
+    public Vector3 camera_left_only = new Vector3(-4f,-2.4f,-4.07f);
     public Vector3 camera_now_traget = new Vector3(0,0,0);
     public Vector3 camera_uncloseup_begin;
     public int closeUpState = 0;
@@ -30,13 +35,17 @@ public class closeupStage : MonoBehaviour, battleStage
     public Vector3[] team1_pos;
     public Vector3[] team1_closePoint;
     public BasicControler[] team1;
+    public roleAnim[] team1_anim;
     public Vector3[] team2_pos;
+    public roleAnim[] team2_anim;
     public Vector3[] team2_closePoint;
     public BasicControler[] team2;
-    public GameObject curtain;
+    public SpriteRenderer curtain;
+    public float curtain_max_alph = 0.85f;
     public GameObject rolePrefab;
-    public const int CURTAIN_MASKER_NUMBER = 101;
+
     protected cu_state Cstate=cu_state.no_cu;
+    private int[] CU_table;
     //用於存放異步的order
     protected skill_movement rootMovement;
     protected List<skill_movement> heap;
@@ -63,8 +72,11 @@ public class closeupStage : MonoBehaviour, battleStage
                 next_closeUpEnd = null;
             }
         }
-        Vector3 cam_offset = camera_now_traget - camera_normal;
-        cameraObj.transform.position = camera_normal + (timeBefore / closeUp_time) * cam_offset;
+        Vector3 cam_offset = camera_now_traget - camera_uncloseup_begin;//camera_normal;
+        cameraObj.transform.position = camera_uncloseup_begin + (timeBefore / closeUp_time) * cam_offset;
+        Color c= curtain.color;
+        c.a = (timeBefore / closeUp_time)*curtain_max_alph;
+        curtain.color = c;
         //timeBefore = 0;
     }
     public with_nothing next_unCloseUpEnd;
@@ -85,7 +97,9 @@ public class closeupStage : MonoBehaviour, battleStage
         }
         Vector3 cam_offset = camera_normal - camera_uncloseup_begin;
         cameraObj.transform.position = camera_uncloseup_begin + (timeBefore / closeUp_time) * cam_offset;
-
+        Color c = curtain.color;
+        c.a = ((closeUp_time-timeBefore)*curtain_max_alph/ closeUp_time);
+        curtain.color = c;
     }
     protected void reCloseUp_process(float time)
     {
@@ -95,16 +109,25 @@ public class closeupStage : MonoBehaviour, battleStage
             Cstate = cu_state.cu_ing;
             Vector3 cam_offset = camera_normal - camera_uncloseup_begin;
             cameraObj.transform.position = camera_uncloseup_begin + (timeBefore / closeUp_time) * cam_offset;
+            Debug.Log("stage1 timeBefore:" + timeBefore + " campos:" + cameraObj.transform.position);
+            Color c = curtain.color;
+            c.a = ((closeUp_time - timeBefore) * curtain_max_alph / closeUp_time);
+            curtain.color = c;
         }
         else if (timeBefore < closeUp_time + reCloseUpWait_time)//等待階段
         {
+            Debug.Log("stage2 timeBefore:" + timeBefore + " campos:" + cameraObj.transform.position);
             Cstate = cu_state.no_cu;
         }
         else if (timeBefore < closeUp_time * 2 + reCloseUpWait_time)//再次特寫
         {
             Cstate = cu_state.cu_ing;
             Vector3 cam_offset = camera_now_traget - camera_normal;
-            cameraObj.transform.position = camera_normal + (timeBefore / closeUp_time) * cam_offset;
+            cameraObj.transform.position = camera_normal + ((timeBefore- closeUp_time- reCloseUpWait_time) / closeUp_time) * cam_offset;
+            //Debug.Log("stage3 timeBefore:" + timeBefore + " campos:" + cameraObj.transform.position);
+            Color c = curtain.color;
+            c.a = ((timeBefore - closeUp_time - reCloseUpWait_time) / closeUp_time) * curtain_max_alph;
+            curtain.color = c;
         }
         else {//完成
             clockFunc = null;
@@ -130,14 +153,142 @@ public class closeupStage : MonoBehaviour, battleStage
         stage_movement newone = new stage_movement(stage_movement.move.Number, new List<object>() { who, number, kind });
         heap[0].argList.Add(newone);
     }
+    public void display_recloseUp(int code)
+    {
+        List<object> list = new List<object> { code };
+        stage_movement newone = new recloseUp_action(list);
+        heap[0].argList.Add(newone);
+    }
+    public void display_closeUp(int code)
+    {
+        List<object> list = new List<object> { code };
+        stage_movement newone = new closeUp_action(list);
+        heap[0].argList.Add(newone);
+    }
+    private int testFaction(unitControler tester,List<unitControler> betesteds)//測試tester和betesteds的陣營關係
+    {
+        bool same=false;
+        bool different = false;
+        foreach(comboControler btd in betesteds)
+        {
+            if(((comboControler)tester).playerNo == btd.playerNo)
+            {
+                same = true;
+            }
+            else
+            {
+                different = true;
+            }
+        }
+        if (same && different)
+        {
+            return 2;//betesteds既有友方又有敵方
+        }
+        else if (same)
+        {
+            return 1;//只有友方
+        }
+        else if (different)
+        {
+            return 0;//只有敵方
+        }
+        else {
+            return -1;//betesteds為空
+        }
+    }
+    private List<comboControler> getDomain(unitControler protagonist,int testcode)
+    {
+        comboManager manager = ((comboManager)BasicManager.main);
+        List<comboControler> domain = new List<comboControler>() {  };
+        if (testcode == 2) {
+            foreach(comboControler unit in team1)
+            {
+                domain.Add(unit);
+            }
+            foreach (comboControler unit in team2)
+            {
+                domain.Add(unit);
+            }
+        }
+        else if(testcode == 1)
+        {
+            if (((comboControler)protagonist).playerNo == 0) {
+                foreach (comboControler unit in team1)
+                {
+                    domain.Add(unit);
+                }
+            }
+            else if (((comboControler)protagonist).playerNo == 1)
+            {
+                foreach (comboControler unit in team2)
+                {
+                    domain.Add(unit);
+                }
+            }
+        }
+        else if (testcode == 0) {
+            domain.Add((comboControler)protagonist);
+            if (((comboControler)protagonist).playerNo == 0)
+            {
+                foreach (comboControler unit in team2)
+                {
+                    domain.Add(unit);
+                }
+            }
+            else if (((comboControler)protagonist).playerNo == 1)
+            {
+                foreach (comboControler unit in team1)
+                {
+                    domain.Add(unit);
+                }
+            }
+        }
+        return domain;
+    }
     public void display_skill(unitControler protagonist, Skill skill, List<unitControler> tragets, bool isTrigger)
     {
         skill_movement before = heap[0];
         heap.Insert(0, new skill_movement(stage_movement.move.SkillStart, new List<object>(), protagonist, tragets, before.user, new List<unitControler>(before.tragets.ToArray())));
         heap[0].isTrigger = isTrigger;
-        if (!heap[0].isTrigger)
-        {
+        display_onStage(protagonist,tragets);
+        if (!heap[0].isTrigger)//如果不是觸發的技能,說明是正牌技能
+        {//確定domain
+            /*heap[0].nowDomain = new List<comboControler>() { (comboControler)protagonist };
+            foreach (comboControler unit in tragets)
+            {
+                heap[0].nowDomain.Add(unit);
+            }*/
+            int testCode = testFaction(protagonist, tragets);
+            int closeUp_code = CU_table[CU_table.Length / 2 * ((BasicControler)protagonist).playerNo+ testCode];//playerNo=0代表是右方的角色,=1代表的是左邊的角色
+            display_recloseUp(closeUp_code);
+            heap[0].nowDomain = getDomain(protagonist, testCode);
+        }
+        else {//觸發型技能
+            bool redomain = false;
+            if (!heap[1].nowDomain.Contains((comboControler)protagonist)) {
+                redomain = true;
+            }
+            else
+            {
+                foreach (comboControler unit in tragets) {
+                    if (!heap[1].nowDomain.Contains(unit))
+                    {
+                        redomain = true;
+                        break;
+                    }
+                }
+            }
+            if (redomain)
+            {
+                int testCode = testFaction(protagonist, tragets);
+                int closeUp_code = CU_table[((int)CU_table.Length / 2) * ((BasicControler)protagonist).playerNo + testCode];
+                display_closeUp(closeUp_code);
+                heap[0].nowDomain = getDomain(protagonist, testCode);
 
+            }
+            else {
+                heap[0].nowDomain = heap[1].nowDomain;//繼承上一個技能的domain
+            }
         }
     }
     public void display_skillEnd()
@@ -151,17 +302,22 @@ public class closeupStage : MonoBehaviour, battleStage
     {
         if (code== roleAnim.BEHIT)
         {
-            heap[0].argList.Add(new animBenhit_action(stage_movement.move.Anim,new List<object>() {unit,code}));
+            heap[0].argList.Add(new animBenhit_action(new List<object>() {unit,code}));
         }
         else
         {
-            heap[0].argList.Add(new animSkill_action(stage_movement.move.Anim, new List<object>() { unit, code }));
+            heap[0].argList.Add(new animSkill_action( new List<object>() { unit, code }));
         }
         //heap[0].argList.Add(new stage_movement(stage_movement.move.Anim, new List<object>() { unit, code }));
+    }
+    public void display_onStage(unitControler unit,List<unitControler> tragets)
+    {
+        heap[0].argList.Add(new onstage_action(new List<object>() { unit, tragets }));
     }
     //-------------------------------------------
     public void closeUp(int kind)
     {
+        camera_uncloseup_begin = cameraObj.transform.position;
         switch(kind){
             case CU_RIGHT_TOLEFT: {
                 camera_now_traget = camera_closeUp_right2left;
@@ -172,7 +328,22 @@ public class closeupStage : MonoBehaviour, battleStage
                 camera_now_traget = camera_closeUp_left2right;
                 break;
             }
-        }
+            case CU_LEFT_ONLY:
+            {
+                    camera_now_traget = camera_right_only;
+                break;
+            }
+            case CU_RIGHT_ONLY:
+                {
+                    camera_now_traget = camera_left_only;
+                    break;
+                }
+            case CU_NOCU:
+                {
+                    camera_now_traget = camera_normal;
+                    break;
+                }
+      }
         if (clockFunc == null)
         {
             timeBefore = 0;
@@ -230,6 +401,11 @@ public class closeupStage : MonoBehaviour, battleStage
             clockFunc = reCloseUp_process;
             Cstate = cu_state.cu_ing;
         }
+    }
+    public void recloseUp(int kind,with_nothing end_cb)
+    {
+        recloseUp(kind);
+        next_closeUpEnd += end_cb;
     }
     public Vector3 getClosePos(List<unitControler> roles) {
         List<int[]> posList = new List<int[]>();
@@ -333,10 +509,11 @@ public class closeupStage : MonoBehaviour, battleStage
         }
         return new Vector3(0,0,0);
     }
+    /*
     public void setCurtain(bool torf)
     {
         curtain.SetActive(torf);
-    }
+    }*/
     void OnEnable()
     {
         if (main != null)
@@ -356,6 +533,8 @@ public class closeupStage : MonoBehaviour, battleStage
         handleFuncs = new with_skillpackage[6];
         heap = new List<skill_movement>();
         heap.Add(rootMovement);
+        CU_table = new int[6] { CU_RIGHT_TOLEFT ,CU_RIGHT_ONLY,CU_NOCU,CU_LEFT_TORIGHT,CU_LEFT_ONLY,CU_NOCU};//用來查表closeup的動作
+        
         //handleFuncs[(int)stage_movement.move.SkillStart] = SkillStart_for;
     }
 
@@ -388,9 +567,19 @@ public class closeupStage : MonoBehaviour, battleStage
             }
         
     }
-    public void display_onStage(unitControler actioner, unitControler[] tragets)
+    public void onStage(unitControler actioner, unitControler[] tragets)
     {
-        setCurtain(true);
+        //setCurtain(true);
+        for(int i=0;i<team1_anim.Length;i++)
+        {
+            roleAnim ranim = team1_anim[i];
+            ranim.setSortLayout(BASE_ROLE_LAYOUT + i);
+        }
+        for (int i = 0; i < team2_anim.Length; i++)
+        {
+            roleAnim ranim = team2_anim[i];
+            ranim.setSortLayout(BASE_ROLE_LAYOUT + i);
+        }
         ((BasicControler)actioner).GetComponent<roleAnim>().addSortLayout(CURTAIN_MASKER_NUMBER);
         foreach (unitControler unit in tragets)
         {  
@@ -470,32 +659,20 @@ public class skillpackage : state_machine
               //stage3依次開始所有目標的behit動畫和創建被擊特效 stage3->4為所有behit動畫結束
               //stage4設置為End 為True,整個技能的表現結束
     skill_movement now_movement;
-    public List<object> stage2_condition;//存還未打中的missile
-    public List<object> stage3_condition;//存還未完成的動畫
+    public List<object>[] stage_conditions;
     public skillpackage_func[] stage_funcs;
+    
 
     public override void Next(object arg)//這個Next是用於stage2 missile擊通知,和stage3所有角色的被擊動畫完成通知
     {
-        if (stage != 2 && stage != 3) {//如果不是在stage2/stage3呼叫就是不正常現象
-            return;
-        }
         bool condition_meet = false;
-        if (stage == 2)
-        {
-            stage2_condition.Remove(arg);
-            if (stage2_condition.Count == 0)
+
+        stage_conditions[stage].Remove(arg);
+        if (stage_conditions[stage].Count == 0)
             {
                 condition_meet = true;
             }
-        }
-        if (stage == 3)
-        {
-            stage3_condition.Remove(arg);
-            if (stage3_condition.Count == 0)
-            {
-                condition_meet = true;
-            }
-        }
+
         if (condition_meet)
         {
             stage++;
@@ -509,16 +686,16 @@ public class skillpackage : state_machine
     }
     public override void Next()//反之
     {
-        if (stage == 2 || stage == 3) {
-            return;
-        }
-        stage++;
-        while (stage < 4 && stage_funcs[stage] == null)
+        if (stage<0||stage_conditions[stage].Count == 0)
         {
             stage++;
+            while (stage < 4 && stage_funcs[stage] == null)
+            {
+                stage++;
+            }
+            if (stage_funcs[stage] != null)
+                stage_funcs[stage](this);
         }
-        if(stage_funcs[stage] != null)
-            stage_funcs[stage](this);
        
     }
     public skillpackage(stage_movement movement)
@@ -527,8 +704,11 @@ public class skillpackage : state_machine
         now_movement = (skill_movement)movement;
         bool isTrigger = ((skill_movement)movement).isTrigger;
         stage_funcs = new skillpackage_func[5];
-        stage2_condition = new List<object>();
-        stage3_condition = new List<object>();
+        stage_conditions = new List<object>[4];
+        for(int i = 0; i < stage_conditions.Length; i++)
+        {
+            stage_conditions[i] = new List<object>();
+        }
         /*if (!isTrigger)//如果不是觸發產生的技能
         {
             //復原close up
