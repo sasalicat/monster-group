@@ -298,6 +298,10 @@ public class closeupStage : MonoBehaviour, battleStage
         heap[0].argList.Add(nowMove);
 
     }
+    public void display_closeMoving(unitControler protagonist, List<unitControler> tragets)
+    {
+
+    }
     public void display_anim(unitControler unit, int code)
     {
         if (code== roleAnim.BEHIT)
