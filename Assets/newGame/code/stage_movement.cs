@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class stage_movement {
     public enum state {unActive,Active,Finish}
-    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage};
+    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose};
 	// Use this for initialization
     public move order;
     public List<object> argList;
@@ -229,5 +229,55 @@ public class animBenhit_action : stage_action_withskp
 
     }
 }
+public class toClosePos_action : stage_action_withskp
+{
+    public toClosePos_action(List<object> argList):base(move.ToClose)
+    {
 
+    }
+    public override int stage
+    {
+        get
+        {
+            return 0;
+        }
+    }
+    public void ontime(float time)
+    {
+        closeupStage.main.nowClosePos;
+    }
+    public override void action(skillpackage skp)
+    {
+        unitControler role = (unitControler)argList[0];
+        Vector3 tragetPos = (Vector3)argList[1];
+        Vector3 oriPos = (Vector3)argList[2];
+        float time = (float)argList[3];
+
+        if (nowClosePos == null)
+        {
+            closeupStage.main.nowClosePos = new closeAndPos(role,tragetPos,oriPos,time);
+            closeupStage.main.clockFunc += ontime;
+        }
+    }
+}
+public class resetClosePos_action : stage_action
+{
+
+    public resetClosePos_action(List<object> argList)
+        : base(move.Anim, argList)
+    {
+        
+    }
+    public override int stage
+    {
+        get
+        {
+            return 4;
+        }
+    }
+    public override void action(skillpackage skp)
+    {
+
+    }
+}
 

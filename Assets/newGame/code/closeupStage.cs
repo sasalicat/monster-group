@@ -3,7 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+struct closeAndPos
+{
+    Vector3 oriPos;
+    Vector3 closePos;
+    unitControler role;
+    float nowTime;
+    float totalTime;
+    closeAndPos(unitControler unit,Vector3 ori,Vector3 traget,float time)
+    {
+        role = unit;
+        oriPos = ori;
+        closePos = traget;
+        totalTime = time;
+    }
+}
 public class closeupStage : MonoBehaviour, battleStage
 {
 
@@ -15,7 +29,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public const int BASE_ROLE_LAYOUT = 100;
     public const int CURTAIN_MASKER_NUMBER = 101;
     protected enum cu_state {no_cu,cu_ing,cu_ed};//標記當前鏡頭的closeUp狀態
-    protected delegate void clock(float time);
+    public delegate void clock(float time);
  //   public delegate object with_movement(stage_movement move);
     public delegate void with_skillpackage(stage_movement move,skillpackage skp);
     public delegate void with_nothing();
@@ -31,7 +45,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public float closeUp_time = 0.3f;
     public float reCloseUpWait_time = 0.5f;
     protected float timeBefore = 0;
-    protected clock clockFunc;
+    public clock clockFunc;
     public Vector3[] team1_pos;
     public Vector3[] team1_closePoint;
     public BasicControler[] team1;
@@ -46,6 +60,7 @@ public class closeupStage : MonoBehaviour, battleStage
 
     protected cu_state Cstate=cu_state.no_cu;
     private int[] CU_table;
+    closeAndPos nowClosePos;
     //用於存放異步的order
     protected skill_movement rootMovement;
     protected List<skill_movement> heap;
