@@ -3,19 +3,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-struct closeAndPos
+public struct closeAndPos
 {
     Vector3 oriPos;
     Vector3 closePos;
     unitControler role;
     float nowTime;
     float totalTime;
-    closeAndPos(unitControler unit,Vector3 ori,Vector3 traget,float time)
+    public bool end;
+    public closeAndPos(bool value)
+    {
+        oriPos = Vector3.zero;
+        closePos = Vector3.zero;
+        role = null;
+        nowTime = -1;
+        totalTime = -1;
+        end = value;
+    }
+    public closeAndPos(unitControler unit,Vector3 ori,Vector3 traget,float time)
     {
         role = unit;
         oriPos = ori;
         closePos = traget;
         totalTime = time;
+        nowTime = 0;
+        end = false;
+    }
+    public Vector3 moveStep(float interval)
+    {
+        Vector3 dir = closePos- oriPos;
+        nowTime += interval;
+        if (nowTime >= totalTime)
+        {
+            nowTime = totalTime;
+            end = true;
+        }
+        return oriPos + dir * nowTime;
     }
 }
 public class closeupStage : MonoBehaviour, battleStage
@@ -60,7 +83,7 @@ public class closeupStage : MonoBehaviour, battleStage
 
     protected cu_state Cstate=cu_state.no_cu;
     private int[] CU_table;
-    closeAndPos nowClosePos;
+    public closeAndPos nowClosePos=new closeAndPos(true);
     //用於存放異步的order
     protected skill_movement rootMovement;
     protected List<skill_movement> heap;

@@ -231,7 +231,8 @@ public class animBenhit_action : stage_action_withskp
 }
 public class toClosePos_action : stage_action_withskp
 {
-    public toClosePos_action(List<object> argList):base(move.ToClose)
+    protected GameObject roleObj;
+    public toClosePos_action(List<object> argList):base(move.ToClose,argList)
     {
 
     }
@@ -244,7 +245,12 @@ public class toClosePos_action : stage_action_withskp
     }
     public void ontime(float time)
     {
-        closeupStage.main.nowClosePos;
+        Vector3 pos= closeupStage.main.nowClosePos.moveStep(time);
+        if (closeupStage.main.nowClosePos.end)
+        {
+            conditionNext();
+            closeupStage.main.clockFunc -= ontime;
+        }
     }
     public override void action(skillpackage skp)
     {
@@ -252,8 +258,8 @@ public class toClosePos_action : stage_action_withskp
         Vector3 tragetPos = (Vector3)argList[1];
         Vector3 oriPos = (Vector3)argList[2];
         float time = (float)argList[3];
-
-        if (nowClosePos == null)
+        roleObj = ((BasicControler)role).gameObject;
+        if (closeupStage.main.nowClosePos.end)
         {
             closeupStage.main.nowClosePos = new closeAndPos(role,tragetPos,oriPos,time);
             closeupStage.main.clockFunc += ontime;
