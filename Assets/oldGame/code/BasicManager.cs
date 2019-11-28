@@ -22,6 +22,24 @@ public class BasicManager : MonoBehaviour,Manager {
     public GameObject failedPanel;//手動拉取
     public GameObject successPanel;//手動拉取
     public static BasicManager main = null;
+    public virtual ChessBoard createChessBoard()
+    {
+        return new ChessBoard(5,8);
+    }
+    public virtual int PLAYER_NO
+    {
+        get
+        {
+            return 1;
+        }
+    }
+    public virtual int ENEMY_NO
+    {
+        get
+        {
+            return 0;
+        }
+    }
     void OnEnable()
     {
         if (main != null)
@@ -141,19 +159,19 @@ public class BasicManager : MonoBehaviour,Manager {
 
     // Use this for initialization
     void Start () {
-        chessBoard = new ChessBoard(5,8);
+        chessBoard = createChessBoard();
         PlayerInf playdata = dataWarehouse.main.nowData;
         foreach(RoleRecord unit in playdata.army){
             if (unit.location != null)
             {
-                Dictionary<string, object> unitDic = new Dictionary<string, object>() { { STR_POS_X, unit.location.x }, { STR_POS_Y, unit.location.y }, { STR_PLAYER_NO, 1 }, { STR_INF, unit } };
+                Dictionary<string, object> unitDic = new Dictionary<string, object>() { { STR_POS_X, unit.location.x }, { STR_POS_Y, unit.location.y }, { STR_PLAYER_NO, PLAYER_NO }, { STR_INF, unit } };
                 unitControler controler = createUnit(unitDic);
             }
         }
         List<RoleRecord> enemys = dataWarehouse.main.currentEnemy;
         foreach(RoleRecord enemy in enemys)
         {
-            Dictionary<string, object> enemyDic = new Dictionary<string, object>() { { STR_POS_X, enemy.location.x }, { STR_POS_Y, enemy.location.y }, { STR_PLAYER_NO, 0 }, { STR_INF, enemy } };
+            Dictionary<string, object> enemyDic = new Dictionary<string, object>() { { STR_POS_X, enemy.location.x }, { STR_POS_Y, enemy.location.y }, { STR_PLAYER_NO, ENEMY_NO }, { STR_INF, enemy } };
             createUnit(enemyDic);
         }
         //完成了所有單位的創建

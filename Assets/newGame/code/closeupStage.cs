@@ -289,6 +289,16 @@ public class closeupStage : MonoBehaviour, battleStage
         heap.Insert(0, new skill_movement(stage_movement.move.SkillStart, new List<object>(), protagonist, tragets, before.user, new List<unitControler>(before.tragets.ToArray())));
         heap[0].isTrigger = isTrigger;
         display_onStage(protagonist,tragets);
+        bool close = true;
+        if (skill == null)
+        {
+        }
+        else {
+            if (skill.information.remote)
+            {
+                close = false;
+            }
+        }
         if (!heap[0].isTrigger)//如果不是觸發的技能,說明是正牌技能
         {//確定domain
             /*heap[0].nowDomain = new List<comboControler>() { (comboControler)protagonist };
@@ -296,6 +306,10 @@ public class closeupStage : MonoBehaviour, battleStage
             {
                 heap[0].nowDomain.Add(unit);
             }*/
+            if (close)
+            {
+                display_closeMoving(protagonist, tragets);
+            }
             int testCode = testFaction(protagonist, tragets);
             int closeUp_code = CU_table[CU_table.Length / 2 * ((BasicControler)protagonist).playerNo+ testCode];//playerNo=0代表是右方的角色,=1代表的是左邊的角色
             display_recloseUp(closeUp_code);
@@ -339,6 +353,8 @@ public class closeupStage : MonoBehaviour, battleStage
     public void display_closeMoving(unitControler protagonist, List<unitControler> tragets)
     {
 
+        Vector3 cpos =getClosePos(tragets);
+        heap[0].argList.Add(new toClosePos_action(new List<object>() { protagonist, cpos, ((BasicControler)protagonist).transform.position}));
     }
     public void display_anim(unitControler unit, int code)
     {
