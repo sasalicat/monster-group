@@ -18,7 +18,7 @@ public class roleAnim : MonoBehaviour {
     //public withNothing onAttackEnd;
     // Use this for initialization
 	void Start () {
-        stateList = anim.GetBehaviours<state_test>();
+        
 	}
 	
 	// Update is called once per frame
@@ -49,6 +49,14 @@ public class roleAnim : MonoBehaviour {
                 state.force2End();
             }
         }
+    }
+    public void setRootObj(GameObject obj,int sortLayout)
+    {
+        rootObj = obj;
+        anim = rootObj.GetComponent<Animator>();
+        stateList = anim.GetBehaviours<state_test>();
+        sorter = anim.GetComponent<SortingGroup>();
+        setSortLayout(sortLayout);
     }
 
 

@@ -11,6 +11,7 @@ public struct closeAndPos
     float nowTime;
     float totalTime;
     public bool end;
+
     public closeAndPos(bool value)
     {
         oriPos = Vector3.zero;
@@ -69,17 +70,46 @@ public class closeupStage : MonoBehaviour, battleStage
     public float reCloseUpWait_time = 0.5f;
     protected float timeBefore = 0;
     public clock clockFunc;
-    public Vector3[] team1_pos;
+    public Vector3[] team1_pos= new Vector3[6];
     public Vector3[] team1_closePoint;
-    public BasicControler[] team1;
-    public roleAnim[] team1_anim;
-    public Vector3[] team2_pos;
-    public roleAnim[] team2_anim;
+    //public BasicControler[] team1;
+    public roleAnim[] team1_anim= new roleAnim[6];
+    public Vector3[] team2_pos=new Vector3[6];
+    public roleAnim[] team2_anim=new roleAnim[6];
     public Vector3[] team2_closePoint;
-    public BasicControler[] team2;
+    //public BasicControler[] team2;
     public SpriteRenderer curtain;
     public float curtain_max_alph = 0.85f;
     public GameObject rolePrefab;
+    public GameObject createRole(int team,int x, int y,int prefabIndex)
+    {
+        Vector3 pos = Vector3.zero;
+        if(team == 0)
+        {
+            pos = team1_pos[x * y + x];
+        }
+        else if(team == 1)
+        {
+            pos = team2_pos[x * y + x];
+        }
+        else
+        {
+            return null;
+        }
+        GameObject newRole = Instantiate(rolePrefab, pos, Quaternion.Euler(0, 0, 0));
+        GameObject prafeb = ((objectNameList)(objectList.main)).getRolePrafeb(prefabIndex); //Instantiate(objectList.main.mainUnit);
+        GameObject newone = Instantiate(prafeb, Vector3.zero, Quaternion.Euler(0, 0, 0),newRole.transform);
+        if (team == 0) {
+            team1_anim[x * y + x] = newRole.GetComponent<roleAnim>();
+            team1_anim[x * y + x].setSortLayout(BASE_ROLE_LAYOUT + x * y + x);
+        }
+        if (team == 1)
+        {
+            team2_anim[x * y + x] = newRole.GetComponent<roleAnim>();
+            team2_anim[x * y + x].setSortLayout(BASE_ROLE_LAYOUT + x*y+x);
+        }
+        return newRole;
+    }
 
     protected cu_state Cstate=cu_state.no_cu;
     private int[] CU_table;
@@ -238,12 +268,9 @@ public class closeupStage : MonoBehaviour, battleStage
     {
         comboManager manager = ((comboManager)BasicManager.main);
         List<comboControler> domain = new List<comboControler>() {  };
+        ChessBoard env = ((comboManager)comboManager.main).ChessBoard;
         if (testcode == 2) {
-            foreach(comboControler unit in team1)
-            {
-                domain.Add(unit);
-            }
-            foreach (comboControler unit in team2)
+            foreach(comboControler unit in env.units)
             {
                 domain.Add(unit);
             }
@@ -251,16 +278,18 @@ public class closeupStage : MonoBehaviour, battleStage
         else if(testcode == 1)
         {
             if (((comboControler)protagonist).playerNo == 0) {
-                foreach (comboControler unit in team1)
+                foreach (comboControler unit in env.units)
                 {
-                    domain.Add(unit);
+                    if(unit.playerNo == 0)
+                        domain.Add(unit);
                 }
             }
             else if (((comboControler)protagonist).playerNo == 1)
             {
-                foreach (comboControler unit in team2)
+                foreach (comboControler unit in env.units)
                 {
-                    domain.Add(unit);
+                    if (unit.playerNo == 1)
+                        domain.Add(unit);
                 }
             }
         }
@@ -268,16 +297,21 @@ public class closeupStage : MonoBehaviour, battleStage
             domain.Add((comboControler)protagonist);
             if (((comboControler)protagonist).playerNo == 0)
             {
-                foreach (comboControler unit in team2)
+                foreach (comboControler unit in env.units)
                 {
-                    domain.Add(unit);
+                    if (unit.playerNo == 1)
+                        domain.Add(unit);
                 }
             }
             else if (((comboControler)protagonist).playerNo == 1)
             {
-                foreach (comboControler unit in team1)
+                if (((comboControler)protagonist).playerNo == 0)
                 {
-                    domain.Add(unit);
+                    foreach (comboControler unit in env.units)
+                    {
+                        if (unit.playerNo == 0)
+                            domain.Add(unit);
+                    }
                 }
             }
         }
@@ -526,7 +560,7 @@ public class closeupStage : MonoBehaviour, battleStage
         }
         if (enemy)
         {
-            int teamLen = team2.Length / 2;
+            int teamLen = team2_anim.Length / 2;
             if (row1 && row2)
             {
                 return (team2_closePoint[forwardY] + team2_closePoint[forwardY + teamLen]) / 2;
@@ -546,7 +580,7 @@ public class closeupStage : MonoBehaviour, battleStage
             }
         }
         else {
-            int teamLen = team1.Length / 2;
+            int teamLen = team1_anim.Length / 2;
             if (row1 && row2)
             {
                 return (team1_closePoint[forwardY] + team1_closePoint[forwardY + teamLen]) / 2;

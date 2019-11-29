@@ -24,6 +24,7 @@ public class skill_movement:stage_movement
     public List<comboControler> tragets;
     public List<comboControler> nowDomain;
     public bool isTrigger=false;
+    public bool Close=true;
     public skill_movement(move order, List<object> argList, unitControler user, List<unitControler> tragetlist,unitControler user_bef,List<unitControler> tragets_bef)
         : base(order, argList)
     {
@@ -283,7 +284,7 @@ public class resetClosePos_action : stage_action
     }
     public override void action(skillpackage skp)
     {
-
+            //closeupStage.main.nowClosePos.resetRole();
     }
 }
 

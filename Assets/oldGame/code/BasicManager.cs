@@ -158,7 +158,7 @@ public class BasicManager : MonoBehaviour,Manager {
     }
 
     // Use this for initialization
-    void Start () {
+    protected virtual void Start () {
         chessBoard = createChessBoard();
         PlayerInf playdata = dataWarehouse.main.nowData;
         foreach(RoleRecord unit in playdata.army){

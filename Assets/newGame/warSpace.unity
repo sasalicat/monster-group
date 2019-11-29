@@ -632,13 +632,14 @@ GameObject:
   m_Component:
   - component: {fileID: 599777128}
   - component: {fileID: 599777127}
+  - component: {fileID: 599777129}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &599777127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +680,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &599777129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599777126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dddcd8af9a043a4e88a355d3336b42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainUnit: {fileID: 1612748968249254, guid: fd428d58dbaa8934788a3bea0363eb8d, type: 2}
+  hpBar: {fileID: 1326547280689896, guid: f81d5e7ff5cc41546b3aa1c5497b5bd5, type: 2}
+  prafebList: []
+  roleNames:
+  - roles/cyclops
 --- !u!1 &607739884
 GameObject:
   m_ObjectHideFlags: 0

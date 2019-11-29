@@ -354,5 +354,16 @@ public class ChessBoard : Environment {
             units = value;
         }
     }
-
+    public List<unitControler> getTeamOf(int playerNo)
+    {
+        List<unitControler> team = new List<unitControler>();
+        foreach(BasicControler unit in units)
+        {
+            if(unit.playerNo == playerNo)
+            {
+                team.Add(unit);
+            }
+        }
+        return team;
+    }
 }

@@ -7,6 +7,7 @@ public class demoButtom : MonoBehaviour {
     public GameObject effect; 
 	// Use this for initialization
 	void Start () {
+        /*
         stage.team1 = new BasicControler[stage.team1_pos.Length];
         stage.team1_anim = new roleAnim[stage.team1_pos.Length];
 		for(int i=0;i<stage.team1_pos.Length;i++)
@@ -30,7 +31,7 @@ public class demoButtom : MonoBehaviour {
             stage.team2_anim[i] = newrole.GetComponent<roleAnim>();
             newrole.GetComponent<roleAnim>().setSortLayout(100 + i);
             newrole.name = "team2:no" + i;
-        }
+        }*/
 	}
 	
 	// Update is called once per frame
@@ -39,9 +40,9 @@ public class demoButtom : MonoBehaviour {
 	}
     public void clearEnemyHitAnim()
     {
-        foreach (BasicControler enermy in stage.team2)
+        foreach (roleAnim enermy in stage.team2_anim)
         {
-            enermy.GetComponent<roleAnim>().endNowAnim();
+            enermy.endNowAnim();
         }
     }
     public void createEffect(GameObject gobj)
@@ -51,12 +52,13 @@ public class demoButtom : MonoBehaviour {
     }
     public void createEffects()
     {
+        /*
         Debug.Log("createEffects !!!");
         foreach (BasicControler enermy in stage.team2)
         {
             GameObject rObj = enermy.GetComponent<roleAnim>().rootObj;
             Instantiate(effect, rObj.transform.position, rObj.transform.rotation);
-        }
+        }*/
     }
     public void onFightClick()
     {
@@ -81,6 +83,7 @@ public class demoButtom : MonoBehaviour {
     }
     public void demoSkill()
     {
+        /*
         List<unitControler> sk1_tgs = new List<unitControler>();
         sk1_tgs.Add(stage.team2[1]);
         sk1_tgs.Add(stage.team2[2]);
@@ -112,6 +115,6 @@ public class demoButtom : MonoBehaviour {
  
         stage.display_skillEnd();
         stage.display_skillEnd();
-
+        */
     }
 }
