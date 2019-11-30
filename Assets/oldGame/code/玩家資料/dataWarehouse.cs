@@ -56,13 +56,15 @@ public class dataWarehouse : MonoBehaviour {
     {
         Debug.Log("創建新檔案");
         nowData = new PlayerInf();
-        nowData.army.Add(new RoleRecord(1));
+        nowData.army.Add(new RoleRecord(0));
         nowData.army[0].index = 0;
-        nowData.army[0].skillNos.Add(1);
-        nowData.army[0].skillNos.Add(5);
-        nowData.army[0].itemNos.Add(1);
-        nowData.army[0].itemNos.Add(2);
-        nowData.army[0].careers = new List<int>() {5};
+        nowData.army[0].location = new vec2i(0, 0);
+        //nowData.army[0].skillNos.Add(1);
+        //nowData.army[0].skillNos.Add(5);
+        //nowData.army[0].itemNos.Add(1);
+        //nowData.army[0].itemNos.Add(2);
+        //nowData.army[0].careers = new List<int>() {5};
+        /*
         nowData.army.Add(new RoleRecord(2));
         nowData.army[1].index = 1;
         nowData.army[1].skillNos.Add(1);
@@ -86,7 +88,7 @@ public class dataWarehouse : MonoBehaviour {
             nowData.itemInBag.Add(n);
         }
         //給點初始資金
-        nowData.moneyLeft = 100;
+        nowData.moneyLeft = 100;*/
     }
     public void loadArchive() {
         Debug.Log("加載檔案");

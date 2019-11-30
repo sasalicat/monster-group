@@ -5,6 +5,11 @@ using UnityEngine;
 public class demoButtom : MonoBehaviour {
     public closeupStage stage;
     public GameObject effect; 
+    void OnEnable()
+    {
+        dataWarehouse.main.createNewArchive();
+        dataWarehouse.main.currentEnemy = new List<RoleRecord>();
+    }
 	// Use this for initialization
 	void Start () {
         /*
@@ -32,6 +37,8 @@ public class demoButtom : MonoBehaviour {
             newrole.GetComponent<roleAnim>().setSortLayout(100 + i);
             newrole.name = "team2:no" + i;
         }*/
+        
+        
 	}
 	
 	// Update is called once per frame

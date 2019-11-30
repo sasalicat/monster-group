@@ -310,46 +310,49 @@ MonoBehaviour:
   closeUp_time: 0.25
   reCloseUpWait_time: 0.5
   team1_pos:
-  - {x: 1.57, y: -2.87, z: 0}
-  - {x: 3.55, y: -2.87, z: 0}
-  - {x: 5.91, y: -2.87, z: 0}
-  - {x: 2.55, y: -4.44, z: 0}
-  - {x: 4.59, y: -4.44, z: 0}
-  - {x: 6.79, y: -4.44, z: 0}
-  team1_closePoint:
-  - {x: -0.84, y: -2.87, z: 0}
-  - {x: 1.2, y: -2.87, z: 0}
-  - {x: 3.5, y: -2.87, z: 0}
-  - {x: 0.23, y: -4.44, z: 0}
-  - {x: 2.21, y: -4.44, z: 0}
-  - {x: 4.41, y: -4.44, z: 0}
-  team1:
-  - {fileID: 0}
-  team1_anim: []
-  team2_pos:
   - {x: -1.57, y: -2.87, z: 0}
   - {x: -3.55, y: -2.87, z: 0}
   - {x: -5.91, y: -2.87, z: 0}
   - {x: -2.55, y: -4.44, z: 0}
   - {x: -4.59, y: -4.44, z: 0}
   - {x: -6.79, y: -4.44, z: 0}
-  team2_anim: []
-  team2_closePoint:
+  team1_closePoint:
   - {x: 0.84, y: -2.87, z: 0}
   - {x: -1.2, y: -2.87, z: 0}
   - {x: -3.5, y: -2.87, z: 0}
   - {x: -0.23, y: -4.44, z: 0}
   - {x: -2.21, y: -4.44, z: 0}
   - {x: -4.41, y: -4.44, z: 0}
-  team2:
+  team1_anim:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  team2_pos:
+  - {x: 1.57, y: -2.87, z: 0}
+  - {x: 3.55, y: -2.87, z: 0}
+  - {x: 5.91, y: -2.87, z: 0}
+  - {x: 2.55, y: -4.44, z: 0}
+  - {x: 4.59, y: -4.44, z: 0}
+  - {x: 6.79, y: -4.44, z: 0}
+  team2_anim:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  team2_closePoint:
+  - {x: -0.84, y: -2.87, z: 0}
+  - {x: 1.2, y: -2.87, z: 0}
+  - {x: 3.5, y: -2.87, z: 0}
+  - {x: 0.23, y: -4.44, z: 0}
+  - {x: 2.21, y: -4.44, z: 0}
+  - {x: 4.41, y: -4.44, z: 0}
   curtain: {fileID: 1189129445}
   curtain_max_alph: 0.85
-  rolePrefab: {fileID: 1811563812064016, guid: 45b164dcac365aa42b7c1f8f024a26f7, type: 2}
 --- !u!1 &438770613
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,6 +636,9 @@ GameObject:
   - component: {fileID: 599777128}
   - component: {fileID: 599777127}
   - component: {fileID: 599777129}
+  - component: {fileID: 599777130}
+  - component: {fileID: 599777131}
+  - component: {fileID: 599777132}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -653,20 +659,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   failedPanel: {fileID: 0}
   successPanel: {fileID: 0}
-  team1_pos:
-  - {x: 1.57, y: -2.87, z: -10}
-  - {x: 3.55, y: -2.87, z: -10}
-  - {x: 5.91, y: -2.87, z: -10}
-  - {x: 2.55, y: -4.44, z: -10}
-  - {x: 4.59, y: -4.44, z: -10}
-  - {x: 6.79, y: -4.44, z: -10}
-  team2_pos:
-  - {x: -1.57, y: -2.87, z: -10}
-  - {x: -3.55, y: -2.87, z: -10}
-  - {x: -5.91, y: -2.87, z: -10}
-  - {x: -2.55, y: -4.44, z: -10}
-  - {x: -4.59, y: -4.44, z: -10}
-  - {x: -6.79, y: -4.44, z: -10}
 --- !u!4 &599777128
 Transform:
   m_ObjectHideFlags: 0
@@ -696,6 +688,81 @@ MonoBehaviour:
   prafebList: []
   roleNames:
   - roles/cyclops
+--- !u!114 &599777130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599777126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13aa06eaec334fb419b2b339810e9199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &599777131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599777126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ab5fd5612007540afc6f3e046c3f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_time_perframe: 0.005
+  max_counter_perframe: 100
+--- !u!114 &599777132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599777126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac39dd21a72e364294ec13be792605d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  createPosOffset: {x: 0.5, y: 0}
+  normal_interval: 0.21
+  normalNum:
+  - {fileID: 21300004, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300006, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300008, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300010, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300012, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300014, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300022, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300016, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300018, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  - {fileID: 21300020, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
+  red_interval: 0.21
+  redNum:
+  - {fileID: 21300002, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  - {fileID: 21300004, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  - {fileID: 21300006, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  - {fileID: 21300008, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  - {fileID: 21300010, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  - {fileID: 21300012, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  - {fileID: 21300014, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  - {fileID: 21300016, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  - {fileID: 21300020, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  - {fileID: 21300018, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
+  green_interval: 0.21
+  greenNum:
+  - {fileID: 21300004, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  - {fileID: 21300006, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  - {fileID: 21300008, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  - {fileID: 21300010, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  - {fileID: 21300012, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  - {fileID: 21300014, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  - {fileID: 21300016, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  - {fileID: 21300018, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  - {fileID: 21300022, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  - {fileID: 21300020, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
+  numberObj: {fileID: 1001948120358198, guid: 0909517e908a98e498c0a096b7479c36, type: 2}
+  bitObj: {fileID: 1049919268143966, guid: e46247de35d00c44d8ab69fcd5b40c4e, type: 2}
+  missPrafeb: {fileID: 1408690023858624, guid: 5af096a8cc18d1346a1cfec56df445de, type: 2}
 --- !u!1 &607739884
 GameObject:
   m_ObjectHideFlags: 0

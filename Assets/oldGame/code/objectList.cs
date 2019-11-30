@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class objectList : MonoBehaviour {
 public static objectList main=null;
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         if(main != null)
         {
@@ -15,6 +15,10 @@ public static objectList main=null;
             main = this;
         }
     }
+    public virtual void Start()
+    {
+
+    } 
     public GameObject mainUnit;
     public GameObject hpBar;
     public List<GameObject> prafebList;

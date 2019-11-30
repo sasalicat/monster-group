@@ -140,6 +140,20 @@ public class comboControler : BasicControler{
         }
 
     }
+    public override void heal(int num, unitControler creater)
+    {
+        HealMsg msg = new HealMsg(num, creater);
+        if (_befHealing != null)
+        {
+            _befHealing(msg);
+        }
+        data.Now_Life += num;
+        closeupStage.main.display_number(this, msg.num, NumberCreater.GREEN);
+        if (_aftHealing != null)
+        {
+            _aftHealing(msg);
+        }
+    }
     public override void useSkill(Skill skill, unitControler[] tragets, Dictionary<string, object> arg)
     {
         if (((comboControler)skill.Owner) != this)

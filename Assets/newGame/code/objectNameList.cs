@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class objectNameList : objectList {
     public List<string> roleNames;
-    public GameObject[] rolePrafebs;
-    void Start()
+    protected GameObject[] rolePrafebs;
+
+    protected override void OnEnable()
     {
-        rolePrafebs = new GameObject[rolePrafebs.Length];
+        base.OnEnable();
+        rolePrafebs = new GameObject[roleNames.Count];
     }
     public GameObject getRolePrafeb(int index)
     {

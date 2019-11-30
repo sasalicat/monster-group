@@ -80,7 +80,7 @@ public class closeupStage : MonoBehaviour, battleStage
     //public BasicControler[] team2;
     public SpriteRenderer curtain;
     public float curtain_max_alph = 0.85f;
-    public GameObject rolePrefab;
+    //public GameObject rolePrefab;
     public GameObject createRole(int team,int x, int y,int prefabIndex)
     {
         Vector3 pos = Vector3.zero;
@@ -96,17 +96,20 @@ public class closeupStage : MonoBehaviour, battleStage
         {
             return null;
         }
-        GameObject newRole = Instantiate(rolePrefab, pos, Quaternion.Euler(0, 0, 0));
+        GameObject newRole = Instantiate(((objectNameList)objectList.main).mainUnit, pos, Quaternion.Euler(0, 0, 0));
         GameObject prafeb = ((objectNameList)(objectList.main)).getRolePrafeb(prefabIndex); //Instantiate(objectList.main.mainUnit);
-        GameObject newone = Instantiate(prafeb, Vector3.zero, Quaternion.Euler(0, 0, 0),newRole.transform);
+        GameObject newone = Instantiate(prafeb, newRole.transform.position, Quaternion.Euler(0, 0, 0),newRole.transform);
+        
         if (team == 0) {
             team1_anim[x * y + x] = newRole.GetComponent<roleAnim>();
-            team1_anim[x * y + x].setSortLayout(BASE_ROLE_LAYOUT + x * y + x);
+            team1_anim[x * y + x].setRootObj(newone,BASE_ROLE_LAYOUT+x*y+x);
+            
         }
         if (team == 1)
         {
             team2_anim[x * y + x] = newRole.GetComponent<roleAnim>();
-            team2_anim[x * y + x].setSortLayout(BASE_ROLE_LAYOUT + x*y+x);
+            team2_anim[x * y + x].setRootObj(newone, BASE_ROLE_LAYOUT + x * y + x);
+            newone.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         return newRole;
     }
@@ -218,8 +221,8 @@ public class closeupStage : MonoBehaviour, battleStage
 
     public void display_number(unitControler who, int number, int kind)
     {
-        stage_movement newone = new stage_movement(stage_movement.move.Number, new List<object>() { who, number, kind });
-        heap[0].argList.Add(newone);
+        //stage_movement newone = new stage_movement(stage_movement.move.Number, new List<object>() { who, number, kind });
+        //heap[0].argList.Add(newone);
     }
     public void display_recloseUp(int code)
     {
