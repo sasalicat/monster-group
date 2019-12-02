@@ -8,15 +8,18 @@ public abstract class dynamicSkill : CDSkill {
     protected abstract List<modifier> Modifiers
     {
         get;
-    } 
+    }
+    public abstract SkillInf Inf();
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         modifierList = Modifiers;
+        information = Inf();
         foreach(modifier mod in modifierList)
         {
             mod.traget = this;
             mod.onSkillInit(owner, deleg);
         }
+        
     }
     public abstract unitControler[] getTragets(Environment env);
     public override unitControler[] findTraget(Environment env)
