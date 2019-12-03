@@ -46,7 +46,17 @@ public class newSkill_normalAttack : dynamicSkill {
     {
         closeupStage.main.display_anim(owner, roleAnim.ATTACK);
         Dictionary<comboControler, bool> missDict = (Dictionary<comboControler, bool>)args["miss"];
-        comboControler.bonus_kind kind = (comboControler.bonus_kind)args["bonus"];
+        //comboControler.bonus_kind kind = (comboControler.bonus_kind)args["bonus"];
+        unitControler[] tragets = (unitControler[])args["tragets"];
+        foreach(comboControler traget in tragets)
+        {
+            if (!missDict[traget])
+            {
+                Damage d = new Damage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, owner);
+                traget.takeDamage(d);
+                closeupStage.main.display_anim(traget, roleAnim.BEHIT);
+            }
+        }
     }
 
 }

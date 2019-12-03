@@ -180,15 +180,16 @@ public class comboControler : BasicControler{
         {
             return;
         }
-        Dictionary<string, object> skillArg = createSkillArg(data);
+        Dictionary<string, object> skillArg = createSkillArg(data,tragets);
 
+        _befUseSkill(skill.information, skillArg, ref tragets);
         foreach (unitControler traget in tragets)
         {
             ((comboControler)traget)._beAppoint(skill.information, skillArg);//被指定
         }
-        _befUseSkill(skill.information,skillArg,ref tragets);
+        
         //Debug.LogWarning("在useSkill后tragets Count:"+tragets.Length);
-        skillArg["tragets"] = tragets;
+        //skillArg["tragets"] = tragets;
         ((CDSkill)skill).trigger(skillArg);
         foreach (unitControler traget in tragets)
         {
