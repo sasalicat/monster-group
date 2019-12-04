@@ -161,6 +161,8 @@ public class comboControler : BasicControler{
             return;
         }
         arg["tragets"] = tragets;
+        bool trigger = (bonus_kind)arg["bonus"] != bonus_kind.NoBonus;
+        closeupStage.main.display_skill(this,skill,new List<unitControler>(tragets),trigger);
         foreach (unitControler traget in tragets)
         {
             ((comboControler)traget)._beAppoint(skill.information, arg);//被指定
@@ -172,8 +174,9 @@ public class comboControler : BasicControler{
             ((comboControler)traget)._aftBeSkill(skill.information, arg);//技能結算后
         }
         _aftUseSkill(skill.information, arg, tragets);
+        closeupStage.main.display_skillEnd();
     }
-        public override void useSkill(Skill skill,unitControler[] tragets)
+    public override void useSkill(Skill skill,unitControler[] tragets)
     {
         //Debug.Log("skill:" + skill.name);
         if(((comboControler)skill.Owner) != this)
@@ -181,6 +184,8 @@ public class comboControler : BasicControler{
             return;
         }
         Dictionary<string, object> skillArg = createSkillArg(data,tragets);
+        bool trigger = (bonus_kind)skillArg["bonus"] != bonus_kind.NoBonus;
+        closeupStage.main.display_skill(this, skill, new List<unitControler>(tragets), trigger);
 
         _befUseSkill(skill.information, skillArg, ref tragets);
         foreach (unitControler traget in tragets)
@@ -196,5 +201,6 @@ public class comboControler : BasicControler{
             ((comboControler)traget)._aftBeSkill(skill.information, skillArg);
         }
         _aftUseSkill(skill.information, skillArg, tragets);
+        closeupStage.main.display_skillEnd();
     }
 }

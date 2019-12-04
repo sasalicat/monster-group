@@ -13,6 +13,7 @@ public abstract class dynamicSkill : CDSkill {
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         modifierList = Modifiers;
+        this.owner = (BasicControler)owner;
         information = Inf();
         foreach(modifier mod in modifierList)
         {

@@ -639,6 +639,8 @@ GameObject:
   - component: {fileID: 599777130}
   - component: {fileID: 599777131}
   - component: {fileID: 599777132}
+  - component: {fileID: 599777133}
+  - component: {fileID: 599777134}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -763,6 +765,45 @@ MonoBehaviour:
   numberObj: {fileID: 1001948120358198, guid: 0909517e908a98e498c0a096b7479c36, type: 2}
   bitObj: {fileID: 1049919268143966, guid: e46247de35d00c44d8ab69fcd5b40c4e, type: 2}
   missPrafeb: {fileID: 1408690023858624, guid: 5af096a8cc18d1346a1cfec56df445de, type: 2}
+--- !u!114 &599777133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599777126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3815e434877f5c844ba516b74d55603f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  representation:
+  - resource_normalAttack
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  MagicNos: 
+  singleTragetMagicNo: 
+  multipTragetMagicNo: 
+  holyMagicNos: 
+  holyHealingMagicNos: 
+  holySupportMagicNos: 
+--- !u!114 &599777134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599777126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5610e2a9258081c4280a2cc715f3bdb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &607739884
 GameObject:
   m_ObjectHideFlags: 0

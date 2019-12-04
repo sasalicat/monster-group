@@ -30,8 +30,18 @@ public class comboManager : BasicManager {
             return 1;
         }
     }
+    protected virtual void onInit()
+    {
+        List<RoleRecord> enemy = new List<RoleRecord>();
+        RoleRecord enemy1 = new RoleRecord();
+        enemy1.skillNos = new List<int>() {0};
+        enemy1.location = new vec2i(1, 1);
+        enemy.Add(enemy1);
+        dataWarehouse.main.currentEnemy=enemy;
+    }
     protected override void Start()
     {
+        onInit();
         base.Start();
     }
     public override unitControler createUnit(Dictionary<string, object> unitInf) {
