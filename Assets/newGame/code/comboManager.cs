@@ -33,7 +33,7 @@ public class comboManager : BasicManager {
     protected virtual void onInit()
     {
         List<RoleRecord> enemy = new List<RoleRecord>();
-        RoleRecord enemy1 = new RoleRecord();
+        RoleRecord_v2 enemy1 = new RoleRecord_v2(0);
         enemy1.skillNos = new List<int>() {0};
         enemy1.location = new vec2i(1, 1);
         enemy.Add(enemy1);
@@ -49,12 +49,12 @@ public class comboManager : BasicManager {
         int posX = (int)unitInf["position_x"];
         int posY = (int)unitInf["position_y"];
 
-        RoleRecord inf = ((RoleRecord)unitInf["information"]);
+        RoleRecord_v2 inf = ((RoleRecord_v2)unitInf["information"]);
         int unitNo = inf.race;
         int playerNo = (int)unitInf["player_no"];
         List<int> skillnos = inf.skillNos;
         List<int> itemnos = inf.itemNos;
-        unitData data = inf.data;
+        unitData_v2 data = (unitData_v2)inf.data;
         int realX = 0;
         int realY = 0;
         GameObject newone = closeupStage.main.createRole(playerNo,posX,posY,inf.race);
@@ -83,13 +83,14 @@ public class comboManager : BasicManager {
             hpbar.transform.localPosition = objectList.main.hpBar.transform.position;
             hpbar.GetComponent<HpBar>().HpColor = playerColor[playerNo];
             //要複製一個新的unitData,不然在戰鬥中的技能可能會永久地改變角色屬性
-            controler.init(new voidAI(), chessBoard, new unitData(data), hpbar.GetComponent<HpBar>());
+            controler.init(new voidAI(), chessBoard, new unitData_v2(data), hpbar.GetComponent<HpBar>());
             controler._onDeath = forRoleDeath;
             Timer.main.logInTimer(controler.action);
             newone.AddComponent<sp_effection>();
-            SkillBelt belt = newone.AddComponent<SkillBelt>();
+            SkillBelt_v2 belt = newone.AddComponent<SkillBelt_v2>();
             controler.skillBelt = belt;
             belt.init(controler, skillnos);
+            //controler.counterSkill = 
             itemBelt item_belt = newone.AddComponent<itemBelt>();
             item_belt.init(controler, itemnos);
             return controler;
@@ -101,5 +102,11 @@ public class comboManager : BasicManager {
         }
         
         
+    }
+   
+    public override void forRoleDeath(GameObject gobj)
+    {
+        comboControler control = gobj.GetComponent<comboControler>();
+        Timer.main.loginOutTimer(control.action);
     }
 }

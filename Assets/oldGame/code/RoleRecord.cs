@@ -35,7 +35,7 @@ public class RoleRecord  {
     public bool teammate = true;
     public unitData data;
     public vec2i location=null;
-    public RoleRecord() {
+    public  RoleRecord() {
         race = 0;
         data = new unitData();
     }

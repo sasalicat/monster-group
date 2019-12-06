@@ -7,9 +7,9 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     unitControler controler;
     public delegate void withFloat(float arg);
     protected withFloat _time_pass; 
-    List<Skill> skills;
-    List<Skill> activeSkills;
-    List<skill_representation> repres;
+    protected List<Skill> skills;
+    protected List<Skill> activeSkills;
+    protected List<skill_representation> repres;
     protected BasicDelegate.forSkill _be_appoint;
     public BasicDelegate.forSkill _BeAppoint
     {

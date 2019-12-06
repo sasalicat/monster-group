@@ -10,6 +10,12 @@ public abstract class dynamicSkill : CDSkill {
         get;
     }
     public abstract SkillInf Inf();
+    public Damage_v2 createDamage(int num,byte kind,Dictionary<string,object> skillArg)
+    {
+        Damage_v2 d = new Damage_v2(num, kind, owner);
+        d.extraArgs = skillArg;
+        return d;
+    }
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         modifierList = Modifiers;

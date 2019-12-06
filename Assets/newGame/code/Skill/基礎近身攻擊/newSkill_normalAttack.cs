@@ -39,7 +39,7 @@ public class newSkill_normalAttack : dynamicSkill {
 
     public override SkillInf Inf()
     {
-        return new SkillInf(true,true,true,  new List<string>() { "damage" });
+        return new SkillInf_v2(this,true,true,true,  new List<string>() { "damage" });
     }
 
     public override void trigger(Dictionary<string, object> args)
@@ -52,7 +52,7 @@ public class newSkill_normalAttack : dynamicSkill {
         {
             if (!missDict[traget])
             {
-                Damage d = new Damage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, owner);
+                Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
                 traget.takeDamage(d);
                 closeupStage.main.display_anim(traget, roleAnim.BEHIT);
             }

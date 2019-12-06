@@ -183,7 +183,40 @@ public class unitData_v2 : unitData {
     {
         get
         {
-            return 0.5f;
+            return 1f;
         }
+    }
+    public override unitData_Profile getProflie()
+    {
+        return new unitDataV2_profile(base_attack,attack_speed_reinforce,magic_strength,armor,max_life_point,now_life_recover,cooldown_reinforce,magic_resistance,dodge_point,block_reduce,block_point,insight_reduce_rate,crit_magnification,crit_point,batter_limmit,batter_point,counter_point);
+    }
+    public unitData_v2(unitData_v2 another) : base(another)
+    {
+        this.dodge_point = another.dodge_point;
+        this.block_reduce = another.block_reduce;
+        this.block_point = another.block_point;
+        this.insight_reduce_rate = another.insight_reduce_rate;
+        this.crit_magnification = another.crit_magnification;
+        this.crit_point = another.crit_point;
+        this.batter_limmit = another.batter_limmit;
+        this.batter_point = another.batter_point;
+        this.counter_point = another.counter_point;
+    }
+    public unitData_v2(unitData_Profile profile) : base(profile)
+    {
+        unitDataV2_profile profile_v2 = (unitDataV2_profile)profile;
+        this.dodge_point = profile_v2.dodge_point;
+        this.block_reduce = profile_v2.block_reduce;
+        this.block_point = profile_v2.block_point;
+        this.insight_reduce_rate = profile_v2.insight_reduce_rate;
+        this.crit_magnification = profile_v2.crit_magnification;
+        this.crit_point = profile_v2.crit_point;
+        this.batter_limmit = profile_v2.batter_limmit;
+        this.batter_point = profile_v2.batter_point;
+        this.counter_point = profile_v2.counter_point;
+    }
+    public unitData_v2() : base()
+    {
+
     }
 }

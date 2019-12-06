@@ -18,7 +18,7 @@ public class unitData  {
     public const int STAND_COOLDOWN_REINFORCE = 0;
     public const int STAND_MAG_RESISTANCE = 0;
 
-    private int base_attack = STAND_ATK;
+    protected int base_attack = STAND_ATK;
     private int attack_offset = 0;
 
 
@@ -78,7 +78,7 @@ public class unitData  {
         }
     }
 
-    private int attack_speed_reinforce= STAND_ATK_SPD_REINFORCE;
+    protected int attack_speed_reinforce= STAND_ATK_SPD_REINFORCE;
     public int Now_Attack_Speed
     {
         set
@@ -98,7 +98,7 @@ public class unitData  {
         }
     }
 
-    private int magic_strength = STAND_MAG_REINFOCE;
+    protected int magic_strength = STAND_MAG_REINFOCE;
     public int Now_Mag_Reinforce
     {
         set
@@ -118,7 +118,7 @@ public class unitData  {
         }
     }
 
-    private int armor = STAND_ARMOR;
+    protected int armor = STAND_ARMOR;
     public int Now_Armor
     {
         set
@@ -138,7 +138,7 @@ public class unitData  {
         }
     }
 
-    private int max_life_point = STAND_LIFE;
+    protected int max_life_point = STAND_LIFE;
 
     public int Now_Max_Life
     {
@@ -174,7 +174,7 @@ public class unitData  {
         }
     }
 
-    private int now_life_point = STAND_LIFE;
+    protected int now_life_point = STAND_LIFE;
     public int Now_Life
     {
         get
@@ -205,7 +205,7 @@ public class unitData  {
                 _onLifeChange(before);
         }
     }
-    private int now_life_recover = STAND_LIFE_RECOVER;
+    protected int now_life_recover = STAND_LIFE_RECOVER;
     public int Now_Life_Recover
     {
         set
@@ -224,7 +224,7 @@ public class unitData  {
             }
         }
     }
-    private int cooldown_reinforce = STAND_COOLDOWN_REINFORCE;
+    protected int cooldown_reinforce = STAND_COOLDOWN_REINFORCE;
     public int Now_Cooldown_Reinforce
     {
         set
@@ -247,7 +247,7 @@ public class unitData  {
         } 
     }
 
-    private int magic_resistance = STAND_MAG_RESISTANCE;
+    protected int magic_resistance = STAND_MAG_RESISTANCE;
     public int Now_Mag_Resistance{
         set
         {
@@ -265,7 +265,7 @@ public class unitData  {
             return calReduce(magic_resistance, BASE_ABILITY_NUMBER);
         }
     }
-    public unitData_Profile getProflie()
+    public virtual unitData_Profile getProflie()
     {
         return new unitData_Profile(base_attack,attack_speed_reinforce,magic_strength,armor,max_life_point,
             now_life_recover,cooldown_reinforce,magic_resistance);

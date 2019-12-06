@@ -23,27 +23,34 @@ public class comboControler : BasicControler{
     public BasicDelegate.forSkill _aftDodge;
     public void dodgeAction(SkillInf skillInf, Dictionary<string, object> skillArgs){
         float denyRate = (float)skillArgs["dodgeDeny"];
-        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Dodge_Rate-denyRate)//如果閃避成功
+        if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Dodge_Rate-denyRate))//如果閃避成功
             ((Dictionary<comboControler, bool>)skillArgs["miss"])[this] = true;
-            _aftDodge(skillInf, skillArgs);   
+            if(_aftDodge!=null)
+                _aftDodge(skillInf, skillArgs);   
     }
     public Skill counterSkill = null;
     public void counterAction(SkillInf skillInf, Dictionary<string, object> skillArgs)
     {
-        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Counter_Rate)
+        bonus_kind kind = (bonus_kind)skillArgs["bonus"];
+        if (kind != bonus_kind.Counter)
         {
-            unitControler[] traget = new unitControler[]{(unitControler)skillArgs["user"]};
-            Dictionary<string,object> args= createSkillArg(data);
-            args["bonus"] = bonus_kind.Counter;
-            useSkill(counterSkill, traget, args);
+            if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Counter_Rate)
+            {
+                unitControler[] traget = new unitControler[] { (unitControler)skillArgs["user"] };
+                //Skill skill = (Skill)skillArgs["skill"];
+                Dictionary<string, object> args = createSkillArg(data, traget);
+                args["bonus"] = bonus_kind.Counter;
+                useSkill(counterSkill, traget, args);
+            }
         }
     }
     public void batterAction(SkillInf skillInf, Dictionary<string, object> skillArgs,unitControler[] tragets)
     {
         if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Batter_Rate)
         {
-            Dictionary<string, object> args = createSkillArg(data);
+            Dictionary<string, object> args = createSkillArg(data,tragets);
             args["bonus"] = bonus_kind.Batter;
+            //args["skill"] = ((SkillInf_v2)skillInf).skill;
             bool canBatter = false;
             if (!args.ContainsKey("batterTime"))
             {
@@ -65,14 +72,15 @@ public class comboControler : BasicControler{
     public void blockAction(Damage damage)
     {
         float denyRate = (float)((Damage_v2)damage).extraArgs["blockDeny"];
-        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Batter_Rate - denyRate)
+        if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Batter_Rate - denyRate))
         {
             damage.num -= ((unitData_v2)data).Now_Block_Point;
             if (damage.num < 0)
             {
                 damage.num = 0;
             }
-            _aftBlock(damage);
+            if (_aftBlock != null)
+                _aftBlock(damage);
         }
     }
     public BasicDelegate.withDamage _aftCrit;
@@ -81,7 +89,8 @@ public class comboControler : BasicControler{
         if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Crit_Rate)
         {
             damage.num = (int)((unitData_v2)data).Now_Crit_Rate*damage.num;
-            _aftCrit(damage);
+            if(_aftCrit!=null)
+                _aftCrit(damage);
         }
     }
     public virtual Dictionary<string,object> createSkillArg(unitData data,unitControler[] tragets)
@@ -98,6 +107,7 @@ public class comboControler : BasicControler{
         arg["critical"] = false;
         arg["dodgeDeny"] = ((unitData_v2)data).Now_Insight_Rate * ((unitData_v2)data).Now_Insight_Reduce;
         arg["blockDeny"] = ((unitData_v2)data).Now_Insight_Rate * ((unitData_v2)data).Now_Insight_Reduce;
+        arg["tragets"] = tragets;
         return arg;
     }
     public override void takeDamage(Damage damage)
@@ -161,6 +171,7 @@ public class comboControler : BasicControler{
             return;
         }
         arg["tragets"] = tragets;
+        arg["skill"] = skill;
         bool trigger = (bonus_kind)arg["bonus"] != bonus_kind.NoBonus;
         closeupStage.main.display_skill(this,skill,new List<unitControler>(tragets),trigger);
         foreach (unitControler traget in tragets)
@@ -170,7 +181,7 @@ public class comboControler : BasicControler{
         _befUseSkill(skill.information, arg, ref tragets);
         ((CDSkill)skill).trigger(arg);
         foreach (unitControler traget in tragets)
-        {
+        {//最後GG在這裡
             ((comboControler)traget)._aftBeSkill(skill.information, arg);//技能結算后
         }
         _aftUseSkill(skill.information, arg, tragets);
@@ -184,6 +195,7 @@ public class comboControler : BasicControler{
             return;
         }
         Dictionary<string, object> skillArg = createSkillArg(data,tragets);
+        skillArg["skill"] = skill;
         bool trigger = (bonus_kind)skillArg["bonus"] != bonus_kind.NoBonus;
         closeupStage.main.display_skill(this, skill, new List<unitControler>(tragets), trigger);
 

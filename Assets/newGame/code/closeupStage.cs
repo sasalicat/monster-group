@@ -668,12 +668,14 @@ public class closeupStage : MonoBehaviour, battleStage
         for(int i=0;i<team1_anim.Length;i++)
         {
             roleAnim ranim = team1_anim[i];
-            ranim.setSortLayout(BASE_ROLE_LAYOUT + i);
+            if(ranim!=null)
+                ranim.setSortLayout(BASE_ROLE_LAYOUT + i);
         }
         for (int i = 0; i < team2_anim.Length; i++)
         {
             roleAnim ranim = team2_anim[i];
-            ranim.setSortLayout(BASE_ROLE_LAYOUT + i);
+            if(ranim!=null)
+                ranim.setSortLayout(BASE_ROLE_LAYOUT + i);
         }
         ((BasicControler)actioner).GetComponent<roleAnim>().addSortLayout(CURTAIN_MASKER_NUMBER);
         foreach (unitControler unit in tragets)
