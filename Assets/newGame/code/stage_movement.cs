@@ -247,10 +247,11 @@ public class toClosePos_action : stage_action_withskp
     public void ontime(float time)
     {
         Vector3 pos= closeupStage.main.nowClosePos.moveStep(time);
+        roleObj.transform.position = pos;
         if (closeupStage.main.nowClosePos.end)
         {
             conditionNext();
-            closeupStage.main.clockFunc -= ontime;
+            closeupStage.main.onUpdateFunc -= ontime;
         }
     }
     public override void action(skillpackage skp)
@@ -262,8 +263,8 @@ public class toClosePos_action : stage_action_withskp
         roleObj = ((BasicControler)role).gameObject;
         if (closeupStage.main.nowClosePos.end)
         {
-            closeupStage.main.nowClosePos = new closeAndPos(role,tragetPos,oriPos,time);
-            closeupStage.main.clockFunc += ontime;
+            closeupStage.main.nowClosePos = new closeAndPos(role,oriPos,tragetPos,time);
+            closeupStage.main.onUpdateFunc += ontime;
         }
     }
 }

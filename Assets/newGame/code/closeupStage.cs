@@ -11,7 +11,7 @@ public struct closeAndPos
     float nowTime;
     float totalTime;
     public bool end;
-
+    public const float BASE_MOVE_TIME = 0.3f;
     public closeAndPos(bool value)
     {
         oriPos = Vector3.zero;
@@ -39,7 +39,7 @@ public struct closeAndPos
             nowTime = totalTime;
             end = true;
         }
-        return oriPos + dir * nowTime;
+        return oriPos + dir * (nowTime/totalTime);
     }
 }
 public class closeupStage : MonoBehaviour, battleStage
@@ -70,6 +70,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public float reCloseUpWait_time = 0.5f;
     protected float timeBefore = 0;
     public clock clockFunc;
+    public clock onUpdateFunc;
     public Vector3[] team1_pos= new Vector3[6];
     public Vector3[] team1_closePoint;
     //public BasicControler[] team1;
@@ -86,11 +87,11 @@ public class closeupStage : MonoBehaviour, battleStage
         Vector3 pos = Vector3.zero;
         if(team == 0)
         {
-            pos = team1_pos[x * y + x];
+            pos = team1_pos[3 * y + x];
         }
         else if(team == 1)
         {
-            pos = team2_pos[x * y + x];
+            pos = team2_pos[3 * y + x];
         }
         else
         {
@@ -322,6 +323,11 @@ public class closeupStage : MonoBehaviour, battleStage
     }
     public void display_skill(unitControler protagonist, Skill skill, List<unitControler> tragets, bool isTrigger)
     {
+        Debug.Log(isTrigger+"技能使用者:" + ((comboControler)protagonist).name + " 目標:");
+        foreach(unitControler traget in tragets)
+        {
+            Debug.Log("目標:" + ((comboControler)traget).name);
+        }
         skill_movement before = heap[0];
         heap.Insert(0, new skill_movement(stage_movement.move.SkillStart, new List<object>(), protagonist, tragets, before.user, new List<unitControler>(before.tragets.ToArray())));
         heap[0].isTrigger = isTrigger;
@@ -389,9 +395,10 @@ public class closeupStage : MonoBehaviour, battleStage
     }
     public void display_closeMoving(unitControler protagonist, List<unitControler> tragets)
     {
-
+         
         Vector3 cpos =getClosePos(tragets);
-        heap[0].argList.Add(new toClosePos_action(new List<object>() { protagonist, cpos, ((BasicControler)protagonist).transform.position}));
+        Debug.Log("近戰位置:" + cpos + " 當前位置:"+ ((BasicControler)protagonist).transform.position);
+        heap[0].argList.Add(new toClosePos_action(new List<object>() { protagonist, cpos, ((BasicControler)protagonist).transform.position,closeAndPos.BASE_MOVE_TIME}));
     }
     public void display_anim(unitControler unit, int code)
     {
@@ -510,27 +517,26 @@ public class closeupStage : MonoBehaviour, battleStage
             posList.Add(pos);
         }
         bool enemy = false;
-        if (posList[0][1]< (cbd.Y / 2))
+        if (posList[0][1]>= (cbd.Y / 2))
         {
             enemy = true;
         }
-        int forwardY = cbd.Y / 2 - 1;
+        int forwardX = cbd.Y / 2 - 1;//設定最前目標的x,一開始是2,當找到一個在其之前的目標時設為該目標的x
         bool row1 = false;
         bool row2 = false;
         foreach (int[] pos in posList)
         {
-
             if (enemy)
             {
-                if (pos[1] >= (cbd.Y / 2))
+                if (pos[1]<(cbd.Y / 2))
                 {
                     Debug.LogError("錯誤的close pos請求,有不同陣營的角色");
                     return Vector3.zero;
                 }
-                int realY = cbd.Y / 2 - pos[1]-1;
-                if (realY < forwardY)
+                int posX = pos[1] - cbd.Y/2;
+                if (posX < forwardX)
                 {
-                    forwardY = realY;
+                    forwardX = posX;
                 }
                 if (pos[0] == 0)
                 {
@@ -541,14 +547,14 @@ public class closeupStage : MonoBehaviour, battleStage
                 }
             }
             else {
-                if (pos[1] < (cbd.Y / 2)) {
+                if (pos[1] >= (cbd.Y / 2)) {
                     Debug.LogError("錯誤的close pos請求,有不同陣營的角色");
                     return Vector3.zero;
                 }
-                int realY = pos[1] - cbd.Y / 2;
-                if (realY < forwardY)
+                int posX = cbd.Y / 2 - 1 - pos[1];
+                if (posX < forwardX)
                 {
-                    forwardY = realY;
+                    forwardX = posX;
                 }
                 if (pos[0] == 0)
                 {
@@ -566,15 +572,15 @@ public class closeupStage : MonoBehaviour, battleStage
             int teamLen = team2_anim.Length / 2;
             if (row1 && row2)
             {
-                return (team2_closePoint[forwardY] + team2_closePoint[forwardY + teamLen]) / 2;
+                return (team2_closePoint[forwardX] + team2_closePoint[forwardX + teamLen]) / 2;
             }
             else if (row1)
             {
-                return team2_closePoint[forwardY + teamLen];
+                return team2_closePoint[forwardX];
             }
             else if (row2)
             {
-                return team2_closePoint[forwardY];
+                return team2_closePoint[forwardX+teamLen];
             }
             else
             {
@@ -586,15 +592,15 @@ public class closeupStage : MonoBehaviour, battleStage
             int teamLen = team1_anim.Length / 2;
             if (row1 && row2)
             {
-                return (team1_closePoint[forwardY] + team1_closePoint[forwardY + teamLen]) / 2;
+                return (team1_closePoint[forwardX] + team1_closePoint[forwardX + teamLen]) / 2;
             }
             else if (row1)
             {
-                return team1_closePoint[forwardY + teamLen];
+                return team1_closePoint[forwardX ];
             }
             else if (row2)
             {
-                return team1_closePoint[forwardY];
+                return team1_closePoint[forwardX+teamLen];
             }
             else
             {
@@ -640,7 +646,10 @@ public class closeupStage : MonoBehaviour, battleStage
         {
             clockFunc(Time.deltaTime);
         }
-
+        if (onUpdateFunc!=null)
+        {
+            onUpdateFunc(Time.deltaTime);
+        }
             //if (((skill_movement)rootMovement.argList[0]).nowState == stage_movement.state.unActive)
             if (packages.Count ==0)//如果沒有skillpackage
             {

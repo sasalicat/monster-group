@@ -14,9 +14,10 @@ public class asynchronousTimer : Timer {
             callAllFunction(0.01f);//0.01是隨便寫的數字,實際上這個版本的update根本不關心間隔是多久
             if(Time.realtimeSinceStartup - start_time > max_time_perframe)
             {
+                //Debug.LogWarning("時間耗盡跳出!耗時:"+(Time.realtimeSinceStartup - start_time)+"總計幀數:"+i);
                 break;
             }
         }
-        //Debug.Log("完成100! 幀耗時:" + (Time.realtimeSinceStartup - start_time));
+        //Debug.LogWarning("完成100! 幀耗時:" + (Time.realtimeSinceStartup - start_time));
     }
 }

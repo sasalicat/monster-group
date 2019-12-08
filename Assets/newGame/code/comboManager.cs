@@ -58,20 +58,21 @@ public class comboManager : BasicManager {
         int realX = 0;
         int realY = 0;
         GameObject newone = closeupStage.main.createRole(playerNo,posX,posY,inf.race);
-        newone.name = "位於(" + realX + "," + realY + ")";
-        Debug.Log("playerNo:" + playerNo + " chessx:" + chessBoard.X + " chessy:" + chessBoard.Y);
+        
         //Debug.Log("realY")
         if (playerNo % 2 == 0)//user
         {
-            realX = posX;
-            realY = chessBoard.Y / 2 - 1 - posY;
+            realX = chessBoard.X-1-posY;
+            realY = chessBoard.Y / 2 - 1 - posX;
         }
         else if (playerNo % 2 == 1)//敵人
         {
-            realX = posX;
-            realY = chessBoard.Y / 2 + posY;
+            realX = chessBoard.X - 1 - posY;
+            realY = chessBoard.Y/2 + posX;
         }
         //newone.transform.position = new Vector2(INIT_X + realX * X_INTERVAL, INIT_Y + realY * Y_INTERVAL);
+        newone.name = "team" + playerNo + "位於(" + realX + "," + realY + ")";
+        Debug.Log("playerNo:" + playerNo + " chessx:" + chessBoard.X + " chessy:" + chessBoard.Y);
         comboControler controler = newone.GetComponent<comboControler>();
         controler.playerNo = playerNo;
         //newone.GetComponent<SpriteRenderer>().sprite = ImageList.main.headIcons[unitNo];

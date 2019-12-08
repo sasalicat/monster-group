@@ -39,7 +39,7 @@ public class newSkill_normalAttack : dynamicSkill {
 
     public override SkillInf Inf()
     {
-        return new SkillInf_v2(this,true,true,true,  new List<string>() { "damage" });
+        return new SkillInf_v2(this,true,true,true,false,new List<string>() { "damage" });
     }
 
     public override void trigger(Dictionary<string, object> args)

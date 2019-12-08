@@ -31,11 +31,13 @@ public class comboControler : BasicControler{
     public Skill counterSkill = null;
     public void counterAction(SkillInf skillInf, Dictionary<string, object> skillArgs)
     {
+
         bonus_kind kind = (bonus_kind)skillArgs["bonus"];
         if (kind != bonus_kind.Counter)
         {
             if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Counter_Rate)
             {
+                //Debug.LogWarning(gameObject.name + "反擊->" + ((comboControler)skillArgs["user"]).gameObject.name);
                 unitControler[] traget = new unitControler[] { (unitControler)skillArgs["user"] };
                 //Skill skill = (Skill)skillArgs["skill"];
                 Dictionary<string, object> args = createSkillArg(data, traget);
@@ -46,7 +48,7 @@ public class comboControler : BasicControler{
     }
     public void batterAction(SkillInf skillInf, Dictionary<string, object> skillArgs,unitControler[] tragets)
     {
-        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Batter_Rate)
+        if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Batter_Rate&& ((bonus_kind)skillArgs["bonus"])!=bonus_kind.Counter)//反擊不能觸發連擊
         {
             Dictionary<string, object> args = createSkillArg(data,tragets);
             args["bonus"] = bonus_kind.Batter;
@@ -64,8 +66,11 @@ public class comboControler : BasicControler{
                     canBatter = true;
                  }
             }
-            if(canBatter)
+            if (canBatter)
+            {
+                //Debug.LogWarning(gameObject.name + "連擊 次數"+ args["batterTime"] + ">>>" + ((comboControler)tragets[0]).gameObject.name);
                 useSkill(((SkillInf_v2)skillInf).skill, tragets, args);
+            }
         }
     }
     public BasicDelegate.withDamage _aftBlock;
@@ -112,14 +117,14 @@ public class comboControler : BasicControler{
     }
     public override void takeDamage(Damage damage)
     {
-        Debug.Log("before _befTakeDamage");
+        //Debug.Log("before _befTakeDamage");
         _befTakeDamage(damage);
         comboControler from = (comboControler)damage.creater;
         damage.creater = this;
         from._befCauseDamage(damage);
         damage.creater = from;
 
-        Debug.Log("after _befTakeDamage");
+        //Debug.Log("after _befTakeDamage");
         if (damage.vaild && !data.Dead)
         {
 
