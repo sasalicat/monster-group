@@ -41,6 +41,10 @@ public struct closeAndPos
         }
         return oriPos + dir * (nowTime/totalTime);
     }
+    public void resetRole()
+    {
+        ((comboControler)role).transform.position = oriPos;
+    }
 }
 public class closeupStage : MonoBehaviour, battleStage
 {
@@ -309,14 +313,13 @@ public class closeupStage : MonoBehaviour, battleStage
             }
             else if (((comboControler)protagonist).playerNo == 1)
             {
-                if (((comboControler)protagonist).playerNo == 0)
-                {
+
                     foreach (comboControler unit in env.units)
                     {
                         if (unit.playerNo == 0)
                             domain.Add(unit);
                     }
-                }
+                
             }
         }
         return domain;
@@ -342,6 +345,7 @@ public class closeupStage : MonoBehaviour, battleStage
                 close = false;
             }
         }
+        heap[0].Close = close;
         if (!heap[0].isTrigger)//如果不是觸發的技能,說明是正牌技能
         {//確定domain
             /*heap[0].nowDomain = new List<comboControler>() { (comboControler)protagonist };
@@ -391,15 +395,21 @@ public class closeupStage : MonoBehaviour, battleStage
         stage_movement nowMove = heap[0];
         heap.RemoveAt(0);
         heap[0].argList.Add(nowMove);
+        if (heap[0].Close)
+        {
+            //for()
+        }
 
     }
     public void display_closeMoving(unitControler protagonist, List<unitControler> tragets)
-    {
-         
+    { 
         Vector3 cpos =getClosePos(tragets);
         Debug.Log("近戰位置:" + cpos + " 當前位置:"+ ((BasicControler)protagonist).transform.position);
-        heap[0].argList.Add(new toClosePos_action(new List<object>() { protagonist, cpos, ((BasicControler)protagonist).transform.position,closeAndPos.BASE_MOVE_TIME}));
+        Vector3 oripos = getOriginPos(protagonist);
+        heap[0].argList.Add(new toClosePos_action(new List<object>() { protagonist, cpos, oripos,closeAndPos.BASE_MOVE_TIME}));
+        //heap[0].argList.Add(new resetClosePos_action(null));
     }
+    //public void display_resetCloseMoving
     public void display_anim(unitControler unit, int code)
     {
         if (code== roleAnim.BEHIT)
@@ -610,6 +620,38 @@ public class closeupStage : MonoBehaviour, battleStage
         }
         return new Vector3(0,0,0);
     }
+    int[] teamAndPos(int[] cb_pos,ChessBoard cbd)
+    {
+        int[] result = new int[3];
+        //ChessBoard cbd = ((comboManager)BasicManager.main).ChessBoard;
+        if (cb_pos[1] >= cbd.Y / 2)//敵人
+        {
+            result[0] = 1;
+            result[1] =  cb_pos[1] - cbd.Y/2;
+            result[2] =  cbd.X-1- cb_pos[0];
+        }
+        else {
+            result[0] = 0;
+            result[1] = cbd.Y / 2 - 1 - cb_pos[1];
+            result[2] = cbd.X - 1 - cb_pos[0];
+        }
+        return result;
+    }
+    public Vector3 getOriginPos(unitControler unit)
+    {
+        ChessBoard cbd = ((comboManager)BasicManager.main).ChessBoard;
+        int[] pos =  cbd.getPosFor(unit);
+        int[] team_pos = teamAndPos(pos,cbd);
+        if (team_pos[0] == 0)
+        {
+            return team1_pos[3 * team_pos[2] + team_pos[1]];
+        }
+        else if (team_pos[1] == 1)
+        {
+            return team2_pos[3 * team_pos[2] + team_pos[1]];
+        }
+        return Vector3.zero;
+    }
     /*
     public void setCurtain(bool torf)
     {
@@ -634,7 +676,7 @@ public class closeupStage : MonoBehaviour, battleStage
         handleFuncs = new with_skillpackage[6];
         heap = new List<skill_movement>();
         heap.Add(rootMovement);
-        CU_table = new int[6] { CU_RIGHT_TOLEFT ,CU_RIGHT_ONLY,CU_NOCU,CU_LEFT_TORIGHT,CU_LEFT_ONLY,CU_NOCU};//用來查表closeup的動作
+        CU_table = new int[6] { CU_LEFT_TORIGHT, CU_LEFT_ONLY, CU_NOCU,CU_RIGHT_TOLEFT,CU_RIGHT_ONLY,CU_NOCU};//用來查表closeup的動作
         
         //handleFuncs[(int)stage_movement.move.SkillStart] = SkillStart_for;
     }
@@ -720,6 +762,11 @@ public class closeupStage : MonoBehaviour, battleStage
                 skm2skp((skill_movement)move, skpList);
             }
         }
+        if (!nowpackage.now_movement.isTrigger)//強制復位近戰位置角色
+        {
+            resetClosePos_action special_reset = new resetClosePos_action(null);
+            special_reset.onLoad(skpList[skpList.Count - 1]);
+        }
     }
     protected List<skillpackage> SkillStart_for(stage_movement move){
         //nowMachine = new handle_SkillStart(move);
@@ -764,7 +811,7 @@ public class skillpackage : state_machine
               //stage2專為missile設計,如果沒有創建missile則跳過這個stage stage2->3為所有missile hit觸發
               //stage3依次開始所有目標的behit動畫和創建被擊特效 stage3->4為所有behit動畫結束
               //stage4設置為End 為True,整個技能的表現結束
-    skill_movement now_movement;
+    public skill_movement now_movement;
     public List<object>[] stage_conditions;
     public skillpackage_func[] stage_funcs;
     

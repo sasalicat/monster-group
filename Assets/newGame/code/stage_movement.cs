@@ -285,7 +285,7 @@ public class resetClosePos_action : stage_action
     }
     public override void action(skillpackage skp)
     {
-            //closeupStage.main.nowClosePos.resetRole();
+            closeupStage.main.nowClosePos.resetRole();
     }
 }
 
