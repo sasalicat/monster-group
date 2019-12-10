@@ -263,6 +263,7 @@ public class toClosePos_action : stage_action_withskp
         roleObj = ((BasicControler)role).gameObject;
         if (closeupStage.main.nowClosePos.end)
         {
+            closeupStage.main.nowClosePos.resetRole();
             closeupStage.main.nowClosePos = new closeAndPos(role,oriPos,tragetPos,time);
             closeupStage.main.onUpdateFunc += ontime;
         }

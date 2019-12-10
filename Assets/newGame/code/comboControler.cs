@@ -10,14 +10,19 @@ public class comboControler : BasicControler{
 
 
     
-    public override void init(AI ai, Environment env, unitData data, HpBar hpbar)
+    public virtual void init(AI ai, Environment env, unitData data)
     {
         this._beAppoint += dodgeAction;
         this._aftBeSkill += counterAction;
         this._aftUseSkill += batterAction;
         this._befTakeDamage += blockAction;
         this._befCauseDamage += critAction;
-        base.init(ai, env, data, hpbar);
+        this.ai = ai;
+        this.env = env;
+        this.data = data;
+        this.state =new unitState();
+        this.data._onDeath = onUnitDeath;
+        //base.init(ai, env, data, hpbar);
     }
 
     public BasicDelegate.forSkill _aftDodge;

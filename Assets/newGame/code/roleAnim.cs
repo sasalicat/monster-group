@@ -15,6 +15,7 @@ public class roleAnim : MonoBehaviour {
     public withGameObject forNextEffect_GOBJ;
     public state_test[] stateList;
     public GameObject rootObj;
+    public HpBar hpBar;
     //public withNothing onAttackEnd;
     // Use this for initialization
 	void Start () {
@@ -99,4 +100,5 @@ public class roleAnim : MonoBehaviour {
     {
         sorter.sortingOrder = layout;
     }
+    //public 
 }

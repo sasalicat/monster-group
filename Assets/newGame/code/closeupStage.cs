@@ -43,7 +43,8 @@ public struct closeAndPos
     }
     public void resetRole()
     {
-        ((comboControler)role).transform.position = oriPos;
+        if(role!=null)
+            ((comboControler)role).transform.position = oriPos;
     }
 }
 public class closeupStage : MonoBehaviour, battleStage
@@ -116,9 +117,12 @@ public class closeupStage : MonoBehaviour, battleStage
             team2_anim[x * y + x].setRootObj(newone, BASE_ROLE_LAYOUT + x * y + x);
             newone.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+        GameObject hpbar = Instantiate(objectList.main.hpBar, newone.transform);
+        hpbar.transform.localPosition = objectList.main.hpBar.transform.position;
+        hpbar.GetComponent<HpBar>().HpColor = Color.red;
+        newRole.GetComponent<roleAnim>().hpBar = hpbar.GetComponent<HpBar>();
         return newRole;
     }
-
     protected cu_state Cstate=cu_state.no_cu;
     private int[] CU_table;
     public closeAndPos nowClosePos=new closeAndPos(true);
@@ -379,6 +383,7 @@ public class closeupStage : MonoBehaviour, battleStage
             }
             if (redomain)
             {
+                display_closeMoving(protagonist, tragets);
                 int testCode = testFaction(protagonist, tragets);
                 int closeUp_code = CU_table[((int)CU_table.Length / 2) * ((BasicControler)protagonist).playerNo + testCode];
                 display_closeUp(closeUp_code);
