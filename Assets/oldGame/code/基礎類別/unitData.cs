@@ -140,7 +140,7 @@ public class unitData  {
 
     protected int max_life_point = STAND_LIFE;
 
-    public int Now_Max_Life
+    public virtual int Now_Max_Life
     {
         get
         {
@@ -175,7 +175,7 @@ public class unitData  {
     }
 
     protected int now_life_point = STAND_LIFE;
-    public int Now_Life
+    public virtual int Now_Life
     {
         get
         {

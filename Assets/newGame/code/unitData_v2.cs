@@ -15,6 +15,78 @@ public class unitData_v2 : unitData {
     const float BASE_INSIGHT_REDUCE_RATE = 0.5f;
 
     private int dodge_point = STAND_DODGE;
+    public BasicDelegate.withFloat _onHpPercentageChange;
+    public override int Now_Life
+    {
+        get
+        {
+            return now_life_point;
+        }
+        set
+        {
+            int before = now_life_point;
+            if (value > Now_Max_Life)
+            {
+                now_life_point = Now_Max_Life;
+            }
+            else if (value > 0)
+            {
+                now_life_point = value;
+            }
+            else
+            {
+                now_life_point = 0;
+                //Debug.Log("設置now_life_point為:" + now_life_point);
+                if (_onDeath != null)
+                {
+                    _onDeath();
+                }
+                dead = true;
+            }
+            if (_onLifeChange != null)
+                _onLifeChange(before);
+            if (_onHpPercentageChange != null)
+            {
+                _onHpPercentageChange(((float)now_life_point)/((float)Now_Max_Life));
+            }
+        }
+    }
+    public override int Now_Max_Life
+    {
+        get
+        {
+            if (max_life_point >= 0)
+            {
+                return max_life_point;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            int oriMax = Now_Max_Life;
+            max_life_point = value;
+            if (Now_Max_Life > oriMax)//如果血上限增加了,當前血量也會增加
+            {
+                Now_Life += Now_Max_Life - oriMax;
+            }
+
+            if (Now_Max_Life < 0)//如果血上限小於0,設置當前血量為0
+            {
+                Now_Life = 0;
+            }
+            else if (Now_Max_Life < Now_Life)//如果血上限比血量還少,這降低當前血量到血上限
+            {
+                Now_Life = Now_Max_Life;
+            }
+            if (_onHpPercentageChange!=null)
+            {
+                _onHpPercentageChange(((float)now_life_point) / ((float)Now_Max_Life));
+            }
+        }
+    }
     public int Now_Dodge_Point
     {
         get

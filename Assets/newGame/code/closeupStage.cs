@@ -83,6 +83,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public Vector3[] team2_pos=new Vector3[6];
     public roleAnim[] team2_anim=new roleAnim[6];
     public Vector3[] team2_closePoint;
+    Dictionary<unitControler, roleAnim> controler2roleAnim = new Dictionary<unitControler, roleAnim>();
     //public BasicControler[] team2;
     public SpriteRenderer curtain;
     public float curtain_max_alph = 0.85f;
@@ -117,11 +118,20 @@ public class closeupStage : MonoBehaviour, battleStage
             team2_anim[x * y + x].setRootObj(newone, BASE_ROLE_LAYOUT + x * y + x);
             newone.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        GameObject hpbar = Instantiate(objectList.main.hpBar, newone.transform);
+       
+        return newRole;
+    }
+    public void initNewRole(GameObject newRole)
+    {
+        GameObject hpbar = Instantiate(objectList.main.hpBar, newRole.transform);
         hpbar.transform.localPosition = objectList.main.hpBar.transform.position;
         hpbar.GetComponent<HpBar>().HpColor = Color.red;
-        newRole.GetComponent<roleAnim>().hpBar = hpbar.GetComponent<HpBar>();
-        return newRole;
+        roleAnim ranim = newRole.GetComponent<roleAnim>();
+        ranim.HpBar = hpbar.GetComponent<HpBar>();
+        comboControler controler = newRole.GetComponent<comboControler>();
+        controler2roleAnim[controler] = newRole.GetComponent<roleAnim>();
+        ((unitData_v2)controler.data)._onHpPercentageChange += ranim.onHpChange;
+        //hpbar.GetComponent<SpriteRenderer>().sortingOrder = ranim.sorter.sortingOrder;
     }
     protected cu_state Cstate=cu_state.no_cu;
     private int[] CU_table;
@@ -430,6 +440,10 @@ public class closeupStage : MonoBehaviour, battleStage
     public void display_onStage(unitControler unit,List<unitControler> tragets)
     {
         heap[0].argList.Add(new onstage_action(new List<object>() { unit, tragets }));
+    }
+    public void update_roleHp(roleAnim role,float percentage)
+    {
+        heap[0].argList.Add(new hpBarUpdate_action(new List<object>() { role, percentage }));
     }
     //-------------------------------------------
     public void closeUp(int kind)

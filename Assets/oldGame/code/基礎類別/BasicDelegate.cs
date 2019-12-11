@@ -6,6 +6,7 @@ using UnityEngine;
 public class BasicDelegate {
     public delegate void withNone();
     public delegate void withInt(int i);
+    public delegate void withFloat(float f);
     public delegate void withDamage(Damage d);
     public delegate void withGameObject(GameObject gobj);
     public delegate void withIntAndControler(int i,unitControler unit);

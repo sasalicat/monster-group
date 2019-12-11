@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class stage_movement {
     public enum state {unActive,Active,Finish}
-    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose};
+    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange};
 	// Use this for initialization
     public move order;
     public List<object> argList;
@@ -287,6 +287,23 @@ public class resetClosePos_action : stage_action
     public override void action(skillpackage skp)
     {
             closeupStage.main.nowClosePos.resetRole();
+    }
+}
+public class hpBarUpdate_action : stage_action
+{
+    public hpBarUpdate_action( List<object> argList) : base(move.hpChange, argList)
+    {
+    }
+    public override int stage
+    {
+        get
+        {
+            return 3;
+        }
+    }
+    public override void action(skillpackage skp)
+    {
+        ((roleAnim)argList[0]).setHpBar(((float)argList[1]));
     }
 }
 

@@ -10,12 +10,26 @@ public class roleAnim : MonoBehaviour {
 
     public Animator anim;//手動拉取
     public SortingGroup sorter;
+    protected SortingGroup hpbar_sorter;
     public state_test.withNothing forNextEffect;
     public delegate void withGameObject(GameObject gobj);
     public withGameObject forNextEffect_GOBJ;
     public state_test[] stateList;
     public GameObject rootObj;
-    public HpBar hpBar;
+    protected HpBar hpBar;
+    public HpBar HpBar
+    {
+        set
+        {
+            hpBar = value;
+            hpbar_sorter = hpBar.GetComponent<SortingGroup>();
+            hpbar_sorter.sortingOrder = sorter.sortingOrder;
+        }get
+        {
+            return hpBar;
+        }
+    }
+    public int hpnum;
     //public withNothing onAttackEnd;
     // Use this for initialization
 	void Start () {
@@ -95,10 +109,23 @@ public class roleAnim : MonoBehaviour {
     public void addSortLayout(int layout)
     {
         sorter.sortingOrder+=layout;
+        if(hpbar_sorter)
+            hpbar_sorter.sortingOrder += layout;
     }
     public void setSortLayout(int layout)
     {
         sorter.sortingOrder = layout;
+        if(hpbar_sorter)
+            hpbar_sorter.sortingOrder = layout;
+    }
+
+    public void onHpChange(float percentage)
+    {
+        closeupStage.main.update_roleHp(this, percentage);
+    }
+    public void setHpBar(float percentage)
+    {
+        hpBar.Percentage = percentage;
     }
     //public 
 }

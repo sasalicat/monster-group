@@ -84,6 +84,7 @@ public class comboManager : BasicManager {
             //要複製一個新的unitData,不然在戰鬥中的技能可能會永久地改變角色屬性
             controler.init(new voidAI(), chessBoard, new unitData_v2(data));
             controler._onDeath = forRoleDeath;
+            closeupStage.main.initNewRole(newone);
             Timer.main.logInTimer(controler.action);
             newone.AddComponent<sp_effection>();
             SkillBelt_v2 belt = newone.AddComponent<SkillBelt_v2>();
