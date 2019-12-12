@@ -241,7 +241,8 @@ public class closeupStage : MonoBehaviour, battleStage
     public void display_number(unitControler who, int number, int kind)
     {
         //stage_movement newone = new stage_movement(stage_movement.move.Number, new List<object>() { who, number, kind });
-        //heap[0].argList.Add(newone);
+        floatNum_action newone = new floatNum_action(new List<object>() {who,number,kind});
+        heap[0].argList.Add(newone);
     }
     public void display_recloseUp(int code)
     {

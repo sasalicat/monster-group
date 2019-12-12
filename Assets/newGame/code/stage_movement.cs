@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class stage_movement {
     public enum state {unActive,Active,Finish}
-    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange};
+    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange,floatNum};
 	// Use this for initialization
     public move order;
     public List<object> argList;
@@ -304,6 +304,26 @@ public class hpBarUpdate_action : stage_action
     public override void action(skillpackage skp)
     {
         ((roleAnim)argList[0]).setHpBar(((float)argList[1]));
+    }
+}
+public class floatNum_action : stage_action
+{
+    public floatNum_action(List<object> argList) : base(move.floatNum, argList)
+    {
+    }
+    public override int stage
+    {
+        get
+        {
+            return 3;
+        }
+    }
+    public override void action(skillpackage skp)
+    {
+        comboControler control = (comboControler)argList[0];
+        int num = (int)argList[1];
+        int kind = (int)argList[2];
+        NumberCreater.main.CreateFloatingNumber(num, control.transform.position, kind);
     }
 }
 

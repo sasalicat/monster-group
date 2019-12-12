@@ -44,6 +44,7 @@ public class newSkill_normalAttack : dynamicSkill {
 
     public override void trigger(Dictionary<string, object> args)
     {
+
         closeupStage.main.display_anim(owner, roleAnim.ATTACK);
         Dictionary<comboControler, bool> missDict = (Dictionary<comboControler, bool>)args["miss"];
         //comboControler.bonus_kind kind = (comboControler.bonus_kind)args["bonus"];
@@ -53,10 +54,13 @@ public class newSkill_normalAttack : dynamicSkill {
             if (!missDict[traget])
             {
                 Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
+                Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
                 traget.takeDamage(d);
                 closeupStage.main.display_anim(traget, roleAnim.BEHIT);
             }
+            
         }
+
     }
 
 }

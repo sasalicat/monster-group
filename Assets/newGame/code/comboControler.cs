@@ -28,8 +28,11 @@ public class comboControler : BasicControler{
     public BasicDelegate.forSkill _aftDodge;
     public void dodgeAction(SkillInf skillInf, Dictionary<string, object> skillArgs){
         float denyRate = (float)skillArgs["dodgeDeny"];
-        if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Dodge_Rate-denyRate))//如果閃避成功
+        if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Dodge_Rate - denyRate))
+        { //如果閃避成功
+            Debug.LogWarning(gameObject.name + "閃避成功");
             ((Dictionary<comboControler, bool>)skillArgs["miss"])[this] = true;
+        }
             if(_aftDodge!=null)
                 _aftDodge(skillInf, skillArgs);   
     }
@@ -42,6 +45,7 @@ public class comboControler : BasicControler{
         {
             if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Counter_Rate)
             {
+                Debug.LogWarning(gameObject.name+"反擊");
                 //Debug.LogWarning(gameObject.name + "反擊->" + ((comboControler)skillArgs["user"]).gameObject.name);
                 unitControler[] traget = new unitControler[] { (unitControler)skillArgs["user"] };
                 //Skill skill = (Skill)skillArgs["skill"];
@@ -55,24 +59,26 @@ public class comboControler : BasicControler{
     {
         if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Batter_Rate&& ((bonus_kind)skillArgs["bonus"])!=bonus_kind.Counter)//反擊不能觸發連擊
         {
+            
             Dictionary<string, object> args = createSkillArg(data,tragets);
             args["bonus"] = bonus_kind.Batter;
             //args["skill"] = ((SkillInf_v2)skillInf).skill;
             bool canBatter = false;
-            if (!args.ContainsKey("batterTime"))
+            if (!skillArgs.ContainsKey("batterTime"))
             {
                 args["batterTime"] = 1;
                 canBatter = true;
             }
             else
             {
-                if ((int)args["batterTime"] < ((unitData_v2)data).Now_Batter_Limmit) {
-                    args["batterTime"] = (int)args["batterTime"]+1;
+                if ((int)skillArgs["batterTime"] < ((unitData_v2)data).Now_Batter_Limmit) {
+                    args["batterTime"] = (int)skillArgs["batterTime"]+1;
                     canBatter = true;
                  }
             }
             if (canBatter)
             {
+                Debug.LogWarning(gameObject.name + "連擊 次數"+ args["batterTime"]);
                 //Debug.LogWarning(gameObject.name + "連擊 次數"+ args["batterTime"] + ">>>" + ((comboControler)tragets[0]).gameObject.name);
                 useSkill(((SkillInf_v2)skillInf).skill, tragets, args);
             }
@@ -84,6 +90,7 @@ public class comboControler : BasicControler{
         float denyRate = (float)((Damage_v2)damage).extraArgs["blockDeny"];
         if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Batter_Rate - denyRate))
         {
+            Debug.LogWarning(gameObject.name + "格擋");
             damage.num -= ((unitData_v2)data).Now_Block_Point;
             if (damage.num < 0)
             {
@@ -98,8 +105,12 @@ public class comboControler : BasicControler{
     {
         if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Crit_Rate)
         {
-            damage.num = (int)((unitData_v2)data).Now_Crit_Rate*damage.num;
-            if(_aftCrit!=null)
+           
+            damage.num = (int)(((unitData_v2)data).Now_Crit_Magnif*damage.num);
+            //(Dictionary<comboControler, bool>)((Damage_v2)damage).extraArgs["critical"])[]
+            ((Damage_v2)damage).extraArgs["critical"] = true;
+            Debug.LogWarning("致命一擊修改傷害為:"+damage.num);
+            if (_aftCrit!=null)
                 _aftCrit(damage);
         }
     }
@@ -110,11 +121,16 @@ public class comboControler : BasicControler{
         foreach(comboControler traget in tragets){
             missDict[traget] = false;
         }
+        Dictionary<comboControler, bool> critDict = new Dictionary<comboControler, bool>();
+        foreach(comboControler traget in tragets)
+        {
+            critDict[traget] = false;
+        }
         arg["user"] = this;
         arg["miss"] = missDict;
         arg["bonus"] = bonus_kind.NoBonus;//因為技能效果所而額外觸發的技能
         arg["dice"] = Randomer.main.getInt();
-        arg["critical"] = false;
+        arg["critical"] = critDict;
         arg["dodgeDeny"] = ((unitData_v2)data).Now_Insight_Rate * ((unitData_v2)data).Now_Insight_Reduce;
         arg["blockDeny"] = ((unitData_v2)data).Now_Insight_Rate * ((unitData_v2)data).Now_Insight_Reduce;
         arg["tragets"] = tragets;
@@ -123,12 +139,14 @@ public class comboControler : BasicControler{
     public override void takeDamage(Damage damage)
     {
         //Debug.Log("before _befTakeDamage");
+        Debug.LogWarning(">初始傷害"+damage.num);
         _befTakeDamage(damage);
         comboControler from = (comboControler)damage.creater;
         damage.creater = this;
+        Debug.LogWarning(">_befTakeDamage后傷害" + damage.num);
         from._befCauseDamage(damage);
         damage.creater = from;
-
+        Debug.LogWarning(">_befCauseDamage后傷害" + damage.num);
         //Debug.Log("after _befTakeDamage");
         if (damage.vaild && !data.Dead)
         {
@@ -146,11 +164,20 @@ public class comboControler : BasicControler{
             {
                 hurt = (int)(data.Magic_Reduce_Multiple * damage.num);
             }
+            Debug.LogWarning(">真實減少生命值:" + hurt);
             data.Now_Life -= hurt;
             //Debug.Log("計算結束");
             damage.num = hurt;
             _aftTakeDamage(damage);
-            createDamageNum(damage);
+            if ((bool)((Damage_v2)damage).extraArgs["critical"])
+            {
+                closeupStage.main.display_number(this,damage.num,1);
+            }
+            else
+            {
+                closeupStage.main.display_number(this, damage.num, 0);
+            }
+            //createDamageNum(damage);
 
             damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
             if (damage.creater != null)
@@ -199,6 +226,7 @@ public class comboControler : BasicControler{
     }
     public override void useSkill(Skill skill,unitControler[] tragets)
     {
+        Debug.LogWarning(gameObject.name + "基本行動");
         //Debug.Log("skill:" + skill.name);
         if(((comboControler)skill.Owner) != this)
         {
@@ -224,5 +252,6 @@ public class comboControler : BasicControler{
         }
         _aftUseSkill(skill.information, skillArg, tragets);
         closeupStage.main.display_skillEnd();
+        Debug.LogWarning(gameObject.name + "基本行動結束");
     }
 }

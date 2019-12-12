@@ -13,7 +13,9 @@ public abstract class dynamicSkill : CDSkill {
     public Damage_v2 createDamage(int num,byte kind,Dictionary<string,object> skillArg)
     {
         Damage_v2 d = new Damage_v2(num, kind, owner);
-        d.extraArgs = skillArg;
+        d.extraArgs["blockDeny"] = (float)skillArg["blockDeny"];
+        d.extraArgs["dodgeDeny"] = (float)skillArg["dodgeDeny"];
+        d.extraArgs["critical"] = false;
         return d;
     }
     public override void onInit(unitControler owner, Callback4Unit deleg)
