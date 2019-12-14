@@ -638,9 +638,9 @@ GameObject:
   - component: {fileID: 599777129}
   - component: {fileID: 599777130}
   - component: {fileID: 599777131}
-  - component: {fileID: 599777132}
   - component: {fileID: 599777133}
   - component: {fileID: 599777134}
+  - component: {fileID: 599777132}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -722,11 +722,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 599777126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ac39dd21a72e364294ec13be792605d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ecf1d527b66bff48aaf90f335d0da7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createPosOffset: {x: 0.5, y: 0}
-  normal_interval: 0.21
+  createPosOffset: {x: 0, y: 0}
+  normal_interval: 0.2
   normalNum:
   - {fileID: 21300004, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
   - {fileID: 21300006, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
@@ -738,7 +738,7 @@ MonoBehaviour:
   - {fileID: 21300016, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
   - {fileID: 21300018, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
   - {fileID: 21300020, guid: 287ed0e0a89f91b43bd5c2ebaf00ef90, type: 3}
-  red_interval: 0.21
+  red_interval: 0.2
   redNum:
   - {fileID: 21300002, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
   - {fileID: 21300004, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
@@ -750,7 +750,7 @@ MonoBehaviour:
   - {fileID: 21300016, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
   - {fileID: 21300020, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
   - {fileID: 21300018, guid: 5ca592f884cf3f44eb8e284521376aed, type: 3}
-  green_interval: 0.21
+  green_interval: 0.2
   greenNum:
   - {fileID: 21300004, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
   - {fileID: 21300006, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
@@ -764,7 +764,13 @@ MonoBehaviour:
   - {fileID: 21300020, guid: 9d8bd800d652abf48b331d4da4fd0eba, type: 3}
   numberObj: {fileID: 1001948120358198, guid: 0909517e908a98e498c0a096b7479c36, type: 2}
   bitObj: {fileID: 1049919268143966, guid: e46247de35d00c44d8ab69fcd5b40c4e, type: 2}
-  missPrafeb: {fileID: 1408690023858624, guid: 5af096a8cc18d1346a1cfec56df445de, type: 2}
+  missPrafeb: {fileID: 1257605755609780, guid: b9eb25453580a734fa34c91fc9d847d0, type: 2}
+  textPrefabs:
+  - {fileID: 21300000, guid: 911f83cd00eca02408f3fff163569409, type: 3}
+  - {fileID: 21300000, guid: a60d542b187ebe34c8152bd5602e5975, type: 3}
+  - {fileID: 21300000, guid: 7733482b7f6b26b42b68b3ac64b61ff7, type: 3}
+  - {fileID: 21300000, guid: cbb60b453af1199478b8f7367682e91e, type: 3}
+  - {fileID: 21300000, guid: 49d73adf396e50842a05199d0eaa1b12, type: 3}
 --- !u!114 &599777133
 MonoBehaviour:
   m_ObjectHideFlags: 0

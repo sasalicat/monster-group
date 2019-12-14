@@ -230,6 +230,35 @@ public class animBenhit_action : stage_action_withskp
 
     }
 }
+public class animDodge_action : stage_action_withskp
+{
+    public animDodge_action(List<object> argList):base(move.Anim,argList)
+    {
+
+    }
+    public override int stage
+    {
+        get
+        {
+            return 3;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        comboControler control = (comboControler)argList[0];
+        int code = (int)argList[1];
+        if(code != roleAnim.DODGE)
+        {
+            Debug.Log("animDodge_action code錯誤,code:" + code);
+        }
+        else
+        {
+            control.GetComponent<roleAnim>().anim_dodge(conditionNext);
+        }
+
+    }
+}
 public class toClosePos_action : stage_action_withskp
 {
     protected GameObject roleObj;
@@ -326,4 +355,22 @@ public class floatNum_action : stage_action
         NumberCreater.main.CreateFloatingNumber(num, control.transform.position, kind);
     }
 }
-
+public class floatText_action : stage_action
+{
+    public floatText_action(List<object> argList) : base(move.floatNum, argList)
+    {
+    }
+    public override int stage
+    {
+        get
+        {
+            return 3;
+        }
+    }
+    public override void action(skillpackage skp)
+    {
+        comboControler control = (comboControler)argList[0];
+        int kind = (int)argList[1];
+        ((TextCreater)(NumberCreater.main)).createText(kind, control.transform.position);
+    }
+}

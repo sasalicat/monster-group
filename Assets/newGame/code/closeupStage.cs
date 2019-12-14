@@ -244,6 +244,11 @@ public class closeupStage : MonoBehaviour, battleStage
         floatNum_action newone = new floatNum_action(new List<object>() {who,number,kind});
         heap[0].argList.Add(newone);
     }
+    public void display_floatingText(unitControler who,int code)
+    {
+        floatText_action newone = new floatText_action(new List<object>() {who,code});
+        heap[0].argList.Add(newone);
+    }
     public void display_recloseUp(int code)
     {
         List<object> list = new List<object> { code };
@@ -432,9 +437,13 @@ public class closeupStage : MonoBehaviour, battleStage
         {
             heap[0].argList.Add(new animBenhit_action(new List<object>() {unit,code}));
         }
-        else
+        else if(code == roleAnim.ATTACK||code == roleAnim.MAGIC)
         {
             heap[0].argList.Add(new animSkill_action( new List<object>() { unit, code }));
+        }
+        else if(code == roleAnim.DODGE)
+        {
+            heap[0].argList.Add(new animDodge_action(new List<object>() { unit, code }));
         }
         //heap[0].argList.Add(new stage_movement(stage_movement.move.Anim, new List<object>() { unit, code }));
     }
@@ -444,6 +453,7 @@ public class closeupStage : MonoBehaviour, battleStage
     }
     public void update_roleHp(roleAnim role,float percentage)
     {
+        //Debug.LogWarning("update_roleHp被呼叫");
         heap[0].argList.Add(new hpBarUpdate_action(new List<object>() { role, percentage }));
     }
     //-------------------------------------------
@@ -719,6 +729,9 @@ public class closeupStage : MonoBehaviour, battleStage
                 {
                 //handleFuncs[(int)stage_movement.move.SkillStart]((skill_movement)rootMovement.argList[0]);
                     //則解析目前的第一個skill_movement
+                   if(!(rootMovement.argList[0] is skill_movement)){
+                     Debug.LogWarning("type:" + rootMovement.argList[0].GetType());    
+                   }
                     packages = SkillStart_for((skill_movement)rootMovement.argList[0]);
                     rootMovement.argList.RemoveAt(0);
                     packages[0].Next();

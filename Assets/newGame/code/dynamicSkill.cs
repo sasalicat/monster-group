@@ -40,5 +40,17 @@ public abstract class dynamicSkill : CDSkill {
         }
         return tragets;
     }
+    public List<comboControler> getAliveEnemy(ChessBoard env)
+    {
+        List<comboControler> enemy=new List<comboControler>();
+        foreach(comboControler control in env.units)
+        {
+            if (control.playerNo != owner.playerNo && !control.data.Dead)
+            {
+                enemy.Add(control);
+            }
+        }
+        return enemy;
+    }
 
 }

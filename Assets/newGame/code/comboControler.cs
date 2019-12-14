@@ -8,8 +8,30 @@ public class comboControler : BasicControler{
     public enum bonus_kind {NoBonus,Batter,Counter};
     public BasicDelegate.forSkill _aftBeSkill;//basicControler沒有被使用技能后的時間,這裡作為補全
 
+    public override void action(float time)
+    {
+        //Debug.Log("角色 action");
+        //ai更新
+        ai.update(this, env);
+        //技能使用
+        skillBelt.updateSkill(time, env);
 
-    
+
+        //處理buff
+        foreach (Buff buff in buffList)
+        {
+            if (!failed.Contains(buff))
+            {
+                buff.onIntarvel(this, time);
+            }
+        }
+        for (int i = 0; i < failed.Count; i++)
+        {
+            buffList.Remove(failed[i]);
+        }
+        failed.Clear();
+    }
+
     public virtual void init(AI ai, Environment env, unitData data)
     {
         this._beAppoint += dodgeAction;
@@ -30,8 +52,10 @@ public class comboControler : BasicControler{
         float denyRate = (float)skillArgs["dodgeDeny"];
         if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Dodge_Rate - denyRate))
         { //如果閃避成功
-            Debug.LogWarning(gameObject.name + "閃避成功");
+            //Debug.LogWarning(gameObject.name + "閃避成功");
             ((Dictionary<comboControler, bool>)skillArgs["miss"])[this] = true;
+            closeupStage.main.display_anim(this,roleAnim.DODGE);
+            closeupStage.main.display_floatingText(this, TextCreater.DODGE);
         }
             if(_aftDodge!=null)
                 _aftDodge(skillInf, skillArgs);   
@@ -45,7 +69,7 @@ public class comboControler : BasicControler{
         {
             if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Counter_Rate)
             {
-                Debug.LogWarning(gameObject.name+"反擊");
+                //Debug.LogWarning(gameObject.name+"反擊");
                 //Debug.LogWarning(gameObject.name + "反擊->" + ((comboControler)skillArgs["user"]).gameObject.name);
                 unitControler[] traget = new unitControler[] { (unitControler)skillArgs["user"] };
                 //Skill skill = (Skill)skillArgs["skill"];
@@ -78,7 +102,7 @@ public class comboControler : BasicControler{
             }
             if (canBatter)
             {
-                Debug.LogWarning(gameObject.name + "連擊 次數"+ args["batterTime"]);
+                //Debug.LogWarning(gameObject.name + "連擊 次數"+ args["batterTime"]);
                 //Debug.LogWarning(gameObject.name + "連擊 次數"+ args["batterTime"] + ">>>" + ((comboControler)tragets[0]).gameObject.name);
                 useSkill(((SkillInf_v2)skillInf).skill, tragets, args);
             }
@@ -109,7 +133,7 @@ public class comboControler : BasicControler{
             damage.num = (int)(((unitData_v2)data).Now_Crit_Magnif*damage.num);
             //(Dictionary<comboControler, bool>)((Damage_v2)damage).extraArgs["critical"])[]
             ((Damage_v2)damage).extraArgs["critical"] = true;
-            Debug.LogWarning("致命一擊修改傷害為:"+damage.num);
+            //Debug.LogWarning("致命一擊修改傷害為:"+damage.num);
             if (_aftCrit!=null)
                 _aftCrit(damage);
         }
@@ -134,19 +158,26 @@ public class comboControler : BasicControler{
         arg["dodgeDeny"] = ((unitData_v2)data).Now_Insight_Rate * ((unitData_v2)data).Now_Insight_Reduce;
         arg["blockDeny"] = ((unitData_v2)data).Now_Insight_Rate * ((unitData_v2)data).Now_Insight_Reduce;
         arg["tragets"] = tragets;
+        arg["cooldown_multiple"] = 1f;
+        arg["phy_damage_multiple"] = 1f;
+        arg["phy_damage_addition"] = 0;
+        arg["mag_damage_multiple"] = 1f;
+        arg["mag_damage_addition"] = 0;
+        arg["healing_multiple"] = 1f;
+        arg["healing_addition"] = 0;
         return arg;
     }
     public override void takeDamage(Damage damage)
     {
         //Debug.Log("before _befTakeDamage");
-        Debug.LogWarning(">初始傷害"+damage.num);
+        //Debug.LogWarning(">初始傷害"+damage.num);
         _befTakeDamage(damage);
         comboControler from = (comboControler)damage.creater;
         damage.creater = this;
-        Debug.LogWarning(">_befTakeDamage后傷害" + damage.num);
+        //Debug.LogWarning(">_befTakeDamage后傷害" + damage.num);
         from._befCauseDamage(damage);
         damage.creater = from;
-        Debug.LogWarning(">_befCauseDamage后傷害" + damage.num);
+        //Debug.LogWarning(">_befCauseDamage后傷害" + damage.num);
         //Debug.Log("after _befTakeDamage");
         if (damage.vaild && !data.Dead)
         {
@@ -164,7 +195,7 @@ public class comboControler : BasicControler{
             {
                 hurt = (int)(data.Magic_Reduce_Multiple * damage.num);
             }
-            Debug.LogWarning(">真實減少生命值:" + hurt);
+            //Debug.LogWarning(">真實減少生命值:" + hurt);
             data.Now_Life -= hurt;
             //Debug.Log("計算結束");
             damage.num = hurt;
@@ -203,6 +234,10 @@ public class comboControler : BasicControler{
     }
     public override void useSkill(Skill skill, unitControler[] tragets, Dictionary<string, object> arg)
     {
+        if (tragets.Length == 0) {
+            Debug.Log("使用技能"+skill.name+"沒有任何目標");
+            return;
+        }
         if (((comboControler)skill.Owner) != this)
         {
             return;
@@ -226,9 +261,14 @@ public class comboControler : BasicControler{
     }
     public override void useSkill(Skill skill,unitControler[] tragets)
     {
-        Debug.LogWarning(gameObject.name + "基本行動");
+        //Debug.LogWarning(gameObject.name + "基本行動");
+        if (tragets.Length == 0)
+        {
+            Debug.Log("使用技能" + skill.name + "沒有任何目標");
+            return;
+        }
         //Debug.Log("skill:" + skill.name);
-        if(((comboControler)skill.Owner) != this)
+        if (((comboControler)skill.Owner) != this)
         {
             return;
         }
@@ -252,6 +292,6 @@ public class comboControler : BasicControler{
         }
         _aftUseSkill(skill.information, skillArg, tragets);
         closeupStage.main.display_skillEnd();
-        Debug.LogWarning(gameObject.name + "基本行動結束");
+        //Debug.LogWarning(gameObject.name + "基本行動結束");
     }
 }

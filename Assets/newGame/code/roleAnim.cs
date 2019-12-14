@@ -7,6 +7,7 @@ public class roleAnim : MonoBehaviour {
     public const int BEHIT = 0;
     public const int ATTACK = 1;
     public const int MAGIC = 2;
+    public const int DODGE = 3;
 
     public Animator anim;//手動拉取
     public SortingGroup sorter;
@@ -105,6 +106,11 @@ public class roleAnim : MonoBehaviour {
     public void anim_died()
     {
         anim.SetBool("death", true);
+    }
+    public void anim_dodge(state_test.withNothing cb)
+    {
+        anim.GetBehaviour<state_dodge>().forNextEnd += cb;
+        anim.SetBool("jump", true);
     }
     public void addSortLayout(int layout)
     {

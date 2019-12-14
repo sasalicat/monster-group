@@ -32,7 +32,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     void buffFail_callback(Buff b) {
         failed.Add(b);
     }
-    public void onUnitDeath()
+    public virtual void onUnitDeath()
     {
         _onDeath(gameObject);
     }
@@ -43,7 +43,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         arg["bonus"] = false;//因為技能效果所而額外觸發的技能
         arg["dice"] = Randomer.main.getInt();
         arg["critical"] = false;
-         arg["phy_damage_multiple"] = 1f;
+        arg["phy_damage_multiple"] = 1f;
         arg["phy_damage_addition"] = 0;
         arg["mag_damage_multiple"] = data.Now_Mag_Multiple;
         arg["mag_damage_addition"] = 0;
@@ -182,7 +182,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         ((CDSkill)skill).trigger(arg);
         _aftUseSkill(skill.information, arg, tragets);
     }
-    public void action(float time)
+    public virtual void action(float time)
     {
         //Debug.Log("角色 action");
         //ai更新

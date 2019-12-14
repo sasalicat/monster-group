@@ -47,6 +47,7 @@ public class unitData_v2 : unitData {
                 _onLifeChange(before);
             if (_onHpPercentageChange != null)
             {
+                //Debug.LogWarning("hp改變為" + now_life_point);
                 _onHpPercentageChange(((float)now_life_point)/((float)Now_Max_Life));
             }
         }
@@ -83,6 +84,7 @@ public class unitData_v2 : unitData {
             }
             if (_onHpPercentageChange!=null)
             {
+                Debug.LogWarning("maxhp改變為" + max_life_point);
                 _onHpPercentageChange(((float)now_life_point) / ((float)Now_Max_Life));
             }
         }

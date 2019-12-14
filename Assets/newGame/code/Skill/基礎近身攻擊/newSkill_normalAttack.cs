@@ -32,9 +32,16 @@ public class newSkill_normalAttack : dynamicSkill {
     {
         Randomer.main.getInt();
         int oppNo = (owner.playerNo + 1) % 2;
-        List<unitControler> oppTeam= ((ChessBoard)env).getTeamOf(oppNo);
-        unitControler traget = oppTeam[oppNo % (oppTeam.Count)];
-        return new unitControler[1] { traget };
+        List<comboControler> oppTeam = getAliveEnemy((ChessBoard)env);//((ChessBoard)env).getTeamOf(oppNo);
+        if (oppTeam.Count == 0)
+        {
+            return new unitControler[0];
+        }
+        else
+        {
+            unitControler traget = oppTeam[oppNo % (oppTeam.Count)];
+            return new unitControler[1] { traget };
+        }
     }
 
     public override SkillInf Inf()
@@ -44,22 +51,26 @@ public class newSkill_normalAttack : dynamicSkill {
 
     public override void trigger(Dictionary<string, object> args)
     {
-
-        closeupStage.main.display_anim(owner, roleAnim.ATTACK);
-        Dictionary<comboControler, bool> missDict = (Dictionary<comboControler, bool>)args["miss"];
-        //comboControler.bonus_kind kind = (comboControler.bonus_kind)args["bonus"];
         unitControler[] tragets = (unitControler[])args["tragets"];
-        foreach(comboControler traget in tragets)
+        if (tragets.Length > 0)
         {
-            if (!missDict[traget])
+            closeupStage.main.display_anim(owner, roleAnim.ATTACK);
+            Dictionary<comboControler, bool> missDict = (Dictionary<comboControler, bool>)args["miss"];
+            //comboControler.bonus_kind kind = (comboControler.bonus_kind)args["bonus"];
+
+            foreach (comboControler traget in tragets)
             {
-                Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
-                Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
-                traget.takeDamage(d);
-                closeupStage.main.display_anim(traget, roleAnim.BEHIT);
+                if (!missDict[traget])
+                {
+                    Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
+                    //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
+                    traget.takeDamage(d);
+                    closeupStage.main.display_anim(traget, roleAnim.BEHIT);
+                }
+
             }
-            
         }
+        setTime(args);
 
     }
 

@@ -2672,6 +2672,7 @@ MonoBehaviour:
   sorter: {fileID: 210187452653723150}
   stateList: []
   rootObj: {fileID: 1560154361930420}
+  hpnum: 0
 --- !u!210 &210187452653723150
 SortingGroup:
   m_ObjectHideFlags: 1

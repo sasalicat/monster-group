@@ -127,6 +127,22 @@ MonoBehaviour:
   speed_baseline: 5
   minSpeed: 0.15
   slowDown: 0
+--- !u!114 &114621880283537430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9830633f3ff59e46b5da39f0db4f961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stillStartTime: -1
+  stillTime: 0
+  speed_baseline: 5
+  minSpeed: 0.15
+  slowDown: 0
 --- !u!114 &114624675581100656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1160,7 +1176,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101600593205077644}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114621880283537430}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1429,13 +1446,13 @@ AnimatorStateMachine:
     m_Position: {x: 270, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102492715836554002}
-    m_Position: {x: 312, y: 192, z: 0}
+    m_Position: {x: 336, y: 192, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102701069822171438}
     m_Position: {x: 340, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102439474714342768}
-    m_Position: {x: 375, y: 325, z: 0}
+    m_Position: {x: 192, y: 384, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102795571344511060}
     m_Position: {x: 410, y: 390, z: 0}

@@ -106,6 +106,7 @@ public class comboManager : BasicManager {
    
     public override void forRoleDeath(GameObject gobj)
     {
+        Debug.LogWarning(">>>>>"+gobj+"死亡");
         comboControler control = gobj.GetComponent<comboControler>();
         Timer.main.loginOutTimer(control.action);
     }
