@@ -87,6 +87,7 @@ public class closeupStage : MonoBehaviour, battleStage
     //public BasicControler[] team2;
     public SpriteRenderer curtain;
     public float curtain_max_alph = 0.85f;
+
     //public GameObject rolePrefab;
     public GameObject createRole(int team,int x, int y,int prefabIndex)
     {

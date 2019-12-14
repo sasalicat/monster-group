@@ -75,6 +75,7 @@ public class comboControler : BasicControler{
                 //Skill skill = (Skill)skillArgs["skill"];
                 Dictionary<string, object> args = createSkillArg(data, traget);
                 args["bonus"] = bonus_kind.Counter;
+                //closeupStage.main.display_floatingText(this,TextCreater.COUNT);
                 useSkill(counterSkill, traget, args);
             }
         }
@@ -104,6 +105,7 @@ public class comboControler : BasicControler{
             {
                 //Debug.LogWarning(gameObject.name + "連擊 次數"+ args["batterTime"]);
                 //Debug.LogWarning(gameObject.name + "連擊 次數"+ args["batterTime"] + ">>>" + ((comboControler)tragets[0]).gameObject.name);
+                //closeupStage.main.display_floatingText(this, TextCreater.BATTER);
                 useSkill(((SkillInf_v2)skillInf).skill, tragets, args);
             }
         }
@@ -112,9 +114,10 @@ public class comboControler : BasicControler{
     public void blockAction(Damage damage)
     {
         float denyRate = (float)((Damage_v2)damage).extraArgs["blockDeny"];
-        if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Batter_Rate - denyRate))
+        if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Block_Rate - denyRate))
         {
             Debug.LogWarning(gameObject.name + "格擋");
+            closeupStage.main.display_floatingText(this,TextCreater.BLOCK);
             damage.num -= ((unitData_v2)data).Now_Block_Point;
             if (damage.num < 0)
             {
@@ -131,6 +134,7 @@ public class comboControler : BasicControler{
         {
            
             damage.num = (int)(((unitData_v2)data).Now_Crit_Magnif*damage.num);
+            closeupStage.main.display_floatingText(this,TextCreater.CRIT);
             //(Dictionary<comboControler, bool>)((Damage_v2)damage).extraArgs["critical"])[]
             ((Damage_v2)damage).extraArgs["critical"] = true;
             //Debug.LogWarning("致命一擊修改傷害為:"+damage.num);
@@ -246,6 +250,14 @@ public class comboControler : BasicControler{
         arg["skill"] = skill;
         bool trigger = (bonus_kind)arg["bonus"] != bonus_kind.NoBonus;
         closeupStage.main.display_skill(this,skill,new List<unitControler>(tragets),trigger);
+        if ((bonus_kind)arg["bonus"] == bonus_kind.Counter)
+        {
+            closeupStage.main.display_floatingText(this,TextCreater.COUNT);
+        }
+        else if((bonus_kind)arg["bonus"] == bonus_kind.Batter)
+        {
+            closeupStage.main.display_floatingText(this, TextCreater.BATTER);
+        }
         foreach (unitControler traget in tragets)
         {
             ((comboControler)traget)._beAppoint(skill.information, arg);//被指定

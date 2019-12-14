@@ -17,7 +17,7 @@ public class resource_normalAttack : skill_resource
     {
         get
         {
-            return new string[1] { "effection/新被擊_濺血" }; 
+            return new string[1] { "effection/打擊效果1" }; 
         }
     }
 

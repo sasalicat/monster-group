@@ -62,6 +62,7 @@ public class newSkill_normalAttack : dynamicSkill {
             {
                 if (!missDict[traget])
                 {
+                    closeupStage.main.display_effect()
                     Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
                     //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
                     traget.takeDamage(d);

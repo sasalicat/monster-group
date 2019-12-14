@@ -337,6 +337,7 @@ public class hpBarUpdate_action : stage_action
 }
 public class floatNum_action : stage_action
 {
+    public Vector2 numOffset = new Vector2(0, 2f);
     public floatNum_action(List<object> argList) : base(move.floatNum, argList)
     {
     }
@@ -352,11 +353,12 @@ public class floatNum_action : stage_action
         comboControler control = (comboControler)argList[0];
         int num = (int)argList[1];
         int kind = (int)argList[2];
-        NumberCreater.main.CreateFloatingNumber(num, control.transform.position, kind);
+        NumberCreater.main.CreateFloatingNumber(num, control.transform.position+(Vector3)numOffset, kind);
     }
 }
 public class floatText_action : stage_action
 {
+    public Vector2 numOffset = new Vector2(0, 1f);
     public floatText_action(List<object> argList) : base(move.floatNum, argList)
     {
     }
@@ -371,6 +373,6 @@ public class floatText_action : stage_action
     {
         comboControler control = (comboControler)argList[0];
         int kind = (int)argList[1];
-        ((TextCreater)(NumberCreater.main)).createText(kind, control.transform.position);
+        ((TextCreater)(NumberCreater.main)).createText(kind, control.transform.position+(Vector3)numOffset);
     }
 }
