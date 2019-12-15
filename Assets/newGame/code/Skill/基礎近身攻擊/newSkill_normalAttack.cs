@@ -62,7 +62,11 @@ public class newSkill_normalAttack : dynamicSkill {
             {
                 if (!missDict[traget])
                 {
-                    closeupStage.main.display_effect()
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    dict["traget"] = traget;
+                    dict["creater"] = owner;
+                    GameObject[] resources= dynamicSkill.resourcePool[this.GetType().ToString()];
+                    closeupStage.main.display_effect(resources[0],owner,dict,true);
                     Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
                     //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
                     traget.takeDamage(d);

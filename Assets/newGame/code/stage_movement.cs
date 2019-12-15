@@ -108,7 +108,7 @@ public class closeUp_action : stage_action_withskp
 
     }
 }
-public class uncloseUp_action : stage_action_withskp
+public class uncloseUp_action : stage_action
 {
     public uncloseUp_action( List<object> argList)
         : base(move.UnCloseUp, argList)
@@ -119,14 +119,13 @@ public class uncloseUp_action : stage_action_withskp
     {
         get
         {
-            return 0;
+            return 4;
         }
     }
 
     public override void action(skillpackage skp)
     {
-        int kind = (int)argList[0];
-        closeupStage.main.uncloseUp(conditionNext);
+        closeupStage.main.uncloseUp();
 
     }
 }
@@ -259,6 +258,35 @@ public class animDodge_action : stage_action_withskp
 
     }
 }
+public class animDeath_action : stage_action
+{
+    public animDeath_action(List<object> argList):base(move.Anim,argList)
+    {
+
+    }
+    public override int stage
+    {
+        get
+        {
+            return 3;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        comboControler control = (comboControler)argList[0];
+        int code = (int)argList[1];
+        if (code != roleAnim.DEATH)
+        {
+            Debug.Log("animDodge_action code錯誤,code:" + code);
+        }
+        else
+        {
+            control.GetComponent<roleAnim>().anim_died();
+        }
+
+    }
+}
 public class toClosePos_action : stage_action_withskp
 {
     protected GameObject roleObj;
@@ -374,5 +402,45 @@ public class floatText_action : stage_action
         comboControler control = (comboControler)argList[0];
         int kind = (int)argList[1];
         ((TextCreater)(NumberCreater.main)).createText(kind, control.transform.position+(Vector3)numOffset);
+    }
+}
+public class createEffect_hit : stage_action
+{
+    public createEffect_hit(List<object> argList) : base(move.Effection, argList)
+    {
+    }
+    public override int stage
+    {
+        get
+        {
+            return 3;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        GameObject prafeb = (GameObject)argList[0];
+        Dictionary<string, object> initDict = (Dictionary<string, object>)argList[1];
+        closeupStage.main.createEffect(prafeb,initDict);
+    }
+}
+public class showSIcon : stage_action
+{
+    public showSIcon(List<object> argList) : base(move.Effection, argList)
+    {
+    }
+    public override int stage
+    {
+        get
+        {
+            return 1;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        roleAnim ranim = (roleAnim)argList[0];
+        Sprite Icon = (Sprite)argList[1];
+        ranim.showSkillIcon(Icon);
     }
 }

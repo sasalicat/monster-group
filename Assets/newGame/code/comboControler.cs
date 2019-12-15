@@ -7,9 +7,12 @@ public class comboControler : BasicControler{
     public const int ENEMY_ROLE_NO = 1;
     public enum bonus_kind {NoBonus,Batter,Counter};
     public BasicDelegate.forSkill _aftBeSkill;//basicControler沒有被使用技能后的時間,這裡作為補全
-
     public override void action(float time)
     {
+        if (data.Dead)
+        {
+            return;
+        }
         //Debug.Log("角色 action");
         //ai更新
         ai.update(this, env);
@@ -118,7 +121,7 @@ public class comboControler : BasicControler{
         {
             Debug.LogWarning(gameObject.name + "格擋");
             closeupStage.main.display_floatingText(this,TextCreater.BLOCK);
-            damage.num -= ((unitData_v2)data).Now_Block_Point;
+            damage.num -= ((unitData_v2)data).Now_Block_Reduce_Num;
             if (damage.num < 0)
             {
                 damage.num = 0;
@@ -238,6 +241,10 @@ public class comboControler : BasicControler{
     }
     public override void useSkill(Skill skill, unitControler[] tragets, Dictionary<string, object> arg)
     {
+        if (data.Dead)
+        {
+            return;
+        }
         if (tragets.Length == 0) {
             Debug.Log("使用技能"+skill.name+"沒有任何目標");
             return;
@@ -250,6 +257,7 @@ public class comboControler : BasicControler{
         arg["skill"] = skill;
         bool trigger = (bonus_kind)arg["bonus"] != bonus_kind.NoBonus;
         closeupStage.main.display_skill(this,skill,new List<unitControler>(tragets),trigger);
+        closeupStage.main.display_showSkillIcon(this, (dynamicSkill)skill);
         if ((bonus_kind)arg["bonus"] == bonus_kind.Counter)
         {
             closeupStage.main.display_floatingText(this,TextCreater.COUNT);
@@ -273,10 +281,14 @@ public class comboControler : BasicControler{
     }
     public override void useSkill(Skill skill,unitControler[] tragets)
     {
+        if (data.Dead)
+        {
+            return;
+        }
         //Debug.LogWarning(gameObject.name + "基本行動");
         if (tragets.Length == 0)
         {
-            Debug.Log("使用技能" + skill.name + "沒有任何目標");
+            //Debug.Log("使用技能" + skill.name + "沒有任何目標");
             return;
         }
         //Debug.Log("skill:" + skill.name);
@@ -288,7 +300,7 @@ public class comboControler : BasicControler{
         skillArg["skill"] = skill;
         bool trigger = (bonus_kind)skillArg["bonus"] != bonus_kind.NoBonus;
         closeupStage.main.display_skill(this, skill, new List<unitControler>(tragets), trigger);
-
+        closeupStage.main.display_showSkillIcon(this, (dynamicSkill)skill);
         _befUseSkill(skill.information, skillArg, ref tragets);
         foreach (unitControler traget in tragets)
         {

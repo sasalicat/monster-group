@@ -93,6 +93,7 @@ public class comboManager : BasicManager {
             //controler.counterSkill = 
             itemBelt item_belt = newone.AddComponent<itemBelt>();
             item_belt.init(controler, itemnos);
+            
             return controler;
         }
         else
@@ -109,5 +110,21 @@ public class comboManager : BasicManager {
         Debug.LogWarning(">>>>>"+gobj+"死亡");
         comboControler control = gobj.GetComponent<comboControler>();
         Timer.main.loginOutTimer(control.action);
+        closeupStage.main.display_anim(control,roleAnim.DEATH);
+        unitControler[] teammates=(unitControler[])chessBoard.teammateOf(control);
+        bool allDead = true;
+        foreach (comboControler teammate in teammates)
+        {
+            if (!teammate.data.Dead)
+            {
+                allDead = false;
+                break;
+            }
+        }
+        if (allDead)
+        {
+            closeupStage.main.display_uncloseUp();
+            
+        }
     }
 }

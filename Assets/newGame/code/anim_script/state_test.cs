@@ -11,7 +11,7 @@ public class state_test : StateMachineBehaviour
     //float still_percentage = 0.2f;
     public float minSpeed = 0.15f;
     public bool slowDown = false;
-    bool end = false;
+    protected bool end = false;
     public bool stateActive
     {
         get

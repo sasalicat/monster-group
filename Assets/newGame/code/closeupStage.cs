@@ -88,6 +88,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public SpriteRenderer curtain;
     public float curtain_max_alph = 0.85f;
 
+
     //public GameObject rolePrefab;
     public GameObject createRole(int team,int x, int y,int prefabIndex)
     {
@@ -107,7 +108,7 @@ public class closeupStage : MonoBehaviour, battleStage
         GameObject newRole = Instantiate(((objectNameList)objectList.main).mainUnit, pos, Quaternion.Euler(0, 0, 0));
         GameObject prafeb = ((objectNameList)(objectList.main)).getRolePrafeb(prefabIndex); //Instantiate(objectList.main.mainUnit);
         GameObject newone = Instantiate(prafeb, newRole.transform.position, Quaternion.Euler(0, 0, 0),newRole.transform);
-        
+        newone.GetComponent<Animator>().GetBehaviour<state_dodge>().gobj = newone;
         if (team == 0) {
             team1_anim[x * y + x] = newRole.GetComponent<roleAnim>();
             team1_anim[x * y + x].setRootObj(newone,BASE_ROLE_LAYOUT+x*y+x);
@@ -117,7 +118,7 @@ public class closeupStage : MonoBehaviour, battleStage
         {
             team2_anim[x * y + x] = newRole.GetComponent<roleAnim>();
             team2_anim[x * y + x].setRootObj(newone, BASE_ROLE_LAYOUT + x * y + x);
-            newone.transform.rotation = Quaternion.Euler(0, 180, 0);
+            newRole.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
        
         return newRole;
@@ -127,11 +128,18 @@ public class closeupStage : MonoBehaviour, battleStage
         GameObject hpbar = Instantiate(objectList.main.hpBar, newRole.transform);
         hpbar.transform.localPosition = objectList.main.hpBar.transform.position;
         hpbar.GetComponent<HpBar>().HpColor = Color.red;
+
+        GameObject iconInBattle = Instantiate(((objectNameList)objectList.main).sIconInBattle,newRole.transform);
+        iconInBattle.transform.localPosition = ((objectNameList)objectList.main).sIconInBattle.transform.position;
+
         roleAnim ranim = newRole.GetComponent<roleAnim>();
         ranim.HpBar = hpbar.GetComponent<HpBar>();
+        ranim.sIcon = iconInBattle.GetComponent<IconInBattle>();
+
         comboControler controler = newRole.GetComponent<comboControler>();
         controler2roleAnim[controler] = newRole.GetComponent<roleAnim>();
         ((unitData_v2)controler.data)._onHpPercentageChange += ranim.onHpChange;
+        
         //hpbar.GetComponent<SpriteRenderer>().sortingOrder = ranim.sorter.sortingOrder;
     }
     protected cu_state Cstate=cu_state.no_cu;
@@ -232,11 +240,24 @@ public class closeupStage : MonoBehaviour, battleStage
             cameraObj.transform.position = camera_now_traget;
         }
     }
-    //提交order的function
-    public void display_effect(GameObject effectPrefab, unitControler creater, Dictionary<string, object> initArgs)
+    public void createEffect(GameObject prafeb,Dictionary<string,object> dict)
     {
-        stage_movement newone = new stage_movement(stage_movement.move.Number, new List<object>() { effectPrefab, creater, initArgs });
-        heap[0].argList.Add(newone);
+        GameObject eff= Instantiate(prafeb);
+        eff.GetComponent<effectionInit>().init(dict,prafeb);
+    }
+    //提交order的function
+    public void display_effect(GameObject effectPrefab, unitControler creater, Dictionary<string, object> initArgs,bool hitEff)
+    {
+        if (hitEff)
+        {
+            //stage_movement newone = new stage_movement(stage_movement.move.Effection, new List<object>() { effectPrefab, creater, initArgs });
+            createEffect_hit newone = new createEffect_hit(new List<object>() { effectPrefab , initArgs });
+            heap[0].argList.Add(newone);
+        }
+        else
+        {
+
+        }
     }
 
     public void display_number(unitControler who, int number, int kind)
@@ -260,6 +281,12 @@ public class closeupStage : MonoBehaviour, battleStage
     {
         List<object> list = new List<object> { code };
         stage_movement newone = new closeUp_action(list);
+        heap[0].argList.Add(newone);
+    }
+    public void display_uncloseUp()
+    {
+        List<object> list = new List<object> { };
+        stage_movement newone =new uncloseUp_action(list);
         heap[0].argList.Add(newone);
     }
     private int testFaction(unitControler tester,List<unitControler> betesteds)//測試tester和betesteds的陣營關係
@@ -446,17 +473,26 @@ public class closeupStage : MonoBehaviour, battleStage
         {
             heap[0].argList.Add(new animDodge_action(new List<object>() { unit, code }));
         }
+        else if(code == roleAnim.DEATH)
+        {
+            heap[0].argList.Add(new animDeath_action(new List<object>() { unit, code}));
+        }
         //heap[0].argList.Add(new stage_movement(stage_movement.move.Anim, new List<object>() { unit, code }));
     }
     public void display_onStage(unitControler unit,List<unitControler> tragets)
     {
         heap[0].argList.Add(new onstage_action(new List<object>() { unit, tragets }));
     }
+    public void display_showSkillIcon(unitControler unit,dynamicSkill skill)
+    {
+        heap[0].argList.Add(new showSIcon(new List<object>() { controler2roleAnim[unit], skill_resource.IconPool[skill.GetType().ToString()] }));
+    }
     public void update_roleHp(roleAnim role,float percentage)
     {
         //Debug.LogWarning("update_roleHp被呼叫");
         heap[0].argList.Add(new hpBarUpdate_action(new List<object>() { role, percentage }));
     }
+
     //-------------------------------------------
     public void closeUp(int kind)
     {

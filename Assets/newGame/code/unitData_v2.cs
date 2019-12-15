@@ -36,12 +36,13 @@ public class unitData_v2 : unitData {
             else
             {
                 now_life_point = 0;
+                dead = true;
                 //Debug.Log("設置now_life_point為:" + now_life_point);
                 if (_onDeath != null)
                 {
                     _onDeath();
                 }
-                dead = true;
+
             }
             if (_onLifeChange != null)
                 _onLifeChange(before);
@@ -109,7 +110,7 @@ public class unitData_v2 : unitData {
         }
     }
     private int block_reduce=BASE_BLOCK_REDUCE;
-    public virtual int blockReduceNum {
+    public virtual int Now_Block_Reduce_Num {
         get
         {
             return block_reduce;

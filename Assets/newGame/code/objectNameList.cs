@@ -5,7 +5,7 @@ using UnityEngine;
 public class objectNameList : objectList {
     public List<string> roleNames;
     protected GameObject[] rolePrafebs;
-
+    public GameObject sIconInBattle;
     protected override void OnEnable()
     {
         base.OnEnable();

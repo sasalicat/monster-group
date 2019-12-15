@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4472406780430556}
   - component: {fileID: 212456051839014808}
   - component: {fileID: 95867531301579858}
-  - component: {fileID: 114751992873479390}
+  - component: {fileID: 114458370252650480}
   m_Layer: 0
   m_Name: "\u6253\u64CA\u6548\u679C1"
   m_TagString: Untagged
@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1151447419865782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.399293, y: -0.5220244, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,7 +60,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114751992873479390
+--- !u!114 &114458370252650480
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,10 +68,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1151447419865782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eb309a64d7c35841958ca4eda5f0663, type: 3}
+  m_Script: {fileID: 11500000, guid: fab97c09509f80f4f920f8636241aadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 1
+  time: 0.5
+  positiveDirection: {x: 1, y: 0}
 --- !u!212 &212456051839014808
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -106,7 +107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 300
+  m_SortingOrder: 245
   m_Sprite: {fileID: 21300000, guid: 6cef5073c06917e43b975494c8a7269c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillBelt : MonoBehaviour,Callback4Unit {
-    unitControler controler;
+    protected unitControler controler;
     public delegate void withFloat(float arg);
     protected withFloat _time_pass; 
     protected List<Skill> skills;
@@ -222,7 +222,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         }
         skills.Add(newone);*/
     }
-    public virtual void addSkillDirectBy(string scriptName)
+    public virtual Skill addSkillDirectBy(string scriptName)
     {
         Skill newone = (Skill)gameObject.AddComponent(System.Type.GetType(scriptName));
         //Debug.Log("skillname:" + scriptName + " type:" + System.Type.GetType(scriptName));
@@ -238,6 +238,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
             activeSkills.Add(newone);
         }
         skills.Add(newone);
+        return newone;
     }
     public virtual void aftAllUnitInit(Manager manager)
     {

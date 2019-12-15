@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class dynamicSkill : CDSkill {
+    //protected GameObject[] resources=null;
     protected List<modifier> modifierList;
+    public static Dictionary<string, GameObject[]> resourcePool=new Dictionary<string, GameObject[]>();
     protected abstract List<modifier> Modifiers
     {
         get;
@@ -18,6 +20,7 @@ public abstract class dynamicSkill : CDSkill {
         d.extraArgs["critical"] = false;
         return d;
     }
+
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
         modifierList = Modifiers;
@@ -30,6 +33,11 @@ public abstract class dynamicSkill : CDSkill {
         }
         
     }
+    /*
+    public void setResources(GameObject[] resources)
+    {
+        this.resources = resources;
+    }*/
     public abstract unitControler[] getTragets(Environment env);
     public override unitControler[] findTraget(Environment env)
     {

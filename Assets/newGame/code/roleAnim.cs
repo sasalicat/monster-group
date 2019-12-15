@@ -8,6 +8,7 @@ public class roleAnim : MonoBehaviour {
     public const int ATTACK = 1;
     public const int MAGIC = 2;
     public const int DODGE = 3;
+    public const int DEATH = 4;
 
     public Animator anim;//手動拉取
     public SortingGroup sorter;
@@ -32,15 +33,8 @@ public class roleAnim : MonoBehaviour {
     }
     public int hpnum;
     //public withNothing onAttackEnd;
-    // Use this for initialization
-	void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public IconInBattle sIcon;
+
     public void goEffect()
     {
         Debug.Log("time to show effect");
@@ -133,5 +127,9 @@ public class roleAnim : MonoBehaviour {
     {
         hpBar.Percentage = percentage;
     }
-    //public 
+    public void showSkillIcon(Sprite icon)
+    {
+        sIcon.show(icon);
+    }
+    
 }

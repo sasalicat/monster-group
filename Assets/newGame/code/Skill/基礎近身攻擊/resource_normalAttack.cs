@@ -13,6 +13,14 @@ public class resource_normalAttack : skill_resource
         }
     }
 
+    public override string IconName
+    {
+        get
+        {
+            return "Icon/基本近戰攻擊";
+        }
+    }
+
     public override string[] prafebList
     {
         get
