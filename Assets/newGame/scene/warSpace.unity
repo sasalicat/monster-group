@@ -690,6 +690,7 @@ MonoBehaviour:
   prafebList: []
   roleNames:
   - roles/cyclops
+  - roles/samurai_male
   sIconInBattle: {fileID: 1672934530819138, guid: 618a032e738b8ab48af538807e5c273c,
     type: 2}
 --- !u!114 &599777130
