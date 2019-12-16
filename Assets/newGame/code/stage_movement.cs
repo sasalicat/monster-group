@@ -191,9 +191,9 @@ public class animSkill_action : stage_action {
     public override void action(skillpackage skp) {
         comboControler control = (comboControler)argList[0];
         int code = (int)argList[1];
-        if (code == roleAnim.ATTACK)
+        if (code == AnimCodes.ATTACK)
             control.GetComponent<roleAnim>().anim_attack(skp.Next);
-        else if (code == roleAnim.MAGIC)
+        else if (code == AnimCodes.MAGIC)
             control.GetComponent<roleAnim>().anim_magic(skp.Next);
         else
             Debug.LogError("animSkill_action code錯誤,不正確的code:" + code);
@@ -218,7 +218,7 @@ public class animBenhit_action : stage_action_withskp
     {
         comboControler control = (comboControler)argList[0]; 
         int code = (int)argList[1];
-        if (code != roleAnim.BEHIT)
+        if (code != AnimCodes.BEHIT)
         {
             Debug.Log("animBenhit_action code錯誤,code:"+code);
         }
@@ -247,7 +247,7 @@ public class animDodge_action : stage_action_withskp
     {
         comboControler control = (comboControler)argList[0];
         int code = (int)argList[1];
-        if(code != roleAnim.DODGE)
+        if(code != AnimCodes.DODGE)
         {
             Debug.Log("animDodge_action code錯誤,code:" + code);
         }
@@ -276,7 +276,7 @@ public class animDeath_action : stage_action
     {
         comboControler control = (comboControler)argList[0];
         int code = (int)argList[1];
-        if (code != roleAnim.DEATH)
+        if (code != AnimCodes.DEATH)
         {
             Debug.Log("animDodge_action code錯誤,code:" + code);
         }

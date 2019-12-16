@@ -54,7 +54,7 @@ public class newSkill_normalAttack : dynamicSkill {
         unitControler[] tragets = (unitControler[])args["tragets"];
         if (tragets.Length > 0)
         {
-            closeupStage.main.display_anim(owner, roleAnim.ATTACK);
+            closeupStage.main.display_anim(owner, AnimCodes.ATTACK);
             Dictionary<comboControler, bool> missDict = (Dictionary<comboControler, bool>)args["miss"];
             //comboControler.bonus_kind kind = (comboControler.bonus_kind)args["bonus"];
 
@@ -65,12 +65,13 @@ public class newSkill_normalAttack : dynamicSkill {
                     Dictionary<string, object> dict = new Dictionary<string, object>();
                     dict["traget"] = traget;
                     dict["creater"] = owner;
-                    GameObject[] resources= dynamicSkill.resourcePool[this.GetType().ToString()];
+                    GameObject[] resources= dynamicSkill.resourcePool[poolKey];
                     closeupStage.main.display_effect(resources[0],owner,dict,true);
+
                     Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
                     //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
                     traget.takeDamage(d);
-                    closeupStage.main.display_anim(traget, roleAnim.BEHIT);
+                    closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
                 }
 
             }

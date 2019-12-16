@@ -57,7 +57,7 @@ public class comboControler : BasicControler{
         { //如果閃避成功
             //Debug.LogWarning(gameObject.name + "閃避成功");
             ((Dictionary<comboControler, bool>)skillArgs["miss"])[this] = true;
-            closeupStage.main.display_anim(this,roleAnim.DODGE);
+            closeupStage.main.display_anim(this,AnimCodes.DODGE);
             closeupStage.main.display_floatingText(this, TextCreater.DODGE);
         }
             if(_aftDodge!=null)

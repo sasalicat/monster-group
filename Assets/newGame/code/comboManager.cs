@@ -110,7 +110,7 @@ public class comboManager : BasicManager {
         Debug.LogWarning(">>>>>"+gobj+"死亡");
         comboControler control = gobj.GetComponent<comboControler>();
         Timer.main.loginOutTimer(control.action);
-        closeupStage.main.display_anim(control,roleAnim.DEATH);
+        closeupStage.main.display_anim(control,AnimCodes.DEATH);
         unitControler[] teammates=(unitControler[])chessBoard.teammateOf(control);
         bool allDead = true;
         foreach (comboControler teammate in teammates)

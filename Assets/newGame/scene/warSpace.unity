@@ -693,6 +693,9 @@ MonoBehaviour:
   - roles/samurai_male
   sIconInBattle: {fileID: 1672934530819138, guid: 618a032e738b8ab48af538807e5c273c,
     type: 2}
+  keyDictNames:
+  - cyclops_akey
+  - samurai_akey
 --- !u!114 &599777130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,7 +790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   representation:
   - resource_normalAttack
-  - 
+  - resource_normalAttack_eff2
   - 
   - 
   - 
@@ -923,6 +926,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stage: {fileID: 135104381}
   effect: {fileID: 1123186564341794, guid: 46419b9b2f0c3284a920bbcd46754f0b, type: 2}
+--- !u!1001 &823962868
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4432359782646666, guid: fe9700e36f32aee439dec191de864b29, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432359782646666, guid: fe9700e36f32aee439dec191de864b29, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432359782646666, guid: fe9700e36f32aee439dec191de864b29, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432359782646666, guid: fe9700e36f32aee439dec191de864b29, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432359782646666, guid: fe9700e36f32aee439dec191de864b29, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432359782646666, guid: fe9700e36f32aee439dec191de864b29, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432359782646666, guid: fe9700e36f32aee439dec191de864b29, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432359782646666, guid: fe9700e36f32aee439dec191de864b29, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fe9700e36f32aee439dec191de864b29, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1041789737
 GameObject:
   m_ObjectHideFlags: 0

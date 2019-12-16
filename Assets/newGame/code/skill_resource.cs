@@ -11,18 +11,33 @@ public abstract class skill_resource : skill_representation {
     public GameObject[] resource=null;
     public abstract string IconName { get; }
     public static Dictionary<string, Sprite> IconPool = new Dictionary<string, Sprite>();
+    public virtual bool createPrafebOnInit {
+        get
+        {
+            return true;
+        }
+    }
+    public virtual string poolKey
+    {
+       get {
+            return ScriptName;
+        }
+    }
 
     public virtual void init(unitData nowdata)
     {
 
-        if (!dynamicSkill.resourcePool.ContainsKey(ScriptName))
+        if (createPrafebOnInit)
         {
-            resource = new GameObject[prafebList.Length];
-            for (int i = 0; i < prafebList.Length; i++)
+            if (!dynamicSkill.resourcePool.ContainsKey(ScriptName))
             {
-                resource[i] = (GameObject)Resources.Load(prafebList[i]);
+                resource = new GameObject[prafebList.Length];
+                for (int i = 0; i < prafebList.Length; i++)
+                {
+                    resource[i] = (GameObject)Resources.Load(prafebList[i]);
+                }
+                dynamicSkill.resourcePool[ScriptName] = resource;
             }
-            dynamicSkill.resourcePool[ScriptName] = resource;
         }
         if (!IconPool.ContainsKey(ScriptName))
         {

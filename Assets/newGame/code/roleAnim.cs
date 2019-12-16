@@ -4,11 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 public class roleAnim : MonoBehaviour {
-    public const int BEHIT = 0;
-    public const int ATTACK = 1;
-    public const int MAGIC = 2;
-    public const int DODGE = 3;
-    public const int DEATH = 4;
+
 
     public Animator anim;//手動拉取
     public SortingGroup sorter;
@@ -19,6 +15,7 @@ public class roleAnim : MonoBehaviour {
     public state_test[] stateList;
     public GameObject rootObj;
     protected HpBar hpBar;
+    protected animKeyDict keyDict;
     public HpBar HpBar
     {
         set
@@ -68,43 +65,46 @@ public class roleAnim : MonoBehaviour {
         sorter = anim.GetComponent<SortingGroup>();
         setSortLayout(sortLayout);
     }
-
+    public void setRoleData(animKeyDict dict)
+    {
+        keyDict = dict;
+    }
 
     public void anim_attack()
     {
-        anim.SetBool("skill_1",true);
+        anim.SetBool(keyDict[AnimCodes.ATTACK], true);
     }
     public void anim_attack(state_test.withNothing cb)
     {
         forNextEffect += cb;
-        anim.SetBool("skill_1", true);
+        anim.SetBool(keyDict[AnimCodes.ATTACK], true);
     }
     public void anim_magic()
     {
-        anim.SetBool("skill_3", true);
+        anim.SetBool(keyDict[AnimCodes.MAGIC], true);
     }
     public void anim_magic(state_test.withNothing cb)
     {
         forNextEffect += cb;
-        anim.SetBool("skill_3", true);
+        anim.SetBool(keyDict[AnimCodes.MAGIC], true);
     }
     public void anim_behit()
     {
-        anim.SetBool("hit_1", true);
+        anim.SetBool(keyDict[AnimCodes.BEHIT], true);
     }
     public void anim_behit(state_test.withNothing cb)
     {
         anim.GetBehaviour<state_behit>().forNextEnd += cb;
-        anim.SetBool("hit_1", true);
+        anim.SetBool(keyDict[AnimCodes.BEHIT], true);
     }
     public void anim_died()
     {
-        anim.SetBool("death", true);
+        anim.SetBool(keyDict[AnimCodes.DEATH], true);
     }
     public void anim_dodge(state_test.withNothing cb)
     {
         anim.GetBehaviour<state_dodge>().forNextEnd += cb;
-        anim.SetBool("jump", true);
+        anim.SetBool(keyDict[AnimCodes.DODGE], true);
     }
     public void addSortLayout(int layout)
     {

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class objectNameList : objectList {
     public List<string> roleNames;
     protected GameObject[] rolePrafebs;
     public GameObject sIconInBattle;
+    public List<string> keyDictNames;
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -18,5 +20,9 @@ public class objectNameList : objectList {
             rolePrafebs[index] = (GameObject)Resources.Load(roleNames[index]);
         }
         return rolePrafebs[index];
+    }
+    public animKeyDict getKeyDict(int index)
+    {//Activator.CreateInstance:使用類別名稱來創建物件,動態產生物件的方法
+        return  (animKeyDict)Activator.CreateInstance(Type.GetType(keyDictNames[index]));
     }
 }

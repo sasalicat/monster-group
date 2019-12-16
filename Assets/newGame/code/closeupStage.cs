@@ -112,12 +112,14 @@ public class closeupStage : MonoBehaviour, battleStage
         if (team == 0) {
             team1_anim[x * y + x] = newRole.GetComponent<roleAnim>();
             team1_anim[x * y + x].setRootObj(newone,BASE_ROLE_LAYOUT+x*y+x);
+            team1_anim[x * y + x].setRoleData(((objectNameList)objectList.main).getKeyDict(prefabIndex));
             
         }
         if (team == 1)
         {
             team2_anim[x * y + x] = newRole.GetComponent<roleAnim>();
             team2_anim[x * y + x].setRootObj(newone, BASE_ROLE_LAYOUT + x * y + x);
+            team2_anim[x * y + x].setRoleData(((objectNameList)objectList.main).getKeyDict(prefabIndex));
             newRole.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
        
@@ -460,20 +462,20 @@ public class closeupStage : MonoBehaviour, battleStage
     }
     //public void display_resetCloseMoving
     public void display_anim(unitControler unit, int code)
-    {
-        if (code== roleAnim.BEHIT)
+    {  
+        if (code== AnimCodes.BEHIT)
         {
             heap[0].argList.Add(new animBenhit_action(new List<object>() {unit,code}));
         }
-        else if(code == roleAnim.ATTACK||code == roleAnim.MAGIC)
+        else if(code == AnimCodes.ATTACK||code == AnimCodes.MAGIC)
         {
             heap[0].argList.Add(new animSkill_action( new List<object>() { unit, code }));
         }
-        else if(code == roleAnim.DODGE)
+        else if(code == AnimCodes.DODGE)
         {
             heap[0].argList.Add(new animDodge_action(new List<object>() { unit, code }));
         }
-        else if(code == roleAnim.DEATH)
+        else if(code == AnimCodes.DEATH)
         {
             heap[0].argList.Add(new animDeath_action(new List<object>() { unit, code}));
         }

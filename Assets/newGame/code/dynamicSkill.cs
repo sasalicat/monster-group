@@ -7,6 +7,25 @@ public abstract class dynamicSkill : CDSkill {
     //protected GameObject[] resources=null;
     protected List<modifier> modifierList;
     public static Dictionary<string, GameObject[]> resourcePool=new Dictionary<string, GameObject[]>();
+    protected virtual string poolKey//有一些和父類別共用素材的技能會需要在這裡用父類別的名字
+    {
+        get {
+            return GetType().ToString();
+        }
+    }
+    public string PoolKey
+    {
+        get
+        {
+            string key = poolKey;
+            foreach (modifier mod in modifierList)
+            {
+                key = mod.specificOnReadyKey(key);
+            }
+            return key;
+        }
+    }
+
     protected abstract List<modifier> Modifiers
     {
         get;
