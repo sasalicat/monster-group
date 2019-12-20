@@ -11,6 +11,7 @@ public abstract class skill_resource : skill_representation {
     public GameObject[] resource=null;
     public abstract string IconName { get; }
     public static Dictionary<string, Sprite> IconPool = new Dictionary<string, Sprite>();
+    public abstract modifier[] mods { get; }
     public virtual bool createPrafebOnInit {
         get
         {

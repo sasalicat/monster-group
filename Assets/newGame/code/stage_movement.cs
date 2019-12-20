@@ -424,6 +424,31 @@ public class createEffect_hit : stage_action
         closeupStage.main.createEffect(prafeb,initDict);
     }
 }
+public class createEffect : stage_action_withskp
+{
+    public createEffect(List<object> argList) : base(move.Effection, argList)
+    {
+    }
+    public override int stage
+    {
+        get
+        {
+            return 2;
+        }
+    }
+    protected virtual void missileHit(missile missile)
+    {
+        conditionNext();
+    }
+    public override void action(skillpackage skp)
+    {
+        GameObject prafeb = (GameObject)argList[0];
+        Dictionary<string, object> initDict = (Dictionary<string, object>)argList[1];
+        missile.withMissile callback = missileHit;
+        initDict["callback"] = callback;
+        closeupStage.main.createEffect(prafeb, initDict);
+    }
+}
 public class showSIcon : stage_action
 {
     public showSIcon(List<object> argList) : base(move.Effection, argList)

@@ -11,7 +11,7 @@ public class unitData  {
     public const float STAND_ATK_INTERVAL = 1.0f;
     public const float STAND_RECOVER_INTERVAL = 1.0f;
     public const int STAND_ATK_SPD_REINFORCE = 0;
-    public const int STAND_MAG_REINFOCE = 0;
+    public const int STAND_MAG_REINFOCE = 10;
     public const int STAND_ARMOR = 0;
     public const int STAND_LIFE = 100;
     public const int STAND_LIFE_RECOVER = 0;

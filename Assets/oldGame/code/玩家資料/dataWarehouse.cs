@@ -51,13 +51,14 @@ public class dataWarehouse : MonoBehaviour {
         {
             main = this;
         }
+        createNewArchive();
     }
     public void createNewArchive()
     {
         Debug.Log("創建新檔案");
         nowData = new PlayerInf();
         nowData.army.Add(new RoleRecord_v2(1));
-        nowData.army[0].skillNos = new List<int>() { 1 };
+        nowData.army[0].skillNos = new List<int>() { 2 };
         nowData.army[0].index = 0;
         nowData.army[0].location = new vec2i(0, 0);
         //nowData.army[0].skillNos.Add(1);

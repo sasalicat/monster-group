@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class newSkill_normalAttack : dynamicSkill {
+public class newSkill_fireBall : dynamicSkill
+{
     public override bool canUse
     {
         get
@@ -16,7 +17,7 @@ public class newSkill_normalAttack : dynamicSkill {
     {
         get
         {
-            return 1 * unitData.STAND_ATK_INTERVAL;
+            return 3 * unitData.STAND_ATK_INTERVAL;
         }
     }
 
@@ -40,15 +41,14 @@ public class newSkill_normalAttack : dynamicSkill {
 
     public override SkillInf Inf()
     {
-        return new SkillInf_v2(this,true,true,true,false,new List<string>() { "damage" });
+        return new SkillInf_v2(this, true, true, true, true, new List<string>() { "damage" });
     }
-
     public override void trigger(Dictionary<string, object> args)
     {
         unitControler[] tragets = (unitControler[])args["tragets"];
         if (tragets.Length > 0)
         {
-            closeupStage.main.display_anim(owner, AnimCodes.ATTACK);
+            closeupStage.main.display_anim(owner, AnimCodes.MAGIC);
             Dictionary<comboControler, bool> missDict = (Dictionary<comboControler, bool>)args["miss"];
             //comboControler.bonus_kind kind = (comboControler.bonus_kind)args["bonus"];
 
@@ -56,15 +56,20 @@ public class newSkill_normalAttack : dynamicSkill {
             {
                 if (!missDict[traget])
                 {
+                    GameObject[] resources = dynamicSkill.resourcePool[poolKey];
+                    Damage_v2 d = createDamage(owner.data.Now_Mag_Reinforce*3, Damage.KIND_MAGICAL, args);
                     Dictionary<string, object> dict = new Dictionary<string, object>();
                     dict["traget"] = traget;
                     dict["creater"] = owner;
-                    GameObject[] resources= dynamicSkill.resourcePool[poolKey];
-                    closeupStage.main.display_effect(resources[0],owner,dict,true);
-
-                    Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
-                    //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
+                    //dict["damage"] = d;
+                    //dict["callback"] = (BasicDelegate.withBasicDict)missile_callback;
+                    //dict["effect"] = resources[1];
+                    
+                    closeupStage.main.display_effect(resources[0], owner, dict, false);
+                    closeupStage.main.display_effect(resources[1], owner, dict, true);
                     traget.takeDamage(d);
+                    //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
+                    
                     closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
                 }
 
@@ -73,5 +78,4 @@ public class newSkill_normalAttack : dynamicSkill {
         setTime(args);
 
     }
-
 }

@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class resource_normalAttack : skill_resource
+public class resource_fireBall : skill_resource
 {
     public override string Explanation
     {
         get
         {
-            return "基礎攻擊,造成等於力量的傷害";
+            return "造成10點火焰傷害";
         }
     }
 
@@ -17,7 +17,7 @@ public class resource_normalAttack : skill_resource
     {
         get
         {
-            return "Icon/基本近戰攻擊";
+            return "Icon/火球";
         }
     }
 
@@ -25,7 +25,7 @@ public class resource_normalAttack : skill_resource
     {
         get
         {
-            return new string[1] { "effection/打擊效果1" }; 
+            return new string[2] { "effection/火球", "effection/爆炸" };
         }
     }
 
@@ -33,7 +33,7 @@ public class resource_normalAttack : skill_resource
     {
         get
         {
-            return "newSkill_normalAttack";
+            return "newSkill_fireBall";
         }
     }
 
@@ -41,14 +41,14 @@ public class resource_normalAttack : skill_resource
     {
         get
         {
-            return "物理攻擊";
+            return "火球";
         }
     }
     public override modifier[] mods
     {
         get
         {
-            return new modifier[1] {new mod_1_activeSkill()};
+            return new modifier[1] { new mod_1_activeSkill() };
         }
     }
 }

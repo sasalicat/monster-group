@@ -258,7 +258,8 @@ public class closeupStage : MonoBehaviour, battleStage
         }
         else
         {
-
+            createEffect newone = new createEffect(new List<object>() { effectPrefab, initArgs });
+            heap[0].argList.Add(newone);
         }
     }
 

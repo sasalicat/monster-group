@@ -9,6 +9,7 @@ public class missile : decisionArea {
     public float minDist=0;
     public delegate void withMissile(missile arg);
     public withMissile on_missile_hited;
+
     private void destorySelf(missile self)
     {
         Destroy(gameObject);

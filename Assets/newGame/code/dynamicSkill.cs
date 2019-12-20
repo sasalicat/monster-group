@@ -26,10 +26,10 @@ public abstract class dynamicSkill : CDSkill {
         }
     }
 
-    protected abstract List<modifier> Modifiers
+/*    protected abstract List<modifier> Modifiers
     {
         get;
-    }
+    }*/
     public abstract SkillInf Inf();
     public Damage_v2 createDamage(int num,byte kind,Dictionary<string,object> skillArg)
     {
@@ -42,7 +42,7 @@ public abstract class dynamicSkill : CDSkill {
 
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
-        modifierList = Modifiers;
+       
         this.owner = (BasicControler)owner;
         information = Inf();
         foreach(modifier mod in modifierList)
@@ -51,6 +51,10 @@ public abstract class dynamicSkill : CDSkill {
             mod.onSkillInit(owner, deleg);
         }
         
+    }
+    public virtual void onInit(unitControler owner, Callback4Unit deleg, modifier[] mods) {
+        modifierList = new List<modifier>(mods);
+        onInit(owner, deleg);
     }
     /*
     public void setResources(GameObject[] resources)
@@ -79,5 +83,10 @@ public abstract class dynamicSkill : CDSkill {
         }
         return enemy;
     }
-
+    public virtual void missile_callback(Dictionary<string,object> dict)
+    {
+        comboControler traget = (comboControler)dict["traget"];
+        Damage damage = (Damage)dict["damage"];
+        traget.takeDamage(damage);
+    }
 }
