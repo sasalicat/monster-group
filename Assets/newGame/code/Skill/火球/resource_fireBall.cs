@@ -25,7 +25,7 @@ public class resource_fireBall : skill_resource
     {
         get
         {
-            return new string[2] { "effection/火球", "effection/爆炸" };
+            return new string[2] { "effection/火球", "effection/爆炸特效1" };
         }
     }
 

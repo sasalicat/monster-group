@@ -9,7 +9,8 @@ public class commonHitEff : decisionArea,effectionInit {
     {
         comboControler traget = (comboControler)effDict["traget"];
         comboControler creater = (comboControler)effDict["creater"];
-        transform.position = traget.transform.position+selfPrafeb.transform.position;
+        roleAnim ranim = closeupStage.main.controler2roleAnim[traget];
+        transform.position = (Vector2)ranim.Center+(Vector2)selfPrafeb.transform.position;
         Vector2 toTraget = traget.transform.position - creater.transform.position;
         Quaternion rotater = Quaternion.FromToRotation(positiveDirection, toTraget);
         transform.up = rotater * transform.up;

@@ -83,7 +83,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public Vector3[] team2_pos=new Vector3[6];
     public roleAnim[] team2_anim=new roleAnim[6];
     public Vector3[] team2_closePoint;
-    Dictionary<unitControler, roleAnim> controler2roleAnim = new Dictionary<unitControler, roleAnim>();
+    public Dictionary<unitControler, roleAnim> controler2roleAnim = new Dictionary<unitControler, roleAnim>();
     //public BasicControler[] team2;
     public SpriteRenderer curtain;
     public float curtain_max_alph = 0.85f;
@@ -245,7 +245,9 @@ public class closeupStage : MonoBehaviour, battleStage
     public void createEffect(GameObject prafeb,Dictionary<string,object> dict)
     {
         GameObject eff= Instantiate(prafeb);
-        eff.GetComponent<effectionInit>().init(dict,prafeb);
+        effectionInit script = eff.GetComponent<effectionInit>();
+        if(script != null)
+            script.init(dict,prafeb);
     }
     //提交order的function
     public void display_effect(GameObject effectPrefab, unitControler creater, Dictionary<string, object> initArgs,bool hitEff)
