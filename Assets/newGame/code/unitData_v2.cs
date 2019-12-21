@@ -258,7 +258,7 @@ public class unitData_v2 : unitData {
     {
         get
         {
-            return 1f;
+            return 0.5f;
         }
     }
     public override unitData_Profile getProflie()

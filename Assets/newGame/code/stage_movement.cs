@@ -387,14 +387,16 @@ public class floatNum_action : stage_action
 public class floatText_action : stage_action
 {
     public Vector2 numOffset = new Vector2(0, 1f);
-    public floatText_action(List<object> argList) : base(move.floatNum, argList)
+    protected int stageNo=3;
+    public floatText_action(List<object> argList,int stageNum) : base(move.floatNum, argList)
     {
+        stageNo = stageNum;
     }
     public override int stage
     {
         get
         {
-            return 3;
+            return stageNo;
         }
     }
     public override void action(skillpackage skp)
@@ -404,6 +406,7 @@ public class floatText_action : stage_action
         ((TextCreater)(NumberCreater.main)).createText(kind, control.transform.position+(Vector3)numOffset);
     }
 }
+
 public class createEffect_hit : stage_action
 {
     public createEffect_hit(List<object> argList) : base(move.Effection, argList)

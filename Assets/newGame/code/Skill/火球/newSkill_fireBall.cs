@@ -55,14 +55,14 @@ public class newSkill_fireBall : dynamicSkill
             foreach (comboControler traget in tragets)
             {
                 Dictionary<string, object> dict = new Dictionary<string, object>();
+                dict["traget"] = traget;
+                dict["creater"] = owner;
                 closeupStage.main.display_effect(resources[0], owner, dict, false);
                 if (!missDict[traget])
                 {
                     
                     Damage_v2 d = createDamage(owner.data.Now_Mag_Reinforce*3, Damage.KIND_MAGICAL, args);
 
-                    dict["traget"] = traget;
-                    dict["creater"] = owner;
                     //dict["damage"] = d;
                     //dict["callback"] = (BasicDelegate.withBasicDict)missile_callback;
                     //dict["effect"] = resources[1];

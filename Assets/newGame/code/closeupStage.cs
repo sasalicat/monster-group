@@ -260,6 +260,16 @@ public class closeupStage : MonoBehaviour, battleStage
         }
         else
         {
+            string msg = "display effect initArgs:";
+            foreach (KeyValuePair<string, object> pair in initArgs) {
+                msg += "(";
+                msg += pair.Key;
+                msg += ":";
+                msg += pair.Value;
+                msg += ") ";
+
+            }
+            Debug.Log(msg);
             createEffect newone = new createEffect(new List<object>() { effectPrefab, initArgs });
             heap[0].argList.Add(newone);
         }
@@ -273,7 +283,11 @@ public class closeupStage : MonoBehaviour, battleStage
     }
     public void display_floatingText(unitControler who,int code)
     {
-        floatText_action newone = new floatText_action(new List<object>() {who,code});
+        int stage = 3;
+        if (code == TextCreater.BATTER || code == TextCreater.COUNT) {
+            stage = 2;
+        }
+        floatText_action newone = new floatText_action(new List<object>() {who,code},stage);
         heap[0].argList.Add(newone);
     }
     public void display_recloseUp(int code)
