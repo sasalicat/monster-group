@@ -16,7 +16,7 @@ public class newSkill_normalAttack : dynamicSkill {
     {
         get
         {
-            return 1 * unitData.STAND_ATK_INTERVAL;
+            return 1 * BASE_SKILL_COOLDOWN_FRAMES;
         }
     }
 

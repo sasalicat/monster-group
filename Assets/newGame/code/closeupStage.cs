@@ -217,7 +217,7 @@ public class closeupStage : MonoBehaviour, battleStage
         }
         else if (timeBefore < closeUp_time + reCloseUpWait_time)//等待階段
         {
-            Debug.Log("stage2 timeBefore:" + timeBefore + " campos:" + cameraObj.transform.position);
+            //Debug.Log("stage2 timeBefore:" + timeBefore + " campos:" + cameraObj.transform.position);
             Cstate = cu_state.no_cu;
         }
         else if (timeBefore < closeUp_time * 2 + reCloseUpWait_time)//再次特寫
@@ -285,7 +285,7 @@ public class closeupStage : MonoBehaviour, battleStage
     {
         int stage = 3;
         if (code == TextCreater.BATTER || code == TextCreater.COUNT) {
-            stage = 2;
+            stage = 1;
         }
         floatText_action newone = new floatText_action(new List<object>() {who,code},stage);
         heap[0].argList.Add(newone);

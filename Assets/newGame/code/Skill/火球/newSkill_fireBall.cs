@@ -17,7 +17,7 @@ public class newSkill_fireBall : dynamicSkill
     {
         get
         {
-            return 3 * unitData.STAND_ATK_INTERVAL;
+            return 2 * BASE_SKILL_COOLDOWN_FRAMES;
         }
     }
 
@@ -41,10 +41,21 @@ public class newSkill_fireBall : dynamicSkill
 
     public override SkillInf Inf()
     {
-        return new SkillInf_v2(this, true, true, true, true, new List<string>() { "damage" });
+        return new SkillInf_v2(this, true, true, true, false, new List<string>() { "damage" });
+    }
+    public override void setTime(Dictionary<string, object> args)
+    {
+        if (((comboControler.bonus_kind)args["bonus"]) == comboControler.bonus_kind.NoBonus)
+        {
+            base.setTime(args);
+        }
     }
     public override void trigger(Dictionary<string, object> args)
     {
+        if ((comboControler.bonus_kind)args["bonus"] == comboControler.bonus_kind.NoBonus)
+        {
+            Debug.LogWarning("基礎火球術");
+        }
         unitControler[] tragets = (unitControler[])args["tragets"];
         if (tragets.Length > 0)
         {
@@ -61,7 +72,7 @@ public class newSkill_fireBall : dynamicSkill
                 if (!missDict[traget])
                 {
                     
-                    Damage_v2 d = createDamage(owner.data.Now_Mag_Reinforce*3, Damage.KIND_MAGICAL, args);
+                    Damage_v2 d = createDamage(owner.data.Now_Mag_Reinforce*2, Damage.KIND_MAGICAL, args);
 
                     //dict["damage"] = d;
                     //dict["callback"] = (BasicDelegate.withBasicDict)missile_callback;
@@ -78,6 +89,9 @@ public class newSkill_fireBall : dynamicSkill
             }
         }
         setTime(args);
-
+        if ((comboControler.bonus_kind)args["bonus"] == comboControler.bonus_kind.NoBonus)
+        {
+            Debug.LogWarning("火球術新的時間:" + timeLeft);
+        }
     }
 }

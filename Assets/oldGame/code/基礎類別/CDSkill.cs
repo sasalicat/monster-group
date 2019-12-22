@@ -38,7 +38,7 @@ public abstract class CDSkill : Skill {
         }
         //Debug.Log("timeLeft - time 後為:" + timeLeft);
     }
-    public void setTime(Dictionary<string,object> args) {
+    public virtual void setTime(Dictionary<string,object> args) {
 
         timeLeft = CoolDown*(float)args["cooldown_multiple"];
     }

@@ -1,9 +1,67 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillBelt_v2 : SkillBelt {
+public class SkillBelt_v2 : SkillBelt,Callback4Unit_v2{
+    //新callback
+    public void crit_callback(Damage d)
+    {
+        if(_crit_cb!=null)
+            _crit_cb(d);
+    }
+    BasicDelegate.withDamage _crit_cb;
+    public BasicDelegate.withDamage _aftCrit
+    {
+        get
+        {
+            return _crit_cb;
+        }
 
+        set
+        {
+            _crit_cb = value;
+        }
+    }
+    public void block_callback(Damage d)
+    {
+        if(_block_cb!=null)
+            _block_cb(d);
+    }
+    BasicDelegate.withDamage _block_cb;
+    public BasicDelegate.withDamage _aftBlock
+    {
+        get
+        {
+            return _block_cb;
+        }
+        set
+        {
+            _block_cb = value;
+        }
+    }
+
+
+    public void dodge_callback(SkillInf inf,Dictionary<string,object> dict)
+    {
+        if(_dodge_cb!=null)
+            _dodge_cb(inf,dict);
+    }
+    BasicDelegate.forSkill _dodge_cb;
+
+    public BasicDelegate.forSkill _aftDodge
+    {
+        get
+        {
+            return _dodge_cb;
+        }
+
+        set
+        {
+            _dodge_cb = value;
+        }
+    }
+    //---------------------------------------------------------------
     public virtual Skill addSkillDirectBy(string scriptName,modifier[] mods)
     {
         dynamicSkill newone = (dynamicSkill)gameObject.AddComponent(System.Type.GetType(scriptName));
@@ -35,6 +93,8 @@ public class SkillBelt_v2 : SkillBelt {
     {
         base.init(controler, skillNos);
         ((comboControler)controler).counterSkill = skills[0];
-
+        ((comboControler)controler)._aftCrit += crit_callback;
+        ((comboControler)controler)._aftBlock += block_callback;
+        ((comboControler)controler)._aftDodge += dodge_callback;
     }
 }

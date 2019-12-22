@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class dynamicSkill : CDSkill {
     //protected GameObject[] resources=null;
+    protected const int BASE_SKILL_COOLDOWN_FRAMES = 100;
     protected List<modifier> modifierList;
     public static Dictionary<string, GameObject[]> resourcePool=new Dictionary<string, GameObject[]>();
     protected virtual string poolKey//有一些和父類別共用素材的技能會需要在這裡用父類別的名字
@@ -42,13 +43,13 @@ public abstract class dynamicSkill : CDSkill {
 
     public override void onInit(unitControler owner, Callback4Unit deleg)
     {
-       
+        timeLeft = StandCoolDown;
         this.owner = (BasicControler)owner;
         information = Inf();
         foreach(modifier mod in modifierList)
         {
             mod.traget = this;
-            mod.onSkillInit(owner, deleg);
+            mod.onSkillInit(owner, (Callback4Unit_v2)deleg);
         }
         
     }

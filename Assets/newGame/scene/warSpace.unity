@@ -522,6 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_time_perframe: 0.005
   max_counter_perframe: 100
+  frameNumber: 0
 --- !u!114 &599777132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,7 +595,7 @@ MonoBehaviour:
   - resource_normalAttack
   - resource_normalAttack_eff2
   - resource_fireBall
-  - 
+  - resource_fireBall_atk
   - 
   - 
   - 
