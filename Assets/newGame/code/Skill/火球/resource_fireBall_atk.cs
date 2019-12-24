@@ -7,7 +7,7 @@ public class resource_fireBall_atk : resource_fireBall {
     {
         get
         {
-            return new modifier[2] { new mod_1_activeSkill(),new mod_1_attackReduceCD(0.6f) };
+            return new modifier[2] { new mod_1_activeSkill(),new mod_1_attackReduceCD(0.4f*TriggerAmend.BASE_ATTACK) };
         }
     }
 }
