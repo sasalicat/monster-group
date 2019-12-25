@@ -498,6 +498,17 @@ MonoBehaviour:
   keyDictNames:
   - cyclops_akey
   - samurai_akey
+  buffInfNames:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!114 &599777130
 MonoBehaviour:
   m_ObjectHideFlags: 0

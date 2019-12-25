@@ -7,6 +7,13 @@ public class comboControler : BasicControler{
     public const int ENEMY_ROLE_NO = 1;
     public enum bonus_kind {NoBonus,Batter,Counter};
     public BasicDelegate.forSkill _aftBeSkill;//basicControler沒有被使用技能后的時間,這裡作為補全
+    public override Buff addBuff(string buffInfName)
+    {
+        buff_Inf binf= (buff_Inf)System.Activator.CreateInstance(System.Type.GetType(buffInfName));
+        Buff_v2 buff= (Buff_v2)base.addBuff(binf.scriptName);
+        buff.prafebNames = binf.prafebNames;
+        return buff;
+    }
     public override void action(float time)
     {
         if (data.Dead)

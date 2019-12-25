@@ -87,6 +87,18 @@ public class SkillBelt_v2 : SkillBelt,Callback4Unit_v2{
         string skillName = ((skill_resource)newrepres).ScriptName;
         ((skill_resource)newrepres).init(((comboControler)controler).data);
         dynamicSkill newskill=(dynamicSkill)addSkillDirectBy(skillName, ((skill_resource)newrepres).mods);
+        newskill.prefabNames = ((skill_resource)newrepres).prafebList;
+        buff_Inf[] depends = ((skill_resource)newrepres).depends;
+        foreach(buff_Inf binf in depends)
+        {
+            foreach(string pname in binf.prafebNames)
+            {
+                if (!dynamicSkill.resourcePool.ContainsKey(pname))
+                {
+                    dynamicSkill.resourcePool[pname] = (GameObject)Resources.Load(pname);
+                }
+            }
+        }
         //newskill.setResources(((skill_resource)newrepres).resource);
     }
     public override void init(unitControler controler, List<int> skillNos)

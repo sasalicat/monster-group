@@ -8,6 +8,7 @@ public class objectNameList : objectList {
     protected GameObject[] rolePrafebs;
     public GameObject sIconInBattle;
     public List<string> keyDictNames;
+    public List<string> buffInfNames;
     protected override void OnEnable()
     {
         base.OnEnable();

@@ -19,7 +19,7 @@ public class asynchronousTimer : Timer {
                 //Debug.LogWarning("時間耗盡跳出!耗時:"+(Time.realtimeSinceStartup - start_time)+"總計幀數:"+i);
                 break;
             }
-            Debug.Log("第"+frameNumber+"幀");
+            //Debug.Log("第"+frameNumber+"幀");
         }
         //Debug.LogWarning("完成100! 幀耗時:" + (Time.realtimeSinceStartup - start_time));
     }

@@ -12,6 +12,13 @@ public abstract class skill_resource : skill_representation {
     public abstract string IconName { get; }
     public static Dictionary<string, Sprite> IconPool = new Dictionary<string, Sprite>();
     public abstract modifier[] mods { get; }
+    public virtual buff_Inf[] depends
+    {
+        get
+        {
+            return new buff_Inf[0];
+        }
+    }
     public virtual bool createPrafebOnInit {
         get
         {
@@ -30,14 +37,19 @@ public abstract class skill_resource : skill_representation {
 
         if (createPrafebOnInit)
         {
-            if (!dynamicSkill.resourcePool.ContainsKey(ScriptName))
+            foreach (string name in prafebList)
             {
-                resource = new GameObject[prafebList.Length];
-                for (int i = 0; i < prafebList.Length; i++)
+                if (!dynamicSkill.resourcePool.ContainsKey(name))
                 {
-                    resource[i] = (GameObject)Resources.Load(prafebList[i]);
+                    /*
+                    resource = new GameObject[prafebList.Length];
+                    for (int i = 0; i < prafebList.Length; i++)
+                    {
+                        resource[i] = (GameObject)Resources.Load(prafebList[i]);
+                    }
+                    dynamicSkill.resourcePool[ScriptName] = resource;*/
+                    dynamicSkill.resourcePool[name] = (GameObject)Resources.Load(name);
                 }
-                dynamicSkill.resourcePool[ScriptName] = resource;
             }
         }
         if (!IconPool.ContainsKey(ScriptName))

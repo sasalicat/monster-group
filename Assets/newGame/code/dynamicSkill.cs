@@ -7,7 +7,8 @@ public abstract class dynamicSkill : CDSkill {
     //protected GameObject[] resources=null;
     protected const int BASE_SKILL_COOLDOWN_FRAMES = 100;
     protected List<modifier> modifierList;
-    public static Dictionary<string, GameObject[]> resourcePool=new Dictionary<string, GameObject[]>();
+    public string[] prefabNames; 
+    public static Dictionary<string, GameObject> resourcePool=new Dictionary<string, GameObject>();
     protected virtual string poolKey//有一些和父類別共用素材的技能會需要在這裡用父類別的名字
     {
         get {
