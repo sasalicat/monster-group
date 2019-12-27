@@ -52,7 +52,7 @@ public abstract class dynamicSkill : CDSkill {
             mod.traget = this;
             mod.onSkillInit(owner, (Callback4Unit_v2)deleg);
         }
-        
+        //Debug.Log("skill Instance id is:" + this.GetInstanceID());
     }
     public virtual void onInit(unitControler owner, Callback4Unit deleg, modifier[] mods) {
         modifierList = new List<modifier>(mods);

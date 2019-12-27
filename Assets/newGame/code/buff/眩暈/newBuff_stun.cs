@@ -23,10 +23,10 @@ public class newBuff_stun : Buff_v2
             this.unit = (BasicControler)unit;
             ((comboControler)this.unit).state.CanAttack = false;
             ((comboControler)this.unit).state.CanSkill = false;
-
-            GameObject prefab = dynamicSkill.resourcePool[prafebNames[0]];
-            effection = Instantiate(prefab, ((comboControler)this.unit).transform);
-            effection.transform.localPosition = prefab.transform.position;
+            string effkey = GetInstanceID() + "_1";
+            Dictionary<string, object> eff_args = new Dictionary<string, object>();
+            eff_args["traget"] = gameObject;
+            closeupStage.main.createEffect(dynamicSkill.resourcePool[prafebNames[0]], eff_args, effkey);
             return true;
 
         }
@@ -45,6 +45,7 @@ public class newBuff_stun : Buff_v2
     {
         ((comboControler)unit).state.CanSkill = true;
         ((comboControler)unit).state.CanAttack = true;
-        Destroy(effection);
+        closeupStage.main.display_extraStart();
+
     }
 }

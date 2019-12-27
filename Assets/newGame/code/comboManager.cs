@@ -6,6 +6,7 @@ public class comboManager : BasicManager {
 
     //public Vector3[] team1_pos;
     //public Vector3[] team2_pos;
+    
     public ChessBoard ChessBoard
     {
         get {
@@ -38,6 +39,7 @@ public class comboManager : BasicManager {
         enemy1.location = new vec2i(1, 1);
         enemy.Add(enemy1);
         dataWarehouse.main.currentEnemy=enemy;
+        transform.position = new Vector3(0, 0, 0);
     }
     protected override void Start()
     {

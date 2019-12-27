@@ -67,11 +67,10 @@ public class SkillBelt_v2 : SkillBelt,Callback4Unit_v2{
         dynamicSkill newone = (dynamicSkill)gameObject.AddComponent(System.Type.GetType(scriptName));
         //Debug.Log("skillname:" + scriptName + " type:" + System.Type.GetType(scriptName));
         //Debug.Log("represName name:" + represName + " parent:"+ newone.GetComponentInParent(System.Type.GetType("CDSkill")));
-        if (System.Type.GetType(scriptName).IsSubclassOf(System.Type.GetType("CDSkill")))
-        //if (newone.GetComponentInParent(System.Type.GetType("CDSkill")) != null)//如果是CD型技能
+        /*if (System.Type.GetType(scriptName).IsSubclassOf(System.Type.GetType("CDSkill")))
         {
             _time_pass += ((CDSkill)newone).timePass;
-        }
+        }*/
         newone.onInit(controler, this,mods);
         if (newone.information.activeSkill)//如果是
         {

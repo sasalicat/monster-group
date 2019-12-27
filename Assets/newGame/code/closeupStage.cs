@@ -84,6 +84,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public roleAnim[] team2_anim=new roleAnim[6];
     public Vector3[] team2_closePoint;
     public Dictionary<unitControler, roleAnim> controler2roleAnim = new Dictionary<unitControler, roleAnim>();
+    public Dictionary<string, GameObject> effectRecords = new Dictionary<string, GameObject>();
     //public BasicControler[] team2;
     public SpriteRenderer curtain;
     public float curtain_max_alph = 0.85f;
@@ -149,7 +150,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public closeAndPos nowClosePos=new closeAndPos(true);
     //用於存放異步的order
     protected skill_movement rootMovement;
-    protected List<skill_movement> heap;
+    protected List<stage_movement> heap;
     protected with_skillpackage[] handleFuncs;
     public static closeupStage main = null;
     //記錄當前黑幕前有哪些角色
@@ -242,12 +243,19 @@ public class closeupStage : MonoBehaviour, battleStage
             cameraObj.transform.position = camera_now_traget;
         }
     }
-    public void createEffect(GameObject prafeb,Dictionary<string,object> dict)
+    public GameObject createEffect(GameObject prafeb,Dictionary<string,object> dict)
     {
         GameObject eff= Instantiate(prafeb);
         effectionInit script = eff.GetComponent<effectionInit>();
         if(script != null)
             script.init(dict,prafeb);
+        return eff;
+    }
+    public GameObject createEffect(GameObject prafeb,Dictionary<string,object> dict,string key)
+    {
+        GameObject eff= createEffect(prafeb, dict);
+        effectRecords[key] = eff;
+        return eff;
     }
     //提交order的function
     public void display_effect(GameObject effectPrefab, unitControler creater, Dictionary<string, object> initArgs,bool hitEff)
@@ -260,7 +268,7 @@ public class closeupStage : MonoBehaviour, battleStage
         }
         else
         {
-            string msg = "display effect initArgs:";
+            /*string msg = "display effect initArgs:";
             foreach (KeyValuePair<string, object> pair in initArgs) {
                 msg += "(";
                 msg += pair.Key;
@@ -269,12 +277,16 @@ public class closeupStage : MonoBehaviour, battleStage
                 msg += ") ";
 
             }
-            Debug.Log(msg);
+            Debug.Log(msg);*/
             createEffect newone = new createEffect(new List<object>() { effectPrefab, initArgs });
             heap[0].argList.Add(newone);
         }
     }
-
+    public void display_effect(GameObject effectPrefab, unitControler creater, Dictionary<string, object> initArgs, string key)
+    {
+        createEffect_record newone = new createEffect_record(new List<object>() { effectPrefab, initArgs, key });
+        heap[0].argList.Add(newone);
+    }
     public void display_number(unitControler who, int number, int kind)
     {
         //stage_movement newone = new stage_movement(stage_movement.move.Number, new List<object>() { who, number, kind });
@@ -391,6 +403,18 @@ public class closeupStage : MonoBehaviour, battleStage
         }
         return domain;
     }
+    public void display_extraStart()
+    {
+        heap.Insert(0, new extraAction_movement(new List<object>()));
+    }
+    public void display_swtichEffectOff(string key)
+    {
+        heap[0].argList.Add(new switchOff(new List<object>() {key}));
+    }
+    public void display_extraEnd()
+    {
+        display_skillEnd();
+    }
     public void display_skill(unitControler protagonist, Skill skill, List<unitControler> tragets, bool isTrigger)
     {
         Debug.Log(isTrigger+"技能使用者:" + ((comboControler)protagonist).name + " 目標:");
@@ -398,9 +422,10 @@ public class closeupStage : MonoBehaviour, battleStage
         {
             Debug.Log("目標:" + ((comboControler)traget).name);
         }
-        skill_movement before = heap[0];
-        heap.Insert(0, new skill_movement(stage_movement.move.SkillStart, new List<object>(), protagonist, tragets, before.user, new List<unitControler>(before.tragets.ToArray())));
-        heap[0].isTrigger = isTrigger;
+        skill_movement before = (skill_movement)heap[0];
+        heap.Insert(0, new skill_movement(new List<object>(), protagonist, tragets, before.user, new List<unitControler>(before.tragets.ToArray())));
+        skill_movement now = (skill_movement)heap[0];
+        now.isTrigger = isTrigger;
         display_onStage(protagonist,tragets);
         bool close = true;
         if (skill == null)
@@ -412,8 +437,8 @@ public class closeupStage : MonoBehaviour, battleStage
                 close = false;
             }
         }
-        heap[0].Close = close;
-        if (!heap[0].isTrigger)//如果不是觸發的技能,說明是正牌技能
+        now.Close = close;
+        if (!now.isTrigger)//如果不是觸發的技能,說明是正牌技能
         {//確定domain
             /*heap[0].nowDomain = new List<comboControler>() { (comboControler)protagonist };
             foreach (comboControler unit in tragets)
@@ -427,17 +452,17 @@ public class closeupStage : MonoBehaviour, battleStage
             int testCode = testFaction(protagonist, tragets);
             int closeUp_code = CU_table[CU_table.Length / 2 * ((BasicControler)protagonist).playerNo+ testCode];//playerNo=0代表是右方的角色,=1代表的是左邊的角色
             display_recloseUp(closeUp_code);
-            heap[0].nowDomain = getDomain(protagonist, testCode);
+            now.nowDomain = getDomain(protagonist, testCode);
         }
         else {//觸發型技能
             bool redomain = false;
-            if (!heap[1].nowDomain.Contains((comboControler)protagonist)) {
+            if (!before.nowDomain.Contains((comboControler)protagonist)) {
                 redomain = true;
             }
             else
             {
                 foreach (comboControler unit in tragets) {
-                    if (!heap[1].nowDomain.Contains(unit))
+                    if (!before.nowDomain.Contains(unit))
                     {
                         redomain = true;
                         break;
@@ -450,11 +475,11 @@ public class closeupStage : MonoBehaviour, battleStage
                 int testCode = testFaction(protagonist, tragets);
                 int closeUp_code = CU_table[((int)CU_table.Length / 2) * ((BasicControler)protagonist).playerNo + testCode];
                 display_closeUp(closeUp_code);
-                heap[0].nowDomain = getDomain(protagonist, testCode);
+                now.nowDomain = getDomain(protagonist, testCode);
 
             }
             else {
-                heap[0].nowDomain = heap[1].nowDomain;//繼承上一個技能的domain
+                now.nowDomain = before.nowDomain;//繼承上一個技能的domain
             }
         }
     }
@@ -463,10 +488,10 @@ public class closeupStage : MonoBehaviour, battleStage
         stage_movement nowMove = heap[0];
         heap.RemoveAt(0);
         heap[0].argList.Add(nowMove);
-        if (heap[0].Close)
+        /*if (heap[0].Close)
         {
             //for()
-        }
+        }*/
 
     }
     public void display_closeMoving(unitControler protagonist, List<unitControler> tragets)
@@ -480,6 +505,7 @@ public class closeupStage : MonoBehaviour, battleStage
     //public void display_resetCloseMoving
     public void display_anim(unitControler unit, int code)
     {  
+        //this.GetInstanceID
         if (code== AnimCodes.BEHIT)
         {
             heap[0].argList.Add(new animBenhit_action(new List<object>() {unit,code}));
@@ -758,9 +784,9 @@ public class closeupStage : MonoBehaviour, battleStage
     void Start()
     {
         cameraObj = Camera.main.gameObject;
-        rootMovement = new skill_movement(stage_movement.move.SkillStart, new List<object>(), null, new List<unitControler>(), null, null);
+        rootMovement = new skill_movement( new List<object>(), null, new List<unitControler>(), null, null);
         handleFuncs = new with_skillpackage[6];
-        heap = new List<skill_movement>();
+        heap = new List<stage_movement>();
         heap.Add(rootMovement);
         CU_table = new int[6] { CU_LEFT_TORIGHT, CU_LEFT_ONLY, CU_NOCU,CU_RIGHT_TOLEFT,CU_RIGHT_ONLY,CU_NOCU};//用來查表closeup的動作
         
@@ -882,6 +908,13 @@ public abstract class state_machine
 
 public class skillpackage : state_machine
 {
+    protected virtual int TOTAL_STAGE//最多有幾個stage,用於初始化stage_funcs
+    {
+        get
+        {
+            return 5;
+        }
+    }
     int stage_no=-1;
     int stage
     {
@@ -901,10 +934,22 @@ public class skillpackage : state_machine
               //stage3依次開始所有目標的behit動畫和創建被擊特效 stage3->4為所有behit動畫結束
               //stage4設置為End 為True,整個技能的表現結束
     public skill_movement now_movement;
-    public List<object>[] stage_conditions;
-    public skillpackage_func[] stage_funcs;
-    
-
+    protected List<object>[] stage_conditions;
+    protected skillpackage_func[] stage_funcs;
+    public virtual void addFunc(int stage,skillpackage_func func)
+    {
+        if (stage < TOTAL_STAGE)
+        {
+            stage_funcs[stage] += func;
+        }
+    }
+    public virtual void addCondition(int stage, object condition)
+    {
+        if (stage < TOTAL_STAGE)
+        {
+            stage_conditions[stage].Add(condition);
+        }
+    }
     public override void Next(object arg)//這個Next是用於stage2 missile擊通知,和stage3所有角色的被擊動畫完成通知
     {
         bool condition_meet = false;
@@ -918,7 +963,7 @@ public class skillpackage : state_machine
         if (condition_meet)
         {
             stage++;
-            while (stage < 4 && stage_funcs[stage] == null)
+            while (stage < TOTAL_STAGE-1 && stage_funcs[stage] == null)
             {
                 stage++;
             }
@@ -931,7 +976,7 @@ public class skillpackage : state_machine
         if (stage<0||stage_conditions[stage].Count == 0)
         {
             stage++;
-            while (stage < 4 && stage_funcs[stage] == null)
+            while (stage < TOTAL_STAGE-1 && stage_funcs[stage] == null)
             {
                 stage++;
             }
@@ -945,8 +990,8 @@ public class skillpackage : state_machine
     {
         now_movement = (skill_movement)movement;
         bool isTrigger = ((skill_movement)movement).isTrigger;
-        stage_funcs = new skillpackage_func[5];
-        stage_conditions = new List<object>[4];
+        stage_funcs = new skillpackage_func[TOTAL_STAGE];
+        stage_conditions = new List<object>[TOTAL_STAGE-1];
         for(int i = 0; i < stage_conditions.Length; i++)
         {
             stage_conditions[i] = new List<object>();
@@ -965,7 +1010,30 @@ public class skillpackage : state_machine
     {
         get
         {
-            return stage >= 4;
+            return stage >= TOTAL_STAGE-1;
         }
+    }
+}
+
+public class extrapackage: skillpackage
+{
+    protected override int TOTAL_STAGE
+    {
+        get
+        {
+            return 2;
+        }
+    }
+    public extrapackage(stage_movement movement)
+    : base(movement)
+    {
+    }
+    public override void addFunc(int stage, skillpackage_func func)
+    {
+        stage_funcs[0] += func;
+    }
+    public override void addCondition(int stage, object condition)
+    {
+        stage_conditions[0].Add(condition);
     }
 }

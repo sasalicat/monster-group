@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class stage_movement {
     public enum state {unActive,Active,Finish}
-    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange,floatNum};
+    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange,floatNum,ExtraStart,ExtraEnd,OffEffectByKey};
 	// Use this for initialization
     public move order;
     public List<object> argList;
@@ -25,8 +25,8 @@ public class skill_movement:stage_movement
     public List<comboControler> nowDomain;
     public bool isTrigger=false;
     public bool Close=true;
-    public skill_movement(move order, List<object> argList, unitControler user, List<unitControler> tragetlist,unitControler user_bef,List<unitControler> tragets_bef)
-        : base(order, argList)
+    public skill_movement( List<object> argList, unitControler user, List<unitControler> tragetlist,unitControler user_bef,List<unitControler> tragets_bef)
+        : base(move.SkillStart, argList)
     {
         this.user_before = (comboControler)user_bef;
         if (tragets_bef == null)
@@ -56,6 +56,11 @@ public class skill_movement:stage_movement
         }
     }
 }
+public class extraAction_movement : stage_movement
+{
+    public extraAction_movement(List<object> list):base(move.ExtraStart,list){
+    }
+}
 public abstract class stage_action:stage_movement
 {
     public stage_action(move order, List<object> argList):base(order,argList)
@@ -65,7 +70,7 @@ public abstract class stage_action:stage_movement
         get;
     }
     public virtual void onLoad(skillpackage skp) {
-        skp.stage_funcs[stage] += action;
+        skp.addFunc(stage, action);
     }
     public abstract void action(skillpackage skp);
 }
@@ -79,7 +84,7 @@ public abstract class stage_action_withskp : stage_action
     {
         this.skp = skp;
         base.onLoad(skp);
-        skp.stage_conditions[stage].Add(this);
+        skp.addCondition(stage, this);
     }
     public void conditionNext()
     {
@@ -427,6 +432,28 @@ public class createEffect_hit : stage_action
         closeupStage.main.createEffect(prafeb,initDict);
     }
 }
+public class createEffect_record : stage_action
+{
+    int selfStage = 3;
+    public createEffect_record(List<object> argList) : base(move.Effection, argList)
+    {
+    }
+    public override int stage
+    {
+        get
+        {
+            return selfStage;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        GameObject prafeb = (GameObject)argList[0];
+        Dictionary<string, object> initDict = (Dictionary<string, object>)argList[1];
+        string key = (string)argList[2];
+        closeupStage.main.createEffect(prafeb, initDict,key);
+    }
+}
 public class createEffect : stage_action_withskp
 {
     public createEffect(List<object> argList) : base(move.Effection, argList)
@@ -471,4 +498,24 @@ public class showSIcon : stage_action
         Sprite Icon = (Sprite)argList[1];
         ranim.showSkillIcon(Icon);
     }
+}
+public class switchOff : stage_action
+{
+    public switchOff(List<object> list) : base(move.OffEffectByKey,list)
+    {
+
+    }
+    public override int stage
+    {
+        get
+        {
+            return 4;
+        }
+    }
+    public override void action(skillpackage skp)
+    {
+        string key = (string)argList[0];
+        closeupStage.main.effectRecords[key].GetComponent<switchEff>().off();
+    }
+
 }
