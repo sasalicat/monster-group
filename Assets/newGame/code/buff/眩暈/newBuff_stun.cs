@@ -32,9 +32,9 @@ public class newBuff_stun : Buff_v2
         }
         else
         {
-            if (((buff_stun)Repetitive[0]).TimeLeft < (float)args["time"])
+            if (((newBuff_stun)Repetitive[0]).TimeLeft < (float)args["time"])
             {
-                ((buff_stun)Repetitive[0]).timeLeft = (float)args["time"];
+                ((newBuff_stun)Repetitive[0]).timeLeft = (float)args["time"];
             }
             return false;
         }
@@ -46,6 +46,7 @@ public class newBuff_stun : Buff_v2
         ((comboControler)unit).state.CanSkill = true;
         ((comboControler)unit).state.CanAttack = true;
         closeupStage.main.display_extraStart();
-
+        closeupStage.main.display_swtichEffectOff(GetInstanceID() + "_1");
+        closeupStage.main.display_extraEnd();
     }
 }

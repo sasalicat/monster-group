@@ -31,9 +31,11 @@ public class newSkill_stunAttack : dynamicSkill
     public override void trigger(Dictionary<string, object> args)
     {
         unitControler[] tragets = (unitControler[])args["tragets"];
-        foreach(comboControler traget in tragets)
+        Dictionary<string, object> arg = new Dictionary<string, object>();
+        arg["time"] = unitData_v2.BASE_ABILITY_NUMBER*1f;
+        foreach (comboControler traget in tragets)
         {
-            traget.addBuff("newBuff_stun");
+            traget.addBuff("stun_bInf", arg);
         }
     }
 }

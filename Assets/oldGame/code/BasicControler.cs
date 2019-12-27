@@ -29,7 +29,7 @@ public class BasicControler : MonoBehaviour,unitControler {
     public int playerNo = -1;
     public List<Buff> buffList = new List<Buff>();
     protected List<Buff> failed = new List<Buff>();
-    void buffFail_callback(Buff b) {
+    protected void buffFail_callback(Buff b) {
         failed.Add(b);
     }
     public virtual void onUnitDeath()
@@ -65,7 +65,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         buffList.Add(buff);
         return buff;
     }
-    public virtual void addBuff(string buffName,Dictionary<string,object> dict)
+    public virtual Buff addBuff(string buffName,Dictionary<string,object> dict)
     {
         BasicControler creater = null;
         if (dict.ContainsKey("creater"))
@@ -94,6 +94,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         {
             Destroy(buff);
         }
+        return buff;
     }
     public virtual void heal(int num, unitControler creater)
     {

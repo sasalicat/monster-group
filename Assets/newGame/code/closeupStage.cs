@@ -422,6 +422,7 @@ public class closeupStage : MonoBehaviour, battleStage
         {
             Debug.Log("目標:" + ((comboControler)traget).name);
         }
+        Debug.Log(heap[0].GetType());
         skill_movement before = (skill_movement)heap[0];
         heap.Insert(0, new skill_movement(new List<object>(), protagonist, tragets, before.user, new List<unitControler>(before.tragets.ToArray())));
         skill_movement now = (skill_movement)heap[0];
@@ -810,11 +811,14 @@ public class closeupStage : MonoBehaviour, battleStage
                 if (rootMovement.argList.Count > 0)//還有skill_movement需要處理
                 {
                 //handleFuncs[(int)stage_movement.move.SkillStart]((skill_movement)rootMovement.argList[0]);
-                    //則解析目前的第一個skill_movement
-                   if(!(rootMovement.argList[0] is skill_movement)){
-                     Debug.LogWarning("type:" + rootMovement.argList[0].GetType());    
-                   }
-                    packages = SkillStart_for((skill_movement)rootMovement.argList[0]);
+                //則解析目前的第一個skill_movement
+                    if (((stage_movement)rootMovement.argList[0]).order == stage_movement.move.SkillStart)
+                    {
+                    /*if(!(rootMovement.argList[0] is skill_movement)){
+                      Debug.LogWarning("type:" + rootMovement.argList[0].GetType());    
+                    }*/
+                        packages = SkillStart_for((skill_movement)rootMovement.argList[0]);
+                    }
                     rootMovement.argList.RemoveAt(0);
                     packages[0].Next();
 

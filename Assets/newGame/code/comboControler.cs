@@ -1,17 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class comboControler : BasicControler{
     public const int PLAYER_ROLE_NO= 0;
     public const int ENEMY_ROLE_NO = 1;
     public enum bonus_kind {NoBonus,Batter,Counter};
     public BasicDelegate.forSkill _aftBeSkill;//basicControler沒有被使用技能后的時間,這裡作為補全
-    public override Buff addBuff(string buffInfName)
+
+    public override Buff addBuff(string buffInfName, Dictionary<string, object> dict)
     {
-        buff_Inf binf= (buff_Inf)System.Activator.CreateInstance(System.Type.GetType(buffInfName));
-        Buff_v2 buff= (Buff_v2)base.addBuff(binf.scriptName);
+        buff_Inf binf = (buff_Inf)System.Activator.CreateInstance(System.Type.GetType(buffInfName));
+        BasicControler creater = null;
+        if (dict.ContainsKey("creater"))
+        {
+            creater = (BasicControler)dict["creater"];
+        }
+        //Debug.Log("buffname:"+buffName+","+GetComponents(Type.GetType(buffName)));
+        Component[] comps = GetComponents(Type.GetType(binf.scriptName));
+        Buff_v2 buff = (Buff_v2)gameObject.AddComponent(Type.GetType(binf.scriptName));
         buff.prafebNames = binf.prafebNames;
+        Buff[] before = new Buff[comps.Length];
+        for (int i = 0; i < comps.Length; i++)
+        {
+            before[i] = (Buff)comps[i];
+        }
+        buff.onfail += buffFail_callback;
+        if (buff.onInit(this, before, dict))
+        {
+            buffList.Add(buff);
+            if (creater != null && creater._onCreateBuff != null)
+            {
+                creater._onCreateBuff(buff, this);
+            }
+            if (_onGetBuff != null)
+                _onGetBuff(buff, creater);
+        }
+        else
+        {
+            Destroy(buff);
+        }
+
         return buff;
     }
     public override void action(float time)

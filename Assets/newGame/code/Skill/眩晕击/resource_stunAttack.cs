@@ -37,7 +37,7 @@ public class resource_stunAttack : skill_resource
     {
         get
         {
-            return "Icon/火球";
+            return "Icon/眩暈擊";
         }
     }
 

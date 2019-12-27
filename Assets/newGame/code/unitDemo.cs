@@ -8,7 +8,8 @@ public class unitDemo : unitControler
     }
     public void takeDamage(Damage damage) { 
     }
-    public void addBuff(string buffName, Dictionary<string, object> buffargs) { 
+    public Buff addBuff(string buffName, Dictionary<string, object> buffargs) {
+        return null;
     }
     public void action(float time) { 
     }

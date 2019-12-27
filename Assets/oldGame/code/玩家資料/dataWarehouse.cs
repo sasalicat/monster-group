@@ -58,7 +58,7 @@ public class dataWarehouse : MonoBehaviour {
         Debug.Log("創建新檔案");
         nowData = new PlayerInf();
         nowData.army.Add(new RoleRecord_v2(1));
-        nowData.army[0].skillNos = new List<int>() { 1,3 };
+        nowData.army[0].skillNos = new List<int>() { 1,9 };
         nowData.army[0].index = 0;
         nowData.army[0].location = new vec2i(0, 0);
         //nowData.army[0].skillNos.Add(1);
