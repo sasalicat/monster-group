@@ -8,7 +8,7 @@ public class newSkill_normalAttack : dynamicSkill {
     {
         get
         {
-            return timeLeft <= 0;
+            return timeLeft <= 0&&owner.state.CanAttack;
         }
     }
 
@@ -61,7 +61,7 @@ public class newSkill_normalAttack : dynamicSkill {
                     dict["creater"] = owner;
                     //GameObject[] resources= dynamicSkill.resourcePool[poolKey];
                     GameObject eff = resourcePool[prefabNames[0]];
-                    closeupStage.main.display_effect(eff,owner,dict,true);
+                    closeupStage.main.display_effect(eff,dict,true);
 
                     Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
                     //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");

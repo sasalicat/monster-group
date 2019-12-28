@@ -30,12 +30,14 @@ public class newSkill_stunAttack : dynamicSkill
 
     public override void trigger(Dictionary<string, object> args)
     {
+        Dictionary<comboControler, bool> missDict = (Dictionary<comboControler, bool>)args["miss"];
         unitControler[] tragets = (unitControler[])args["tragets"];
         Dictionary<string, object> arg = new Dictionary<string, object>();
         arg["time"] = unitData_v2.BASE_ABILITY_NUMBER*1f;
         foreach (comboControler traget in tragets)
         {
-            traget.addBuff("stun_bInf", arg);
+            if(!missDict[traget])
+                traget.addBuff("stun_bInf", arg);
         }
     }
 }

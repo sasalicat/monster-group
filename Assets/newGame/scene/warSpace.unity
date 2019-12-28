@@ -612,7 +612,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  - 
+  - resource_stunAttack
   MagicNos: 
   singleTragetMagicNo: 
   multipTragetMagicNo: 

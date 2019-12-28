@@ -180,7 +180,8 @@ public class onstage_action : stage_action_withskp
 
     }
 }
-public class animSkill_action : stage_action {
+public class animSkill_action : stage_action_withskp
+{
     public animSkill_action( List<object> argList)
         : base(move.Anim, argList)
     {
@@ -197,9 +198,9 @@ public class animSkill_action : stage_action {
         comboControler control = (comboControler)argList[0];
         int code = (int)argList[1];
         if (code == AnimCodes.ATTACK)
-            control.GetComponent<roleAnim>().anim_attack(skp.Next);
+            control.GetComponent<roleAnim>().anim_attack(conditionNext);
         else if (code == AnimCodes.MAGIC)
-            control.GetComponent<roleAnim>().anim_magic(skp.Next);
+            control.GetComponent<roleAnim>().anim_magic(conditionNext);
         else
             Debug.LogError("animSkill_action code錯誤,不正確的code:" + code);
     }

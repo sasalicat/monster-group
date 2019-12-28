@@ -7,7 +7,7 @@ public class mod_1_baseAttackTrigger : modifier
     float percentage = 0;
     public void aftSkill(SkillInf skillInf, Dictionary<string, object> skillArgs, unitControler[] tragets)
     {
-        if (skillInf.attack || ((comboControler.bonus_kind)skillArgs["bonus"]) == comboControler.bonus_kind.NoBonus) {
+        if (skillInf.attack && ((comboControler.bonus_kind)skillArgs["bonus"]) == comboControler.bonus_kind.NoBonus) {
             if (((int)skillArgs["dice"]) <= percentage * 100f) {
                 traget.trigger(skillArgs);
             }

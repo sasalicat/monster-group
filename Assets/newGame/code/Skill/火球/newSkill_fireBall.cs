@@ -41,7 +41,7 @@ public class newSkill_fireBall : dynamicSkill
 
     public override SkillInf Inf()
     {
-        return new SkillInf_v2(this, true, true, true, false, new List<string>() { "damage" });
+        return new SkillInf_v2(this, true, true, false, true, new List<string>() { "damage" });
     }
     public override void setTime(Dictionary<string, object> args)
     {
@@ -70,7 +70,7 @@ public class newSkill_fireBall : dynamicSkill
                 Dictionary<string, object> dict = new Dictionary<string, object>();
                 dict["traget"] = traget;
                 dict["creater"] = owner;
-                closeupStage.main.display_effect(missile, owner, dict, false);
+                closeupStage.main.display_effect(missile,dict, false);
                 if (!missDict[traget])
                 {
                     
@@ -81,7 +81,7 @@ public class newSkill_fireBall : dynamicSkill
                     //dict["effect"] = resources[1];
                     
                     
-                    closeupStage.main.display_effect(expro, owner, dict, true);
+                    closeupStage.main.display_effect(expro, dict, true);
                     traget.takeDamage(d);
                     //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
                     

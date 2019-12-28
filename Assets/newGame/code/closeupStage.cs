@@ -258,7 +258,7 @@ public class closeupStage : MonoBehaviour, battleStage
         return eff;
     }
     //提交order的function
-    public void display_effect(GameObject effectPrefab, unitControler creater, Dictionary<string, object> initArgs,bool hitEff)
+    public void display_effect(GameObject effectPrefab,  Dictionary<string, object> initArgs,bool hitEff)
     {
         if (hitEff)
         {
@@ -282,7 +282,7 @@ public class closeupStage : MonoBehaviour, battleStage
             heap[0].argList.Add(newone);
         }
     }
-    public void display_effect(GameObject effectPrefab, unitControler creater, Dictionary<string, object> initArgs, string key)
+    public void display_effect(GameObject effectPrefab, Dictionary<string, object> initArgs, string key)
     {
         createEffect_record newone = new createEffect_record(new List<object>() { effectPrefab, initArgs, key });
         heap[0].argList.Add(newone);
@@ -477,10 +477,17 @@ public class closeupStage : MonoBehaviour, battleStage
                 int closeUp_code = CU_table[((int)CU_table.Length / 2) * ((BasicControler)protagonist).playerNo + testCode];
                 display_closeUp(closeUp_code);
                 now.nowDomain = getDomain(protagonist, testCode);
-
+                if (close)//如果換鏡頭了,且是技能是近戰
+                {
+                    display_closeMoving(protagonist, tragets);
+                }
             }
             else {
                 now.nowDomain = before.nowDomain;//繼承上一個技能的domain
+                if (!before.Close && close)//雖然沒有換domain但是上一個技能是遠程,本技能是近戰
+                {
+                    display_closeMoving(protagonist, tragets);
+                }
             }
         }
     }
@@ -812,12 +819,16 @@ public class closeupStage : MonoBehaviour, battleStage
                 {
                 //handleFuncs[(int)stage_movement.move.SkillStart]((skill_movement)rootMovement.argList[0]);
                 //則解析目前的第一個skill_movement
-                    if (((stage_movement)rootMovement.argList[0]).order == stage_movement.move.SkillStart)
+                    if (((stage_movement)rootMovement.argList[0]).order == stage_movement.move.SkillStart|| ((stage_movement)rootMovement.argList[0]).order == stage_movement.move.ExtraStart)
                     {
                     /*if(!(rootMovement.argList[0] is skill_movement)){
                       Debug.LogWarning("type:" + rootMovement.argList[0].GetType());    
                     }*/
-                        packages = SkillStart_for((skill_movement)rootMovement.argList[0]);
+                        packages = SkillStart_for((stage_movement)rootMovement.argList[0]);
+                    }
+                    else
+                    {
+                        Debug.LogError("錯誤的stage_movement order為:"+ ((stage_movement)rootMovement.argList[0]).order);
                     }
                     rootMovement.argList.RemoveAt(0);
                     packages[0].Next();
@@ -864,7 +875,48 @@ public class closeupStage : MonoBehaviour, battleStage
     }*/
 
     //處理order的function
+    protected void skmEam2skp(stage_movement move, List<skillpackage> skpList)
+    {
+        skillpackage nowpackage = null;
+        if (move.order == stage_movement.move.SkillStart) {
+            nowpackage = new skillpackage(move);
+        }
+        else if (move.order == stage_movement.move.ExtraStart)
+        {
+            nowpackage = new extrapackage(move);
+        }
+        else
+        {
+            Debug.LogError("錯誤的stage_movement,其order為:" + move.order);
+            return;
+        }
+        skpList.Add(nowpackage);
+        foreach (stage_movement m in move.argList)
+        {
+            if (m.order == stage_movement.move.SkillStart || m.order == stage_movement.move.ExtraStart)
+            {
+                skmEam2skp(m, skpList);
+            }
+            else {
+                try
+                {
+                    ((stage_action)m).onLoad(nowpackage);
+                }
+                catch (InvalidCastException e) {
+                    Debug.LogError(m.order);
+                }
+            }
+        }
+        if(move.order == stage_movement.move.SkillStart) {
+            if (!nowpackage.now_movement.isTrigger)//強制復位近戰位置角色
+            {
+                resetClosePos_action special_reset = new resetClosePos_action(null);
+                special_reset.onLoad(skpList[skpList.Count - 1]);
+            }
 
+        }
+
+    }
     protected void skm2skp(skill_movement skm,List<skillpackage> skpList)//遞迴function用來把skill_movement轉化為skillpackage,skill_movement是巢狀結構,這個方法包含把巢狀結構轉化為線性結構:
                                                                          // 例如skm0{skm1{skm3},skm2} => skp0,skm1,skm3,skm2
     {
@@ -890,7 +942,7 @@ public class closeupStage : MonoBehaviour, battleStage
     protected List<skillpackage> SkillStart_for(stage_movement move){
         //nowMachine = new handle_SkillStart(move);
         packages = new List<skillpackage>();
-        skm2skp((skill_movement)move,packages);
+        skmEam2skp(move,packages);
         return packages;
     }/*
     protected void Anim_for(stage_movement move,skillpackage skp)
@@ -977,13 +1029,21 @@ public class skillpackage : state_machine
     }
     public override void Next()//反之
     {
-        if (stage<0||stage_conditions[stage].Count == 0)
+        if (stage<0)
         {
-            stage++;
-            while (stage < TOTAL_STAGE-1 && stage_funcs[stage] == null)
+            /*do
             {
                 stage++;
-            }
+                if (stage_funcs[stage] != null)
+                    stage_funcs[stage](this);
+            } while (stage_conditions[stage].Count == 0&&stage<TOTAL_STAGE-1);*/
+            stage++;
+            if (stage_funcs[stage] != null)
+                stage_funcs[stage](this);
+        }
+           
+        while (stage < TOTAL_STAGE - 1&&stage_conditions[stage].Count == 0) {
+            stage++;
             if (stage_funcs[stage] != null)
                 stage_funcs[stage](this);
         }
@@ -992,23 +1052,27 @@ public class skillpackage : state_machine
     public skillpackage(stage_movement movement)
         : base(movement)
     {
-        now_movement = (skill_movement)movement;
-        bool isTrigger = ((skill_movement)movement).isTrigger;
+        if (movement != null)
+        {
+            now_movement = (skill_movement)movement;
+            bool isTrigger = ((skill_movement)movement).isTrigger;
+        }
         stage_funcs = new skillpackage_func[TOTAL_STAGE];
-        stage_conditions = new List<object>[TOTAL_STAGE-1];
-        for(int i = 0; i < stage_conditions.Length; i++)
+        stage_conditions = new List<object>[TOTAL_STAGE - 1];
+        for (int i = 0; i < stage_conditions.Length; i++)
         {
             stage_conditions[i] = new List<object>();
         }
-        /*if (!isTrigger)//如果不是觸發產生的技能
-        {
-            //復原close up
-            closeupStage.main.uncloseUp();
-        }
-        else
-        {
+            /*if (!isTrigger)//如果不是觸發產生的技能
+            {
+                //復原close up
+                closeupStage.main.uncloseUp();
+            }
+            else
+            {
 
-        }*/
+            }*/
+
     }
     public bool End
     {
@@ -1028,9 +1092,9 @@ public class extrapackage: skillpackage
             return 2;
         }
     }
-    public extrapackage(stage_movement movement)
-    : base(movement)
+    public extrapackage(stage_movement movement):base(null)
     {
+
     }
     public override void addFunc(int stage, skillpackage_func func)
     {

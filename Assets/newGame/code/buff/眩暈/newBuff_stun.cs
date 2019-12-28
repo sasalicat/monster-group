@@ -20,13 +20,15 @@ public class newBuff_stun : Buff_v2
         if (Repetitive.Length == 0)
         {
             timeLeft = (float)args["time"];
+
             this.unit = (BasicControler)unit;
             ((comboControler)this.unit).state.CanAttack = false;
             ((comboControler)this.unit).state.CanSkill = false;
             string effkey = GetInstanceID() + "_1";
             Dictionary<string, object> eff_args = new Dictionary<string, object>();
             eff_args["traget"] = gameObject;
-            closeupStage.main.createEffect(dynamicSkill.resourcePool[prafebNames[0]], eff_args, effkey);
+            //closeupStage.main.createEffect(dynamicSkill.resourcePool[prafebNames[0]], eff_args, effkey);
+            closeupStage.main.display_effect(dynamicSkill.resourcePool[prafebNames[0]],eff_args,effkey);
             return true;
 
         }
