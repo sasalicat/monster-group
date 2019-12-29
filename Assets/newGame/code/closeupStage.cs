@@ -43,6 +43,7 @@ public struct closeAndPos
     }
     public void resetRole()
     {
+        //Debug.Log 
         if(role!=null)
             ((comboControler)role).transform.position = oriPos;
     }
@@ -111,16 +112,16 @@ public class closeupStage : MonoBehaviour, battleStage
         GameObject newone = Instantiate(prafeb, newRole.transform.position, Quaternion.Euler(0, 0, 0),newRole.transform);
         newone.GetComponent<Animator>().GetBehaviour<state_dodge>().gobj = newone;
         if (team == 0) {
-            team1_anim[x * y + x] = newRole.GetComponent<roleAnim>();
-            team1_anim[x * y + x].setRootObj(newone,BASE_ROLE_LAYOUT+x*y+x);
-            team1_anim[x * y + x].setRoleData(((objectNameList)objectList.main).getKeyDict(prefabIndex));
+            team1_anim[3 * y + x] = newRole.GetComponent<roleAnim>();
+            team1_anim[3 * y + x].setRootObj(newone,BASE_ROLE_LAYOUT+x*y+x);
+            team1_anim[3 * y + x].setRoleData(((objectNameList)objectList.main).getKeyDict(prefabIndex));
             
         }
         if (team == 1)
         {
-            team2_anim[x * y + x] = newRole.GetComponent<roleAnim>();
-            team2_anim[x * y + x].setRootObj(newone, BASE_ROLE_LAYOUT + x * y + x);
-            team2_anim[x * y + x].setRoleData(((objectNameList)objectList.main).getKeyDict(prefabIndex));
+            team2_anim[3 * y + x] = newRole.GetComponent<roleAnim>();
+            team2_anim[3 * y + x].setRootObj(newone, BASE_ROLE_LAYOUT + x * y + x);
+            team2_anim[3 * y + x].setRoleData(((objectNameList)objectList.main).getKeyDict(prefabIndex));
             newRole.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
        
@@ -451,7 +452,12 @@ public class closeupStage : MonoBehaviour, battleStage
                 display_closeMoving(protagonist, tragets);
             }
             int testCode = testFaction(protagonist, tragets);
+            if (skill.information.remote)
+            {
+                testCode = 2;
+            }
             int closeUp_code = CU_table[CU_table.Length / 2 * ((BasicControler)protagonist).playerNo+ testCode];//playerNo=0代表是右方的角色,=1代表的是左邊的角色
+            Debug.Log(skill.GetType());
             display_recloseUp(closeUp_code);
             now.nowDomain = getDomain(protagonist, testCode);
         }
@@ -474,6 +480,10 @@ public class closeupStage : MonoBehaviour, battleStage
             {
                 display_closeMoving(protagonist, tragets);
                 int testCode = testFaction(protagonist, tragets);
+                if (skill.information.remote)
+                {
+                    testCode = 2;
+                }
                 int closeUp_code = CU_table[((int)CU_table.Length / 2) * ((BasicControler)protagonist).playerNo + testCode];
                 display_closeUp(closeUp_code);
                 now.nowDomain = getDomain(protagonist, testCode);
@@ -615,6 +625,21 @@ public class closeupStage : MonoBehaviour, battleStage
             case CU_LEFT_TORIGHT:
                 {
                     camera_now_traget = camera_closeUp_left2right;
+                    break;
+                }
+            case CU_LEFT_ONLY:
+                {
+                    camera_now_traget = camera_left_only;
+                    break;
+                }
+            case CU_RIGHT_ONLY:
+                {
+                    camera_now_traget = camera_right_only;
+                    break;
+                }
+            case CU_NOCU:
+                {
+                    camera_now_traget = camera_normal;
                     break;
                 }
         }
@@ -761,12 +786,14 @@ public class closeupStage : MonoBehaviour, battleStage
     {
         ChessBoard cbd = ((comboManager)BasicManager.main).ChessBoard;
         int[] pos =  cbd.getPosFor(unit);
+        Debug.Log("getPosFor:("+pos[0]+","+pos[1]+")");
         int[] team_pos = teamAndPos(pos,cbd);
+        Debug.Log("teamPos:("+team_pos[0] +","+ team_pos[1] + "," + team_pos[2] + ")");
         if (team_pos[0] == 0)
         {
             return team1_pos[3 * team_pos[2] + team_pos[1]];
         }
-        else if (team_pos[1] == 1)
+        else if (team_pos[0] == 1)
         {
             return team2_pos[3 * team_pos[2] + team_pos[1]];
         }

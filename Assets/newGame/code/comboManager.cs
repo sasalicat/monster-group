@@ -38,6 +38,14 @@ public class comboManager : BasicManager {
         enemy1.skillNos = new List<int>() {0};
         enemy1.location = new vec2i(1, 1);
         enemy.Add(enemy1);
+        RoleRecord_v2 enemy2 = new RoleRecord_v2(0);
+        enemy2.skillNos = new List<int>() {0};
+        enemy2.location = new vec2i(2, 1);
+        enemy.Add(enemy2);
+        RoleRecord_v2 enemy3 = new RoleRecord_v2(0);
+        enemy3.skillNos = new List<int> { 0 };
+        enemy3.location = new vec2i(2, 0);
+        enemy.Add(enemy3);
         dataWarehouse.main.currentEnemy=enemy;
         transform.position = new Vector3(0, 0, 0);
     }
