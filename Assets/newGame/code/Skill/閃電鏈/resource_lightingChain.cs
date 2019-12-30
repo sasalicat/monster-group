@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class resource_fireBall : skill_resource
+public class resource_lightingChain : skill_resource
 {
     public override string Explanation
     {
         get
         {
-            return "造成20點火焰傷害";
+            return "對最多3個目標造成合計30點電系傷害";
         }
     }
 
@@ -17,7 +16,7 @@ public class resource_fireBall : skill_resource
     {
         get
         {
-            return "Icon/火球";
+            return "Icon/閃電鏈";
         }
     }
 
@@ -25,7 +24,7 @@ public class resource_fireBall : skill_resource
     {
         get
         {
-            return new string[2] { "effection/火球", "effection/爆炸特效1" };
+            return new string[2] { "effection/閃電鏈物件", "effection/爆炸特效1" };
         }
     }
 
@@ -33,7 +32,7 @@ public class resource_fireBall : skill_resource
     {
         get
         {
-            return "newSkill_fireBall";
+            return "newSkill_lightingChain";
         }
     }
 
@@ -41,7 +40,7 @@ public class resource_fireBall : skill_resource
     {
         get
         {
-            return "火球";
+            return "閃電鏈";
         }
     }
     public override modifier[] mods
@@ -52,3 +51,4 @@ public class resource_fireBall : skill_resource
         }
     }
 }
+

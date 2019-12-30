@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class newSkill_fireBall : dynamicSkill
-{
+public class newSkill_lightingChain : dynamicSkill {
     public override bool canUse
     {
         get
@@ -17,7 +15,7 @@ public class newSkill_fireBall : dynamicSkill
     {
         get
         {
-            return 2 * BASE_SKILL_COOLDOWN_FRAMES;
+            return 0.5f * BASE_SKILL_COOLDOWN_FRAMES;
         }
     }
 
@@ -28,20 +26,26 @@ public class newSkill_fireBall : dynamicSkill
         Randomer.main.getInt();
         int oppNo = (owner.playerNo + 1) % 2;
         List<comboControler> oppTeam = getAliveEnemy((ChessBoard)env);//((ChessBoard)env).getTeamOf(oppNo);
-        if (oppTeam.Count == 0)
+        if (oppTeam.Count <=3)
         {
-            return new unitControler[0];
+            return oppTeam.ToArray();
         }
         else
         {
-            unitControler traget = oppTeam[oppNo % (oppTeam.Count)];
-            return new unitControler[1] { traget };
+            comboControler[] tragets = new comboControler[3];
+            for(int i = 0; i < tragets.Length; i++)
+            {
+                int index= Randomer.main.getInt() % oppTeam.Count;
+                tragets[i] = oppTeam[index];
+                oppTeam.RemoveAt(index);
+            }
+            return tragets;   
         }
     }
 
     public override SkillInf Inf()
     {
-        return new SkillInf_v2(this, true, true, false, true, new List<string>() { "damage" });
+        return new SkillInf_v2(this, false, true, false, true, new List<string>() { "damage" });
     }
     public override void setTime(Dictionary<string, object> args)
     {
@@ -52,10 +56,6 @@ public class newSkill_fireBall : dynamicSkill
     }
     public override void trigger(Dictionary<string, object> args)
     {
-        if ((comboControler.bonus_kind)args["bonus"] == comboControler.bonus_kind.NoBonus)
-        {
-            Debug.LogWarning("基礎火球術");
-        }
         unitControler[] tragets = (unitControler[])args["tragets"];
         if (tragets.Length > 0)
         {
@@ -65,25 +65,22 @@ public class newSkill_fireBall : dynamicSkill
             //GameObject[] resources = dynamicSkill.resourcePool[poolKey];
             GameObject missile = resourcePool[prefabNames[0]];
             GameObject expro = resourcePool[prefabNames[1]];
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["tragets"] = tragets;
+            dict["creater"] = owner;
+            closeupStage.main.display_effect(missile, dict, false);
             foreach (comboControler traget in tragets)
             {
-                Dictionary<string, object> dict = new Dictionary<string, object>();
-                dict["traget"] = traget;
-                dict["creater"] = owner;
-                closeupStage.main.display_effect(missile,dict, false);
                 if (!missDict[traget])
                 {
-                    
-                    Damage_v2 d = createDamage(owner.data.Now_Mag_Reinforce*2, Damage.KIND_MAGICAL, args);
 
-                    //dict["damage"] = d;
-                    //dict["callback"] = (BasicDelegate.withBasicDict)missile_callback;
-                    //dict["effect"] = resources[1];
-                    
-                    
-                    closeupStage.main.display_effect(expro, dict, true);
+                    Damage_v2 d = createDamage(owner.data.Now_Mag_Reinforce * 3/tragets.Length, Damage.KIND_MAGICAL, args);
+
+                    Dictionary<string, object> dict_expr=new Dictionary<string, object>();
+                    dict_expr["traget"] = tragets;
+                    dict_expr["creater"] = owner;
+                    closeupStage.main.display_effect(expro, dict_expr, true);
                     traget.takeDamage(d);
-                    //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
                     
                     closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
                 }
@@ -91,9 +88,5 @@ public class newSkill_fireBall : dynamicSkill
             }
         }
         setTime(args);
-        if ((comboControler.bonus_kind)args["bonus"] == comboControler.bonus_kind.NoBonus)
-        {
-            Debug.LogWarning("火球術新的時間:" + timeLeft);
-        }
     }
 }
