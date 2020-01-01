@@ -8,7 +8,10 @@ public class chain : decisionArea {
     public List<Vector3> points= new List<Vector3>();
     protected new void Update()
     {
-        line.SetPositions(points.ToArray());
+        Vector3[] array = points.ToArray();
+        line.positionCount = points.Count;
+        line.SetPositions(array);
+        //line.SetPositions(points.ToArray());
         base.Update();
     }
 

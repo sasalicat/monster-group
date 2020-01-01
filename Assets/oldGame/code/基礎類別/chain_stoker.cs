@@ -14,6 +14,11 @@ public class chain_stoker : chain {
             if(traget !=null)
                 points.Add(traget.transform.position);
         }
+        /*
+        for(int i = 0; i < 10; i++)
+        {
+            points.Add(new Vector3(i, i, 0));
+        }*/
         base.Update();
 	}
 }

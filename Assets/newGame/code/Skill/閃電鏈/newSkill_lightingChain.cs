@@ -57,6 +57,7 @@ public class newSkill_lightingChain : dynamicSkill {
     public override void trigger(Dictionary<string, object> args)
     {
         unitControler[] tragets = (unitControler[])args["tragets"];
+        
         if (tragets.Length > 0)
         {
             closeupStage.main.display_anim(owner, AnimCodes.MAGIC);
@@ -67,7 +68,7 @@ public class newSkill_lightingChain : dynamicSkill {
             GameObject expro = resourcePool[prefabNames[1]];
             Dictionary<string, object> dict = new Dictionary<string, object>();
             dict["tragets"] = tragets;
-            dict["creater"] = owner;
+            dict["creater"] = (comboControler)owner;
             closeupStage.main.display_effect(missile, dict, false);
             foreach (comboControler traget in tragets)
             {
@@ -77,8 +78,8 @@ public class newSkill_lightingChain : dynamicSkill {
                     Damage_v2 d = createDamage(owner.data.Now_Mag_Reinforce * 3/tragets.Length, Damage.KIND_MAGICAL, args);
 
                     Dictionary<string, object> dict_expr=new Dictionary<string, object>();
-                    dict_expr["traget"] = tragets;
-                    dict_expr["creater"] = owner;
+                    dict_expr["traget"] = traget;
+                    dict_expr["creater"] = (comboControler)owner;
                     closeupStage.main.display_effect(expro, dict_expr, true);
                     traget.takeDamage(d);
                     
