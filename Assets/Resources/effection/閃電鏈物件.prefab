@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63a66f338d45f842882947d8795aee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0.5
+  time: 0.3
   line: {fileID: 120454190002659980}
   points: []
   tragets: []
@@ -109,8 +109,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0063803717
-        value: 0.50378895
+        time: 0.003656678
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0

@@ -24,7 +24,7 @@ public class resource_lightingChain : skill_resource
     {
         get
         {
-            return new string[2] { "effection/閃電鏈物件", "effection/爆炸特效1" };
+            return new string[2] { "effection/閃電鏈物件", "effection/閃電擊中" };
         }
     }
 

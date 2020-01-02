@@ -1,7 +1,24 @@
 fileFormatVersion: 2
 guid: 9382193d74132c64ea59cf5ad9bc2b64
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Effect68_0
+    21300002: Effect68_1
+    21300004: Effect68_2
+    21300006: Effect68_3
+    21300008: Effect68_4
+    21300010: Effect68_5
+    21300012: Effect68_6
+    21300014: Effect68_7
+    21300016: Effect68_8
+    21300018: Effect68_9
+    21300020: Effect68_10
+    21300022: Effect68_11
+    21300024: Effect68_12
+    21300026: Effect68_13
+    21300028: Effect68_14
+    21300030: Effect68_15
+    21300032: Effect68_16
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -40,7 +57,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -69,9 +86,371 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Effect68_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 387
+        width: 126
+        height: 122
+      alignment: 9
+      pivot: {x: 0.5076139, y: 0.48427293}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eaa44077bb88d1499367cb8574f09ee
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_1
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 385
+        width: 123
+        height: 126
+      alignment: 9
+      pivot: {x: 0.50779974, y: 0.4923861}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54a8a40363cf35b4eb4d0ec4241ec9e0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_2
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 387
+        width: 126
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61bab28bd6bb930409c4905f888fe5ae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_3
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 388
+        width: 123
+        height: 123
+      alignment: 9
+      pivot: {x: 0.48440105, y: 0.47236225}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44147dca8c0843648b8f3ffef4cb0e97
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 250
+        width: 123
+        height: 130
+      alignment: 9
+      pivot: {x: 0.5077997, y: 0.53689766}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2e582de6e2dd5546ba52048862b0d1e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_5
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 259
+        width: 122
+        height: 122
+      alignment: 9
+      pivot: {x: 0.48427308, y: 0.49213648}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0539b10a853d867458ebe07dc68e89fb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_6
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 259
+        width: 122
+        height: 123
+      alignment: 9
+      pivot: {x: 0.4842732, y: 0.4844008}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2dffbd97c4db7d4495a4b18a6520c7b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_7
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 339
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0188e4c5be686d408c4920d146d4e0d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_8
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 258
+        width: 122
+        height: 115
+      alignment: 9
+      pivot: {x: 0.48427293, y: 0.5166841}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7334ee3aad6852945b4a844debc0a0e0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 129
+        width: 125
+        height: 122
+      alignment: 9
+      pivot: {x: 0.5000002, y: 0.5078634}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd707ea05b4da8d49a0ccc0fe50d435b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_10
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 130
+        width: 125
+        height: 124
+      alignment: 9
+      pivot: {x: 0.50767493, y: 0.49226344}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a1763a6af1a8ff4581b1053d63ee723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_11
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 131
+        width: 122
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5235903, y: 0.49999988}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789e10f17bcc9944e9da8624b31e1450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_12
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 133
+        width: 125
+        height: 120
+      alignment: 9
+      pivot: {x: 0.4846504, y: 0.48401108}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad526aeadefe8694d94ad6bfeea3a479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_13
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 124
+        height: 122
+      alignment: 9
+      pivot: {x: 0.5077367, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85275d278b6a45459183f8313450d55
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_14
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 3
+        width: 124
+        height: 120
+      alignment: 9
+      pivot: {x: 0.4922633, y: 0.5079945}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9e2d13c10435cf4a983e2c8a62c828b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_15
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 3
+        width: 124
+        height: 117
+      alignment: 9
+      pivot: {x: 0.4845266, y: 0.50819945}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a11c8a2e447612428792de8203aed83
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect68_16
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 2
+        width: 120
+        height: 123
+      alignment: 9
+      pivot: {x: 0.4920054, y: 0.49220058}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 960abdadc2f5abb4a8a6af28e02e09b5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

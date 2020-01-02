@@ -17,6 +17,7 @@ public class roleAnim : MonoBehaviour {
     protected HpBar hpBar;
     protected animKeyDict keyDict;
     protected Vector2 center_offset = new Vector2(0, 1f);
+    public GameObject centerPointObj;
     public Vector2 Center
     {
         get {
