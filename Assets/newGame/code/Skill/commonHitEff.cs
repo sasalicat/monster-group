@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class commonHitEff : decisionArea,effectionInit {
     public Vector2 positiveDirection;
-    public void init(Dictionary<string, object> effDict,GameObject selfPrafeb)
+    public virtual void init(Dictionary<string, object> effDict,GameObject selfPrafeb)
     {
         comboControler traget = (comboControler)effDict["traget"];
         comboControler creater = (comboControler)effDict["creater"];

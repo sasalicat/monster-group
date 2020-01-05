@@ -613,6 +613,16 @@ MonoBehaviour:
   - 
   - 
   - resource_stunAttack
+  - resource_VampireSpell_counter
+  - resource_stunAttack
+  - resource_stunAttack
+  - resource_stunAttack
+  - resource_stunAttack
+  - resource_stunAttack
+  - resource_stunAttack
+  - resource_stunAttack
+  - resource_stunAttack
+  - resource_stunAttack
   MagicNos: 
   singleTragetMagicNo: 
   multipTragetMagicNo: 

@@ -1,0 +1,425 @@
+fileFormatVersion: 2
+guid: 4c23995c0f06a08448affa7c02484635
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Effect89_1
+    21300002: Effect89_2
+    21300004: Effect89_3
+    21300006: Effect89_4
+    21300008: Effect89_7
+    21300010: Effect89_8
+    21300012: Effect89_9
+    21300014: Effect89_10
+    21300016: Effect89_11
+    21300018: Effect89_12
+    21300020: Effect89_13
+    21300022: Effect89_14
+    21300024: Effect89_15
+    21300026: Effect89_16
+    21300028: Effect89_17
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Effect89_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 427
+        width: 82
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fd83edb0a7bcfa4a8e3a2e87fa69d45
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 403
+        width: 92
+        height: 94
+      alignment: 9
+      pivot: {x: 0.48977908, y: 0.5900301}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b59d6da31eb69a42acd2813933bcf0d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_3
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 401
+        width: 101
+        height: 103
+      alignment: 9
+      pivot: {x: 0.4627598, y: 0.5615027}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b64ab1cfe10d1044aaf29d7941129cd3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_4
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 400
+        width: 116
+        height: 109
+      alignment: 9
+      pivot: {x: 0.46757534, y: 0.51725364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f4e0694f618e6c4ba78411c5ae4be63
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_7
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 267
+        width: 107
+        height: 97
+      alignment: 9
+      pivot: {x: 0.5878796, y: 0.5193881}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d91d26fb6483432449a972327e972b7b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_8
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 260
+        width: 90
+        height: 110
+      alignment: 9
+      pivot: {x: 0.5731352, y: 0.41451722}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f7adc516b5c48949a3ec6ee46afa693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_9
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 256
+        width: 96
+        height: 117
+      alignment: 9
+      pivot: {x: 0.47061506, y: 0.443742}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c53006b7f45e1b7408681ee7b9b51c26
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_10
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 275
+        width: 108
+        height: 105
+      alignment: 9
+      pivot: {x: 0.36069432, y: 0.28507167}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c3ef19c7e0ac954b99809ca585a1e59
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_11
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 142
+        width: 82
+        height: 98
+      alignment: 9
+      pivot: {x: 0.53440154, y: 0.36566988}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb0534b15a7cfc04a87e44346741efd5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_12
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 139
+        width: 84
+        height: 106
+      alignment: 9
+      pivot: {x: 0.54477674, y: 0.39354965}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 641051a7133faf64cb7b19a4d0e447f5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_13
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 132
+        width: 92
+        height: 118
+      alignment: 9
+      pivot: {x: 0.60220766, y: 0.36453143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54b78e7f7ccf0f74aa3b1ac2cb0b1d88
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_14
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 30
+        width: 112
+        height: 203
+      alignment: 9
+      pivot: {x: 0.47481292, y: 0.726972}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25a653058d6c4f747aa8c7599d84aad3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_15
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 20
+        width: 107
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5615157, y: 0.38757154}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e81075fa1f3f1344ab5a3a731a29d2f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_16
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 18
+        width: 114
+        height: 99
+      alignment: 9
+      pivot: {x: 0.56598675, y: 0.40501913}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f081d7653c9a4574b87fe9c77b9c83ce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect89_17
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32
+        width: 125
+        height: 92
+      alignment: 9
+      pivot: {x: 0.4924773, y: 0.3058056}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6465edd0823544a4b87231e14b0722c5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 7473dabee11fd1d49bfef5cc4b32fc7c
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
