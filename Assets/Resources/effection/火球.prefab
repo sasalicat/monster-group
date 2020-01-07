@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   traget: {fileID: 0}
-  speed: 5
+  speed: 10
   Zrotate: 90
   minDist: 0
 --- !u!212 &212371966524805456

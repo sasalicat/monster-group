@@ -18,3 +18,4 @@ public class resource_VampireSpell_block : resource_VampireSpell
             return new modifier[2] { new mod_1_activeSkill(), new mod_1_batterReduceCD(0.4f * TriggerAmend.BATTER) };
         }
     }
+}

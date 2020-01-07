@@ -14,6 +14,9 @@ public class unitData_v2 : unitData {
     const float BASE_CRIT_MAGNIF = 2;
     const float BASE_INSIGHT_REDUCE_RATE = 0.5f;
 
+    const float MAX_POINT_X = 400f;
+    const float MAX_POINT_Y = 1;
+
     private int dodge_point = STAND_DODGE;
     public BasicDelegate.withFloat _onHpPercentageChange;
     public override int Now_Life
@@ -137,7 +140,7 @@ public class unitData_v2 : unitData {
     {
         get
         {
-            return 0.5f;
+            return formula_bivriateLinear_center0(MAX_POINT_X,MAX_POINT_Y,block_point);
         }
     }
     private float insight_reduce_rate = BASE_INSIGHT_REDUCE_RATE;
@@ -293,5 +296,8 @@ public class unitData_v2 : unitData {
     public unitData_v2() : base()
     {
 
+    }
+    protected float formula_bivriateLinear_center0(float w,float h,float x){
+        return (-(h / (w * w))) * (x - w) * (x - w) + h;
     }
 }

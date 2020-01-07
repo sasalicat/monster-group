@@ -78,7 +78,8 @@ public class newSkill_VampireSpell :dynamicSkill {
 
                     closeupStage.main.display_effect(expro, dict, true);
                     traget.takeDamage(d);
-                    owner.heal(owner.data.Now_Mag_Reinforce * 1,owner);
+                    owner.heal(d.num, owner);
+                    //owner.heal(owner.data.Now_Mag_Reinforce * 1,owner);
                     //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
 
                     closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
