@@ -35,6 +35,18 @@ public abstract class dynamicSkill : CDSkill {
     public abstract SkillInf Inf();
     public Damage_v2 createDamage(int num,byte kind,Dictionary<string,object> skillArg)
     {
+        float phy_mult = (float)skillArg["phy_damage_multiple"];
+        int phy_add = (int)skillArg["phy_damage_addition"];
+        float mag_mult = (float)skillArg["mag_damage_multiple"];
+        int mag_add= (int)skillArg["mag_damage_addition"];
+        if(kind == Damage.KIND_PHYSICAL)
+        {
+            num = (int)(num * phy_mult) + phy_add;
+        }
+        else if(kind == Damage.KIND_MAGICAL)
+        {
+            num = (int)(num * mag_mult) + mag_add;
+        }
         Damage_v2 d = new Damage_v2(num, kind, owner);
         d.extraArgs["blockDeny"] = (float)skillArg["blockDeny"];
         d.extraArgs["dodgeDeny"] = (float)skillArg["dodgeDeny"];
