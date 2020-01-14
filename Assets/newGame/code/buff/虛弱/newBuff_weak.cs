@@ -42,9 +42,9 @@ public class newBuff_weak : Buff_v2
         }
         else
         {
-            if (((newBuff_stun)Repetitive[0]).TimeLeft < (float)args["time"])
+            if (((newBuff_weak)Repetitive[0]).TimeLeft < (float)args["time"])
             {
-                ((newBuff_stun)Repetitive[0]).timeLeft = (float)args["time"];
+                ((newBuff_weak)Repetitive[0]).timeLeft = (float)args["time"];
             }
             return false;
         }
