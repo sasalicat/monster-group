@@ -37,6 +37,7 @@ public class newBuff_weak : Buff_v2
             //closeupStage.main.createEffect(dynamicSkill.resourcePool[prafebNames[0]], eff_args, effkey);
             closeupStage.main.display_effect(dynamicSkill.resourcePool[prafebNames[0]], eff_args, effkey);
             ((comboControler)unit)._befCauseDamage += befCauseDamage_cb;
+            layer = now_layer;
             return true;
 
         }
@@ -45,6 +46,10 @@ public class newBuff_weak : Buff_v2
             if (((newBuff_weak)Repetitive[0]).TimeLeft < (float)args["time"])
             {
                 ((newBuff_weak)Repetitive[0]).timeLeft = (float)args["time"];
+            }
+            if (((newBuff_weak)Repetitive[0]).layer < now_layer)
+            {
+                ((newBuff_weak)Repetitive[0]).layer = now_layer;
             }
             return false;
         }
