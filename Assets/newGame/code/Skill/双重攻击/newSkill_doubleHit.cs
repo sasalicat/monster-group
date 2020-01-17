@@ -67,6 +67,7 @@ public class newSkill_doubleHit : dynamicSkill {
             List<unitControler> newTragets = new List<unitControler>(tragets);
             newTragets.Add(newTraget);
             tragets = newTragets.ToArray();
+            args["new_tragets"] = tragets;//向現實妥協的方法,在這裡無論如何都修改不了ref tragets,mod會在外部閱讀然後修改的ref tragets
         }
     }
 }
