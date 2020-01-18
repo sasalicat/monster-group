@@ -54,7 +54,7 @@ public class newSkill_normalAttack : dynamicSkill {
 
             foreach (comboControler traget in tragets)
             {
-                if (!missDict[traget])
+                if (!missDict[traget]&&!traget.data.Dead)
                 {
                     Dictionary<string, object> dict = new Dictionary<string, object>();
                     dict["traget"] = traget;
@@ -66,7 +66,10 @@ public class newSkill_normalAttack : dynamicSkill {
                     Damage_v2 d = createDamage(owner.data.Now_Attack, Damage.KIND_PHYSICAL, args);
                     //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
                     traget.takeDamage(d);
-                    closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
+                    if (!traget.data.Dead)
+                    {
+                        closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
+                    }
                 }
 
             }

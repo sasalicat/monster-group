@@ -615,7 +615,7 @@ MonoBehaviour:
   - resource_stunAttack
   - resource_VampireSpell_counter
   - resource_mysticCurse
-  - resource_stunAttack
+  - resource_doubleHit
   - resource_stunAttack
   - resource_stunAttack
   - resource_stunAttack

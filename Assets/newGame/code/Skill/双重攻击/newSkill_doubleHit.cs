@@ -39,6 +39,7 @@ public class newSkill_doubleHit : dynamicSkill {
         }
         else
         {
+            args["phy_damage_multiple"] = ((float)args["phy_damage_multiple"]) - 0.25f;
             List<unitControler> candidate = new List<unitControler>();
             foreach (unitControler unit in enemys)
             {
@@ -63,7 +64,7 @@ public class newSkill_doubleHit : dynamicSkill {
             int num = Randomer.main.getInt();
             int index = num % candidate.Count;
             comboControler newTraget = (comboControler)candidate[index];
-            newTraget._beAppoint(information, args);
+            //newTraget._beAppoint(information, args);
             List<unitControler> newTragets = new List<unitControler>(tragets);
             newTragets.Add(newTraget);
             tragets = newTragets.ToArray();

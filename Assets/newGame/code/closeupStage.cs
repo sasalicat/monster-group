@@ -501,6 +501,38 @@ public class closeupStage : MonoBehaviour, battleStage
             }
         }
     }
+    public void modify_skillTragets(unitControler protagonist, Skill skill, List<unitControler> tragets)
+    {
+        skill_movement now = (skill_movement)heap[0];
+        int testCode = testFaction(protagonist, tragets);
+        if (now.Close)//只有近戰技能需要修改closeUp選項
+        { 
+            int closeUp_code = CU_table[CU_table.Length / 2 * ((BasicControler)protagonist).playerNo + testCode];//playerNo=0代表是右方的角色,=1代表的是左邊的角色
+            foreach (stage_movement move in now.argList)
+            {
+                if (move.order == stage_movement.move.ReCloseUp || move.order == stage_movement.move.CloseUp)
+                {
+                    move.argList[0] = closeUp_code;
+                }
+                if(move.order == stage_movement.move.ToClose)
+                {
+                    move.argList[1] = getClosePos(tragets);
+                }
+            }
+        }
+        else {
+            testCode = 2;
+        }
+        now.nowDomain = getDomain(protagonist, testCode);
+        //之後修改onStage包和
+        foreach (stage_movement move in now.argList)
+        {
+            if (move.order == stage_movement.move.onStage)
+            {
+                move.argList[1] = tragets;
+            }
+        }
+    }
     public void display_skillEnd()
     {
         stage_movement nowMove = heap[0];
@@ -1019,6 +1051,22 @@ public class skillpackage : state_machine
     public skill_movement now_movement;
     protected List<object>[] stage_conditions;
     protected skillpackage_func[] stage_funcs;
+    public void debug_funcIn(int stage)
+    {
+       var list=  stage_funcs[stage].GetInvocationList();
+        foreach(var func in list)
+        {
+            Debug.Log(func.Target);
+        }
+    }
+    public void debug_conditionIn(int stage)
+    {
+        var list = stage_conditions[stage];
+        foreach (var obj in list)
+        {
+            Debug.Log(obj);
+        }
+    }
     public virtual void addFunc(int stage,skillpackage_func func)
     {
         if (stage < TOTAL_STAGE)

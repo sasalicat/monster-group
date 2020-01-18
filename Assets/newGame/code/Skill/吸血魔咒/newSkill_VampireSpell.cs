@@ -66,7 +66,7 @@ public class newSkill_VampireSpell :dynamicSkill {
                 dict["traget"] = traget;
                 dict["creater"] = owner;
                 closeupStage.main.display_effect(missile, dict, false);
-                if (!missDict[traget])
+                if (!missDict[traget] && !traget.data.Dead)
                 {
 
                     Damage_v2 d = createDamage(owner.data.Now_Mag_Reinforce * 1, Damage.KIND_MAGICAL, args);
@@ -81,8 +81,10 @@ public class newSkill_VampireSpell :dynamicSkill {
                     owner.heal(d.num, owner);
                     //owner.heal(owner.data.Now_Mag_Reinforce * 1,owner);
                     //Debug.LogWarning("對" + traget.gameObject.name + "造成傷害" + d.num + "點");
-
-                    closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
+                    if (!traget.data.Dead)
+                    {
+                        closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
+                    }
                 }
 
             }

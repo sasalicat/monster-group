@@ -18,6 +18,7 @@ public class roleAnim : MonoBehaviour {
     protected animKeyDict keyDict;
     protected Vector2 center_offset = new Vector2(0, 1f);
     public GameObject centerPointObj;
+    public bool roleDead = false;
     public Vector2 Center
     {
         get {

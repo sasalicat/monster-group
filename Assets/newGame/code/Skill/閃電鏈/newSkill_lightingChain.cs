@@ -73,7 +73,7 @@ public class newSkill_lightingChain : dynamicSkill
             closeupStage.main.display_effect(missile, dict, false);
             foreach (comboControler traget in tragets)
             {
-                if (!missDict[traget])
+                if (!missDict[traget] && !traget.data.Dead)
                 {
 
                     Damage_v2 d = createDamage(owner.data.Now_Mag_Reinforce * 3 / tragets.Length, Damage.KIND_MAGICAL, args);
@@ -83,8 +83,10 @@ public class newSkill_lightingChain : dynamicSkill
                     dict_expr["creater"] = (comboControler)owner;
                     closeupStage.main.display_effect(expro, dict_expr, true);
                     traget.takeDamage(d);
-
-                    closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
+                    if (!traget.data.Dead)
+                    {
+                        closeupStage.main.display_anim(traget, AnimCodes.BEHIT);
+                    }
                 }
 
             }

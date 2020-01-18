@@ -131,7 +131,7 @@ public class uncloseUp_action : stage_action
     public override void action(skillpackage skp)
     {
         closeupStage.main.uncloseUp();
-
+        skp.Next();
     }
 }
 public class recloseUp_action : stage_action_withskp
@@ -196,13 +196,16 @@ public class animSkill_action : stage_action_withskp
     }
     public override void action(skillpackage skp) {
         comboControler control = (comboControler)argList[0];
-        int code = (int)argList[1];
-        if (code == AnimCodes.ATTACK)
-            control.GetComponent<roleAnim>().anim_attack(conditionNext);
-        else if (code == AnimCodes.MAGIC)
-            control.GetComponent<roleAnim>().anim_magic(conditionNext);
-        else
-            Debug.LogError("animSkill_action code錯誤,不正確的code:" + code);
+        if (!control.GetComponent<roleAnim>().roleDead)
+        {
+            int code = (int)argList[1];
+            if (code == AnimCodes.ATTACK)
+                control.GetComponent<roleAnim>().anim_attack(conditionNext);
+            else if (code == AnimCodes.MAGIC)
+                control.GetComponent<roleAnim>().anim_magic(conditionNext);
+            else
+                Debug.LogError("animSkill_action code錯誤,不正確的code:" + code);
+        }
     }
 }
 public class animBenhit_action : stage_action_withskp
@@ -224,9 +227,9 @@ public class animBenhit_action : stage_action_withskp
     {
         comboControler control = (comboControler)argList[0]; 
         int code = (int)argList[1];
-        if (code != AnimCodes.BEHIT)
+        if (code != AnimCodes.BEHIT|| control.GetComponent<roleAnim>().roleDead)
         {
-            Debug.Log("animBenhit_action code錯誤,code:"+code);
+            //Debug.Log("animBenhit_action code錯誤,code:"+code);
         }
         else
         {
@@ -253,9 +256,9 @@ public class animDodge_action : stage_action_withskp
     {
         comboControler control = (comboControler)argList[0];
         int code = (int)argList[1];
-        if(code != AnimCodes.DODGE)
+        if(code != AnimCodes.DODGE || control.GetComponent<roleAnim>().roleDead)
         {
-            Debug.Log("animDodge_action code錯誤,code:" + code);
+            
         }
         else
         {
@@ -289,7 +292,13 @@ public class animDeath_action : stage_action
         else
         {
             control.GetComponent<roleAnim>().anim_died();
+            control.GetComponent<roleAnim>().roleDead = true;
         }
+        Debug.Log("此時的stage3 functions:");
+        skp.debug_funcIn(3);
+        Debug.Log("此時的stage3 condidtion:");
+        skp.debug_conditionIn(3);
+        skp.Next();
 
     }
 }
@@ -367,6 +376,7 @@ public class hpBarUpdate_action : stage_action
     public override void action(skillpackage skp)
     {
         ((roleAnim)argList[0]).setHpBar(((float)argList[1]));
+        skp.Next();
     }
 }
 public class floatNum_action : stage_action
@@ -410,6 +420,7 @@ public class floatText_action : stage_action
         comboControler control = (comboControler)argList[0];
         int kind = (int)argList[1];
         ((TextCreater)(NumberCreater.main)).createText(kind, control.transform.position+(Vector3)numOffset);
+        skp.Next();
     }
 }
 
@@ -431,6 +442,7 @@ public class createEffect_hit : stage_action
         GameObject prafeb = (GameObject)argList[0];
         Dictionary<string, object> initDict = (Dictionary<string, object>)argList[1];
         closeupStage.main.createEffect(prafeb,initDict);
+        skp.Next();
     }
 }
 public class createEffect_record : stage_action
@@ -453,6 +465,7 @@ public class createEffect_record : stage_action
         Dictionary<string, object> initDict = (Dictionary<string, object>)argList[1];
         string key = (string)argList[2];
         closeupStage.main.createEffect(prafeb, initDict,key);
+        skp.Next();
     }
 }
 public class createEffect : stage_action_withskp
@@ -498,6 +511,7 @@ public class showSIcon : stage_action
         roleAnim ranim = (roleAnim)argList[0];
         Sprite Icon = (Sprite)argList[1];
         ranim.showSkillIcon(Icon);
+        skp.Next();
     }
 }
 public class switchOff : stage_action
@@ -517,6 +531,7 @@ public class switchOff : stage_action
     {
         string key = (string)argList[0];
         closeupStage.main.effectRecords[key].GetComponent<switchEff>().off();
+        skp.Next();
     }
 
 }
