@@ -23,7 +23,7 @@ public class resource_VampireSpell : skill_resource {
     {
         get
         {
-            return new string[2] { "effection/血魔法", "effection/血噴發" };
+            return new string[3] { "effection/血魔法", "effection/血噴發", "effection/吸血恢復特效" };
         }
     }
 

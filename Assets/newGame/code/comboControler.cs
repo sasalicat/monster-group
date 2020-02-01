@@ -9,7 +9,7 @@ public class comboControler : BasicControler
     public const int ENEMY_ROLE_NO = 1;
     public enum bonus_kind { NoBonus, Batter, Counter };
     public BasicDelegate.forSkill _aftBeSkill;//basicControler沒有被使用技能后的時間,這裡作為補全
-
+    public static int judgement_chain_counter=0;//記錄總共發生了幾條判定鏈
     public override Buff addBuff(string buffInfName, Dictionary<string, object> dict)
     {
         buff_Inf binf = (buff_Inf)System.Activator.CreateInstance(System.Type.GetType(buffInfName));
@@ -98,16 +98,17 @@ public class comboControler : BasicControler
             ((Dictionary<comboControler, bool>)skillArgs["miss"])[this] = true;
             closeupStage.main.display_anim(this, AnimCodes.DODGE);
             closeupStage.main.display_floatingText(this, TextCreater.DODGE);
+            if (_aftDodge != null)
+                _aftDodge(skillInf, skillArgs);
         }
-        if (_aftDodge != null)
-            _aftDodge(skillInf, skillArgs);
+
     }
     public Skill counterSkill = null;
     public void counterAction(SkillInf skillInf, Dictionary<string, object> skillArgs)
     {
 
         bonus_kind kind = (bonus_kind)skillArgs["bonus"];
-        if (kind != bonus_kind.Counter)
+        if (kind != bonus_kind.Counter)//反擊不能觸發反擊
         {
             if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Counter_Rate)
             {
@@ -117,6 +118,7 @@ public class comboControler : BasicControler
                 //Skill skill = (Skill)skillArgs["skill"];
                 Dictionary<string, object> args = createSkillArg(data, traget);
                 args["bonus"] = bonus_kind.Counter;
+                args["jcId"] = skillArgs["jcId"];//延續判定鏈
                 //closeupStage.main.display_floatingText(this,TextCreater.COUNT);
                 useSkill(counterSkill, traget, args);
             }
@@ -129,6 +131,7 @@ public class comboControler : BasicControler
 
             Dictionary<string, object> args = createSkillArg(data, tragets);
             args["bonus"] = bonus_kind.Batter;
+            args["jcId"] = skillArgs["jcId"];//延續判定鏈
             //args["skill"] = ((SkillInf_v2)skillInf).skill;
             bool canBatter = false;
             if (!skillArgs.ContainsKey("batterTime"))
@@ -159,7 +162,7 @@ public class comboControler : BasicControler
         float denyRate = (float)((Damage_v2)damage).extraArgs["blockDeny"];
         if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Block_Rate - denyRate))
         {
-            Debug.LogWarning(gameObject.name + "格擋");
+            //Debug.LogWarning(gameObject.name + "格擋");
             closeupStage.main.display_floatingText(this, TextCreater.BLOCK);
             damage.num -= ((unitData_v2)data).Now_Block_Reduce_Num;
             if (damage.num < 0)
@@ -315,13 +318,13 @@ public class comboControler : BasicControler
         _befUseSkill(skill.information, arg, ref tragets);
         ((CDSkill)skill).trigger(arg);
         foreach (unitControler traget in tragets)
-        {//最後GG在這裡
+        {
             ((comboControler)traget)._aftBeSkill(skill.information, arg);//技能結算后
         }
         _aftUseSkill(skill.information, arg, tragets);
         closeupStage.main.display_skillEnd();
     }
-    public override void useSkill(Skill skill, unitControler[] tragets)
+    public override void useSkill(Skill skill, unitControler[] tragets)//主動使用的技能才能使用本方法,會產生新的判定鏈
     {
         if (data.Dead)
         {
@@ -339,6 +342,9 @@ public class comboControler : BasicControler
             return;
         }
         Dictionary<string, object> skillArg = createSkillArg(data, tragets);
+        skillArg["jcId"] = ++judgement_chain_counter;//產生新的判定鏈
+        useSkill(skill, tragets, skillArg);
+        /*
         skillArg["skill"] = skill;
         bool trigger = (bonus_kind)skillArg["bonus"] != bonus_kind.NoBonus;
         closeupStage.main.display_skill(this, skill, new List<unitControler>(tragets), trigger);
@@ -358,7 +364,27 @@ public class comboControler : BasicControler
         }
         _aftUseSkill(skill.information, skillArg, tragets);
         closeupStage.main.display_skillEnd();
-        //Debug.LogWarning(gameObject.name + "基本行動結束");
+        //Debug.LogWarning(gameObject.name + "基本行動結束");*/
     }
-
+    public virtual void useSkill(Skill skill, unitControler[] tragets,int jcId)//觸發的技能使用的方法,會延續判定鏈
+    {
+        if (data.Dead)
+        {
+            return;
+        }
+        //Debug.LogWarning(gameObject.name + "基本行動");
+        if (tragets.Length == 0)
+        {
+            //Debug.Log("使用技能" + skill.name + "沒有任何目標");
+            return;
+        }
+        //Debug.Log("skill:" + skill.name);
+        if (((comboControler)skill.Owner) != this)
+        {
+            return;
+        }
+        Dictionary<string, object> skillArg = createSkillArg(data, tragets);
+        skillArg["jcId"] = jcId;//延續當前判定鏈
+        useSkill(skill, tragets, skillArg);
+    }
 }

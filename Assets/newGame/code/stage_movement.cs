@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class stage_movement {
     public enum state {unActive,Active,Finish}
-    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange,floatNum,ExtraStart,ExtraEnd,OffEffectByKey};
+    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange,floatNum,ExtraStart,ExtraEnd,OffEffectByKey,MsgToEff};
 	// Use this for initialization
     public move order;
     public List<object> argList;
@@ -524,7 +524,7 @@ public class switchOff : stage_action
     {
         get
         {
-            return 4;
+            return 3;
         }
     }
     public override void action(skillpackage skp)
@@ -533,5 +533,24 @@ public class switchOff : stage_action
         closeupStage.main.effectRecords[key].GetComponent<switchEff>().off();
         skp.Next();
     }
-
+}
+public class msgToEff:stage_action
+{
+    public msgToEff(List<object> list) : base(move.MsgToEff, list)
+    {
+       
+    }
+    public override int stage
+    {
+        get
+        {
+            return 3;
+        }
+    }
+    public override void action(skillpackage skp)
+    {
+        string key = (string)argList[0];
+        closeupStage.main.effectRecords[key].GetComponent<effTakeMsg>().takeMsg((string)argList[1], argList[2]);
+        skp.Next();
+    }
 }

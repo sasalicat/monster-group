@@ -58,10 +58,18 @@ public class newBuff_weak : Buff_v2
 
     public override void onRemove()
     {
-        closeupStage.main.display_extraStart();
-        closeupStage.main.display_swtichEffectOff(GetInstanceID() + "_1");
-        closeupStage.main.display_extraEnd();
-        ((comboControler)unit)._befCauseDamage -= befCauseDamage_cb;
+        if (deleteByDispel)//驅散
+        {
+            closeupStage.main.display_swtichEffectOff(GetInstanceID() + "_1");
+            ((comboControler)unit)._befCauseDamage -= befCauseDamage_cb;
+        }
+        else
+        {
+            closeupStage.main.display_extraStart();
+            closeupStage.main.display_swtichEffectOff(GetInstanceID() + "_1");
+            closeupStage.main.display_extraEnd();
+            ((comboControler)unit)._befCauseDamage -= befCauseDamage_cb;
+        }
     }
 }
 

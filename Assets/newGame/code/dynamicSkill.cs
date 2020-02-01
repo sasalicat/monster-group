@@ -51,6 +51,8 @@ public abstract class dynamicSkill : CDSkill {
         d.extraArgs["blockDeny"] = (float)skillArg["blockDeny"];
         d.extraArgs["dodgeDeny"] = (float)skillArg["dodgeDeny"];
         d.extraArgs["critical"] = false;
+        d.extraArgs["dice"] = (int)skillArg["dice"];
+        d.extraArgs["jcId"] = (int)skillArg["jcId"];
         return d;
     }
 
@@ -102,5 +104,9 @@ public abstract class dynamicSkill : CDSkill {
         comboControler traget = (comboControler)dict["traget"];
         Damage damage = (Damage)dict["damage"];
         traget.takeDamage(damage);
+    }
+    public virtual void arouse2chain(Environment env, int jcId) {//所有觸發所使用的技能都要通過這個方法來加入判定鏈
+        unitControler[] tragets = findTraget(env);
+        ((comboControler)owner).useSkill(this, tragets,jcId);
     }
 }

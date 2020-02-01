@@ -104,12 +104,11 @@ public class unitData_v2 : unitData {
             dodge_point = value;
         }
     }
-    //在確定計算公式前都用0.5湊合下
     public float Now_Dodge_Rate
     {
         get
         {
-            return 0.5f;
+            return formula_bivriateLinear_center0(MAX_POINT_X, MAX_POINT_Y, dodge_point);
         }
     }
     private int block_reduce=BASE_BLOCK_REDUCE;
@@ -167,7 +166,7 @@ public class unitData_v2 : unitData {
     {
         get
         {
-            return 0.5f;
+            return formula_bivriateLinear_center0(MAX_POINT_X, MAX_POINT_Y, insight_point);
         }
     }
     private float crit_magnification = BASE_CRIT_MAGNIF;
@@ -205,7 +204,7 @@ public class unitData_v2 : unitData {
     {
         get
         {
-            return 0.5f;
+            return formula_bivriateLinear_center0(MAX_POINT_X, MAX_POINT_Y, crit_point);
         }
     }
     private int batter_limmit = BASE_BATTER_LIMMIT;
@@ -241,7 +240,7 @@ public class unitData_v2 : unitData {
     }
     public float Now_Batter_Rate{
         get{
-            return 0.5f;
+            return formula_bivriateLinear_center0(MAX_POINT_X, MAX_POINT_Y, batter_point);
         }
     }
 
@@ -261,7 +260,7 @@ public class unitData_v2 : unitData {
     {
         get
         {
-            return 0.5f;
+            return formula_bivriateLinear_center0(MAX_POINT_X, MAX_POINT_Y, counter_point);
         }
     }
     public override unitData_Profile getProflie()

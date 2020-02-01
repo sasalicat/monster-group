@@ -32,7 +32,7 @@ public class newSkill_doubleHit : dynamicSkill {
     public override void trigger(Dictionary<string, object> args)
     {
         unitControler[] tragets = (unitControler[])args["tragets"];
-        unitControler[] enemys = ((comboManager)comboManager.main).ChessBoard.enemyOf(Owner);
+        unitControler[] enemys = ((dynamicSkill)Owner).getAliveEnemy(((comboManager)comboManager.main).ChessBoard).ToArray();//((comboManager)comboManager.main).ChessBoard.enemyOf(Owner);
         if (enemys.Length <= tragets.Length)
         {
 

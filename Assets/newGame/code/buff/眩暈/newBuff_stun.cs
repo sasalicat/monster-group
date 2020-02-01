@@ -45,10 +45,18 @@ public class newBuff_stun : Buff_v2
 
     public override void onRemove()
     {
+
         ((comboControler)unit).state.CanSkill = true;
         ((comboControler)unit).state.CanAttack = true;
-        closeupStage.main.display_extraStart();
-        closeupStage.main.display_swtichEffectOff(GetInstanceID() + "_1");
-        closeupStage.main.display_extraEnd();
+        if (deleteByDispel)
+        {
+            closeupStage.main.display_swtichEffectOff(GetInstanceID() + "_1");
+        }
+        else
+        {
+            closeupStage.main.display_extraStart();
+            closeupStage.main.display_swtichEffectOff(GetInstanceID() + "_1");
+            closeupStage.main.display_extraEnd();
+        }
     }
 }

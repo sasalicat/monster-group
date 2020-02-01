@@ -212,7 +212,7 @@ public class closeupStage : MonoBehaviour, battleStage
             Cstate = cu_state.cu_ing;
             Vector3 cam_offset = camera_normal - camera_uncloseup_begin;
             cameraObj.transform.position = camera_uncloseup_begin + (timeBefore / closeUp_time) * cam_offset;
-            Debug.Log("stage1 timeBefore:" + timeBefore + " campos:" + cameraObj.transform.position);
+            //Debug.Log("stage1 timeBefore:" + timeBefore + " campos:" + cameraObj.transform.position);
             Color c = curtain.color;
             c.a = ((closeUp_time - timeBefore) * curtain_max_alph / closeUp_time);
             curtain.color = c;
@@ -411,6 +411,10 @@ public class closeupStage : MonoBehaviour, battleStage
     public void display_swtichEffectOff(string key)
     {
         heap[0].argList.Add(new switchOff(new List<object>() {key}));
+    }
+    public void display_msgToEffect(string key,string msg,object arg)
+    {
+        heap[0].argList.Add(new msgToEff(new List<object>() { key, msg, arg }));
     }
     public void display_extraEnd()
     {
@@ -920,7 +924,8 @@ public class closeupStage : MonoBehaviour, battleStage
         ((BasicControler)actioner).GetComponent<roleAnim>().addSortLayout(CURTAIN_MASKER_NUMBER);
         foreach (unitControler unit in tragets)
         {  
-            ((BasicControler)unit).GetComponent<roleAnim>().addSortLayout(CURTAIN_MASKER_NUMBER);
+            if(actioner!=unit)//如果沒有這個判斷式對自己使用的技能就會addSortLayout兩次
+                ((BasicControler)unit).GetComponent<roleAnim>().addSortLayout(CURTAIN_MASKER_NUMBER);
         }
     }
     /*
@@ -1051,12 +1056,16 @@ public class skillpackage : state_machine
     public skill_movement now_movement;
     protected List<object>[] stage_conditions;
     protected skillpackage_func[] stage_funcs;
+    protected static int debugCount = 1;
     public void debug_funcIn(int stage)
     {
-       var list=  stage_funcs[stage].GetInvocationList();
-        foreach(var func in list)
+        if (stage_funcs[stage] != null)
         {
-            Debug.Log(func.Target);
+            var list = stage_funcs[stage].GetInvocationList();
+            foreach (var func in list)
+            {
+                Debug.Log(func.Target);
+            }
         }
     }
     public void debug_conditionIn(int stage)
@@ -1102,6 +1111,17 @@ public class skillpackage : state_machine
                 stage_funcs[stage](this);
         }
     }
+    public void debugPackage()
+    {
+        //Debug.Log("-----package "+debugCount+++" for " + ((skill_movement)now_movement).user+"-----");
+        for(int i = 0; i < stage_funcs.Length; i++)
+        {
+            Debug.Log("stage:"+i);
+            debug_funcIn(i);
+            //if(i<TOTAL_STAGE-1)
+            //    debug_conditionIn(i);
+        }
+    }
     public override void Next()//反之
     {
         if (stage<0)
@@ -1112,6 +1132,7 @@ public class skillpackage : state_machine
                 if (stage_funcs[stage] != null)
                     stage_funcs[stage](this);
             } while (stage_conditions[stage].Count == 0&&stage<TOTAL_STAGE-1);*/
+            debugPackage();
             stage++;
             if (stage_funcs[stage] != null)
                 stage_funcs[stage](this);

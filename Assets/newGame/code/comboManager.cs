@@ -53,6 +53,18 @@ public class comboManager : BasicManager {
     {
         onInit();
         base.Start();
+        var armys= chessBoard.getTeamOf(0);
+        Debug.LogWarning("army 有" + armys.Count + "人");
+        var enemys = chessBoard.getTeamOf(1);
+        Debug.LogWarning("enemys 有" + enemys.Count + "人");
+        Dictionary<string, object> arg = new Dictionary<string, object>();
+        var binf = new weak_bInf();
+        dynamicSkill.resourcePool[binf.prafebNames[0]] = (GameObject)Resources.Load(binf.prafebNames[0]);
+        arg["time"] = unitData_v2.BASE_ABILITY_NUMBER * 20f;
+        arg["layer"] = 4;
+        closeupStage.main.display_extraStart();
+        armys[0].addBuff("weak_bInf", arg);
+        closeupStage.main.display_extraEnd();
     }
     public override unitControler createUnit(Dictionary<string, object> unitInf) {
         Debug.Log("創建新的單位");
@@ -117,7 +129,7 @@ public class comboManager : BasicManager {
    
     public override void forRoleDeath(GameObject gobj)
     {
-        Debug.LogWarning(">>>>>"+gobj+"死亡");
+        //Debug.LogWarning(">>>>>"+gobj+"死亡");
         comboControler control = gobj.GetComponent<comboControler>();
         Timer.main.loginOutTimer(control.action);
         closeupStage.main.display_anim(control,AnimCodes.DEATH);

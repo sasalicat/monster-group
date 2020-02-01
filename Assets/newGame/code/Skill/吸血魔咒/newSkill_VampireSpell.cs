@@ -60,6 +60,8 @@ public class newSkill_VampireSpell :dynamicSkill {
             //GameObject[] resources = dynamicSkill.resourcePool[poolKey];
             GameObject missile = resourcePool[prefabNames[0]];
             GameObject expro = resourcePool[prefabNames[1]];
+            GameObject healEff = resourcePool[prefabNames[2]];
+
             foreach (comboControler traget in tragets)
             {
                 Dictionary<string, object> dict = new Dictionary<string, object>();
@@ -88,6 +90,10 @@ public class newSkill_VampireSpell :dynamicSkill {
                 }
 
             }
+            Dictionary<string, object> dict2 = new Dictionary<string, object>();
+            dict2["traget"] = owner;
+            dict2["creater"] = owner;
+            closeupStage.main.display_effect(healEff,dict2,false);
         }
         setTime(args);
     }
