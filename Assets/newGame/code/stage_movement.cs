@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class stage_movement {
     public enum state {unActive,Active,Finish}
-    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange,floatNum,ExtraStart,ExtraEnd,OffEffectByKey,MsgToEff};
+    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange,floatNum,ExtraStart,ExtraEnd,OffEffectByKey,MsgToEff,unStage};
 	// Use this for initialization
     public move order;
     public List<object> argList;
@@ -134,6 +134,25 @@ public class uncloseUp_action : stage_action
         skp.Next();
     }
 }
+public class uncloseUp_action_sp : stage_action_withskp {
+    public uncloseUp_action_sp(List<object> argList)
+        : base(move.UnCloseUp, argList)
+    {
+
+    }
+    public override int stage
+    {
+        get
+        {
+            return 4;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        closeupStage.main.uncloseUp(conditionNext);
+    }
+}
 public class recloseUp_action : stage_action_withskp
 {
     public recloseUp_action( List<object> argList)
@@ -156,7 +175,7 @@ public class recloseUp_action : stage_action_withskp
 
     }
 }
-public class onstage_action : stage_action_withskp
+public class onstage_action : stage_action
 {
     public onstage_action(List<object> list):
         base(move.onStage,list)
@@ -176,7 +195,31 @@ public class onstage_action : stage_action_withskp
         unitControler mainRole = (unitControler)argList[0];
         List<unitControler> tragets= (List<unitControler>)argList[1];
         closeupStage.main.onStage(mainRole, tragets.ToArray());
-        conditionNext();//因為onStage是立刻結束的過程所以直接在後面呼叫就行了
+        skp.Next();
+        //conditionNext();//因為onStage是立刻結束的過程所以直接在後面呼叫就行了
+
+    }
+}
+public class unstage_action : stage_action
+{
+    public unstage_action(List<object> list) :
+        base(move.unStage, list)
+    {
+
+    }
+    public override int stage
+    {
+        get
+        {
+            return 4;
+        }
+    }
+
+    public override void action(skillpackage skp)
+    {
+        closeupStage.main.resetSortLayouts();
+        //closeupStage.main.onStage(mainRole, tragets.ToArray());
+        skp.Next();
 
     }
 }
@@ -294,10 +337,10 @@ public class animDeath_action : stage_action
             control.GetComponent<roleAnim>().anim_died();
             control.GetComponent<roleAnim>().roleDead = true;
         }
-        Debug.Log("此時的stage3 functions:");
-        skp.debug_funcIn(3);
-        Debug.Log("此時的stage3 condidtion:");
-        skp.debug_conditionIn(3);
+        //Debug.Log("此時的stage3 functions:");
+        //skp.debug_funcIn(3);
+        //Debug.Log("此時的stage3 condidtion:");
+        //skp.debug_conditionIn(3);
         skp.Next();
 
     }
@@ -358,7 +401,8 @@ public class resetClosePos_action : stage_action
     }
     public override void action(skillpackage skp)
     {
-            closeupStage.main.nowClosePos.resetRole();
+        closeupStage.main.nowClosePos.resetRole();
+        skp.Next();
     }
 }
 public class hpBarUpdate_action : stage_action

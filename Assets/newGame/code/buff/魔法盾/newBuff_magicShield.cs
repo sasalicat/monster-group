@@ -6,6 +6,13 @@ public class newBuff_magicShield : Buff_v2
 {
     protected int numLeft = 1;
     protected GameObject effection;
+    public override int kind
+    {
+        get
+        {
+            return Buff.POSITIVE;
+        }
+    }
     public override float Duration
     {
         get

@@ -6,6 +6,13 @@ public class newBuff_weak : Buff_v2
 {
     protected int layer=0;
     protected GameObject effection;
+    public override int kind
+    {
+        get
+        {
+            return Buff.NEGATIVE;
+        }
+    }
     public override float Duration
     {
         get

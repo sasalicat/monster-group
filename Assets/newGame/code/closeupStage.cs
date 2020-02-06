@@ -315,6 +315,12 @@ public class closeupStage : MonoBehaviour, battleStage
         stage_movement newone = new closeUp_action(list);
         heap[0].argList.Add(newone);
     }
+    public void display_uncloseUp_sp4skp(List<skillpackage> skpList)
+    {
+        List<object> list = new List<object> { };
+        uncloseUp_action_sp newone = new uncloseUp_action_sp(list);
+        newone.onLoad(skpList[skpList.Count -1]);
+    }
     public void display_uncloseUp()
     {
         List<object> list = new List<object> { };
@@ -433,6 +439,8 @@ public class closeupStage : MonoBehaviour, battleStage
         skill_movement now = (skill_movement)heap[0];
         now.isTrigger = isTrigger;
         display_onStage(protagonist,tragets);
+        display_unStage();
+        
         bool close = true;
         if (skill == null)
         {
@@ -581,6 +589,9 @@ public class closeupStage : MonoBehaviour, battleStage
     public void display_onStage(unitControler unit,List<unitControler> tragets)
     {
         heap[0].argList.Add(new onstage_action(new List<object>() { unit, tragets }));
+    }
+    public void display_unStage() {
+        heap[0].argList.Add(new unstage_action(new List<object>() { }));
     }
     public void display_showSkillIcon(unitControler unit,dynamicSkill skill)
     {
@@ -906,9 +917,25 @@ public class closeupStage : MonoBehaviour, battleStage
             }
         
     }
+    public void resetSortLayouts()
+    {
+        for (int i = 0; i < team1_anim.Length; i++)
+        {
+            roleAnim ranim = team1_anim[i];
+            if (ranim != null)
+                ranim.setSortLayout(BASE_ROLE_LAYOUT + i);
+        }
+        for (int i = 0; i < team2_anim.Length; i++)
+        {
+            roleAnim ranim = team2_anim[i];
+            if (ranim != null)
+                ranim.setSortLayout(BASE_ROLE_LAYOUT + i);
+        }
+    }
     public void onStage(unitControler actioner, unitControler[] tragets)
     {
         //setCurtain(true);
+        /*
         for(int i=0;i<team1_anim.Length;i++)
         {
             roleAnim ranim = team1_anim[i];
@@ -920,7 +947,8 @@ public class closeupStage : MonoBehaviour, battleStage
             roleAnim ranim = team2_anim[i];
             if(ranim!=null)
                 ranim.setSortLayout(BASE_ROLE_LAYOUT + i);
-        }
+        }*/
+        //resetSortLayouts();
         ((BasicControler)actioner).GetComponent<roleAnim>().addSortLayout(CURTAIN_MASKER_NUMBER);
         foreach (unitControler unit in tragets)
         {  
@@ -939,7 +967,7 @@ public class closeupStage : MonoBehaviour, battleStage
     }*/
 
     //處理order的function
-    protected void skmEam2skp(stage_movement move, List<skillpackage> skpList)
+    protected void skmEam2skp(stage_movement move, List<skillpackage> skpList)//這是目前在使用的function因為包含了處理extraAction
     {
         skillpackage nowpackage = null;
         if (move.order == stage_movement.move.SkillStart) {
@@ -976,6 +1004,7 @@ public class closeupStage : MonoBehaviour, battleStage
             {
                 resetClosePos_action special_reset = new resetClosePos_action(null);
                 special_reset.onLoad(skpList[skpList.Count - 1]);
+                display_uncloseUp_sp4skp(skpList);
             }
 
         }
@@ -1001,6 +1030,8 @@ public class closeupStage : MonoBehaviour, battleStage
         {
             resetClosePos_action special_reset = new resetClosePos_action(null);
             special_reset.onLoad(skpList[skpList.Count - 1]);
+            //取消closeup
+
         }
     }
     protected List<skillpackage> SkillStart_for(stage_movement move){
@@ -1032,7 +1063,7 @@ public class skillpackage : state_machine
     {
         get
         {
-            return 5;
+            return 6;//5;
         }
     }
     int stage_no=-1;

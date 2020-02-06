@@ -159,6 +159,9 @@ public class comboControler : BasicControler
     public BasicDelegate.withDamage _aftBlock;
     public void blockAction(Damage damage)
     {
+        if (!((Damage_v2)damage).extraArgs.ContainsKey("jcId")) {//沒有jcId說明是buff造成的傷害
+            return;
+        }
         float denyRate = (float)((Damage_v2)damage).extraArgs["blockDeny"];
         if (Randomer.main.getInt() < 100 * (((unitData_v2)data).Now_Block_Rate - denyRate))
         {
@@ -176,6 +179,10 @@ public class comboControler : BasicControler
     public BasicDelegate.withDamage _aftCrit;
     public void critAction(Damage damage)
     {
+        if (!((Damage_v2)damage).extraArgs.ContainsKey("jcId"))
+        {
+            return;
+        }
         if (Randomer.main.getInt() < 100 * ((unitData_v2)data).Now_Crit_Rate)
         {
 
@@ -224,10 +231,13 @@ public class comboControler : BasicControler
         //Debug.LogWarning(">初始傷害"+damage.num);
         _befTakeDamage(damage);
         comboControler from = (comboControler)damage.creater;
-        damage.creater = this;
-        //Debug.LogWarning(">_befTakeDamage后傷害" + damage.num);
-        from._befCauseDamage(damage);
-        damage.creater = from;
+        if (from != null)
+        {
+            damage.creater = this;
+            //Debug.LogWarning(">_befTakeDamage后傷害" + damage.num);
+            from._befCauseDamage(damage);
+            damage.creater = from;
+        }
         //Debug.LogWarning(">_befCauseDamage后傷害" + damage.num);
         //Debug.Log("after _befTakeDamage");
         if (damage.vaild && !data.Dead)
@@ -261,9 +271,9 @@ public class comboControler : BasicControler
             }
             //createDamageNum(damage);
 
-            damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
             if (damage.creater != null)
             {
+                damage.creater = this;//將creater改成自己來告訴傷害的造成者傷害目標是誰
                 from._aftCauseDamage(damage);
             }
         }

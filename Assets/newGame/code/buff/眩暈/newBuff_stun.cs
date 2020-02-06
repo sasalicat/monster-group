@@ -6,6 +6,13 @@ using UnityEngine;
 public class newBuff_stun : Buff_v2
 {
     protected GameObject effection;
+    public override int kind
+    {
+        get
+        {
+            return Buff.NEGATIVE;
+        }
+    }
     public override float Duration
     {
         get

@@ -53,6 +53,7 @@ public class comboManager : BasicManager {
     {
         onInit();
         base.Start();
+        /*
         var armys= chessBoard.getTeamOf(0);
         Debug.LogWarning("army 有" + armys.Count + "人");
         var enemys = chessBoard.getTeamOf(1);
@@ -64,7 +65,7 @@ public class comboManager : BasicManager {
         arg["layer"] = 4;
         closeupStage.main.display_extraStart();
         armys[0].addBuff("weak_bInf", arg);
-        closeupStage.main.display_extraEnd();
+        closeupStage.main.display_extraEnd();*/
     }
     public override unitControler createUnit(Dictionary<string, object> unitInf) {
         Debug.Log("創建新的單位");

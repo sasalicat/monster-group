@@ -60,7 +60,7 @@ public class dataWarehouse : MonoBehaviour {
         nowData.army.Add(new RoleRecord_v2(1));
         //nowData.army[0].data.Now_Attack = 1000;
         ((unitData_v2)nowData.army[0].data).Now_Block_Point = 200;
-        nowData.army[0].skillNos = new List<int>() { 1,2,4,10,9,19};
+        nowData.army[0].skillNos = new List<int>() { 1,2,4,10,20,21};
         nowData.army[0].index = 0;
         nowData.army[0].location = new vec2i(0, 0);
         //nowData.army[0].skillNos.Add(1);

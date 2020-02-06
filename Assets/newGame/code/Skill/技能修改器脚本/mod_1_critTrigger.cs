@@ -9,6 +9,10 @@ public class mod_1_critTrigger : modifier
     public void aftCrit(Damage d)
     {
         Damage_v2 d_v2 = (Damage_v2)d;
+        if (!d_v2.extraArgs.ContainsKey("jcId"))//沒有jcId的傷害說明是由buff觸發的持續傷害,不能觸發技能
+        {
+            return;
+        }
         if (((int)d_v2.extraArgs["dice"]) <= percentage * 100f && now_jcId != ((int)d_v2.extraArgs["jcId"]))
         {
             now_jcId = ((int)d_v2.extraArgs["jcId"]);

@@ -108,12 +108,12 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     {
         get
         {
-            return _aft_take_damage;
+            return _aft_cause_damage;
         }
 
         set
         {
-            _aft_take_damage = value;
+            _aft_cause_damage = value;
         }
     }
     BasicDelegate.withInt _on_life_change;
@@ -198,7 +198,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     protected void aftCauseDamage_cb(Damage d)
     {
         if(_aft_cause_damage !=null)
-            _aft_take_damage(d);
+            _aft_cause_damage(d);
     }
 
     public virtual void addSkillBy(string represName)
