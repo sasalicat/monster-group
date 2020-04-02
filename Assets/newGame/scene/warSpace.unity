@@ -368,10 +368,10 @@ MonoBehaviour:
   stage: {fileID: 135104381}
   tragetCamera: {fileID: 135104378}
   mainStageZ: 0
-  left_x: 0
-  up_y: 0
-  right_x: 0
-  down_y: 0
+  left_x: -8.15
+  up_y: 1.95
+  right_x: 8.15
+  down_y: -4.7
 --- !u!1001 &169394664
 Prefab:
   m_ObjectHideFlags: 0

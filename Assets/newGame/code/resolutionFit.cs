@@ -4,9 +4,29 @@ using UnityEngine;
 public struct rect{
     Vector2 upLeft;
     Vector2 buttomRight;
-    rect(Vector2 ul,Vector2 br) {
+    public rect(Vector2 ul,Vector2 br) {
         upLeft = ul;
         buttomRight = br;
+    }
+    public float aspect{
+        get
+        {
+            return (buttomRight.x - upLeft.x) / (upLeft.y - buttomRight.y);
+        }
+    }
+    public float width
+    {
+        get
+        {
+            return buttomRight.x - upLeft.x;
+        }
+    }
+    public float height
+    {
+        get
+        {
+            return upLeft.y - buttomRight.y;
+        }
     }
 }
 
@@ -27,5 +47,14 @@ public class resolutionFit : MonoBehaviour
         //cameraWordHeight = tragetCamera.orthographicSize;//獲得camera在世界坐標下的長度
         cameraWorldWidth = tragetCamera.aspect * cameraWordHeight;//獲得camera在世界坐標下的寬度
         Debug.Log("camera width:" + cameraWorldWidth + " height:" + cameraWordHeight);
+        rect sceneRect =new rect(new Vector2(left_x, up_y), new Vector2(right_x, down_y));
+        if (tragetCamera.aspect >= sceneRect.aspect)//camera比fitScene橫向更寬
+        {//維持camera height 和sceneRect height 相同
+            tragetCamera.fieldOfView = Mathf.Atan(sceneRect.height/ (2 * Mathf.Abs(mainStageZ - stage.camera_normal.z))) * Mathf.Rad2Deg * 2;//fieldOfView是height的一般對於depth的tan度數的一倍
+        }//具體數學關係請看https://blog.csdn.net/lezhi_/article/details/78827549
+        else
+        {//維持camera width 和sceneRect width 相同
+            tragetCamera.fieldOfView = Mathf.Atan((sceneRect.width/ tragetCamera.aspect) / (2 * Mathf.Abs(mainStageZ - stage.camera_normal.z)))*Mathf.Rad2Deg * 2;
+        }
     }
 }
