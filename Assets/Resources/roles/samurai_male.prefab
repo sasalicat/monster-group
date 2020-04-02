@@ -237,8 +237,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4439065715624190}
   - component: {fileID: 95411869368500490}
-  - component: {fileID: 114149038617837854}
   - component: {fileID: 210848558805657506}
+  - component: {fileID: 114959919072412856}
   m_Layer: 0
   m_Name: samurai_male
   m_TagString: Untagged
@@ -1911,7 +1911,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114149038617837854
+--- !u!114 &114959919072412856
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1919,10 +1919,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1245403708182302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 721308ef9c2ef490fb1940d70811441e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f66eec2a4272be4a8244723ce964e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
   anim: {fileID: 0}
   father: {fileID: 0}
 --- !u!210 &210848558805657506

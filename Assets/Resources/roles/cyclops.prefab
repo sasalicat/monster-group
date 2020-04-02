@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4167298269647158}
   - component: {fileID: 95530951250830868}
   - component: {fileID: 210610567675885000}
-  - component: {fileID: 114922805714259436}
+  - component: {fileID: 114480366564427378}
   m_Layer: 0
   m_Name: cyclops
   m_TagString: Untagged
@@ -2596,7 +2596,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114922805714259436
+--- !u!114 &114480366564427378
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2604,11 +2604,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1136232702489298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 721308ef9c2ef490fb1940d70811441e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f66eec2a4272be4a8244723ce964e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  anim: {fileID: 0}
+  anim: {fileID: 95530951250830868}
   father: {fileID: 0}
 --- !u!210 &210610567675885000
 SortingGroup:

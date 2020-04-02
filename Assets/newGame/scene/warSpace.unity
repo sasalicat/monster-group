@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 135104377}
   - component: {fileID: 135104380}
   - component: {fileID: 135104381}
+  - component: {fileID: 135104382}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -161,7 +162,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 33.6
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -353,6 +354,24 @@ MonoBehaviour:
   - {x: 4.41, y: -4.44, z: 0}
   curtain: {fileID: 1189129445}
   curtain_max_alph: 0.85
+--- !u!114 &135104382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 135104376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e246bb5c18365c24e8f06d7ea74e7341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage: {fileID: 135104381}
+  tragetCamera: {fileID: 135104378}
+  mainStageZ: 0
+  left_x: 0
+  up_y: 0
+  right_x: 0
+  down_y: 0
 --- !u!1001 &169394664
 Prefab:
   m_ObjectHideFlags: 0
@@ -1063,11 +1082,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4777873048266106, guid: 45b164dcac365aa42b7c1f8f024a26f7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 7.158275
+      value: 6.79
       objectReference: {fileID: 0}
     - target: {fileID: 4777873048266106, guid: 45b164dcac365aa42b7c1f8f024a26f7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.551431
+      value: -4.44
       objectReference: {fileID: 0}
     - target: {fileID: 4777873048266106, guid: 45b164dcac365aa42b7c1f8f024a26f7, type: 2}
       propertyPath: m_LocalPosition.z
