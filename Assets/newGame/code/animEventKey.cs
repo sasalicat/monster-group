@@ -19,7 +19,7 @@ public class animEventKey : MonoBehaviour {
     }
     public void resetBack()
     {
-        anim.SetBool("back",false);
+        //anim.SetBool("back",false);
     }
 
 }

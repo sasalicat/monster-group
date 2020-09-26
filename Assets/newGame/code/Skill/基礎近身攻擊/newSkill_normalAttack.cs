@@ -24,8 +24,8 @@ public class newSkill_normalAttack : dynamicSkill {
 
     public override unitControler[] getTragets(Environment env)
     {
-        Randomer.main.getInt();
-        int oppNo = (owner.playerNo + 1) % 2;
+        int dice= Randomer.main.getInt();
+        //int oppNo = (owner.playerNo + 1) % 2;
         List<comboControler> oppTeam = getAliveEnemy((ChessBoard)env);//((ChessBoard)env).getTeamOf(oppNo);
         if (oppTeam.Count == 0)
         {
@@ -33,7 +33,7 @@ public class newSkill_normalAttack : dynamicSkill {
         }
         else
         {
-            unitControler traget = oppTeam[oppNo % (oppTeam.Count)];
+            unitControler traget = oppTeam[dice % (oppTeam.Count)];
             return new unitControler[1] { traget };
         }
     }

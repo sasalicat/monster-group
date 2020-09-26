@@ -4,16 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class stage_movement {
-    public enum state {unActive,Active,Finish}
-    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange,floatNum,ExtraStart,ExtraEnd,OffEffectByKey,MsgToEff,unStage};
+    //public enum state {unActive,Active,Finish}
+    public enum move {SkillStart,SkillEnd,Anim,Effection,Missile,Number,ReCloseUp,UnCloseUp,CloseUp,onStage,ToClose,ResetClose,hpChange,floatNum,ExtraStart,ExtraEnd,OffEffectByKey,MsgToEff,unStage,showIcon};
 	// Use this for initialization
     public move order;
     public List<object> argList;
-    public state nowState  = state.unActive;
+    public int frameNumber = -1;
+    //public state nowState  = state.unActive;
     public stage_movement(move order, List<object> argList)
     {
         this.order = order;
         this.argList = argList;
+    }
+    public virtual string msg
+    {
+        get { return this.GetType().ToString(); }
     }
 }
 public class skill_movement:stage_movement
@@ -112,6 +117,13 @@ public class closeUp_action : stage_action_withskp
         closeupStage.main.closeUp(kind,conditionNext);
 
     }
+    public override string msg
+    {
+        get
+        {
+            return "close up kind:"+ (int)argList[0];
+        }
+    }
 }
 public class uncloseUp_action : stage_action
 {
@@ -133,6 +145,13 @@ public class uncloseUp_action : stage_action
         closeupStage.main.uncloseUp();
         skp.Next();
     }
+    public override string msg
+    {
+        get
+        {
+            return "unclose up";
+        }
+    }
 }
 public class uncloseUp_action_sp : stage_action_withskp {
     public uncloseUp_action_sp(List<object> argList)
@@ -151,6 +170,13 @@ public class uncloseUp_action_sp : stage_action_withskp {
     public override void action(skillpackage skp)
     {
         closeupStage.main.uncloseUp(conditionNext);
+    }
+    public override string msg
+    {
+        get
+        {
+            return "unclose up special";
+        }
     }
 }
 public class recloseUp_action : stage_action_withskp
@@ -173,6 +199,13 @@ public class recloseUp_action : stage_action_withskp
         int kind = (int)argList[0];
         closeupStage.main.recloseUp(kind, conditionNext);
 
+    }
+    public override string msg
+    {
+        get
+        {
+            return "close up kind:" + (int)argList[0];
+        }
     }
 }
 public class onstage_action : stage_action
@@ -197,7 +230,15 @@ public class onstage_action : stage_action
         closeupStage.main.onStage(mainRole, tragets.ToArray());
         skp.Next();
         //conditionNext();//因為onStage是立刻結束的過程所以直接在後面呼叫就行了
-
+    }
+    public override string msg
+    {
+        get
+        {
+            string log = "on stage:";
+            comboControler mainRole = ((comboControler)argList[0]);
+            return log;
+        }
     }
 }
 public class unstage_action : stage_action
@@ -388,7 +429,7 @@ public class resetClosePos_action : stage_action
 {
 
     public resetClosePos_action(List<object> argList)
-        : base(move.Anim, argList)
+        : base(move.ResetClose, argList)
     {
         
     }
@@ -532,14 +573,15 @@ public class createEffect : stage_action_withskp
     {
         GameObject prafeb = (GameObject)argList[0];
         Dictionary<string, object> initDict = (Dictionary<string, object>)argList[1];
-        missile.withMissile callback = missileHit;
-        initDict["callback"] = callback;
+        //missile.withMissile callback = missileHit;
+        BasicDelegate.withNone onEnd = conditionNext;
+        initDict["callback"] = onEnd;//callback;
         closeupStage.main.createEffect(prafeb, initDict);
     }
 }
 public class showSIcon : stage_action
 {
-    public showSIcon(List<object> argList) : base(move.Effection, argList)
+    public showSIcon(List<object> argList) : base(move.showIcon, argList)
     {
     }
     public override int stage

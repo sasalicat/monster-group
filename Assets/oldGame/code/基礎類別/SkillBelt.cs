@@ -9,7 +9,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     protected withFloat _time_pass; 
     protected List<Skill> skills;
     protected List<Skill> activeSkills;
-    protected List<skill_representation> repres;
+    //protected List<skill_representation> repres;
     protected BasicDelegate.forSkill _be_appoint;
     public BasicDelegate.forSkill _BeAppoint
     {
@@ -244,7 +244,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
     {
         foreach(Skill skill in skills)
         {
-            skill.onEnvReady(manager);
+            //skill.onEnvReady(manager);
         }
     }
     public virtual void updateSkill(float time,Environment env)
@@ -262,7 +262,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         }
     }
 
-    public virtual void init(unitControler controler,List<int> skillNos)
+    public virtual void init(unitControler controler,List<int> skillNos)//使用指定技能的索引值數列skillNos進行初始化
     {
         this.controler = controler;
         ((BasicControler)controler)._beAppoint += beAppoint_cb;
@@ -277,7 +277,7 @@ public class SkillBelt : MonoBehaviour,Callback4Unit {
         ((BasicControler)controler)._onCreateBuff += onCreateBuff_cb;
         skills =new List<Skill>();
         activeSkills = new List<Skill>();
-        repres = new List<skill_representation>();
+        //repres = new List<skill_representation>();
         foreach(int no in skillNos)
         {
             string respName = SkillList.main.representation[no];

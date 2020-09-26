@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class resource_lightingChain_block : resource_fireBall
+public class resource_lightingChain_block : resource_lightingChain
 {
     public override modifier[] mods
     {

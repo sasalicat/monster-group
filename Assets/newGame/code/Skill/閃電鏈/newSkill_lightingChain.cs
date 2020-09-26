@@ -46,7 +46,7 @@ public class newSkill_lightingChain : dynamicSkill
 
     public override SkillInf Inf()
     {
-        return new SkillInf_v2(this, false, true, false, true, new List<string>() { "damage","magic" });
+        return new SkillInf_v2(this, false, true, false, true, new List<string>() { SkillInf_v2.TAG_DAMAGE,SkillInf_v2.TAG_THUNDER });
     }
     public override void setTime(Dictionary<string, object> args)
     {

@@ -7,6 +7,7 @@ public class missileEff :missile,effectionInit
 {
     protected Dictionary<string, object> args;
     protected roleAnim traget_ranim;
+    BasicDelegate.withNone callback;
     public override Vector2 tragetPoint
     {
         get
@@ -15,19 +16,21 @@ public class missileEff :missile,effectionInit
         }
     }
     //protected BasicDelegate.withBasicDict onEnd=null;
-    /*protected void misHitted(missile selfObj)
+    protected void misHitted(missile selfObj)
     {
-        onEnd(args);
-    }*/
+        if(callback!=null)
+            callback();
+    }
     public void init(Dictionary<string, object> effDict, GameObject prafeb)
     {
         traget = ((comboControler)effDict["traget"]).gameObject;
         traget_ranim = closeupStage.main.controler2roleAnim[(comboControler)effDict["traget"]];
         comboControler creater = ((comboControler)effDict["creater"]);
-        withMissile cb = (withMissile)effDict["callback"];
+        BasicDelegate.withNone cb = (BasicDelegate.withNone)effDict["callback"];
         transform.position = (Vector2)closeupStage.main.controler2roleAnim[creater].Center + (Vector2)prafeb.transform.position;
         args = effDict;
-        on_missile_hited += cb;
+        callback += cb;
+        on_missile_hited += misHitted;
         Timer = false;
     }
     public void OnDestroy()

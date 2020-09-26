@@ -71,7 +71,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public Vector3 camera_left_only = new Vector3(-4f,-2.4f,-4.07f);
     public Vector3 camera_now_traget = new Vector3(0,0,0);
     public Vector3 camera_uncloseup_begin;
-    public int closeUpState = 0;
+
     public float closeUp_time = 0.3f;
     public float reCloseUpWait_time = 0.5f;
     protected float timeBefore = 0;
@@ -89,7 +89,7 @@ public class closeupStage : MonoBehaviour, battleStage
     //public BasicControler[] team2;
     public SpriteRenderer curtain;
     public float curtain_max_alph = 0.85f;
-
+    public const bool LogSkp = true;
 
     //public GameObject rolePrefab;
     public GameObject createRole(int team,int x, int y,int prefabIndex)
@@ -113,14 +113,14 @@ public class closeupStage : MonoBehaviour, battleStage
         newone.GetComponent<Animator>().GetBehaviour<state_dodge>().gobj = newone;
         if (team == 0) {
             team1_anim[3 * y + x] = newRole.GetComponent<roleAnim>();
-            team1_anim[3 * y + x].setRootObj(newone,BASE_ROLE_LAYOUT+x*y+x);
+            team1_anim[3 * y + x].setRootObj(newone,BASE_ROLE_LAYOUT+3*y+x);
             team1_anim[3 * y + x].setRoleData(((objectNameList)objectList.main).getKeyDict(prefabIndex));
             
         }
         if (team == 1)
         {
             team2_anim[3 * y + x] = newRole.GetComponent<roleAnim>();
-            team2_anim[3 * y + x].setRootObj(newone, BASE_ROLE_LAYOUT + x * y + x);
+            team2_anim[3 * y + x].setRootObj(newone, BASE_ROLE_LAYOUT + 3 * y + x);
             team2_anim[3 * y + x].setRoleData(((objectNameList)objectList.main).getKeyDict(prefabIndex));
             newRole.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
@@ -152,11 +152,11 @@ public class closeupStage : MonoBehaviour, battleStage
     //用於存放異步的order
     protected skill_movement rootMovement;
     protected List<stage_movement> heap;
-    protected with_skillpackage[] handleFuncs;
+    //protected with_skillpackage[] handleFuncs;
     public static closeupStage main = null;
     //記錄當前黑幕前有哪些角色
-    unitControler now_protagonist;
-    unitControler now_tragets;
+    //unitControler now_protagonist;
+    //unitControler now_tragets;
     //用於解讀異步的order
     public List<skillpackage> packages=new List<skillpackage>();
     public with_nothing next_closeUpEnd;
@@ -185,7 +185,7 @@ public class closeupStage : MonoBehaviour, battleStage
     public with_nothing next_unCloseUpEnd;
     protected void unCloseUp_process(float time)
     {
-        Debug.Log("uncloseUp_process timeBefore:" + timeBefore);
+        //Debug.Log("uncloseUp_process timeBefore:" + timeBefore);
         timeBefore += time;
         if (timeBefore >= closeUp_time)//計時完成
         {
@@ -244,17 +244,17 @@ public class closeupStage : MonoBehaviour, battleStage
             cameraObj.transform.position = camera_now_traget;
         }
     }
-    public GameObject createEffect(GameObject prafeb,Dictionary<string,object> dict)
+    public GameObject createEffect(GameObject prefab, Dictionary<string,object> dict)
     {
-        GameObject eff= Instantiate(prafeb);
+        GameObject eff= Instantiate(prefab);
         effectionInit script = eff.GetComponent<effectionInit>();
         if(script != null)
-            script.init(dict,prafeb);
+            script.init(dict, prefab);
         return eff;
     }
-    public GameObject createEffect(GameObject prafeb,Dictionary<string,object> dict,string key)
+    public GameObject createEffect(GameObject prefab, Dictionary<string,object> dict,string key)
     {
-        GameObject eff= createEffect(prafeb, dict);
+        GameObject eff= createEffect(prefab, dict);
         effectRecords[key] = eff;
         return eff;
     }
@@ -412,7 +412,9 @@ public class closeupStage : MonoBehaviour, battleStage
     }
     public void display_extraStart()
     {
-        heap.Insert(0, new extraAction_movement(new List<object>()));
+        extraAction_movement newone= new extraAction_movement(new List<object>());
+        newone.frameNumber = ((asynchronousTimer)Timer.main).frameNumber;
+        heap.Insert(0,newone);
     }
     public void display_swtichEffectOff(string key)
     {
@@ -438,6 +440,7 @@ public class closeupStage : MonoBehaviour, battleStage
         heap.Insert(0, new skill_movement(new List<object>(), protagonist, tragets, before.user, new List<unitControler>(before.tragets.ToArray())));
         skill_movement now = (skill_movement)heap[0];
         now.isTrigger = isTrigger;
+        now.frameNumber = ((asynchronousTimer)(Timer.main)).frameNumber;
         display_onStage(protagonist,tragets);
         display_unStage();
         
@@ -867,7 +870,7 @@ public class closeupStage : MonoBehaviour, battleStage
     {
         cameraObj = Camera.main.gameObject;
         rootMovement = new skill_movement( new List<object>(), null, new List<unitControler>(), null, null);
-        handleFuncs = new with_skillpackage[6];
+        //handleFuncs = new with_skillpackage[6];
         heap = new List<stage_movement>();
         heap.Add(rootMovement);
         CU_table = new int[6] { CU_LEFT_TORIGHT, CU_LEFT_ONLY, CU_NOCU,CU_RIGHT_TOLEFT,CU_RIGHT_ONLY,CU_NOCU};//用來查表closeup的動作
@@ -1066,7 +1069,7 @@ public class skillpackage : state_machine
             return 6;//5;
         }
     }
-    int stage_no=-1;
+    private int stage_no=-1;
     int stage
     {
         get

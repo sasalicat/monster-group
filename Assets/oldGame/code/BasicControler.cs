@@ -54,7 +54,7 @@ public class BasicControler : MonoBehaviour,unitControler {
         arg["cooldown_multiple"] = 1f;
         return arg;
     }
-    public virtual Buff addBuff(string buffName)
+    public virtual Buff addBuff(string buffName)//已废弃
     {
         Debug.LogWarning("addBuff中 buffname:" + buffName);
         Buff buff= (Buff)gameObject.AddComponent(Type.GetType(buffName));

@@ -68,4 +68,5 @@ public class NumberCreater : MonoBehaviour {
         GameObject miss = Instantiate(missPrafeb, pos,Quaternion.EulerAngles(0, 0, 0));
         return miss;
     }
+    
 }

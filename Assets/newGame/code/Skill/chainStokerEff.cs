@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class chainStokerEff : chain_stoker, effectionInit
 {
-    missile.withMissile beforeDestroy;
+    //missile.withMissile beforeDestroy;
+    BasicDelegate.withNone beforeDestroy;
     public void init(Dictionary<string, object> effDict, GameObject prafeb)
     {
         unitControler[] tragets= (unitControler[])effDict["tragets"];
@@ -14,10 +15,12 @@ public class chainStokerEff : chain_stoker, effectionInit
         {
             base.tragets.Add(closeupStage.main.controler2roleAnim[control].centerPointObj);
         }
-        missile.withMissile cb = (missile.withMissile)effDict["callback"];
+        //missile.withMissile cb = (missile.withMissile)effDict["callback"];
+        BasicDelegate.withNone cb = (BasicDelegate.withNone)effDict["callback"];
         beforeDestroy += cb;
     }
     public void OnDestroy() {
-        beforeDestroy(null);
+        //beforeDestroy(null);
+        beforeDestroy();
     }
 }

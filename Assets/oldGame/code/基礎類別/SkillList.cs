@@ -25,4 +25,5 @@ public class SkillList : MonoBehaviour
     public List<int> holyMagicNos;
     public List<int> holyHealingMagicNos;
     public List<int> holySupportMagicNos;
+    
 }

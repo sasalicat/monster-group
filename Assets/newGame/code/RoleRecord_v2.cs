@@ -8,7 +8,7 @@ public class RoleRecord_v2 : RoleRecord {
         this.race = race;
         data = new unitData_v2();
     }
-    public RoleRecord_v2(RoleRecord_profile profile)
+    /*public RoleRecord_v2(RoleRecord_profile profile):base(profile)
     {
         race = profile.race;
         careers = profile.careers;
@@ -16,5 +16,5 @@ public class RoleRecord_v2 : RoleRecord {
         itemNos = profile.items;
         data = new unitData_v2(profile.unit_profile);
         location = profile.location;
-    }
+    }*/
 }

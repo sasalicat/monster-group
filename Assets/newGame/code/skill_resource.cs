@@ -8,7 +8,7 @@ public abstract class skill_resource : skill_representation {
     public abstract string ScriptName { get; }
     public abstract string SkillName { get; }
     public abstract string[] prafebList { get; }//用來記錄這個技能會用到哪些prafeb的名字
-    public GameObject[] resource=null;
+    //public GameObject[] resource=null;
     public abstract string IconName { get; }
     public static Dictionary<string, Sprite> IconPool = new Dictionary<string, Sprite>();
     public abstract modifier[] mods { get; }
@@ -25,12 +25,12 @@ public abstract class skill_resource : skill_representation {
             return true;
         }
     }
-    public virtual string poolKey
+    /*public virtual string poolKey
     {
        get {
             return ScriptName;
         }
-    }
+    }*/
 
     public virtual void init(unitData nowdata)
     {

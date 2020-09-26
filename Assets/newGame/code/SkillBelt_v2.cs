@@ -79,9 +79,9 @@ public class SkillBelt_v2 : SkillBelt,Callback4Unit_v2{
         skills.Add(newone);
         return newone;
     }
-    public override void addSkillBy(string represName)
+    public override void addSkillBy(string resourceName)
     {
-        object newrepres = System.Activator.CreateInstance(System.Type.GetType(represName));
+        object newrepres = System.Activator.CreateInstance(System.Type.GetType(resourceName));
         //string key = ((skill_resource)newrepres).dictKey;
         string skillName = ((skill_resource)newrepres).ScriptName;
         ((skill_resource)newrepres).init(((comboControler)controler).data);

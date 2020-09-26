@@ -6,7 +6,7 @@ public class comboManager : BasicManager {
 
     //public Vector3[] team1_pos;
     //public Vector3[] team2_pos;
-    
+    public BasicDelegate.withNone onAllDeath;
     public ChessBoard ChessBoard
     {
         get {
@@ -35,19 +35,22 @@ public class comboManager : BasicManager {
     {
         List<RoleRecord> enemy = new List<RoleRecord>();
         RoleRecord_v2 enemy1 = new RoleRecord_v2(0);
-        enemy1.skillNos = new List<int>() {0};
+        enemy1.skillNos = new List<int>() {0,22};
         enemy1.location = new vec2i(1, 1);
         enemy.Add(enemy1);
         RoleRecord_v2 enemy2 = new RoleRecord_v2(0);
+        //((unitData_v2)enemy2.data).Now_Dodge_Point = 400;
         enemy2.skillNos = new List<int>() {0};
         enemy2.location = new vec2i(2, 1);
         enemy.Add(enemy2);
         RoleRecord_v2 enemy3 = new RoleRecord_v2(0);
+        //((unitData_v2)enemy3.data).Now_Dodge_Point = 400;
         enemy3.skillNos = new List<int> { 0 };
         enemy3.location = new vec2i(2, 0);
         enemy.Add(enemy3);
         dataWarehouse.main.currentEnemy=enemy;
         transform.position = new Vector3(0, 0, 0);
+        
     }
     protected override void Start()
     {
@@ -147,7 +150,8 @@ public class comboManager : BasicManager {
         if (allDead)
         {
             closeupStage.main.display_uncloseUp();
-            
+            if (onAllDeath!=null)
+                onAllDeath();
         }
     }
 }

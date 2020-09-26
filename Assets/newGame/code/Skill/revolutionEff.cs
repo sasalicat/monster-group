@@ -15,7 +15,8 @@ public class revolutionEff : decisionArea, effectionInit
     protected GameObject[] nowSatellites = null;
     protected float angleInterval;
     protected float angleOffset = 0;
-    protected missile.withMissile callback =null;
+    //protected missile.withMissile callback =null;
+    protected BasicDelegate.withNone callback = null;
     protected float total_time = 0;
 
     protected void createSatellite()
@@ -84,7 +85,7 @@ public class revolutionEff : decisionArea, effectionInit
         total_time += Time.deltaTime;
         if(total_time >= cbTime&& callback!=null)
         {
-            callback(null);
+            callback();//callback(null);
         }
     }
 
@@ -94,7 +95,7 @@ public class revolutionEff : decisionArea, effectionInit
         comboControler creater = (comboControler)effDict["creater"];
         roleAnim ranim = closeupStage.main.controler2roleAnim[creater];
         transform.position = (Vector2)ranim.Center + (Vector2)selfPrafeb.transform.position;
-        callback= (missile.withMissile)effDict["callback"];
+        callback = (BasicDelegate.withNone)effDict["callback"]; //(missile.withMissile)effDict["callback"];
         createSatellite();
     }
 }

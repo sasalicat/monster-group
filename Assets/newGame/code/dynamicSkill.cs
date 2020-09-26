@@ -9,7 +9,7 @@ public abstract class dynamicSkill : CDSkill {
     protected List<modifier> modifierList;
     public string[] prefabNames; 
     public static Dictionary<string, GameObject> resourcePool=new Dictionary<string, GameObject>();
-    protected virtual string poolKey//有一些和父類別共用素材的技能會需要在這裡用父類別的名字
+    /*protected virtual string poolKey//有一些和父類別共用素材的技能會需要在這裡用父類別的名字
     {
         get {
             return GetType().ToString();
@@ -26,7 +26,7 @@ public abstract class dynamicSkill : CDSkill {
             }
             return key;
         }
-    }
+    }*/
 
 /*    protected abstract List<modifier> Modifiers
     {
@@ -99,12 +99,12 @@ public abstract class dynamicSkill : CDSkill {
         }
         return enemy;
     }
-    public virtual void missile_callback(Dictionary<string,object> dict)
+    /*public virtual void missile_callback(Dictionary<string,object> dict)
     {
         comboControler traget = (comboControler)dict["traget"];
         Damage damage = (Damage)dict["damage"];
         traget.takeDamage(damage);
-    }
+    }*/
     public virtual void arouse2chain(Environment env, int jcId) {//所有觸發所使用的技能都要通過這個方法來加入判定鏈
         unitControler[] tragets = findTraget(env);
         ((comboControler)owner).useSkill(this, tragets,jcId);

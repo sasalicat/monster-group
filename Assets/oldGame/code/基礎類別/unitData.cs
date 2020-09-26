@@ -19,7 +19,6 @@ public class unitData  {
     public const int STAND_MAG_RESISTANCE = 0;
 
     protected int base_attack = STAND_ATK;
-    private int attack_offset = 0;
 
 
     public BasicDelegate.withInt _onLifeChange;
